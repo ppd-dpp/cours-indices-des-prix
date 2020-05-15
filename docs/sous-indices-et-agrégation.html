@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sous-indices et agrégation | Un cours sur les indices des prix</title>
+  <meta name="description" content="Une introduction moderne et simple aux indices des prix" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sous-indices et agrégation | Un cours sur les indices des prix" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Une introduction moderne et simple aux indices des prix" />
+  <meta name="github-repo" content="ppd-dpp/cours-indices-des-prix" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sous-indices et agrégation | Un cours sur les indices des prix" />
+  
+  <meta name="twitter:description" content="Une introduction moderne et simple aux indices des prix" />
+  
+
+<meta name="author" content="Steve Martin" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="calcul-dun-indice-des-prix.html"/>
+<link rel="next" href="factorisation-dun-index.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="align.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Aperçu</a></li>
+<li class="part"><span><b>I Introduction aux indices de prix</b></span></li>
+<li class="chapter" data-level="" data-path="programme.html"><a href="programme.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a><ul>
+<li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix.html"><a href="quest-ce-quun-indice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix?</a></li>
+<li class="chapter" data-level="" data-path="utilisations-dun-indice-des-prix.html"><a href="utilisations-dun-indice-des-prix.html"><i class="fa fa-check"></i>Utilisations d’un indice des prix</a></li>
+<li class="chapter" data-level="" data-path="pourquoi-un-indice-des-prix.html"><a href="pourquoi-un-indice-des-prix.html"><i class="fa fa-check"></i>Pourquoi un indice des prix?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="formule-de-numéro-dindex.html"><a href="formule-de-numéro-dindex.html"><i class="fa fa-check"></i>Formule de numéro d’index</a><ul>
+<li class="chapter" data-level="" data-path="indices-arithmétiques-des-prix.html"><a href="indices-arithmétiques-des-prix.html"><i class="fa fa-check"></i>Indices arithmétiques des prix</a></li>
+<li class="chapter" data-level="" data-path="indices-arithmétiques-communs.html"><a href="indices-arithmétiques-communs.html"><i class="fa fa-check"></i>Indices arithmétiques communs</a></li>
+<li class="chapter" data-level="" data-path="indices-arithmétiques-moins-courants.html"><a href="indices-arithmétiques-moins-courants.html"><i class="fa fa-check"></i>Indices arithmétiques moins courants</a></li>
+<li class="chapter" data-level="" data-path="indices-géométriques-des-prix.html"><a href="indices-géométriques-des-prix.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
+<li class="chapter" data-level="" data-path="lindice-fisher.html"><a href="lindice-fisher.html"><i class="fa fa-check"></i>L’indice Fisher</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r.html"><a href="exemple-avec-r.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a><ul>
+<li class="chapter" data-level="" data-path="sous-indices-et-agrégation.html"><a href="sous-indices-et-agrégation.html"><i class="fa fa-check"></i>Sous-indices et agrégation</a></li>
+<li class="chapter" data-level="" data-path="factorisation-dun-index.html"><a href="factorisation-dun-index.html"><i class="fa fa-check"></i>Factorisation d’un index</a></li>
+<li class="chapter" data-level="" data-path="rebasing.html"><a href="rebasing.html"><i class="fa fa-check"></i>Rebasing</a></li>
+<li class="chapter" data-level="" data-path="chaînage.html"><a href="chaînage.html"><i class="fa fa-check"></i>Chaînage</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-1.html"><a href="exemple-avec-r-1.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="affectation.html"><a href="affectation.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i>Références</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Un cours sur les indices des prix</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sous-indices-et-agrégation" class="section level2">
+<h2>Sous-indices et agrégation</h2>
+<p>La plupart des indices des prix ont une structure hiérarchique (ou agrégée), de sorte que les biens et services sont divisés en groupes ou catégories de plus en plus larges qui s’étendent à tous les biens et services couverts par l’indice des prix. Par exemple, les marchandises d’un IPC peuvent être divisées en grandes catégories telles que la nourriture, le logement, le transport, etc. Ces catégories sont ensuite divisées en catégories plus petites; les aliments peuvent être divisés en viande, journal intime, volaille, etc. Ce type de structure présente l’avantage évident de fournir un indice de prix pour les sous-catégories de biens et services qui présentent souvent un intérêt à part entière (bien qu’il existe d’autres, plus raisons subtiles de vouloir structurer un indice de prix comme celui-ci). Le graphique ci-dessous donne un exemple d’une structure d’agrégation simple à trois niveaux.</p>
+<p><img src="img/plot1.png" /></p>
+<p>Une structure hiérarchique ne pose pas de problème particulier pour créer un indice de prix — l’une des formules de numéro d’index de la section précédente peut toujours être utilisée pour agréger les prix relatifs des biens et services dans chaque groupe de la hiérarchie à produire une collection d’indices de prix pour chaque niveau de la hiérarchie. Le calcul de l’indice doit simplement être répété pour chaque groupe de biens et services dans la structure d’agrégation. Il s’agit de l’approche directe pour calculer un indice de prix avec une structure hiérarchique.</p>
+<p>Cependant, avoir une structure hiérarchique suggère que le calcul peut être simplifié avec une procédure en deux étapes. Dans la première étape, les prix relatifs sont combinés au niveau d’agrégation le plus bas en utilisant l’une des formules de numéro d’index de la section précédente. Cela donne une collection d’indices de prix appelés indices élémentaires (ou élémentaires). Ces indices de prix donnent l’évolution des prix dans le temps pour de petits groupes de biens et services relativement homogènes appelés agrégats élémentaires qui constituent la base d’un indice de prix. Une fois les indices élémentaires calculés, les indices des niveaux d’agrégation supérieurs sont calculés en combinant les indices élémentaires à l’aide de pondérations. Ces pondérations fournissent une mesure de l’importance économique des biens et services dans chaque agrégat élémentaire afin de combiner les indices élémentaires pour former un indice de niveau supérieur. Si l’indice cible est un indice arithmétique, alors les agrégats élémentaires doivent être combinés avec une moyenne arithmétique pondérée; sinon, si un indice géométrique est l’indice cible, une moyenne géométrique pondérée doit être utilisée. Autrement dit, chaque agrégat élémentaire est traité comme un bien unique, les indices élémentaires étant les prix apparentés pour ces produits, et cette information est introduite dans une formule de nombre d’indice pour produire un indice de niveau supérieur.</p>
+<p><img src="img/plot2.png" /></p>
+<p>Étant donné qu’il existe deux façons de calculer un indice de prix avec une structure hiérarchique, le calcul direct donne-t-il le même résultat que le calcul en deux étapes? La réponse est oui pour un indice arithmétique ou géométrique, à condition que les poids utilisés pour agréger les agrégats élémentaires soient formés en utilisant les poids sous-jacents pour l’indice cible. Par exemple, si l’objectif est de calculer un indice de Laspeyres, le poids d’un agrégat élémentaire devrait être la part des dépenses / revenus pour les biens de cet agrégat élémentaire au cours de la période 0. Comme les indices géométriques et arithmétiques sont calculés en tant que moyennes pondérées, il ne devrait pas être surprenant qu’un indice puisse être calculé en regroupant d’abord les parents de prix, en calculant les moyennes au niveau du groupe, puis en faisant la moyenne des moyennes au niveau du groupe pour former une moyenne globale. Par conséquent, ces indices seraient cohérents dans l’agrégation, bien que toutes les formules de nombre d’indices ne soient pas cohérentes dans l’agrégation. Par exemple, l’indice de Fisher n’est pas cohérent dans l’agrégation, et l’utilisation de la procédure en deux étapes pour le calculer donnera une réponse différente de celle du calcul direct.</p>
+<p>Il est facile de montrer que tout indice arithmétique est cohérent en agrégation (le raisonnement pour le cas géométrique est presque identique). Supposons que les marchandises soient partitionnées en <span class="math inline">\(k = 1, \ldots, m\)</span> catégories distinctes et mutuellement exclusives — c’est-à-dire qu’il y a <span class="math inline">\(m\)</span> agrégats élémentaires. Si la catégorie <span class="math inline">\(k\)</span> contient <span class="math inline">\(n_{k}\)</span> biens, alors l’index arithmétique de cette catégorie est</p>
+<p><span class="math display">\[\begin{align*}
+I_{k}^{A} = \sum_{i = 1}^{n_k} \frac{\omega_{ik}}{\sum_{j = 1}^{n_k} \omega_{jk}} \frac{p_{ik1}}{p_{ik0}},
+\end{align*}\]</span></p>
+<p>où <span class="math inline">\(p_{ik1} / p_{ik0}\)</span> est le prix relatif du bien <span class="math inline">\(i\)</span> dans la catégorie <span class="math inline">\(k\)</span> et <span class="math inline">\(\omega_{ik}\)</span> est le poids du bien <span class="math inline">\(i\)</span> dans la catégorie <span class="math inline">\(k\)</span>. Ces indices <span class="math inline">\(m\)</span> peuvent maintenant être agrégés ensemble pour former un indice global en prenant une moyenne pondérée de chaque indice, avec des pondérations données par <span class="math inline">\(\omega_{k} = \sum_{j = 1}^{n_k} \omega_{jk}\)</span>, de sorte que</p>
+<p><span class="math display">\[\begin{align*}
+I^{A} &amp;= \sum_{k = 1}^{m} \omega_k I_{k}^{A} \\
+&amp;= \sum_{k = 1}^{m} \omega_k \sum_{i = 1}^{n_k} \frac{\omega_{ik}}{\sum_{j = 1}^{n_k} \omega_{jk}} \frac{p_{ik1}}{p_{ik0}} \\
+&amp;= \sum_{k = 1}^{m} \sum_{i = 1}^{n_k} \omega_{ik} \frac{p_{ik1}}{p_{ik0}}.
+\end{align*}\]</span></p>
+<p>Mais c’est exactement la même chose que si l’indice arithmétique avait été calculé en regroupant tous les parents de prix et en calculant directement l’indice, plutôt que de les diviser en groupes et de calculer l’indice en deux étapes.</p>
+<p>Un avantage du calcul en deux étapes par rapport au calcul direct est que la formule d’indice utilisée pour calculer les indices élémentaires peut différer de la formule d’indice utilisée à des niveaux d’agrégation plus élevés. Cela peut sembler étrange de vouloir le faire, mais il existe un certain nombre de raisons théoriques et pratiques subtiles pour lesquelles une formule d’indice différente serait utilisée pour les indices élémentaires. Dans la plupart des applications, les indices élémentaires sont calculés à l’aide d’un indice de Jevons, en partie parce que des informations détaillées sur les quantités achetées ou vendues peuvent être difficiles à obtenir à des niveaux d’agrégation très faibles. Des niveaux plus élevés sont ensuite calculés comme un indice arithmétique, généralement un indice de Young ou Lowe.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="calcul-dun-indice-des-prix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factorisation-dun-index.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["cours-indices-des-prix.pdf"],
+"toc": {
+"collapse": "section"
+},
+"info": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

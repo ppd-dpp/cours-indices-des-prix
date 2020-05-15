@@ -1,0 +1,589 @@
+# (PART) Indices de prix de qualité constante {-}
+
+# Programme
+
+Un indice des prix devrait mesurer un pur mouvement des prix dans le temps. Dans la pratique, cependant, les biens et services changent avec le temps, ce qui peut contaminer un indice des prix --- sans informations supplémentaires, il n'y a aucun moyen de dissocier un mouvement des prix d'un changement dans la qualité d'un bien ou d'un service.
+
+L'objectif de ce module est de toucher à certains sujets avancés dans la construction d'indices de prix, avec un accent particulier sur les ajustements de qualité et les données manquantes. À la fin du module, une personne devrait:
+
+1. Familiarisez-vous avec la nécessité de procéder à des ajustements de qualité dans un indice des prix et le lien avec les données manquantes.
+
+2. Comprendre l'importance de la stratification pour construire un indice des prix.
+
+3. Avoir une compréhension de base des indices de prix qui utilisent des méthodes économétriques pour faire face aux changements de qualité.
+
+Ce module est utile pour les compilateurs d'indices de prix ayant une compréhension de la théorie de base et de la construction d'un indice de prix, et qui souhaitent obtenir une compréhension plus approfondie de la façon de traiter les ajustements de qualité et les données manquantes.
+
+Ce module se compose de lectures autodirigées, accompagnées d'un devoir. Au total, environ 10 à 15 heures devraient être consacrées à ce module
+
+Prérequis: Théorie de l'indice des prix, au moins un cours d'introduction à l'économétrie. Un cours avancé d'économétrie ou de probabilité et de statistiques est utile.
+
+L'évaluation de ce module est basée sur une tâche composée de 20 questions à choix multiples / vrai-faux qui s'appuient sur du matériel dans le contenu du cours et les lectures. La collaboration sur la mission est la bienvenue, mais chaque personne doit soumettre son propre travail unique. La réussite de ce module nécessite au moins 65% sur l'affectation.
+
+Les lectures de ce module proviennent des chapitres 17 et 21 du manuel PPI [@ppimanual] et / ou du manuel CPI [@cpimanual], publiés par le FMI (disponibles gratuitement sur leur site Web), ainsi que des chapitres 4 à 6 de le Manuel sur les indices des prix des propriétés résidentielles [@rppihandbook], publié par Eurostat (disponible gratuitement sur leur site Web). ^ [Bien que le manuel se concentre sur les prix des propriétés résidentielles, les idées s'appliquent à tous les biens ou services, et au matériel est relativement bien présenté.]
+
+Veuillez envoyer un e-mail à l'instructeur du cours si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+
+# Introduction
+
+La prise en compte des différences de qualité entre les biens est une préoccupation permanente lors de la construction d'un indice des prix. L'objectif d'un indice de prix est de capturer un mouvement de prix pur sur deux périodes, mais s'il y a des différences systématiques dans les marchandises comparées au fil du temps qui affectent également le prix --- soi-disant différences de qualité --- alors un prix pur le mouvement ne peut pas être capturé en utilisant uniquement les prix de transaction. Sans information préalable, il n'y a aucun moyen de démêler un mouvement de prix pur d'un mouvement de prix en raison de l'évolution de la qualité au fil du temps. La mesure idéale d'un mouvement de prix pur est un indice des prix de qualité constante qui maintient les déterminants des prix fixés d'une période à l'autre. Cela permet une comparaison de pommes à pommes en utilisant les prix de transaction, et toute différence de prix entre les périodes doit refléter un mouvement de prix pur.
+
+Il existe un certain nombre de techniques disponibles pour lutter contre les différences de qualité se glissant dans un indice des prix. L'approche la plus simple et la plus intuitive est probablement l'indice de modèle apparié pur, dans lequel les prix de paires de produits similaires sont comparés dans le temps. En se concentrant sur des paires de produits similaires, il devient moins probable que les différences de qualité entre différents produits puissent contaminer la mesure d'un mouvement de prix pur. D'autres techniques plus exotiques, à savoir la stratification et l'hédonique, offrent la même promesse d'un indice des prix de qualité constante, généralement au détriment d'appareils économétriques supplémentaires.
+
+Une caractéristique intéressante de ces différentes méthodes - modèle, stratification et hédonie appariés - est qu'elles ne sont vraiment pas si différentes. Chacun s'appuie sur la même hypothèse clé pour produire un indice de qualité constante; ce qui diffère entre les méthodes, c'est simplement la manière dont elles mettent en œuvre cette hypothèse. Ce point est fondamental pour comprendre comment ces différentes approches peuvent fournir un indice de qualité constante et comment elles sont liées les unes aux autres.
+
+Dans un souci de simplicité, ce cours se concentre sur les indices géométriques des prix. Les concepts d'un indice géométrique sont directement applicables aux indices arithmétiques, bien qu'il y ait quelques détails supplémentaires à s'inquiéter dans le cas arithmétique. ^ [Voir @ lee2016 [Chapitre 1] et @ manski2007 [Chapitre 7] pour certains des détails.] Dans la plupart des applications, les ajustements de qualité sont effectués à l'aide d'une formule d'indice géométrique. Tout au long de ce cours, l'attention est concentrée sur la construction d'un indice de qualité constante lorsque l'ensemble de la population des transactions de biens et services est connue. Ce n'est presque jamais le cas dans la pratique, mais cela facilite l'exposition en ignorant les problèmes associés à l'échantillonnage et à l'inférence statistique. Il souligne également que la construction d'un indice de qualité constante est fondamentalement un problème au niveau de la population, et non un problème d'échantillonnage. Une fois qu'un indice de qualité constante est défini dans la population, il est simple de l'estimer avec un échantillon de transactions en remplaçant les quantités au niveau de la population par leurs homologues de l'échantillon --- voir @ manski1988.
+
+# Prix potentiels
+
+La formalisation d'un indice de qualité constante nécessite d'étendre l'approche stochastique aux indices en généralisant le concept de prix. À cette fin, définissez un prix potentiel comme le prix pour lequel un bien ou un service se vendrait à un moment donné, qu'il se vende ou non --- un prix potentiel est un prix contrefactuel pour un bien ou un service à un point dans le temps. Cela contraste avec un prix de transaction, qui est le prix observé pour lequel un bien se vend au moment où il se vend réellement. La comparaison des prix potentiels à deux moments donne un indice de qualité constante, car les produits comparés sont nécessairement maintenus fixes dans le temps. Il s'agit simplement d'un pur mouvement de prix sur deux périodes, faisant abstraction des variations de prix dues aux différences dans les caractéristiques des marchandises vendues au cours de ces périodes.
+
+Le concept de prix potentiel est extrêmement utile. Dans le modèle d'indice de prix standard, seuls les prix et les quantités peuvent changer au fil du temps. Cependant, avec les prix potentiels, la composition de ce qui se vend au fil du temps peut également changer. Cette généralisation permet de définir un indice de prix lorsque non seulement les prix et les quantités évoluent dans le temps, mais aussi ce qui vend évolue dans le temps.
+
+Un prix potentiel est un type particulier de résultat potentiel qui constitue la base du Rubin Causal Model, un modèle performant pour faire l'inférence causale dans la littérature sur l'évaluation de programme. Le modèle causal de Rubin s'articule autour du récit d'une expérience, où un groupe d'individus reçoit un traitement, l'autre groupe servant de référence contrôlée. Le but de l'expérience est d'obtenir une mesure de l'impact causal du traitement. Dans le contexte d'un indice des prix, un indice de qualité constante est l'effet causal du temps sur les prix, et il est utile de garder à l'esprit le récit d'une expérience. @ manski2007 [Chapitre 7], @ angrist2009 [Chapitres 2 à 4] et @ wooldridge2010 [Chapitre 21] fournissent chacun une excellente présentation du cadre de résultats potentiels. @ lee2016 donne un traitement d'une longueur de livre.
+
+Pour opérationnaliser le concept d'un prix potentiel dans le cadre stochastique, supposons qu'il existe $ n $ biens uniques qui peuvent se vendre dans la période $ t = 0 $ ou la période $ t = 1 $. Soit $ p_ {i} (1) $ le prix du bien $ i $ s'il devait être vendu au cours de la période 1, et que $ p_ {i} (0) $ soit le prix du bien $ i $ s'il devait vendre pendant la période 0, quel que soit le moment où le bien se vend réellement. Si le bien $ i $ se vend effectivement au cours de la période 1, le prix $ p_ {i} (1) $ est le prix de transaction observé --- il peut être observé lorsque le bien se vend au cours de la période 1 --- alors que $ p_ {i } (0) $ est contre-factuel, et donc non observable. De même, si un bon $ i $ se vend pendant la période 0, alors $ p_ {i} (0) $ est le prix de transaction, avec $ p_ {i} (1) $ contre-factuel. Ainsi, pour chaque prix de transaction, il existe également un prix contrefactuel, ce qui permet de construire un prix relatif $ p_ {i} (1) / p_ {i} (0) $ malgré un bien qui ne se vend pas dans les deux périodes.
+
+Traiter chaque bien comme unique et le vendre une seule fois peut sembler étrange, mais c'est la façon appropriée de modéliser les marchandises au fil du temps. Cela signifie que le même produit vendu à deux moments différents est en réalité deux produits différents, ce qui permet à la qualité d'un même produit de changer avec le temps. Par exemple, les aliments pour chats peuvent se vendre à la fois pendant la période 0 et la période 1, mais ceux-ci sont traités comme des produits distincts car la qualité des aliments pour chats peut varier entre la période 0 et la période 1, si, par exemple, la taille de la boîte est plus petite dans période 1. Le fait que chaque bien soit unique permet également aux produits de disparaître avec le temps, ou de ne pas se vendre à chaque période, et toutes ces questions peuvent être traitées dans un seul cadre en utilisant la notion de prix potentiel. Il est clair que cela s'applique plus à certains types de produits (par exemple, le logement, les ordinateurs, les voitures) que d'autres (par exemple, la nourriture), mais le cadre est suffisamment général pour couvrir tous les types de biens et services.
+
+## Indices de prix de qualité constante
+
+La motivation d'un indice des prix de qualité constante se déroule exactement comme dans le cadre stochastique, sauf que maintenant les prix potentiels sont utilisés à la place des prix de transaction. L'idée est qu'il existe une distribution des prix potentiels apparentés, un pour chaque bien, et qu'un indice des prix agit comme le meilleur prédicteur de l'évolution des prix au fil du temps. Cependant, en utilisant des prix potentiels, les mêmes produits sont comparés dans le temps, même si un produit tel qu'il apparaît sur le marché change entre la période 0 et la période 1. Formellement, un indice de prix (géométrique) de qualité constante est donné par
+
+\ begin {align *}
+I ^ {Q} & = \ exp \ left (E \ left [\ log \ left (\ frac {p (1)} {p (0)} \ right) \ right] \ right) \\
+& = \ prod_ {i = 1} ^ {n} \ left (\ frac {p_ {i} (1)} {p_ {i} (0)} \ right) ^ {P_ {i}},
+\ end {align *}
+
+où $ P_ {i} $ est la probabilité d'observer une bonne $ i $ dans la population de biens. Un indice de qualité constante est une généralisation de l'indice géométrique standard qui permet explicitement aux biens, ainsi qu'aux prix, de changer dans le temps.
+
+Afin de simplifier la notation, laissez $ \ rho (t) = \ log (p (t)) $. Avec cette nouvelle notation, un indice de prix de qualité constante est donné par
+
+\ begin {align *}
+\ log (I ^ {Q}) = E (\ rho (1)) - E (\ rho (0)).
+\ end {align *}
+
+Cette notation est pratique car elle permet d'écrire un indice des prix de qualité constante comme une différence dans les prix potentiels moyens, bien que l'indice soit toujours une moyenne géométrique des prix potentiels apparentés. ^ [Il s'agit d'un indice de type Törnqvist, car il donne la variation du prix de tous les biens et services échangés entre la période 0 et la période 1. Un indice de type Laspeyres utilise uniquement la distribution des biens qui effectuent des transactions pendant la période 0, de sorte que $ \ log (I ^ {Q}) = E (\ rho (1) | t = 0) - E (\ rho (0) | t = 0) $; un indice de type Paasche utilise la distribution des biens qui transigent pendant la période 1, de sorte que $ \ log (I ^ {Q}) = E (\ rho (1) | t = 1) - E (\ rho (0) | t = 1) $. Dans le langage d'une expérience, un indice de qualité constante de type Törnqvist est l'effet moyen du traitement, tandis qu'un indice de type Laspeyres est l'effet moyen du traitement sur les non traités, et un indice de type Paasche est l'effet moyen du traitement sur les traités .]
+
+## Indices de prix de transaction
+
+Le défi de la construction d'un indice de prix de qualité constante est que les prix potentiels ne sont pas observables, et seules les informations sur les prix de transaction et le moment où un bien se vend peuvent être utilisées pour calculer un indice. Il y a un problème de données manquantes. Cela peut être vu en liant les prix de transaction aux prix potentiels
+
+\ begin {align *}
+\ rho = \ rho (0) + t (\ rho (1) - \ rho (0)),
+\ end {align *}
+
+où $ \ rho $ est le prix de transaction (log) et $ t $ donne la période de vente (soit $ t = 1 $ ou $ t = 0 $). Les seules informations qui peuvent être observées à partir des transactions sur le marché sont $ \ rho $ et $ t $ --- le prix pour lequel un bien a été vendu et le moment où il a effectivement vendu.
+
+Compte tenu des informations sur les prix de transaction, un indice géométrique des prix de transaction tente de reproduire l'indice de qualité constante en comparant le prix de transaction moyen pour les marchandises qui se vendent au cours de la période 1 avec le prix de transaction moyen des marchandises qui se vendent au cours de la période 0, et est ainsi donné par
+
+\ begin {align *}
+\ log (I ^ {T}) & = E (\ rho | t = 1) - E (\ rho | t = 0) \\
+& = E (\ rho (1) | t = 1) - E (\ rho (0) | t = 0).
+\ end {align *}
+
+L'indice des prix de transaction diffère généralement de l'indice de qualité constante, car il compare les prix potentiels pour les produits qui se vendent au cours de la période 1 aux prix potentiels pour les produits qui se vendent au cours de la période 0, plutôt que pour tous les produits. Tout changement dans la composition des marchandises vendues entre la période 0 et la période 1 contamine la mesure d'un mouvement de prix pur, car les mêmes marchandises ne sont pas comparées dans le temps. Ce pour quoi les marchandises vendues au cours de la période 0 se sont vendues peut différer de ce que les marchandises vendues au cours de la période 1 auraient vendu au cours de la période 0, de sorte que la comparaison du prix de transaction moyen confond un changement de prix avec un changement dans la composition des marchandises vendues à différents points dans le temps. ^ [Revenant au récit d'une expérience, les marchandises qui se vendent au cours de la période 1 sont le groupe de traitement et les marchandises qui se vendent au cours de la période 0 sont le groupe témoin, l'indice des prix de transaction donnant la différence moyenne dans le résultat du expérience. Cela peut correspondre ou non à l'effet causal du traitement, selon la façon dont les groupes de traitement et de contrôle sont formés. Par exemple, supposons que le traitement visite un hôpital et que le résultat soit une mesure de la santé. Le simple fait de comparer les résultats pour la santé de ceux qui ont récemment visité un hôpital à ceux qui ne l'ont pas fait, tout en ignorant la façon dont ces groupes sont formés, conduirait à conclure à tort que la visite d'un hôpital rend les gens en mauvaise santé, comme en moyenne ceux qui ont récemment visité l'hôpital sont en moins bonne santé que ceux qui n'en ont pas. Cela est dû au fait que ceux qui visitent un hôpital ont de toute façon de moins bons résultats en matière de santé, d'où une comparaison pommes-orange.]
+
+Notez que cet indice n'est pas nécessairement basé sur des prix relatifs, car le même nombre de biens peut ne pas se vendre à chaque période. Si $ n (t) $ désigne l'ensemble des biens qui se vendent au cours de la période $ t $, l'indice géométrique des prix de transaction est un rapport de moyennes géométriques,
+
+\ begin {align *}
+\ log (I ^ {T}) = \ frac {\ prod_ {i \ in n (1)} p_ {i} (1) ^ {P_ {i} | t = 1}} {\ prod_ {i \ in n (0)} p_ {i} (1) ^ {P_ {i} | t = 0}},
+\ end {align *}
+
+où $ P_ {i} | t $ est la probabilité conditionnelle d'observer un bon $ i $ pendant la période $ t $. Il s'agit simplement d'une généralisation de l'indice géométrique des prix habituel lorsque différents biens se vendent au fil du temps.
+
+## Identification
+
+Il n'est pas possible de construire un indice des prix de qualité constante avec seulement la connaissance des prix de transaction et quand les marchandises se vendent. Tout ce que l'on peut savoir, c'est l'indice des prix de transaction, qui n'est pas nécessairement en accord avec l'indice de qualité constante. Progresser vers l'identification d'un indice des prix de qualité constante avec des informations sur les prix de transaction nécessite de faire des hypothèses.
+
+L'hypothèse la plus simple qui identifie l'indice des prix de qualité constante avec l'indice des prix de transaction est l'hypothèse qu'il n'y a pas de différence systématique entre les marchandises qui transigent à différents moments, de sorte que le mouvement des prix potentiels est le même que le évolution des prix de transaction observables. Cela revient à supposer que les prix potentiels sont (statistiquement) indépendants du moment où un bien se vend réellement, $ \ {p (1), p (0) \} \ perp t $, donc la distribution des prix potentiels des biens qui vendre au cours de la période 0 est la même que la distribution des prix potentiels pour les biens qui se vendent au cours de la période 1.
+
+Si cette hypothèse d'indépendance est vérifiée, alors $ E (\ rho (t) | t) = E (\ rho (t)) $ pour $ t = 0,1 $ et ainsi, tant que $ 0 <P (t = 1) <1 $, afin qu'il y ait des biens qui se vendent dans les deux périodes,
+
+\ begin {align *}
+\ log (I ^ {Q}) & = E (\ rho (1)) - E (\ rho (0)) \\
+& = E (\ rho (1) | t = 1) - E (\ rho (0) | t = 0) \\
+& = \ log (I ^ {T}).
+\ end {align *}
+
+Autrement dit, l'indice de qualité constante est identique à l'indice des prix de transaction observable. ^ [L'un des principaux éléments de la littérature sur l'évaluation des programmes est qu'il est souvent plus facile d'obtenir un effet de traitement pour une sous-population que pour l'ensemble de la population. population. Par exemple, l'effet moyen du traitement sur les personnes traitées est identifié dans des conditions plus faibles que l'effet moyen du traitement sur l'ensemble de la population. Étant donné qu'un indice des prix de qualité constante n'est qu'un effet de traitement moyen, il convient de se demander si l'indépendance peut être assouplie tout en offrant un indice de qualité constante. Dans certains cas, la réponse est oui, si un indice des prix s'applique à une sous-population de biens (par exemple, la population de biens qui se vendent réellement au cours de la période 1, qui est l'effet moyen du traitement sur les produits traités). Cela signifie que les outils de la littérature sur l'évaluation des programmes --- tels que les variables instrumentales pour les effets moyens du traitement local ou la discontinuité de régression --- peuvent être utilisés pour calculer un indice des prix de qualité constante, bien qu'il s'agisse encore d'un domaine relativement nouveau.]
+
+Dans la pratique, supposer que les prix potentiels sont indépendants du moment où un bien se vend est une hypothèse assez forte. À moins qu'il n'y ait des raisons de croire que les marchandises se vendent au hasard, il s'agit probablement d'une hypothèse inappropriée. Néanmoins, il sert d'hypothèse fondamentale qui justifie l'utilisation de méthodes plus sophistiquées pour construire un indice des prix de qualité constante.
+
+## Exemple
+
+Il vaut la peine de passer par un exemple pour corriger les idées discutées jusqu'à présent. Supposons que l'objectif soit de construire un indice de Jevons de qualité constante pour les aliments pour chats. Les aliments pour chats peuvent se présenter en trois variétés: poulet ($ c $), foie ($ l $) ou saumon ($ s $). Les aliments pour chats au poulet et au saumon se vendent au cours de la période 1, et seuls les aliments pour chats au foie se vendent au cours de la période 0. Dans ce contexte, l'indice des prix de qualité constante est
+
+\ begin {align *}
+I ^ {Q} = \ frac {(p_ {c} (1) p_ {l} (1) p_ {s} (1)) ^ {1/3}} {(p_ {c} (0) p_ { l} (0) p_ {s} (0)) ^ {1/3}}.
+\ end {align *}
+
+Cet indice compare les prix potentiels au fil du temps pour les trois variétés d'aliments pour chats, et donc la qualité des aliments pour chats est maintenue fixe dans le temps.
+
+En pratique, tout ce qui peut être calculé avec des informations sur les prix de transaction est
+
+\ begin {align *}
+I ^ {T} = \ frac {(p_ {c} (1) p_ {s} (1)) ^ {1/2}} {(p_ {l} (0) p_ {l} (0)) ^ {1/2}}.
+\ end {align *}
+
+Cet indice compare le prix moyen des aliments pour chats de la période 1 au prix moyen des aliments pour chats de la période 0.
+
+Si les prix potentiels sont indépendants du temps, de sorte qu'il n'y a pas de différences systématiques entre le foie, le poulet et la nourriture pour chat de saumon qui affectent le prix, alors, au moins dans cet exemple, $ p_ {c} (1) = p_ {l} ( 1) = p_ {s} (1) $ et $ p_ {c} (0) = p_ {l} (0) = p_ {s} (0) $, de sorte que
+
+\ begin {align *}
+I ^ {Q} = \ frac {(p_ {c} (1) p_ {l} (1) p_ {s} (1)) ^ {1/3}} {(p_ {c} (0) p_ { l} (0) p_ {s} (0)) ^ {1/3}} = \ frac {(p_ {c} (1) p_ {s} (1)) ^ {1/2}} {(p_ {l} (0) p_ {l} (0)) ^ {1/2}} = I ^ {T};
+\ end {align *}
+
+l'indice des prix de transaction est égal à l'indice de qualité constante et donne donc le mouvement pur des prix des aliments pour chats. Même si les aliments pour chats au poulet et au saumon ne se vendent pas pendant la période 0, l'indépendance garantit que le prix des aliments pour chats au foie sert de bonne comparaison pour ce que les aliments pour chats au poulet et au saumon auraient vendus pendant la période 0.
+
+Si, au contraire, les aliments pour foie et poulet pour chats sont systématiquement moins chers que les aliments pour chats à saumon, par exemple parce qu'ils sont de qualité inférieure, alors $ p_ {c} (1) = p_ {l} (1) = p_ {s} (1) $ et $ p_ {c} (0) = p_ {l} (0) <p_ {s} (0) $, de sorte que $ p_ {s} (1) / p_ {s} (0) <p_ {s } (1) / p_ {l} (0) $. Donc
+
+\ begin {align *}
+I ^ {Q} = \ frac {(p_ {c} (1) p_ {l} (1) p_ {s} (1)) ^ {1/3}} {(p_ {c} (0) p_ { l} (0) p_ {s} (0)) ^ {1/3}} <\ frac {(p_ {c} (1) p_ {s} (1)) ^ {1/2}} {(p_ {l} (0) p_ {l} (0)) ^ {1/2}} = I ^ {T};
+\ end {align *}
+
+l'indice des prix de transaction montre une augmentation plus importante des prix au fil du temps (ou une diminution plus faible) parce que la nourriture pour chat de saumon se serait vendue plus que la nourriture pour chat de foie au cours de la période 0. Comparaison du prix de la nourriture pour chat de saumon au prix de la nourriture pour chat de foie confond un changement de prix au fil du temps avec un changement de la qualité de ce qui se vend au fil du temps. L'indépendance entre les prix potentiels et le temps exclut ce type de différences systématiques entre les produits qui se vendent réellement à différentes périodes.
+
+# Indices de prix stratifiés
+
+Le point de départ d'un indice de prix stratifié est une répartition des biens selon un ensemble de caractéristiques observables qui déterminent le prix, de sorte que chaque bien est placé dans une strate basée sur ces caractéristiques. Par exemple, un schéma de stratification simple consiste à séparer les biens en fonction de la géographie, de sorte que les biens soient regroupés par lieu de vente. Mais les biens peuvent être partitionnés selon des règles plus complexes - toute combinaison de caractéristiques peut, en principe, être utilisée pour stratifier les biens en groupes distincts. Un indice de prix stratifié est alors simplement un ensemble de sous-indices, un pour chaque strate, ainsi qu'un ensemble de pondérations pour agréger ces sous-indices en un indice de prix global.
+
+L'utilité de la stratification est qu'elle fournit un moyen de justifier une hypothèse d'indépendance qui donne à chaque sous-indice une interprétation de qualité constante. Plutôt que d'exiger une indépendance totale entre les prix potentiels et le moment où les marchandises se vendent, l'indépendance ne doit être subordonnée qu'aux caractéristiques utilisées pour la stratification. C'est-à-dire que l'indépendance ne doit se maintenir que pour chaque strate individuellement, plutôt que pour toutes les strates simultanément. Avec l'indépendance, la stratification contrôle de manière non paramétrique les caractéristiques qui peuvent confondre les variations de prix dans le temps avec les modifications de la composition des marchandises vendues à différents moments. Ces sous-indices stratifiés peuvent ensuite être agrégés pour obtenir un indice global de qualité constante (c'est le travail du poids) car l'indice de chaque strate a une interprétation de qualité constante.
+
+Une approche stratifiée pour construire un indice des prix de qualité constante n'est qu'une application directe des résultats de la section précédente. Il est utile de commencer par des indices stratifiés car ces indices nécessitent le moins d'hypothèses et, dans un certain sens, les autres approches pour construire un indice de qualité constante tentent d'imiter un indice stratifié.
+
+&#128214; Manuel RPPI: Chapitre 4.
+
+&#128214; Manuel PPI: Chapitre 7, sections A, C.
+
+## Indépendance conditionnelle
+
+La configuration de l'indice stratifié suit de près la configuration de l'indice général de qualité constante dans la section précédente, sauf que les caractéristiques d'un bien doivent être explicitement modélisées. Pour ce faire, supposons que $ X $ soit un vecteur (aléatoire) de caractéristiques observables sur lesquelles les biens peuvent être stratifiés. Dans le contexte du logement, par exemple, $ X $ peut inclure la superficie en pieds carrés, le nombre de chambres et l'âge de la maison. Chaque strate correspond à une réalisation différente de $ x $ pour $ X $ (par exemple, maisons de 1500 à 2500 pieds carrés, 3 chambres à coucher et âgées de 10 à 25 ans).
+
+L'indice géométrique des prix de transaction entre la période 0 et la période 1 pour la strate $ x $ compare les prix de transaction moyens dans le temps pour les biens de la strate $ x $, et est donné par
+
+\ begin {align *}
+\ log (I ^ {T} _ {x}) = E (\ rho | X = x, t = 1) - E (\ rho | X = x, t = 0).
+\ end {align *}
+
+Si le prix potentiel est indépendant du temps, en fonction des caractéristiques utilisées pour stratifier les biens, les sous-indices de chaque strate, calculés avec les prix de transaction, ont une interprétation de qualité constante. Formellement, ceci est l'hypothèse d'indépendance conditionnelle $ \ {p (1), p (0) \} \ perp t | X $, l'analogue intra-strate de l'hypothèse d'indépendance de la section précédente. Pour chaque strate, si un bien se vend pendant la période 0 ou la période 1 est essentiellement dû au hasard, il n'y a donc pas de différences systématiques entre les biens qui se vendent pendant la période 0 et la période 1 qui influencent les prix au sein d'une strate. Autrement dit, la seule raison pour laquelle les prix potentiels pourraient changer avec le temps est due à un changement dans la composition de la
+caractéristiques $ X $ --- une fois que ces caractéristiques sont maintenues fixes, tout changement des prix observés dans le temps doit être un pur changement de prix.
+
+Formellement, avec une indépendance conditionnelle, il faut que $ E (\ rho (t) | X, t) = E (\ rho (t) | X) $ pour $ t = 0,1 $, et donc
+
+\ begin {align *}
+\ log (I ^ {T} _ {x}) & = E (\ rho (1) | X = x, t = 1) - E (\ rho (0) | X = x, t = 0) \\
+ & = E (\ rho (1) | X = x) - E (\ rho (0) | X = x).
+\ end {align *}
+
+L'indépendance conditionnelle donne un indice de qualité constante pour chaque strate qui coïncide avec l'indice des prix de transaction pour cette strate.
+
+Dans le cas extrême où les biens sont regroupés en paires dans le temps, de sorte que chaque strate contient deux biens, l'indice stratifié n'est qu'un indice de modèle apparié pur. Pour voir cela, énumérez la population de paires par $ i = 1, \ ldots, n_ {p} $ de sorte que
+
+\ begin {align *}
+I ^ {Q} = \ prod_ {i = 1} ^ {n_ {p}} \ left (\ frac {p_ {i1}} {p_ {i0}} \ right) ^ {\ omega_ {i}},
+\ end {align *}
+
+où $ P (X = x) = \ omega_ {i} $ et $ p_ {it} $ est le prix du bien en paire $ i $ qui se vend pendant la période $ t = 0,1 $. L'indépendance conditionnelle est valable pour un indice de modèle apparié si les biens de chaque paire sont suffisamment similaires dans le temps pour que le prix de transaction du bien qui se vend au cours de la période 0 donne une bonne référence pour ce que le bien qui vend au cours de la période 1 aurait vendu au cours de la période 0. Cela montre également que les formules d'index standard sont des cas particuliers de l'indice stratifié et supposent implicitement une indépendance conditionnelle.
+
+Il convient de souligner que l'indépendance conditionnelle n'est pas une hypothèse vérifiable. C'est intrinsèquement une hypothèse économique sur la façon dont les marchandises se vendent au fil du temps. Mais c'est ce qui permet d'identifier un indice de qualité constante à partir d'un indice de prix de transaction.
+
+## Chevauchement
+
+Pour agréger les sous-indices de chaque strate en un indice de prix global, il faut que $ 0 <P (t = 1 | X = x) <1 $ --- cela signifie que, pour chaque strate, certains biens doivent vendre à chaque période. Il s'agit de la condition de chevauchement (ou de soutien commun) qui garantit qu'un indice des prix peut être construit pour chaque strate. Contrairement à l'indépendance conditionnelle, le chevauchement est vérifiable.
+
+Lorsque la condition de chevauchement tient, avec l'indépendance conditionnelle,
+
+\ begin {align *}
+\ log (I ^ {Q}) & = E (\ rho (1)) - E (\ rho (0)) \\
+& = E [E (\ rho (1) | X) - E (\ rho (0) | X)] \\
+& = E [E (\ rho (1) | X, t = 1) - E (\ rho (0) | X, t = 0)] \\
+& = E [E (\ rho | X, t = 1) - E (\ rho | X, t = 0)],
+\ end {align *}
+
+pour que
+
+\ begin {align *}
+I ^ {Q} = \ prod_ {x} (I ^ {T} _ {x}) ^ {P (X = x)}.
+\ end {align *}
+
+L'indice de qualité constante est simplement un produit pondéré de chaque sous-indice, calculé avec les prix de transaction, où les pondérations correspondent à la probabilité qu'un bien appartienne à une strate particulière. Toutes ces informations sont observables, et donc l'indice de qualité constante est identifié.
+
+## Problèmes de stratification
+
+Un avantage évident de l'approche stratifiée pour la construction d'un indice de qualité constante est qu'elle ne s'appuie que sur deux hypothèses pour fournir un tel indice - indépendance conditionnelle et chevauchement. Ces hypothèses ont également l'avantage d'être relativement transparentes. L'indépendance conditionnelle et le chevauchement sont des conditions intuitivement simples, bien que l'indépendance conditionnelle ne soit pas une hypothèse vérifiable.
+
+Le défi avec une approche stratifiée est de trouver le bon équilibre entre ces deux hypothèses. Si la stratification est trop granulaire, alors la condition de chevauchement peut échouer --- un bien avec une combinaison particulière de caractéristiques peut ne pas se vendre au cours d'une période donnée, de sorte que le sous-indice de cette strate n'est pas défini. Quand vient le temps d'agréger chaque sous-indice, il ne sera pas possible de l'agréger sur la population des strates, et donc l'indice global de qualité constante n'est pas identifié à partir des prix de transaction. ^ [Une façon d'atténuer ce problème est de construire un indice des prix pour une sous-population de biens. Par exemple, un indice de type Paasche requiert uniquement des transactions dans la période 0 et la période 1 pour les strates dans lesquelles un bien se vend dans la période 1, $ P (t = 1 | X = x) <1 $. Cela a également l'avantage d'affaiblir l'hypothèse d'indépendance conditionnelle de sorte que seuls les prix potentiels de la période 0 doivent être conditionnellement indépendants du temps, $ p (0) \ perp t | X $.] Ceci est problématique, car une partition plus granulaire des caractéristiques peut donner plus de crédibilité à l'hypothèse d'indépendance conditionnelle. C'est plus facile à voir lorsque les marchandises sont regroupées en paires (la partition la plus granulaire), de sorte que l'indice des prix de transaction est un indice de modèle apparié. Dans ce cas, le chevauchement échoue lorsqu'un bien ne se vend ni dans la période 0 ni dans la période 1, et donc le prix relatif d'une paire de produits ne peut pas être construit. ^ [Une façon intéressante de réduire le chevauchement dans un indice de modèle apparié consiste à calculer l'indice sur plus de deux périodes. Voir @ kirbymcgregor2019 pour un exemple.]
+
+Un problème connexe avec la stratification est que, si la stratification se produit pour de nombreuses caractéristiques d'un bien, $ X $ peut être de grande dimension. Dans ce cas, la taille des cellules pour chaque strate peut être très petite, et les indices spécifiques à la strate peuvent être très sensibles à l'ajout ou à la suppression de transactions pour un bien. Le chevauchement et la dimensionnalité limitent tous deux la capacité de créer des groupes de biens homogènes pour lesquels il est plus facile de motiver l'indépendance conditionnelle.
+
+## Exemple avec R
+
+Le calcul d'un indice stratifié est simple en pratique. Une bonne façon de le faire est d'utiliser une simple régression linéaire.
+
+Considérez les données suivantes avec des transactions sur deux périodes pour deux groupes de marchandises.
+
+`` `{r}
+# Faire quelques données
+df <- data.frame (period = c (0, 0, 0, 1, 1, 1, 1, 1),
+                 groupe = lettres [1: 2],
+                 prix = 1: 8)
+df
+`` ''
+
+Les indices pour chaque groupe peuvent être calculés avec une seule régression linéaire, puis agrégés avec une moyenne.
+
+`` `{r}
+# Apportez dans la bibliothèque pdd
+bibliothèque (ppd)
+
+# Calculer les indices au niveau des strates avec une régression linéaire
+mdl <- lm (log (prix) ~ groupe + groupe: période - 1, df)
+
+# Transformer les coefficients de régression en indices
+index <- exp (coef (mdl) [- seq_len (nlevels (mdl $ model $ group))]))
+
+# Agrégat, en supposant que les deux strates ont un poids égal
+géomée (indice) * 100
+`` ''
+
+# Indices de prix hédoniques
+
+L'approche stratifiée pour construire un indice de qualité constante répartit les biens selon des caractéristiques observables pour aider à justifier une hypothèse d'indépendance conditionnelle entre les prix potentiels et le moment où un bien se vend. Il en résulte une collection d'indices de qualité constante pour chaque strate qui peuvent être identifiés par les prix de transaction intra-strate. L'astuce avec l'approche stratifiée consiste à trouver une stratification suffisamment grossière pour justifier l'indépendance conditionnelle tout en garantissant la condition de chevauchement. Sinon, si le chevauchement échoue, l'indice global de qualité constante ne peut pas être construit à partir des indices de prix de transaction spécifiques à la strate car il n'est pas possible de construire un index de prix de transaction pour chaque strate.
+
+Une motivation pour l'hédonique est de spécifier un modèle pour les prix à extrapoler à travers les strates lorsque le chevauchement échoue. Il peut y avoir une liste de caractéristiques d'un bien qui sont convenues de saisir de manière appropriée ce qui confond les changements de prix au fil du temps avec les changements de la qualité sous-jacente d'un bien, mais il n'est pas possible de stratifier les prix le long de cette liste de caractéristiques en raison d'un échec de chevauchement. The idea behind hedonics is to model $E(\rho | X, t)$ with a parametric model, $h(X, t)$, that does not require overlap (or requires a weaker form of overlap). With conditional independence, the constant-quality price index is then simply
+
+\begin{align*}
+\log(I^{Q}) = E[E(\rho | X, t = 1) - E(\rho | X, t = 0)] = E[h(X, 1) - h(X, 0)].
+\end{align*}
+
+Every geometric hedonic index has this form, and can be thought of as using the model $h$ to construct modeled price relatives that compare goods with the same characteristics over time, and then aggregating these with a geometric index.
+
+It is worth noting that the hedonic model is usually given a structural interpretation [@rppihandbook, Chapter 5], so that it captures the structural contribution of each characteristic towards price. This is indeed where the name hedonics comes from. The problem with giving the hedonic model $h$ a structural interpretation is that it requires a tremendous amount of prior knowledge, essentially understanding how the individual characteristics of a product determine its price. This is entirely unnecessary, however, once an assumption of conditional independence is made---the hedonic model is simply a model for how average transaction prices relate to characteristics and time. Consequently, the label "hedonics" is not very useful, and is potentially misleading. In the interest of keeping with the broader literature, however, the label will be maintained. What's important to keep in mind is that the hedonic model is simply a model for how average transaction price relates to the characteristics of a good and when it sells.
+
+&#128214; RPPI Handbook: Chapters 5--6.
+
+&#128214; PPI Manual: Chapter 21, sections A, C, D.
+
+## Linear hedonic indices
+
+The canonical form for the hedonic model $h$ is a linear function of a good's characteristics, so that $h(X, 0) = \alpha_{0} + X\beta_{0}$ and $h(X, 1) = \alpha_{1} + X\beta_{1}$, and thus
+
+\begin{align*}
+E(\rho | X, t) = \alpha_{0} + t(\alpha_{1} - \alpha_{0}) + X\beta_{0} + t \cdot X (\beta_{1} - \beta_{0}).
+\end{align*}
+
+With a linear form for the hedonic model, transaction prices are expressed as a linear regression on the characteristics of a good---the parameters in a hedonic model are just population regression coefficients. The parameter vector $\beta_{t}$ is usually interpreted as a vector of implicit prices for the non-market characteristics of a good. This interpretation stems from a structural view of a hedonic model---the goal here is simply to specific a parametric model for the conditional price function, $E(\rho | X, t)$, so $\beta_{t}$ need not be given any special interpretation.^[There are some theoretical issues with specifying a linear hedonic model---see @hausman2003 for an example when a CPI is supposed to measure changes in the cost of living, and @rosen1974, which is usually taken as giving the conceptual foundation for the hedonic approach.]
+
+With a linear hedonic model, and conditional independence between potential prices and time,
+
+\begin{align*}
+\log(I^{Q}) = E(h(X, 1) - h(X, 0)) = \alpha_{1} - \alpha_{0} + E(X)(\beta_{1} - \beta_{0}). 
+\end{align*}
+
+The effect of specifying a model for $E(\rho | X, t)$ is that a constant-quality price index now has a simple parametric form that can be used to relax the overlap condition.^[Overlap is not gone entirely---goods still need to sell in both periods and, at each point in time, none of the characteristics in $X$ can be a linear combination of each other---but is not as onerous as with a stratified index.] Nothing precludes using a more complex non-linear model, but in application the hedonic model is usually linear.^[It is easy to show that a set of linear regression coefficients for the regression of $X$ on $y$ solves the following problem: $\min_{b \in \mathbb{R}^{k}} E[(E(y | X) - Xb)^{2}]$. That is, a linear regression gives the minimum mean-square error linear approximation to the conditional expectation function. Hence, even if average price is a non-linear function of characteristics, the linear hedonic model may still give a good approximation.]
+
+This type of hedonic index is sometimes called the hedonic imputation model, because it is the geometric index formed by taking the ratio of the average predicted prices from the linear regressions of (log) price on characteristics at two points in time. As mentioned in the previous section, however, all hedonic price indices have this form, whether average price is modeled as a linear function of characteristics or not. Consequently, the label "hedonic imputation" is not very useful and leads to a variety of "different" hedonic price indices that are really all the same thing.
+
+One advantage of specifying a linear model for $E(\rho | X, t)$ is that the resulting index has a very intuitive form:^[To show this directly, note that $E(\rho | t) = E(E(\rho | X, t)) = E(\alpha_{t} + X\beta_{t} | t) = \alpha_{t} + E(X | t) \beta_{t}$.]
+
+\begin{align*}
+\log(I^{Q}) =& \underbrace{E(\rho | t = 1) - E(\rho | t = 0)}_{\text{transaction-price index}}\\
+&+ \underbrace{[E(X | t = 0) - E(X | t = 1)][\beta_{0} P(t = 1) + \beta_{1} P(t = 0)]}_{\text{correction term}}.
+\end{align*}
+
+Provided that conditional independence holds, and that average transaction price is a linear function of the characteristics of the goods sold, the constant-quality index can be decomposed into a geometric transaction-price index and a correction term that captures the change in the composition of product characteristics over time. The correction term takes the average change in characteristics over time, and uses this to adjust the transaction-price index---the term $\beta_{0} P(t = 1) + \beta_{1} P(t = 0)$ governs whether increasing the presence of a characteristic on average increases prices or not. For example, if products in period 1 have, on average, more of characteristics that are positively associated with price, then the correction term will exert a negative influence on the transaction-price index to arrive at a constant-quality index. This is because the transaction-price index will show an increase in price over time in part because the goods selling in period 1 are of higher quality than those selling in period 0, and would have sold for more in period 0 than the goods that actually sold in period 0. Consequently, the transaction-price index overstates the pure change in price, hence the negative correction term.
+
+Calculating a linear hedonic price index is easy, as
+
+\begin{align*}
+E(\rho | X, t) &= \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X \beta_{0} + t \cdot X (\beta_{1} - \beta_{0}) \\
+&= \alpha_{0} + t (\alpha_{1} - \alpha_{0} + E(X)(\beta_{1} - \beta_{0})) + X \beta_{0} + t (X - E(X)) (\beta_{1} - \beta_{0}) \\
+&= \alpha_{0} + t \log(I^{Q}) + X \beta_{0} + t (X - E(X)) (\beta_{1} - \beta_{0}).
+\end{align*}
+
+The hedonic index is then just the coefficient on a time-dummy variable in a linear regression, and is therefore extremely easy to calculate.
+
+It is worth concluding this section by noting that in almost all cases it is an assumption that average transaction price is a linear function of characteristics. There is, however, one interesting case where this assumption is always correct. If goods are partitioned by their characteristics, so that each combination of $x$ for $X$ belongs to its own group and gets its own parameter in the hedonic model at each point in time, then $E(\rho | X, t)$ is necessarily linear. In this case the hedonic price index is simply a stratified price index. In this way the linear hedonic price index is a more general type of price index than the stratified index, and finds its value when the stratified index cannot be calculated because of a failure of overlap.
+
+## The time-dummy approach
+
+The hedonic index in the previous section can be simplified to make calculating the index easier with an approach called the time-dummy approach.^[Again, this is a poor name, as the "hedonic imputation" approach recovers the index as the coefficient on a time-dummy variable.] The time-dummy approach simply takes the linear hedonic model in the previous section and restricts it so that $\beta_{0} = \beta_{1} = \beta$. This doesn't change anything fundamental about the index, except that it now requires fewer parameters to calculate, as
+
+\begin{align*}
+E(\rho | X, t) = \alpha_{0} + t \log(I^{Q}) + X \beta.
+\end{align*}
+
+One interesting feature of the time-dummy index is that, like the general linear hedonic index, it is a type of stratified index when goods are partitioned by their observable characteristics. To see this, note that, with the assumption that $\beta_{0} = \beta_{1} = \beta$, the hedonic model becomes $h(X, t) = \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X\beta$. When goods are stratified according to $X$, then $h$ is saturated-in-$X$ such that there is a unique $\beta_x$ for each combination of $x$ for $X$---each stratum gets its own parameter in the regression. In this case, the result in @angrist2009[Section 3.3.1] applies, so that
+
+\begin{align*}
+\log(I^{Q}) = \sum_{x}[E(\rho | X = x, t = 1) - E(\rho | X = x, t = 0)] \omega_{x},
+\end{align*}
+
+où
+
+\begin{align*}
+\omega_{x} = \frac{\text{var}(t | X = x) P(X = x)}{\sum_{x} \text{var}(t | X = x) P(X = x)}.
+\end{align*}
+
+This index is of the same form as the stratified geometric index in the previous section, except that the weights depend on both the probability of a good belonging to a particular stratum and the variance of sales dates within a stratum. In the special case when each stratum contains a pair of goods, $\omega_{x} = P(X = x)$, and the time-dummy index reduces to the pure matched-model index.
+
+The point to take away here is that when goods are stratified according to their characteristics, the time-dummy approach for constructing a constant-quality index and the stratified approach are not fundamentally different approaches to operationalize a conditional independence assumption. Both approaches require the overlap condition, and aggregate within-stratum transaction-price indices to produce an overall price index. The usefulness of the time-dummy approach comes when overlap fails---so that goods cannot be stratified along a particular set of characteristics---as the time-dummy approach provides a parametric correction that gives the transaction-price index a constant-quality interpretation at the expense of an extra assumption.
+
+In practice the time-dummy hedonic model is more popular than the hedonic imputation approach, in part because it is simpler, easier to compute, and less data intensive. The disadvantage to the time-dummy approach is that it is more restrictive, and requires an extra assumption. In most cases, however, the two approaches give similar results.
+
+## Example with R
+
+Calculating a linear hedonic price index is very easy in R.
+
+```{r}
+# Bring in some data
+df <- read.csv("csv/data.csv")
+df
+```
+
+This is a simple data set for cat food, with three characteristics---is it chicken cat food, liver cat food, or salmon cat food? To evaluate the impact of a hedonic price index, it is useful to calculate a simple transaction-price index by pooling transactions for all three types of cat food together.
+
+```{r}
+# Calculate pooled price index
+pooled <- lm(log(price) ~ period, df)
+exp(coef(pooled)[2]) * 100
+```
+
+The general linear hedonic index is easy to calculate with a simple linear regression. The only trick is remembering to remove the average of each characteristic in the interaction term.
+
+```{r}
+# Calculate hedonic imputation index
+hedonic_imputation <- lm(log(price) ~ period + liver + salmon + 
+                           period:(I(liver - mean(liver)) + I(salmon - mean(salmon))), 
+                         df)
+exp(coef(hedonic_imputation)[2]) * 100
+```
+
+This is the same as the two-step calculation that is normally done for a hedonic imputation index.
+```{r}
+# Period-0 regression
+hi0 <- lm(log(price) ~ liver + salmon, df, subset = period == 0)
+
+# Period-1 regression
+hi1 <- lm(log(price) ~ liver + salmon, df, subset = period == 1)
+
+# Calculate index using predicted prices
+exp(mean(predict(hi1, df) - predict(hi0, df))) * 100
+
+```
+
+It is also the same as manually calculating the stratified index.
+```{r}
+# Bring in ppd library
+library(ppd)
+
+# Weight cat food by its frequency
+weights <- colSums(df[-(1:2)])
+
+# Calculate an index for each type of cat food
+strata_indices <- 
+  sapply(list(subset(df, chicken == 1), 
+              subset(df, liver == 1), 
+              subset(df, salmon == 1)),
+         function(x) with(x, geomean(price[period == 1]) / geomean(price[period == 0]))
+         )
+
+# Aggregate
+geomean(strata_indices, weights) * 100
+```
+
+The results are very similar if a time-dummy model is used instead. 
+```{r}
+# Time-dummy index
+time_dummy <- lm(log(price) ~ period + liver + salmon, df)
+exp(coef(time_dummy)[2]) * 100
+```
+
+Adding weights for the transactions in each stratum can easily be done with a weighted regression.
+```{r}
+# Make some weights
+df$weights <- 1:25 / sum(1:25)
+
+# Calculate weighted hedonic imputation index
+hedonic_imputation <- lm(log(price) ~ period + liver + salmon + 
+                           period:(I(liver - weighted.mean(liver, weights)) + 
+                                   I(salmon - weighted.mean(salmon, weights))), 
+                         df, weights = weights)
+exp(coef(hedonic_imputation)[2]) * 100
+```
+
+This gives the same answer as the two-step calculation.
+```{r}
+# Period-0 regression
+hi0 <- lm(log(price) ~ liver + salmon, df, subset = period == 0, weights = weights)
+
+# Period-1 regression
+hi1 <- lm(log(price) ~ liver + salmon, df, subset = period == 1, weights = weights)
+
+# Calculate index using weighted predicted prices
+exp(weighted.mean(predict(hi1, df) - predict(hi0, df), df$weights)) * 100
+
+```
+
+# Assignment
+
+Answers for these questions come from both the course content and the readings. Each question is worth one point, for a total of 20 points. Passing this module requires at least 65% (13 out of 20 correct). Email your answers to the course instructor when you are finished.
+
+**Question 1** True or false: The time-dummy hedonic index is a biased estimator of the constant-quality geometric index.
+
+**Question 2** True or false: A hedonic price index requires no assumptions to be a constant-quality index once the characteristics of the goods being sold are known.
+
+**Question 3** A linear hedonic index equals the Jevons price index in which circumstances.
+
+a) When the average characteristics of goods selling in period 1 equals the average characteristics of goods selling in period 0.
+
+b) When the overlap conditions is satisfied.
+
+c) When the parameters in the hedonic model do not change over time.
+
+d) a and c.
+
+e) None of the above.
+
+**Question 4** Which quality adjustment requires the greatest number of assumptions?
+
+a) Stratification.
+
+b) Hedonics using the characteristics approach.
+
+c) Hedonics using the time-dummy approach.
+
+d) Hedonics using the double imputation approach.
+
+**Question 5** True or false: A repeat-sale index can be motivated/derived as a type of hedonic index.
+
+**Question 6** The size of container for salmon cat food decreased between period 0 and period 1 in the examples with R for hedonic price indices. If the other types of cat food stayed the same, what can be said about the hedonic indices?
+
+a) They overstate the decrease in price between period 0 and period 1.
+
+b) They understate the increase in price between period 0 and period 1.
+
+c) They overstate the increase in price between period 0 and period 1.
+
+d) The hedonic model understates the increase and the stratified model overstates the increase.
+
+e) None of the above.
+
+The next four questions have to do with the following type of quality adjustment. A common strategy to build a constant-quality index when packaging for a product changes is to divide the price by the size of the package (e.g., price per liter of dish soap), so that the price relative for product $i$ becomes $p_{i1} / p_{i0} \times s_{i0} / s_{i1}$, where $s_{it}$ is the size of the package in period $t$. An index based on this approach can be calculated with a linear regression, as 
+
+\begin{align*}
+E(\rho | i, s, t) = \alpha_i + t \log(I) + \log(s).
+\end{align*}
+
+**Question 7** True or false: Adjusting price by package size is a type of time-dummy hedonic index.
+
+**Question 8** What is the conditional independence assumption that makes this quality adjustment work?
+
+a) The only difference between the same product in period 0 and period 1 is the package size.
+
+b) Products in period 1 are a good counterfactual for products in period 0.
+
+c) Each product sells in both periods.
+
+d) The only difference between products over time is due to package size.
+
+e) Conditional independence is not needed.
+
+**Question 9** What extra assumption is made so that simply dividing price by package size adjusts for changes in quality, rather than needing to estimating the hedonic model?
+
+a) The parameters in the hedonic model do not change over time.
+
+b) The error is the hedonic model is homoskedastic.
+
+c) The elasticity between price and package size is one.
+
+d) No extra assumptions are made.
+
+**Question 10** What is the overlap assumption that is required to calculate this index?
+
+a) A transaction must occur for every product-package size combination in both period 0 and period 1.
+
+b) Each product needs to sell in both periods.
+
+c) Each product needs to sell in both periods and package size must change for at least one product.
+
+d) No overlap assumption is needed.
+
+**Question 11** True or false: The time-dummy and hedonic imputation price indices always give different values.
+
+The next two questions deal with a variation on the time-dummy hedonic index based on conditional medians, so that $\text{med}(\rho | X, t) = \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X \beta$. With conditional independence, $\alpha_{1} - \alpha_{0} = \log(\text{med}(p(1)) / \text{med}(p(0)))$. 
+
+**Question 12** Why is the index from the median time-dummy index a poor measure for a constant-quality index?
+
+a) It compares what the median good in period 1 would sell for in period 1 to what the median good in period 0 would sell for in period 0, and hence does not compare the same goods over time.
+
+b) It is a biased estimator of a constant-quality index.
+
+c) It is not possible to construct a maximum likelihood estimator for an index based on medians.
+
+d) It does not satisfy the monotonicity axiom from the axiomatic approach to price indices.
+
+e) There is nothing wrong with the median time-dummy index.
+
+**Question 13** True or false: As the median is less sensitive to outliers than the mean, the median time-dummy index finds application in settings where there may be outlier price observations.
+
+The next four questions use the following data on transactions for two products over two periods.
+
+| Period | Product | Price 1 | Price 2 | Price 3 |
+| ---    | ---     | ---     | ---     | ---     |
+| 0      | A       | 2       | 2       | ...     |
+| 1      | A       | 1       | 2       | ...     |
+| 0      | B       | 4       | ...     | ...     |
+| 1      | B       | 2       | 4       | 8       |
+
+**Question 14** What is the value of the Jevons index when all the price information is pooled together for both periods?
+
+a) 100
+
+b) 98.3
+
+c) 104.7
+
+d) 106.4
+
+e) 89.8
+
+**Question 15** What is the value of the stratified index, where each product belongs to a separate stratum and all strata have equal weight, calculated using a Jevons index?
+
+a) 104.7
+
+b) 98.3
+
+c) 84.1
+
+d) 110.6
+
+e) 101.3
+
+**Question 16** Why does the stratified index show a decrease in price while the pooled index shows an increase in price?
+
+a) The pooled index is a constant-quality index, whereas the stratified index is biased
+downwards.
+
+b) The pooled index uses all the price data, whereas the stratified index does not.
+
+c) Product B sells for a higher price than product A, and relatively more product B
+sold in period 2, but only product A changed price in period 2.
+
+d) None of the above.
+
+**Question 17** True or false: If each product does not change over time, the stratified index is a constant- quality index.
+
+**Question 18** True or false: The repeat-sales index is a type of matched-model index.
+
+**Question 19** True or false: It is possible to mix stratification with hedonics to relax overlap.
+
+**Question 20** It can be shown that 
+
+\begin{align*}
+\underbrace{E(\rho | t = 1) - E(\rho | t = 0)}_{\text{transaction-price index}} =& \underbrace{E(\rho(1) | t = 0) - E(\rho(0) | t = 0)}_{\text{Laspeyres-like constant-quality index}} \\ 
+&+ \underbrace{E(\rho(1) | t = 1) - E(\rho(1) | t = 0)}_{\text{selection bias}}.
+\end{align*}
+
+True or false: Would potential prices in period 0 being correlated with time, such that goods that sell in period 1 would have sold for less in period 0 than the goods that sold period 0, affect using transaction prices to identify a Laspeyres-like constant-quality index?

@@ -1,0 +1,18 @@
+---
+title: "Un cours sur les indices des prix"
+author: "Steve Martin"
+date: "Mai 2020"
+documentclass: article
+geometry: margin=1in
+site: bookdown::bookdown_site
+description: "Une introduction moderne et simple aux indices des prix"
+github-repo: "ppd-dpp/cours-indices-des-prix"
+bibliography: "references.bib"
+---
+
+# Aperçu{-}
+
+Ce cours donne une introduction moderne et simple aux indices des prix. L'accent mis sur les principales idées et concepts qui sont importants pour les utilisateurs et les compilateurs d'indices de prix; par conséquent, le cours n'est pas encyclopédique et plusieurs sujets importants sont soit traités rapidement, soit pas du tout traités. De nombreuses références sont fournies pour compléter le matériel de ce cours et étendre la portée des sujets traités. Dans l'ensemble, le cours repose fermement sur le domaine de la théorie et est conçu pour aider à favoriser la compréhension de ce qu'est un indice des prix. Plusieurs exemples pratiques utilisant le langage de programmation R sont donnés tout au long du cours, ainsi que plusieurs exercices appliqués. Mais la plupart des aspects les plus «réels» de l'élaboration d'un indice des prix sont ignorés. Ce n'est pas parce que ces choses ne sont pas importantes; il est plutôt difficile d'apprécier ces sujets plus pratiques sans une solide compréhension de la théorie.
+
+Le cours est divisé en quatre modules qui s'appuient les uns sur les autres. Le premier module donne une introduction aux indices de prix, en se concentrant principalement sur les aspects informatiques d'un indice de prix. Le deuxième module donne une large introduction à la théorie des indices des prix, en mettant l'accent sur la motivation des indices des prix qui sont produits par les organismes statistiques nationaux. Le troisième module couvre les ajustements de qualité, l'un des principaux obstacles pratiques lors de la construction d'un indice des prix. Le quatrième module rassemble le tout avec un exercice étendu pour construire et analyser un indice des prix avec R.
+
