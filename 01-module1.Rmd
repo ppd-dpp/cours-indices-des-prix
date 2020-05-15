@@ -726,7 +726,7 @@ e) Il est impossible de savoir sans connaître la période de base.
 
 **Question 20** Vous essayez de faire un index pour les widgets bleus et rouges. Le prix relatif des widgets rouges est de 1,2 et le prix relatif des widgets bleus est de 0,9. La part des dépenses consacrées aux widgets rouges est de 0,3 au cours de la période de base et de 0,25 au cours de la période en cours; la part des dépenses pour les widgets bleus est de 0,7 pour la période de base et de 0,75 pour la période en cours. Quelle est la valeur de l'indice géométrique de Laspeyres?
 
-a) 98.1.
+a) 98,1.
 
 b) 96,7.
 

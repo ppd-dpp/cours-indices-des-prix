@@ -54,82 +54,82 @@ Votre objectif est de construire un indice mensuel des prix des widgets, de janv
 
 Les widgets vont être stratifiés par province et par type de widget pour produire des indices élémentaires au niveau de la province par type de widget. Ces indices élémentaires doivent être calculés avec un indice de Jevons. Les indices provinciaux et canadiens vont être des indices arithmétiques qui agrègent les indices élémentaires en utilisant des pondérations de part de valeur. Les pondérations des indices arithmétiques vont être mises à jour en 2019, avec janvier 2019 comme mois de liaison. La structure d'agrégation est résumée dans le graphique ci-dessous.
 
-`` `{r, eval = FALSE, echo = FALSE}
-bibliothèque (DiagrammeR)
-Sirène('
-    graphique TD
-        C [Canada] --- AA [Index <br> arithmétique]
-        AA --- BC ["BC (59)"]
-        AA --- AB ["AB (48)"]
-        AA --- SK ["SK (47)"]
-        AA --- MB ["MB (46)"]
-        AA --- ON ["ON (35)"]
-        AA --- QC ["QC (24)"]
-        AA --- NB ["NB (13)"]
-        AA --- NS ["NS (12)"]
-        AA --- PE ["PE (11)"]
-        AA --- NL ["NL (10)"]
-        ON --- A [Index arithmétique <br>]
-        A --- a [Type </br> A]
-        A --- b [Type </br> B]
-        A --- c [Type </br> C]
-        A --- d [Type </br> D]
-        A --- e [Type </br> E]
-        A --- f [Type </br> F]
-        A --- g [Type </br> G]
-        A --- h [Type </br> H]
-        A --- i [Tapez </br> I]
-        A --- j [Type </br> J]
-        A --- k [Type </br> K]
-        f --- J [Index Jevons </br>]
-        J --- q1 [Citation 1]
-        J --- q2 [Citation 2]
-        J --- q3 [Citation 3]
+```{r, eval=FALSE, echo=FALSE}
+library(DiagrammeR)
+mermaid('
+    graph TD
+        C[Canada] --- AA[Arithmetic <br> Index]
+        AA --- BC["BC (59)"]
+        AA --- AB["AB (48)"]
+        AA --- SK["SK (47)"]
+        AA --- MB["MB (46)"]
+        AA --- ON["ON (35)"]
+        AA --- QC["QC (24)"]
+        AA --- NB["NB (13)"]
+        AA --- NS["NS (12)"]
+        AA --- PE["PE (11)"]
+        AA --- NL["NL (10)"]
+        ON --- A[Arithmetic <br> Index]
+        A --- a[Type </br> A]
+        A --- b[Type </br> B]
+        A --- c[Type </br> C]
+        A --- d[Type </br> D]
+        A --- e[Type </br> E]
+        A --- f[Type </br> F]
+        A --- g[Type </br> G]
+        A --- h[Type </br> H]
+        A --- i[Type </br> I]
+        A --- j[Type </br> J]
+        A --- k[Type </br> K]
+        f --- J[Jevons </br> Index]
+        J --- q1[Quote 1]
+        J --- q2[Quote 2]
+        J --- q3[Quote 3]
 ')
 
-`` ''
+```
 
-! [] (img / structure.png)
+![](img/structure.png)
 
 ## Instructions
 
-Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. (Astuce: consultez le package dplyr et le package [ppd] (https://github.com/marberts/ppd) pour quelques outils utiles.)
+Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. (Astuce: consultez le package dplyr et le package [ppd](https://github.com/marberts/ppd) pour quelques outils utiles.)
 
 Exécutez le code suivant pour récupérer tous les fichiers de données et les placer dans votre environnement de travail.
 
-`` `r
+```r
 source ('https://raw.githubusercontent.com/ppd-dpp/price-index-course/master/scripts/get_data.R')
-`` ''
+```
 
-1. ** Faites les poids **
+1. **Faites les poids**
 
     À l'aide du fichier «poids», créez un ensemble de poids qui donne la part de valeur de chaque produit vendu dans chaque province chaque année, et un autre qui donne la part de valeur de tous les produits vendus dans chaque province chaque année. Ce premier ensemble de poids sera utilisé pour agréger les indices élémentaires pour obtenir 10 indices au niveau de la province, et le deuxième ensemble de poids sera utilisé pour agréger les indices au niveau de la province en un indice national. Il devrait y avoir 200 poids dans le premier fichier et 20 poids dans le second fichier.
 
-2. ** Calculez la géomée du produit K **
+2. **Calculez la géomée du produit K**
 
     En utilisant les microdonnées pour le produit K dans le fichier `dat_micro`, calculez la moyenne géométrique des prix dans chaque province pour chaque mois de chaque année de référence. Ce fichier devrait contenir 250 géomées.
 
-3. ** Calculez la géomée des produits A à J **
+3. **Calculez la géomée des produits A à J**
 
     En utilisant les données du système de prix globaux dans `dat_gps`, calculez la moyenne géométrique des prix pour chaque produit dans chaque province dans chaque mois de chaque année de référence, pour les produits A à J. Combinez ces données avec les données préparées à l'étape 2. Le fichier résultant devrait avoir 2 500 géomées.
 
-4. ** Calculer les indices élémentaires période sur période **
+4. **Calculer les indices élémentaires période sur période**
 
     Pour chaque produit dans chaque province dans chaque année de référence, calculez le rapport des moyennes géométriques calculées à l'étape 3, en vous assurant d'avoir un prix relatif de 1 en janvier 2018 et janvier 2019 (janvier 2019 sera le mois de liaison lorsqu'il est le temps de chaîner l'index.)
 
-5. ** Prix mettre à jour les poids des produits **
+5. **Prix mettre à jour les poids des produits**
 
     Fusionnez les pondérations au niveau du produit par province de l'étape 1 dans l'ensemble de données créé à l'étape 4 et utilisez les indices élémentaires période sur période pour mettre à jour les pondérations.
 
-6. ** Calculez l'indice provincial **
+6. **Calculez l'indice provincial**
 
     Calculez un indice arithmétique pour chaque province au cours de chaque année de référence, à l'aide des indices élémentaires d'une période à l'autre et des pondérations mises à jour des prix des étapes 4 et 5.
 
-7. ** Calculez l'indice au niveau du Canada **
+7. **Calculez l'indice au niveau du Canada**
 
     Fusionnez les pondérations provinciales à l'étape 1 avec les indices provinciaux de l'étape 6 pour calculer un indice canadien pour chaque année de référence.
 
-8. ** Chaîne des indices 2018 et 2019 **
+8. **Chaîne des indices 2018 et 2019**
 
     Enchaînez les indices au niveau de la province de 2018 et 2019 et du niveau du Canada ensemble, en utilisant janvier 2019 comme mois de liaison, pour obtenir un indice de janvier 2018 à décembre 2019 avec janvier 2018 comme période de base (généralement, la période de base serait une année civile , mais il n'y a que 24 mois de données).
 
@@ -137,10 +137,10 @@ Le résultat final devrait être un fichier avec 11 indices de prix, un pour cha
 
 La validation de l'indice au niveau du Canada nécessite de mettre l'indice du groupe canadien d'analyse économique réglementaire et l'indice Monsterweb sous une forme commune.
 
-9. ** Trimestre par rapport aux indices mensuels **
+9. **Trimestre par rapport aux indices mensuels**
 
     Transformez l'indice que vous venez de créer et l'indice du groupe Analyse réglementaire de la réglementation canadienne dans `index_crea` en un indice trimestriel, avec le 1er trimestre 2019 comme période de base, en prenant la moyenne des trois valeurs d'indice de chaque trimestre.
 
-10. ** Ajoutez les trois indices ensemble **
+10. **Ajoutez les trois indices ensemble**
 
      Rassemblez les indices de l'étape 9 dans un ensemble de données avec l'index de Monsterweb dans `index_mw`. Ils devraient tous être trimestriels avec le premier trimestre 2019 comme période de base (= 100).

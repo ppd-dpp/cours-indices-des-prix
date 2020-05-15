@@ -251,339 +251,340 @@ géomée (indice) * 100
 
 L'approche stratifiée pour construire un indice de qualité constante répartit les biens selon des caractéristiques observables pour aider à justifier une hypothèse d'indépendance conditionnelle entre les prix potentiels et le moment où un bien se vend. Il en résulte une collection d'indices de qualité constante pour chaque strate qui peuvent être identifiés par les prix de transaction intra-strate. L'astuce avec l'approche stratifiée consiste à trouver une stratification suffisamment grossière pour justifier l'indépendance conditionnelle tout en garantissant la condition de chevauchement. Sinon, si le chevauchement échoue, l'indice global de qualité constante ne peut pas être construit à partir des indices de prix de transaction spécifiques à la strate car il n'est pas possible de construire un index de prix de transaction pour chaque strate.
 
-Une motivation pour l'hédonique est de spécifier un modèle pour les prix à extrapoler à travers les strates lorsque le chevauchement échoue. Il peut y avoir une liste de caractéristiques d'un bien qui sont convenues de saisir de manière appropriée ce qui confond les changements de prix au fil du temps avec les changements de la qualité sous-jacente d'un bien, mais il n'est pas possible de stratifier les prix le long de cette liste de caractéristiques en raison d'un échec de chevauchement. The idea behind hedonics is to model $E(\rho | X, t)$ with a parametric model, $h(X, t)$, that does not require overlap (or requires a weaker form of overlap). With conditional independence, the constant-quality price index is then simply
+Une motivation pour l'hédonique est de spécifier un modèle pour les prix à extrapoler à travers les strates lorsque le chevauchement échoue. Il peut y avoir une liste de caractéristiques d'un bien qui sont convenues de saisir de manière appropriée ce qui confond les changements de prix au fil du temps avec les changements de la qualité sous-jacente d'un bien, mais il n'est pas possible de stratifier les prix le long de cette liste de caractéristiques en raison d'un échec de chevauchement. L'idée derrière l'hédonique est de modéliser $ E (\ rho | X, t) $ avec un modèle paramétrique, $ h (X, t) $, qui ne nécessite pas de chevauchement (ou nécessite une forme de chevauchement plus faible). Avec l'indépendance conditionnelle, l'indice des prix de qualité constante est alors simplement
 
-\begin{align*}
-\log(I^{Q}) = E[E(\rho | X, t = 1) - E(\rho | X, t = 0)] = E[h(X, 1) - h(X, 0)].
-\end{align*}
+\ begin {align *}
+\ log (I ^ {Q}) = E [E (\ rho | X, t = 1) - E (\ rho | X, t = 0)] = E [h (X, 1) - h (X, 0)].
+\ end {align *}
 
-Every geometric hedonic index has this form, and can be thought of as using the model $h$ to construct modeled price relatives that compare goods with the same characteristics over time, and then aggregating these with a geometric index.
+Chaque indice géométrique hédonique a cette forme, et peut être considéré comme utilisant le modèle $ h $ pour construire des prix relatifs modélisés qui comparent les marchandises avec les mêmes caractéristiques au fil du temps, puis les agréger avec un indice géométrique.
 
-It is worth noting that the hedonic model is usually given a structural interpretation [@rppihandbook, Chapter 5], so that it captures the structural contribution of each characteristic towards price. This is indeed where the name hedonics comes from. The problem with giving the hedonic model $h$ a structural interpretation is that it requires a tremendous amount of prior knowledge, essentially understanding how the individual characteristics of a product determine its price. This is entirely unnecessary, however, once an assumption of conditional independence is made---the hedonic model is simply a model for how average transaction prices relate to characteristics and time. Consequently, the label "hedonics" is not very useful, and is potentially misleading. In the interest of keeping with the broader literature, however, the label will be maintained. What's important to keep in mind is that the hedonic model is simply a model for how average transaction price relates to the characteristics of a good and when it sells.
+Il convient de noter que le modèle hédonique reçoit généralement une interprétation structurelle [@rppihandbook, chapitre 5], de sorte qu'il capture la contribution structurelle de chaque caractéristique au prix. C'est en effet de là que vient le nom d'hédonique. Le problème de donner au modèle hédonique $ h $ une interprétation structurelle est qu'il requiert une quantité considérable de connaissances préalables, essentiellement pour comprendre comment les caractéristiques individuelles d'un produit déterminent son prix. Cependant, cela est totalement inutile une fois qu'une hypothèse d'indépendance conditionnelle est établie --- le modèle hédonique est simplement un modèle pour la relation entre les prix de transaction moyens et les caractéristiques et le temps. Par conséquent, le label "hédonique" n'est pas très utile, et est potentiellement trompeur. Cependant, dans l'intérêt de conserver une documentation plus large, l'étiquette sera maintenue. Ce qui est important à garder à l'esprit, c'est que le modèle hédonique est simplement un modèle pour savoir comment le prix de transaction moyen se rapporte aux caractéristiques d'un bien et quand il se vend.
 
-&#128214; RPPI Handbook: Chapters 5--6.
+& # 128214; Manuel RPPI: chapitres 5 à 6.
 
-&#128214; PPI Manual: Chapter 21, sections A, C, D.
+& # 128214; Manuel PPI: Chapitre 21, sections A, C, D.
 
-## Linear hedonic indices
+## Indices hédoniques linéaires
 
-The canonical form for the hedonic model $h$ is a linear function of a good's characteristics, so that $h(X, 0) = \alpha_{0} + X\beta_{0}$ and $h(X, 1) = \alpha_{1} + X\beta_{1}$, and thus
+La forme canonique du modèle hédonique $ h $ est une fonction linéaire des caractéristiques d'un bien, de sorte que $ h (X, 0) = \ alpha_ {0} + X \ beta_ {0} $ et $ h (X, 1) = \ alpha_ {1} + X \ beta_ {1} $, et donc
 
-\begin{align*}
-E(\rho | X, t) = \alpha_{0} + t(\alpha_{1} - \alpha_{0}) + X\beta_{0} + t \cdot X (\beta_{1} - \beta_{0}).
-\end{align*}
+\ begin {align *}
+E (\ rho | X, t) = \ alpha_ {0} + t (\ alpha_ {1} - \ alpha_ {0}) + X \ beta_ {0} + t \ cdot X (\ beta_ {1} - \ beta_ {0}).
+\ end {align *}
 
-With a linear form for the hedonic model, transaction prices are expressed as a linear regression on the characteristics of a good---the parameters in a hedonic model are just population regression coefficients. The parameter vector $\beta_{t}$ is usually interpreted as a vector of implicit prices for the non-market characteristics of a good. This interpretation stems from a structural view of a hedonic model---the goal here is simply to specific a parametric model for the conditional price function, $E(\rho | X, t)$, so $\beta_{t}$ need not be given any special interpretation.^[There are some theoretical issues with specifying a linear hedonic model---see @hausman2003 for an example when a CPI is supposed to measure changes in the cost of living, and @rosen1974, which is usually taken as giving the conceptual foundation for the hedonic approach.]
+Avec une forme linéaire pour le modèle hédonique, les prix de transaction sont exprimés comme une régression linéaire sur les caractéristiques d'un bien --- les paramètres dans un modèle hédonique ne sont que des coefficients de régression de population. Le vecteur de paramètre $ \ beta_ {t} $ est généralement interprété comme un vecteur de prix implicites pour les caractéristiques non marchandes d'un bien. Cette interprétation découle d'une vue structurelle d'un modèle hédonique --- le but ici est simplement de spécifier un modèle paramétrique pour la fonction de prix conditionnelle, $ E (\ rho | X, t) $, donc $ \ beta_ {t} $ aucune interprétation particulière n'est nécessaire. ^ [Il y a quelques problèmes théoriques avec la spécification d'un modèle hédonique linéaire --- voir @ hausman2003 pour un exemple quand un IPC est censé mesurer les changements du coût de la vie, et @ rosen1974, généralement considéré comme le fondement conceptuel de l'approche hédonique.]
 
-With a linear hedonic model, and conditional independence between potential prices and time,
+Avec un modèle hédonique linéaire, et une indépendance conditionnelle entre les prix potentiels et le temps,
 
-\begin{align*}
-\log(I^{Q}) = E(h(X, 1) - h(X, 0)) = \alpha_{1} - \alpha_{0} + E(X)(\beta_{1} - \beta_{0}). 
-\end{align*}
+\ begin {align *}
+\ log (I ^ {Q}) = E (h (X, 1) - h (X, 0)) = \ alpha_ {1} - \ alpha_ {0} + E (X) (\ beta_ {1} - \ beta_ {0}).
+\ end {align *}
 
-The effect of specifying a model for $E(\rho | X, t)$ is that a constant-quality price index now has a simple parametric form that can be used to relax the overlap condition.^[Overlap is not gone entirely---goods still need to sell in both periods and, at each point in time, none of the characteristics in $X$ can be a linear combination of each other---but is not as onerous as with a stratified index.] Nothing precludes using a more complex non-linear model, but in application the hedonic model is usually linear.^[It is easy to show that a set of linear regression coefficients for the regression of $X$ on $y$ solves the following problem: $\min_{b \in \mathbb{R}^{k}} E[(E(y | X) - Xb)^{2}]$. That is, a linear regression gives the minimum mean-square error linear approximation to the conditional expectation function. Hence, even if average price is a non-linear function of characteristics, the linear hedonic model may still give a good approximation.]
+La spécification d'un modèle pour $ E (\ rho | X, t) $ a pour effet qu'un indice de prix de qualité constante a maintenant une forme paramétrique simple qui peut être utilisée pour assouplir la condition de chevauchement. ^ [Le chevauchement n'est pas complètement disparu- - les marchandises doivent encore être vendues au cours des deux périodes et, à chaque instant, aucune des caractéristiques de $ X $ ne peut être une combinaison linéaire les unes des autres --- mais n'est pas aussi onéreuse qu'avec un indice stratifié.] Rien empêche d'utiliser un modèle non linéaire plus complexe, mais en application, le modèle hédonique est généralement linéaire. ^ [Il est facile de montrer qu'un ensemble de coefficients de régression linéaire pour la régression de $ X $ sur $ y $ résout le problème suivant: $ \ min_ {b \ in \ mathbb {R} ^ {k}} E [(E (y | X) - Xb) ^ {2}] $. Autrement dit, une régression linéaire donne l'approximation linéaire de l'erreur quadratique moyenne minimale à la fonction d'attente conditionnelle. Par conséquent, même si le prix moyen est une fonction non linéaire des caractéristiques, le modèle hédonique linéaire peut toujours donner une bonne approximation.]
 
-This type of hedonic index is sometimes called the hedonic imputation model, because it is the geometric index formed by taking the ratio of the average predicted prices from the linear regressions of (log) price on characteristics at two points in time. As mentioned in the previous section, however, all hedonic price indices have this form, whether average price is modeled as a linear function of characteristics or not. Consequently, the label "hedonic imputation" is not very useful and leads to a variety of "different" hedonic price indices that are really all the same thing.
+Ce type d'indice hédonique est parfois appelé modèle d'imputation hédonique, car il s'agit de l'indice géométrique formé en prenant le rapport des prix moyens prédits à partir des régressions linéaires du prix (log) sur les caractéristiques à deux moments. Comme mentionné dans la section précédente, cependant, tous les indices de prix hédoniques ont cette forme, que le prix moyen soit modélisé en fonction linéaire des caractéristiques ou non. Par conséquent, le label "imputation hédonique" n'est pas très utile et conduit à une variété d'indices de prix hédoniques "différents" qui sont vraiment tous la même chose.
 
-One advantage of specifying a linear model for $E(\rho | X, t)$ is that the resulting index has a very intuitive form:^[To show this directly, note that $E(\rho | t) = E(E(\rho | X, t)) = E(\alpha_{t} + X\beta_{t} | t) = \alpha_{t} + E(X | t) \beta_{t}$.]
+Un avantage de spécifier un modèle linéaire pour $ E (\ rho | X, t) $ est que l'index résultant a une forme très intuitive: ^ [Pour le montrer directement, notez que $ E (\ rho | t) = E ( E (\ rho | X, t)) = E (\ alpha_ {t} + X \ beta_ {t} | t) = \ alpha_ {t} + E (X | t) \ beta_ {t} $.]
 
-\begin{align*}
-\log(I^{Q}) =& \underbrace{E(\rho | t = 1) - E(\rho | t = 0)}_{\text{transaction-price index}}\\
-&+ \underbrace{[E(X | t = 0) - E(X | t = 1)][\beta_{0} P(t = 1) + \beta_{1} P(t = 0)]}_{\text{correction term}}.
-\end{align*}
+\ begin {align *}
+\ log (I ^ {Q}) = & \ underbrace {E (\ rho | t = 1) - E (\ rho | t = 0)} _ {\ text {indice des prix de transaction}} \\
+& + \ underbrace {[E (X | t = 0) - E (X | t = 1)] [\ beta_ {0} P (t = 1) + \ beta_ {1} P (t = 0)]} _ {\ text {terme de correction}}.
+\ end {align *}
 
-Provided that conditional independence holds, and that average transaction price is a linear function of the characteristics of the goods sold, the constant-quality index can be decomposed into a geometric transaction-price index and a correction term that captures the change in the composition of product characteristics over time. The correction term takes the average change in characteristics over time, and uses this to adjust the transaction-price index---the term $\beta_{0} P(t = 1) + \beta_{1} P(t = 0)$ governs whether increasing the presence of a characteristic on average increases prices or not. For example, if products in period 1 have, on average, more of characteristics that are positively associated with price, then the correction term will exert a negative influence on the transaction-price index to arrive at a constant-quality index. This is because the transaction-price index will show an increase in price over time in part because the goods selling in period 1 are of higher quality than those selling in period 0, and would have sold for more in period 0 than the goods that actually sold in period 0. Consequently, the transaction-price index overstates the pure change in price, hence the negative correction term.
+À condition que l'indépendance conditionnelle soit respectée et que le prix de transaction moyen soit une fonction linéaire des caractéristiques des marchandises vendues, l'indice de qualité constante peut être décomposé en un indice géométrique des prix de transaction et un terme de correction qui capture le changement dans la composition de caractéristiques du produit au fil du temps. Le terme de correction prend la variation moyenne des caractéristiques au fil du temps et l'utilise pour ajuster l'indice des prix de transaction --- le terme $ \ beta_ {0} P (t = 1) + \ beta_ {1} P (t = 0 ) $ détermine si l'augmentation de la présence d'une caractéristique augmente en moyenne les prix ou non. Par exemple, si les produits de la période 1 ont, en moyenne, plus de caractéristiques positivement associées au prix, le terme de correction exercera une influence négative sur l'indice des prix de transaction pour arriver à un indice de qualité constante. En effet, l'indice des prix de transaction affichera une augmentation des prix au fil du temps en partie parce que les marchandises vendues au cours de la période 1 sont de meilleure qualité que celles vendues au cours de la période 0, et se seraient vendues plus pendant la période 0 que les marchandises qui vendus au cours de la période 0. Par conséquent, l'indice des prix de transaction surestime la variation pure des prix, d'où le terme de correction négatif.
 
-Calculating a linear hedonic price index is easy, as
+Le calcul d'un indice de prix hédonique linéaire est facile, car
 
-\begin{align*}
-E(\rho | X, t) &= \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X \beta_{0} + t \cdot X (\beta_{1} - \beta_{0}) \\
-&= \alpha_{0} + t (\alpha_{1} - \alpha_{0} + E(X)(\beta_{1} - \beta_{0})) + X \beta_{0} + t (X - E(X)) (\beta_{1} - \beta_{0}) \\
-&= \alpha_{0} + t \log(I^{Q}) + X \beta_{0} + t (X - E(X)) (\beta_{1} - \beta_{0}).
-\end{align*}
+\ begin {align *}
+E (\ rho | X, t) & = \ alpha_ {0} + t (\ alpha_ {1} - \ alpha_ {0}) + X \ beta_ {0} + t \ cdot X (\ beta_ {1} - \ beta_ {0}) \\
+& = \ alpha_ {0} + t (\ alpha_ {1} - \ alpha_ {0} + E (X) (\ beta_ {1} - \ beta_ {0})) + X \ beta_ {0} + t ( X - E (X)) (\ beta_ {1} - \ beta_ {0}) \\
+& = \ alpha_ {0} + t \ log (I ^ {Q}) + X \ beta_ {0} + t (X - E (X)) (\ beta_ {1} - \ beta_ {0}).
+\ end {align *}
 
-The hedonic index is then just the coefficient on a time-dummy variable in a linear regression, and is therefore extremely easy to calculate.
+L'indice hédonique n'est alors que le coefficient d'une variable temps fictive dans une régression linéaire, et est donc extrêmement facile à calculer.
 
-It is worth concluding this section by noting that in almost all cases it is an assumption that average transaction price is a linear function of characteristics. There is, however, one interesting case where this assumption is always correct. If goods are partitioned by their characteristics, so that each combination of $x$ for $X$ belongs to its own group and gets its own parameter in the hedonic model at each point in time, then $E(\rho | X, t)$ is necessarily linear. In this case the hedonic price index is simply a stratified price index. In this way the linear hedonic price index is a more general type of price index than the stratified index, and finds its value when the stratified index cannot be calculated because of a failure of overlap.
+Il convient de conclure cette section en notant que, dans presque tous les cas, il est supposé que le prix de transaction moyen est une fonction linéaire des caractéristiques. Il existe cependant un cas intéressant où cette hypothèse est toujours correcte. Si les marchandises sont partitionnées par leurs caractéristiques, de sorte que chaque combinaison de $ x $ pour $ X $ appartient à son propre groupe et obtient son propre paramètre dans le modèle hédonique à chaque instant, alors $ E (\ rho | X, t ) $ est nécessairement linéaire. Dans ce cas, l'indice de prix hédonique est simplement un indice de prix stratifié. De cette façon, l'indice de prix hédonique linéaire est un type d'indice de prix plus général que l'indice stratifié et trouve sa valeur lorsque l'indice stratifié ne peut pas être calculé en raison d'un échec de chevauchement.
 
-## The time-dummy approach
+## L'approche temporelle
 
-The hedonic index in the previous section can be simplified to make calculating the index easier with an approach called the time-dummy approach.^[Again, this is a poor name, as the "hedonic imputation" approach recovers the index as the coefficient on a time-dummy variable.] The time-dummy approach simply takes the linear hedonic model in the previous section and restricts it so that $\beta_{0} = \beta_{1} = \beta$. This doesn't change anything fundamental about the index, except that it now requires fewer parameters to calculate, as
+L'indice hédonique de la section précédente peut être simplifié pour rendre le calcul de l'indice plus facile avec une approche appelée approche temporelle. ^ [Encore une fois, c'est un mauvais nom, car l'approche «d'imputation hédonique» récupère l'indice comme le coefficient sur une variable factice temporelle.] L'approche factice temporelle prend simplement le modèle hédonique linéaire de la section précédente et le restreint de sorte que $ \ beta_ {0} = \ beta_ {1} = \ beta $. Cela ne change rien de fondamental à propos de l'index, sauf qu'il nécessite désormais moins de paramètres à calculer, comme
 
-\begin{align*}
-E(\rho | X, t) = \alpha_{0} + t \log(I^{Q}) + X \beta.
-\end{align*}
+\ begin {align *}
+E (\ rho | X, t) = \ alpha_ {0} + t \ log (I ^ {Q}) + X \ beta.
+\ end {align *}
 
-One interesting feature of the time-dummy index is that, like the general linear hedonic index, it is a type of stratified index when goods are partitioned by their observable characteristics. To see this, note that, with the assumption that $\beta_{0} = \beta_{1} = \beta$, the hedonic model becomes $h(X, t) = \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X\beta$. When goods are stratified according to $X$, then $h$ is saturated-in-$X$ such that there is a unique $\beta_x$ for each combination of $x$ for $X$---each stratum gets its own parameter in the regression. In this case, the result in @angrist2009[Section 3.3.1] applies, so that
+Une caractéristique intéressante de l'indice temporel est que, comme l'indice hédonique linéaire général, il s'agit d'un type d'index stratifié lorsque les biens sont répartis selon leurs caractéristiques observables. Pour voir cela, notez que, avec l'hypothèse que $ \ beta_ {0} = \ beta_ {1} = \ beta $, le modèle hédonique devient $ h (X, t) = \ alpha_ {0} + t (\ alpha_ {1} - \ alpha_ {0}) + X \ beta $. Lorsque les biens sont stratifiés en fonction de $ X $, alors $ h $ est saturé en $ X $ de telle sorte qu'il existe un $ \ beta_x $ unique pour chaque combinaison de $ x $ pour $ X $ --- chaque strate obtient son propre paramètre dans la régression. Dans ce cas, le résultat dans @ angrist2009 [Section 3.3.1] s'applique, de sorte que
 
-\begin{align*}
-\log(I^{Q}) = \sum_{x}[E(\rho | X = x, t = 1) - E(\rho | X = x, t = 0)] \omega_{x},
-\end{align*}
+\ begin {align *}
+\ log (I ^ {Q}) = \ sum_ {x} [E (\ rho | X = x, t = 1) - E (\ rho | X = x, t = 0)] \ omega_ {x},
+\ end {align *}
 
 où
 
-\begin{align*}
-\omega_{x} = \frac{\text{var}(t | X = x) P(X = x)}{\sum_{x} \text{var}(t | X = x) P(X = x)}.
-\end{align*}
+\ begin {align *}
+\ omega_ {x} = \ frac {\ text {var} (t | X = x) P (X = x)} {\ sum_ {x} \ text {var} (t | X = x) P (X = X)}.
+\ end {align *}
 
-This index is of the same form as the stratified geometric index in the previous section, except that the weights depend on both the probability of a good belonging to a particular stratum and the variance of sales dates within a stratum. In the special case when each stratum contains a pair of goods, $\omega_{x} = P(X = x)$, and the time-dummy index reduces to the pure matched-model index.
+Cet indice est de la même forme que l'indice géométrique stratifié dans la section précédente, sauf que les poids dépendent à la fois de la probabilité qu'un bien appartienne à une strate particulière et de la variance des dates de vente au sein d'une strate. Dans le cas spécial où chaque strate contient une paire de biens, $ \ omega_ {x} = P (X = x) $, et l'indice factice temporel se réduit à l'indice de modèle apparié pur.
 
-The point to take away here is that when goods are stratified according to their characteristics, the time-dummy approach for constructing a constant-quality index and the stratified approach are not fundamentally different approaches to operationalize a conditional independence assumption. Both approaches require the overlap condition, and aggregate within-stratum transaction-price indices to produce an overall price index. The usefulness of the time-dummy approach comes when overlap fails---so that goods cannot be stratified along a particular set of characteristics---as the time-dummy approach provides a parametric correction that gives the transaction-price index a constant-quality interpretation at the expense of an extra assumption.
+Le point à retenir ici est que lorsque les biens sont stratifiés en fonction de leurs caractéristiques, l'approche factice temporelle pour la construction d'un indice de qualité constante et l'approche stratifiée ne sont pas des approches fondamentalement différentes pour opérationnaliser une hypothèse d'indépendance conditionnelle. Les deux approches nécessitent la condition de chevauchement et des indices de prix de transaction intra-strates agrégés pour produire un indice de prix global. L'utilité de l'approche temporelle vient lorsque le chevauchement échoue --- de sorte que les biens ne peuvent pas être stratifiés selon un ensemble particulier de caractéristiques --- car l'approche temporelle fournit une correction paramétrique qui donne à l'indice des prix de transaction une constante - interprétation de qualité au détriment d'une hypothèse supplémentaire.
 
-In practice the time-dummy hedonic model is more popular than the hedonic imputation approach, in part because it is simpler, easier to compute, and less data intensive. The disadvantage to the time-dummy approach is that it is more restrictive, and requires an extra assumption. In most cases, however, the two approaches give similar results.
+Dans la pratique, le modèle hédonique factice est plus populaire que l'approche d'imputation hédonique, en partie parce qu'il est plus simple, plus facile à calculer et moins gourmand en données. L'inconvénient de l'approche temporelle est qu'elle est plus restrictive et nécessite une hypothèse supplémentaire. Dans la plupart des cas, cependant, les deux approches donnent des résultats similaires.
 
-## Example with R
+## Exemple avec R
 
-Calculating a linear hedonic price index is very easy in R.
+Le calcul d'un indice de prix hédonique linéaire est très facile dans R.
 
-```{r}
-# Bring in some data
-df <- read.csv("csv/data.csv")
+`` `{r}
+# Apportez quelques données
+df <- read.csv ("csv / data.csv")
 df
-```
+`` ''
 
-This is a simple data set for cat food, with three characteristics---is it chicken cat food, liver cat food, or salmon cat food? To evaluate the impact of a hedonic price index, it is useful to calculate a simple transaction-price index by pooling transactions for all three types of cat food together.
+Il s'agit d'un ensemble de données simple pour la nourriture pour chat, avec trois caractéristiques --- est-ce de la nourriture pour chat de poulet, de la nourriture pour chat de foie ou de la nourriture pour chat de saumon? Pour évaluer l'impact d'un indice de prix hédonique, il est utile de calculer un indice de prix de transaction simple en regroupant les transactions pour les trois types d'aliments pour chats ensemble.
 
-```{r}
-# Calculate pooled price index
-pooled <- lm(log(price) ~ period, df)
-exp(coef(pooled)[2]) * 100
-```
+`` `{r}
+# Calculer l'indice de prix commun
+regroupé <- lm (log (prix) ~ période, df)
+exp (coef (groupé) [2]) * 100
+`` ''
 
-The general linear hedonic index is easy to calculate with a simple linear regression. The only trick is remembering to remove the average of each characteristic in the interaction term.
+L'indice hédonique linéaire général est facile à calculer avec une simple régression linéaire. La seule astuce consiste à se souvenir de supprimer la moyenne de chaque caractéristique dans le terme d'interaction.
 
-```{r}
-# Calculate hedonic imputation index
-hedonic_imputation <- lm(log(price) ~ period + liver + salmon + 
-                           period:(I(liver - mean(liver)) + I(salmon - mean(salmon))), 
+`` `{r}
+# Calculer l'indice d'imputation hédonique
+hedonic_imputation <- lm (log (prix) ~ période + foie + saumon +
+                           période: (I (foie - moyenne (foie)) + I (saumon - moyenne (saumon))),
                          df)
-exp(coef(hedonic_imputation)[2]) * 100
-```
+exp (coef (hedonic_imputation) [2]) * 100
+`` ''
 
-This is the same as the two-step calculation that is normally done for a hedonic imputation index.
-```{r}
-# Period-0 regression
-hi0 <- lm(log(price) ~ liver + salmon, df, subset = period == 0)
+C'est le même que le calcul en deux étapes qui est normalement effectué pour un indice d'imputation hédonique.
+`` `{r}
+# Régression période 0
+hi0 <- lm (log (prix) ~ foie + saumon, df, sous-ensemble = période == 0)
 
-# Period-1 regression
-hi1 <- lm(log(price) ~ liver + salmon, df, subset = period == 1)
+# Régression de la période 1
+hi1 <- lm (log (prix) ~ foie + saumon, df, sous-ensemble = période == 1)
 
-# Calculate index using predicted prices
-exp(mean(predict(hi1, df) - predict(hi0, df))) * 100
+# Calculer l'indice à l'aide des prix prévus
+exp (moyenne (prédire (hi1, df) - prédire (hi0, df))) * 100
 
-```
+`` ''
 
-It is also the same as manually calculating the stratified index.
-```{r}
-# Bring in ppd library
-library(ppd)
+C'est également la même chose que le calcul manuel de l'indice stratifié.
+`` `{r}
+# Apportez dans la bibliothèque ppd
+bibliothèque (ppd)
 
-# Weight cat food by its frequency
-weights <- colSums(df[-(1:2)])
+# Poids de la nourriture pour chats par sa fréquence
+poids <- colSums (df [- (1: 2)])
 
-# Calculate an index for each type of cat food
-strata_indices <- 
-  sapply(list(subset(df, chicken == 1), 
-              subset(df, liver == 1), 
-              subset(df, salmon == 1)),
-         function(x) with(x, geomean(price[period == 1]) / geomean(price[period == 0]))
+# Calculer un indice pour chaque type de nourriture pour chat
+strata_indices <-
+  sapply (list (sous-ensemble (df, chicken == 1),
+              sous-ensemble (df, foie == 1),
+              sous-ensemble (df, saumon == 1)),
+         fonction (x) avec (x, géomée (prix [période == 1]) / géomée (prix [période == 0]))
          )
 
-# Aggregate
-geomean(strata_indices, weights) * 100
-```
+# Agrégat
+géomée (strata_indices, poids) * 100
+`` ''
 
-The results are very similar if a time-dummy model is used instead. 
-```{r}
-# Time-dummy index
-time_dummy <- lm(log(price) ~ period + liver + salmon, df)
-exp(coef(time_dummy)[2]) * 100
-```
+Les résultats sont très similaires si un modèle temporel est utilisé à la place.
+`` `{r}
+# Indice temporel factice
+time_dummy <- lm (log (prix) ~ période + foie + saumon, df)
+exp (coef (time_dummy) [2]) * 100
+`` ''
 
-Adding weights for the transactions in each stratum can easily be done with a weighted regression.
-```{r}
-# Make some weights
-df$weights <- 1:25 / sum(1:25)
+L'ajout de pondérations pour les transactions dans chaque strate peut facilement être effectué avec une régression pondérée.
+`` `{r}
+# Faites des poids
+poids df $ <- 1:25 / somme (1:25)
 
-# Calculate weighted hedonic imputation index
-hedonic_imputation <- lm(log(price) ~ period + liver + salmon + 
-                           period:(I(liver - weighted.mean(liver, weights)) + 
-                                   I(salmon - weighted.mean(salmon, weights))), 
-                         df, weights = weights)
-exp(coef(hedonic_imputation)[2]) * 100
-```
+# Calculer l'indice d'imputation hédonique pondéré
+hedonic_imputation <- lm (log (prix) ~ période + foie + saumon +
+                           période: (I (foie - moyenne pondérée (foie, poids)) +
+                                   I (saumon - poids pondéré (saumon, poids))),
+                         df, poids = poids)
+exp (coef (hedonic_imputation) [2]) * 100
+`` ''
 
-This gives the same answer as the two-step calculation.
-```{r}
-# Period-0 regression
-hi0 <- lm(log(price) ~ liver + salmon, df, subset = period == 0, weights = weights)
+Cela donne la même réponse que le calcul en deux étapes.
+`` `{r}
+# Régression période 0
+hi0 <- lm (log (prix) ~ foie + saumon, df, sous-ensemble = période == 0, poids = poids)
 
-# Period-1 regression
-hi1 <- lm(log(price) ~ liver + salmon, df, subset = period == 1, weights = weights)
+# Régression de la période 1
+hi1 <- lm (log (prix) ~ foie + saumon, df, sous-ensemble = période == 1, poids = poids)
 
-# Calculate index using weighted predicted prices
-exp(weighted.mean(predict(hi1, df) - predict(hi0, df), df$weights)) * 100
+# Calculer l'indice à l'aide de prix prédits pondérés
+exp (weighted.mean (predire (hi1, df) - predire (hi0, df), df $ poids)) * 100
 
-```
+`` ''
 
-# Assignment
+# Affectation
 
-Answers for these questions come from both the course content and the readings. Each question is worth one point, for a total of 20 points. Passing this module requires at least 65% (13 out of 20 correct). Email your answers to the course instructor when you are finished.
+Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeur du cours lorsque vous avez terminé.
 
-**Question 1** True or false: The time-dummy hedonic index is a biased estimator of the constant-quality geometric index.
+** Question 1 ** Vrai ou faux: l'indice hédonique factice temporel est un estimateur biaisé de l'indice géométrique de qualité constante.
 
-**Question 2** True or false: A hedonic price index requires no assumptions to be a constant-quality index once the characteristics of the goods being sold are known.
+** Question 2 ** Vrai ou faux: un indice de prix hédonique ne nécessite aucune hypothèse pour être un indice de qualité constante une fois que les caractéristiques des marchandises vendues sont connues.
 
-**Question 3** A linear hedonic index equals the Jevons price index in which circumstances.
+** Question 3 ** Un indice hédonique linéaire est égal à l'indice de prix Jevons dans quelles circonstances.
 
-a) When the average characteristics of goods selling in period 1 equals the average characteristics of goods selling in period 0.
+a) Lorsque les caractéristiques moyennes des biens vendus au cours de la période 1 sont égales aux caractéristiques moyennes des biens vendus au cours de la période 0.
 
-b) When the overlap conditions is satisfied.
+b) Lorsque les conditions de chevauchement sont remplies.
 
-c) When the parameters in the hedonic model do not change over time.
+c) Lorsque les paramètres du modèle hédonique ne changent pas avec le temps.
 
-d) a and c.
+d) a et c.
 
-e) None of the above.
+e) Aucune de ces réponses.
 
-**Question 4** Which quality adjustment requires the greatest number of assumptions?
+** Question 4 ** Quel ajustement de qualité nécessite le plus grand nombre d'hypothèses?
 
 a) Stratification.
 
-b) Hedonics using the characteristics approach.
+b) Hédonique utilisant l'approche des caractéristiques.
 
-c) Hedonics using the time-dummy approach.
+c) Hédonique utilisant l'approche temps-factice.
 
-d) Hedonics using the double imputation approach.
+d) Hédonique utilisant l'approche de la double imputation.
 
-**Question 5** True or false: A repeat-sale index can be motivated/derived as a type of hedonic index.
+** Question 5 ** Vrai ou faux: un indice de vente répétée peut être motivé / dérivé comme un type d'indice hédonique.
 
-**Question 6** The size of container for salmon cat food decreased between period 0 and period 1 in the examples with R for hedonic price indices. If the other types of cat food stayed the same, what can be said about the hedonic indices?
+** Question 6 ** La taille du contenant pour la nourriture pour chat de saumon a diminué entre la période 0 et la période 1 dans les exemples avec R pour les indices de prix hédoniques. Si les autres types d'aliments pour chats sont restés les mêmes, que dire des indices hédoniques?
 
-a) They overstate the decrease in price between period 0 and period 1.
+a) Ils surestiment la baisse des prix entre la période 0 et la période 1.
 
-b) They understate the increase in price between period 0 and period 1.
+b) Ils sous-estiment l'augmentation des prix entre la période 0 et la période 1.
 
-c) They overstate the increase in price between period 0 and period 1.
+c) Ils surestiment la hausse des prix entre la période 0 et la période 1.
 
-d) The hedonic model understates the increase and the stratified model overstates the increase.
+d) Le modèle hédonique sous-estime l'augmentation et le modèle stratifié surévalue l'augmentation.
 
-e) None of the above.
+e) Aucune de ces réponses.
 
-The next four questions have to do with the following type of quality adjustment. A common strategy to build a constant-quality index when packaging for a product changes is to divide the price by the size of the package (e.g., price per liter of dish soap), so that the price relative for product $i$ becomes $p_{i1} / p_{i0} \times s_{i0} / s_{i1}$, where $s_{it}$ is the size of the package in period $t$. An index based on this approach can be calculated with a linear regression, as 
+Les quatre questions suivantes concernent le type d'ajustement de qualité suivant. Une stratégie courante pour construire un indice de qualité constante lorsque l'emballage d'un produit change consiste à diviser le prix par la taille de l'emballage (par exemple, le prix par litre de savon à vaisselle), de sorte que le prix relatif du produit $ i $ devienne $ p_ {i1} / p_ {i0} \ fois s_ {i0} / s_ {i1} $, où $ s_ {it} $ est la taille du paquet dans la période $ t $. Un indice basé sur cette approche peut être calculé avec une régression linéaire, comme
 
-\begin{align*}
-E(\rho | i, s, t) = \alpha_i + t \log(I) + \log(s).
-\end{align*}
+\ begin {align *}
+E (\ rho | i, s, t) = \ alpha_i + t \ log (I) + \ log (s).
+\ end {align *}
 
-**Question 7** True or false: Adjusting price by package size is a type of time-dummy hedonic index.
+** Question 7 ** Vrai ou faux: l'ajustement du prix en fonction de la taille de l'emballage est un type d'index hédonique factice.
 
-**Question 8** What is the conditional independence assumption that makes this quality adjustment work?
+** Question 8 ** Quelle est l'hypothèse d'indépendance conditionnelle qui fait fonctionner cet ajustement de la qualité?
 
-a) The only difference between the same product in period 0 and period 1 is the package size.
+a) La seule différence entre le même produit pendant la période 0 et la période 1 est la taille de l'emballage.
 
-b) Products in period 1 are a good counterfactual for products in period 0.
+b) Les produits de la période 1 sont un bon contrefactuel pour les produits de la période 0.
 
-c) Each product sells in both periods.
+c) Chaque produit se vend au cours des deux périodes.
 
-d) The only difference between products over time is due to package size.
+d) La seule différence entre les produits au fil du temps est due à la taille de l'emballage.
 
-e) Conditional independence is not needed.
+e) L'indépendance conditionnelle n'est pas nécessaire.
 
-**Question 9** What extra assumption is made so that simply dividing price by package size adjusts for changes in quality, rather than needing to estimating the hedonic model?
+** Question 9 ** Quelle hypothèse supplémentaire est faite pour que le simple fait de diviser le prix par la taille de l'emballage s'adapte aux changements de qualité, plutôt que d'avoir à estimer le modèle hédonique?
 
-a) The parameters in the hedonic model do not change over time.
+a) Les paramètres du modèle hédonique ne changent pas avec le temps.
 
-b) The error is the hedonic model is homoskedastic.
+b) L'erreur est que le modèle hédonique est homoscédastique.
 
-c) The elasticity between price and package size is one.
+c) L'élasticité entre le prix et la taille de l'emballage est de un.
 
-d) No extra assumptions are made.
+d) Aucune hypothèse supplémentaire n'est faite.
 
-**Question 10** What is the overlap assumption that is required to calculate this index?
+** Question 10 ** Quelle est l'hypothèse de chevauchement requise pour calculer cet indice?
 
-a) A transaction must occur for every product-package size combination in both period 0 and period 1.
+a) Une transaction doit avoir lieu pour chaque combinaison de taille de produit-emballage dans la période 0 et la période 1.
 
-b) Each product needs to sell in both periods.
+b) Chaque produit doit être vendu dans les deux périodes.
 
-c) Each product needs to sell in both periods and package size must change for at least one product.
+c) Chaque produit doit être vendu dans les deux périodes et la taille de l'emballage doit changer pour au moins un produit.
 
-d) No overlap assumption is needed.
+d) Aucune hypothèse de chevauchement n'est nécessaire.
 
-**Question 11** True or false: The time-dummy and hedonic imputation price indices always give different values.
+** Question 11 ** Vrai ou faux: les indices de prix d'imputation temporelle et factice hédonique donnent toujours des valeurs différentes.
 
-The next two questions deal with a variation on the time-dummy hedonic index based on conditional medians, so that $\text{med}(\rho | X, t) = \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X \beta$. With conditional independence, $\alpha_{1} - \alpha_{0} = \log(\text{med}(p(1)) / \text{med}(p(0)))$. 
+Les deux questions suivantes portent sur une variation de l'indice hédonique factice en fonction des médianes conditionnelles, de sorte que $ \ text {med} (\ rho | X, t) = \ alpha_ {0} + t (\ alpha_ {1} - \ alpha_ {0}) + X \ beta $. Avec l'indépendance conditionnelle, $ \ alpha_ {1} - \ alpha_ {0} = \ log (\ text {med} (p (1)) / \ text {med} (p (0))) $.
 
-**Question 12** Why is the index from the median time-dummy index a poor measure for a constant-quality index?
+** Question 12 ** Pourquoi l'indice de l'indice temporel médian est-il une mauvaise mesure pour un indice de qualité constante?
 
-a) It compares what the median good in period 1 would sell for in period 1 to what the median good in period 0 would sell for in period 0, and hence does not compare the same goods over time.
+a) Il compare ce que le produit médian de la période 1 se vendrait au cours de la période 1 à ce que le produit médian de la période 0 se vendrait au cours de la période 0, et ne compare donc pas les mêmes biens au fil du temps.
 
-b) It is a biased estimator of a constant-quality index.
+b) Il s'agit d'un estimateur biaisé d'un indice de qualité constante.
 
-c) It is not possible to construct a maximum likelihood estimator for an index based on medians.
+c) Il n'est pas possible de construire un estimateur du maximum de vraisemblance pour un indice basé sur les médianes.
 
-d) It does not satisfy the monotonicity axiom from the axiomatic approach to price indices.
+d) Il ne satisfait pas l'axiome de monotonie de l'approche axiomatique des indices de prix.
 
-e) There is nothing wrong with the median time-dummy index.
+e) Il n'y a rien de mal à l'index temporel médian.
 
-**Question 13** True or false: As the median is less sensitive to outliers than the mean, the median time-dummy index finds application in settings where there may be outlier price observations.
+** Question 13 ** Vrai ou faux: étant donné que la médiane est moins sensible aux valeurs aberrantes que la moyenne, l'indice médian temps factice trouve application dans les paramètres où il peut y avoir des observations de prix aberrantes.
 
-The next four questions use the following data on transactions for two products over two periods.
+Les quatre questions suivantes utilisent les données suivantes sur les transactions pour deux produits sur deux périodes.
 
-| Period | Product | Price 1 | Price 2 | Price 3 |
-| ---    | ---     | ---     | ---     | ---     |
-| 0      | A       | 2       | 2       | ...     |
-| 1      | A       | 1       | 2       | ...     |
-| 0      | B       | 4       | ...     | ...     |
-| 1      | B       | 2       | 4       | 8       |
+| Période | Produit | Prix 1 | Prix 2 | Prix 3 |
+| --- | --- | --- | --- | --- |
+| 0 | A | 2 | 2 | ... |
+| 1 | A | 1 | 2 | ... |
+| 0 | B | 4 | ... | ... |
+| 1 | B | 2 | 4 | 8 |
 
-**Question 14** What is the value of the Jevons index when all the price information is pooled together for both periods?
+** Question 14 ** Quelle est la valeur de l'indice Jevons lorsque toutes les informations sur les prix sont regroupées pour les deux périodes?
 
 a) 100
 
-b) 98.3
+b) 98,3
 
-c) 104.7
+c) 104,7
 
-d) 106.4
+d) 106,4
 
-e) 89.8
+e) 89,8
 
-**Question 15** What is the value of the stratified index, where each product belongs to a separate stratum and all strata have equal weight, calculated using a Jevons index?
+** Question 15 ** Quelle est la valeur de l'indice stratifié, où chaque produit appartient à une strate distincte et toutes les strates ont un poids égal, calculé à l'aide d'un indice de Jevons?
 
-a) 104.7
+a) 104,7
 
-b) 98.3
+b) 98,3
 
-c) 84.1
+c) 84,1
 
-d) 110.6
+d) 110,6
 
-e) 101.3
+e) 101,3
 
-**Question 16** Why does the stratified index show a decrease in price while the pooled index shows an increase in price?
+** Question 16 ** Pourquoi l'indice stratifié montre-t-il une baisse des prix alors que l'indice groupé montre une augmentation des prix?
 
-a) The pooled index is a constant-quality index, whereas the stratified index is biased
-downwards.
+a) L'indice groupé est un indice de qualité constante, tandis que l'indice stratifié est biaisé
+vers le bas.
 
-b) The pooled index uses all the price data, whereas the stratified index does not.
+b) L'indice groupé utilise toutes les données sur les prix, contrairement à l'indice stratifié.
 
-c) Product B sells for a higher price than product A, and relatively more product B
-sold in period 2, but only product A changed price in period 2.
+c) Le produit B se vend à un prix plus élevé que le produit A, et relativement plus de produit B
+vendu au cours de la période 2, mais uniquement le produit Un prix modifié au cours de la période 2
 
-d) None of the above.
+d) Aucune de ces réponses.
 
-**Question 17** True or false: If each product does not change over time, the stratified index is a constant- quality index.
+** Question 17 ** Vrai ou faux: si chaque produit ne change pas dans le temps, l'indice stratifié est un indice de qualité constante.
 
-**Question 18** True or false: The repeat-sales index is a type of matched-model index.
+** Question 18 ** Vrai ou faux: l'indice de répétition des ventes est un type d'indice de modèle apparié.
 
-**Question 19** True or false: It is possible to mix stratification with hedonics to relax overlap.
+** Question 19 ** Vrai ou faux: il est possible de mélanger la stratification avec l'hédonique pour détendre le chevauchement.
 
-**Question 20** It can be shown that 
+** Question 20 ** On peut montrer que
 
-\begin{align*}
-\underbrace{E(\rho | t = 1) - E(\rho | t = 0)}_{\text{transaction-price index}} =& \underbrace{E(\rho(1) | t = 0) - E(\rho(0) | t = 0)}_{\text{Laspeyres-like constant-quality index}} \\ 
-&+ \underbrace{E(\rho(1) | t = 1) - E(\rho(1) | t = 0)}_{\text{selection bias}}.
-\end{align*}
+\ begin {align *}
+\ underbrace {E (\ rho | t = 1) - E (\ rho | t = 0)} _ {\ text {indice des prix de transaction}} = & \ underbrace {E (\ rho (1) | t = 0 ) - E (\ rho (0) | t = 0)} _ {\ text {Indice de qualité constante semblable à Laspeyres}} \\
+& + \ underbrace {E (\ rho (1) | t = 1) - E (\ rho (1) | t = 0)} _ {\ text {biais de sélection}}.
+\ end {align *}
 
-True or false: Would potential prices in period 0 being correlated with time, such that goods that sell in period 1 would have sold for less in period 0 than the goods that sold period 0, affect using transaction prices to identify a Laspeyres-like constant-quality index?
+Vrai ou faux: les prix potentiels de la période 0 étant-ils corrélés avec le temps, de sorte que les produits vendus au cours de la période 1 se seraient vendus moins cher au cours de la période 0 que les produits vendus à la période 0, affecter l'utilisation des prix de transaction pour identifier une constante de type Laspeyres -indice de qualité?
+
