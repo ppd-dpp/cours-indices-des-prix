@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="affectation-1.html"/>
-<link rel="next" href="affectation-2.html"/>
+<link rel="next" href="introduction-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -175,9 +175,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="inférence-statistique.html"><a href="inférence-statistique.html"><i class="fa fa-check"></i>Inférence statistique</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation</a></li>
-<li class="part"><span><b>III Construire un indice des prix avec R</b></span></li>
+<li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
 <li class="chapter" data-level="" data-path="programme-2.html"><a href="programme-2.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a><ul>
+<li class="chapter" data-level="" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
+<li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>Identification</a></li>
+<li class="chapter" data-level="" data-path="exemple.html"><a href="exemple.html"><i class="fa fa-check"></i>Exemple</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-stratifiés.html"><a href="indices-de-prix-stratifiés.html"><i class="fa fa-check"></i>Indices de prix stratifiés</a><ul>
+<li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
+<li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
+<li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-2.html"><a href="exemple-avec-r-2.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
+<li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
+<li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-3.html"><a href="exemple-avec-r-3.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
+<li class="chapter" data-level="" data-path="programme-3.html"><a href="programme-3.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation</a><ul>
 <li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
 </ul></li>
@@ -201,18 +222,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="programme-2" class="section level1">
 <h1>Programme</h1>
-<p>La mise en pratique de la théorie de l’indice des prix nécessite des outils de calcul. Un outil particulièrement utile pour construire et analyser des indices de prix est le langage de programmation R.</p>
-<p>L’objectif de ce module est de fournir une expérience pratique de la construction et de l’analyse d’un indice des prix avec R. À la fin de ce module, une personne devrait:</p>
+<p>Un indice des prix devrait mesurer un pur mouvement des prix dans le temps. Dans la pratique, cependant, les biens et services changent avec le temps, ce qui peut contaminer un indice des prix — sans informations supplémentaires, il n’y a aucun moyen de dissocier un mouvement des prix d’un changement dans la qualité d’un bien ou d’un service.</p>
+<p>L’objectif de ce module est de toucher à certains sujets avancés dans la construction d’indices de prix, avec un accent particulier sur les ajustements de qualité et les données manquantes. À la fin du module, une personne devrait:</p>
 <ol style="list-style-type: decimal">
-<li>Comprendre comment appliquer la théorie de l’indice des prix pour construire un indice des prix.</li>
-<li>Savoir comparer les indices de prix de différentes sources.</li>
-<li>Connaître la manière de construire et d’analyser un indice de prix avec R.</li>
+<li><p>Familiarisez-vous avec la nécessité de procéder à des ajustements de qualité dans un indice des prix et le lien avec les données manquantes.</p></li>
+<li><p>Comprendre l’importance de la stratification pour construire un indice des prix.</p></li>
+<li><p>Avoir une compréhension de base des indices de prix qui utilisent des méthodes économétriques pour faire face aux changements de qualité.</p></li>
 </ol>
-<p>Ce module est utile pour les compilateurs d’indices de prix ayant une compréhension de base de la théorie et de la construction d’un indice de prix, et qui souhaitent mettre la théorie en pratique et acquérir une compréhension plus approfondie de R.</p>
-<p>Ce module consiste en une tâche de grande envergure qui permet aux apprenants de construire et d’analyser un indice de prix en R sur une semaine. Le rythme du module est autogéré, mais une semaine entière devrait être consacrée à ce travail. Toutes les données pour cette affectation ont été générées au hasard.</p>
-<p>Prérequis: une introduction aux indices de prix et une compréhension de base de la théorie de l’indice des prix R. et des indices de prix de qualité constante, ainsi qu’une compréhension intermédiaire de R, sont utiles.</p>
-<p>L’évaluation de ce module est basée sur une tâche unique qui s’appuie sur les connaissances antérieures des apprenants sur la théorie de l’indice des prix. Le devoir se compose de 4 questions (plus une question bonus). La collaboration sur la mission est encouragée, mais chaque personne doit soumettre son propre travail unique. Les réponses à la mission, ainsi que le code de travail pour chaque question (à l’exclusion de la question bonus) valent 15%. L’instructeur doit être capable de comprendre et d’exécuter votre code; voir [example.R] (scripts / example.R) pour un exemple. Chaque question correctement répondue vaut 10% supplémentaires. Répondre correctement à la question bonus vaut 20%. La réussite de ce module nécessite une note de 60% ou plus.</p>
+<p>Ce module est utile pour les compilateurs d’indices de prix ayant une compréhension de la théorie de base et de la construction d’un indice de prix, et qui souhaitent obtenir une compréhension plus approfondie de la façon de traiter les ajustements de qualité et les données manquantes.</p>
+<p>Ce module se compose de lectures autodirigées, accompagnées d’un devoir. Au total, environ 10 à 15 heures devraient être consacrées à ce module</p>
+<p>Prérequis: Théorie de l’indice des prix, au moins un cours d’introduction à l’économétrie. Un cours avancé d’économétrie ou de probabilité et de statistiques est utile.</p>
+<p>L’évaluation de ce module est basée sur une tâche composée de 20 questions à choix multiples / vrai-faux qui s’appuient sur du matériel dans le contenu du cours et les lectures. La collaboration sur la mission est la bienvenue, mais chaque personne doit soumettre son propre travail unique. La réussite de ce module nécessite au moins 65% sur l’affectation.</p>
+<p>Les lectures de ce module proviennent des chapitres 17 et 21 du manuel PPI <span class="citation">(ILO et al. 2004b)</span> et / ou du manuel CPI <span class="citation">(ILO et al. 2004a)</span>, publiés par le FMI (disponibles gratuitement sur leur site Web), ainsi que des chapitres 4 à 6 de le Manuel sur les indices des prix des propriétés résidentielles <span class="citation">(ILO et al. 2013)</span>, publié par Eurostat (disponible gratuitement sur leur site Web).<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></p>
 <p>Veuillez envoyer un e-mail à l’instructeur du cours si vous avez des questions ou si vous avez besoin d’aide concernant le matériel ou le devoir du cours.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="27">
+<li id="fn27"><p>Bien que le manuel se concentre sur les prix des propriétés résidentielles, les idées s’appliquent à tous les biens ou services, et au matériel est relativement bien présenté.<a href="programme-2.html#fnref27" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -220,7 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="affectation-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="affectation-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -175,9 +175,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="inférence-statistique.html"><a href="inférence-statistique.html"><i class="fa fa-check"></i>Inférence statistique</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation</a></li>
-<li class="part"><span><b>III Construire un indice des prix avec R</b></span></li>
+<li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
 <li class="chapter" data-level="" data-path="programme-2.html"><a href="programme-2.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a><ul>
+<li class="chapter" data-level="" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
+<li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>Identification</a></li>
+<li class="chapter" data-level="" data-path="exemple.html"><a href="exemple.html"><i class="fa fa-check"></i>Exemple</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-stratifiés.html"><a href="indices-de-prix-stratifiés.html"><i class="fa fa-check"></i>Indices de prix stratifiés</a><ul>
+<li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
+<li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
+<li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-2.html"><a href="exemple-avec-r-2.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
+<li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
+<li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-3.html"><a href="exemple-avec-r-3.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
+<li class="chapter" data-level="" data-path="programme-3.html"><a href="programme-3.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation</a><ul>
 <li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
 </ul></li>
@@ -230,12 +251,12 @@ I^{A}_{d} = \frac{1}{2} \frac{\sum_{i = 1}^{n} p_{i1} q_{i0}}{\sum_{i = 1}^{n} p
 I^{A}_{W} = \frac{\sum_{i = 1}^{n} p_{i1} \sqrt{q_{i0} q_{i1}}}{\sum_{i = 1}^{n} p_{i0} \sqrt{q_{i0} q_{i1}}}.
 \end{align*}\]</span></p>
 <p>Cet indice utilise un panier qui contient la moyenne géométrique des quantités de la période 0 et de la période 1.</p>
-<p><strong>Indice Marshall-Edgeworth</strong>. Définition de $<em>{i} = p</em>{i0} (q_{i0} + q_{i1}) / <em>{j = 1}^{n} p</em>{j0} (q_{j0} + q_{j1}) $ résulte dans l’indice Marshall-Edgeworth</p>
+<p><strong>Indice Marshall-Edgeworth</strong>. Définition de <span class="math inline">\(\omega_{i} = p_{i0} (q_{i0} + q_{i1}) / \sum_{j = 1}^{n} p_{j0} (q_{j0} + q_{j1})\)</span> résulte dans l’indice Marshall-Edgeworth</p>
 <p><span class="math display">\[\begin{align*}
 I^{A}_{M} = \frac{\sum_{i = 1}^{n} p_{i1} (q_{i0} + q_{i1}) / 2}{\sum_{i = 1}^{n} p_{i0} (q_{i0} + q_{i1}) / 2}.
 \end{align*}\]</span></p>
 <p>Comme l’indice de Walsh, cet indice utilise un panier qui prend une moyenne des quantités de la période 0 et de la période 1.</p>
-<p><strong>Indice Geary-Khamis</strong>. Paramètre $<em>{i} = p</em>{i0} / (1 / q_{i0} + 1 / q_{i1}) / <em>{j = 1}^{n} p</em>{j0} / (1 / q_{j0} + 1 / q_{j1}) $ se traduit par l’indice Geary-Khamis</p>
+<p><strong>Indice Geary-Khamis</strong>. Paramètre <span class="math inline">\(\omega_{i} = p_{i0} / (1 / q_{i0} + 1 / q_{i1}) / \sum_{j = 1}^{n} p_{j0} / (1 / q_{j0} + 1 / q_{j1})\)</span> se traduit par l’indice Geary-Khamis</p>
 <p><span class="math display">\[\begin{align*}
 I^{A}_{G} = \frac{\sum_{i = 1}^{n} 2 p_{i1} / (1 / q_{i0} + 1 / q_{i1})}{\sum_{i = 1}^{n} 2 p_{i0} / (1 / q_{i0} + 1 / q_{i1})}.
 \end{align*}\]</span></p>

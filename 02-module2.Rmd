@@ -212,7 +212,7 @@ Idéalement, il y aurait un seul indice des prix qui satisfait les cinq axiomes 
 
 ## Motiver les indices Jevons et Laspeyres
 
-Bien qu'aucun indice ne satisfasse les cinq axiomes et les trois tests, les cinq axiomes, ainsi que le test de circularité, définissent de manière unique un indice de prix comme étant un indice de prix géométrique avec des poids qui ne changent pas dans le temps [@balk1995, Theorem 11 et Corollary 11.1]. Autrement dit, un indice de prix satisfait les cinq axiomes et le test de circularité si et seulement si
+Bien qu'aucun indice ne satisfasse les cinq axiomes et les trois tests, les cinq axiomes, ainsi que le test de circularité, définissent de manière unique un indice de prix comme étant un indice de prix géométrique avec des poids qui ne changent pas dans le temps [@balk1995, Theorem 11 et Remark 11.1]. Autrement dit, un indice de prix satisfait les cinq axiomes et le test de circularité si et seulement si
 
 \begin{align*}
 I(p_{t}, p_{0}, q_{t}, q_{0}) = \prod_{i = 1}^{n} \left(\frac{p_{it}}{p_{i0} } \right)^{\omega_{i}},
@@ -406,8 +406,8 @@ ggplot() +
   geom_line(aes(x, y / 2), linetype = "dashed") +
   geom_vline(xintercept = mean(d), linetype = "dotted") +
   theme_classic() +
-  labs(x = "Price relative/Index value", title = "Example of the prediction error associated with different index values") +
-  scale_y_continuous("Density", sec.axis = sec_axis(~ . * 2, name = "Expected prediction error"))
+  labs(x = "Prix relatif / valeur de l'indice", title = "Exemple d'erreur de prédiction associée à différentes valeurs d'index") +
+  scale_y_continuous("Densité", sec.axis = sec_axis(~ . * 2, name = "Erreur de prédiction attendue"))
 ```
 
 Comme la valeur attendue n'est qu'une moyenne pondérée, l'indice $I^{A} = E(p_{t} / p_{0})$ est simplement un indice arithmétique qui fait la moyenne des prix relatifs. Ce qui est intéressant, c'est que les poids ont maintenant une nouvelle interprétation --- ils sont la probabilité d'observer un bien ou un service transigé dans la population. C'est,

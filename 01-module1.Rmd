@@ -43,7 +43,7 @@ library(ggplot2)
 ggplot() +
   geom_line(aes(seq(as.Date("2020-01-01"), as.Date("2020-12-01"), "month"),
                 c(100, 102, 103, 101, 99.5, 99, 100.5, 101, 101.5, 100, 102, 105))) +
-  labs(x = "Month", y = "Index value", title = "Example of a price index") +
+  labs(x = "Mois", y = "Valeur", title = "Exemple d'indice de prix") +
   theme_classic() +
   lims(y = c(98, 106)) +
   scale_x_date(date_labels = "%b")
@@ -213,7 +213,7 @@ I^{A}_{W} = \frac{\sum_{i = 1}^{n} p_{i1} \sqrt{q_{i0} q_{i1}}}{\sum_{i = 1}^{n}
 
 Cet indice utilise un panier qui contient la moyenne géométrique des quantités de la période 0 et de la période 1.
 
-**Indice Marshall-Edgeworth**. Définition de $\omega_{i} = p_{i0} (q_{i0} + q_{i1}) / \sum_{j = 1}^{n} p_{j0} (q_{j0} + q_{j1}) $ résulte dans l'indice Marshall-Edgeworth
+**Indice Marshall-Edgeworth**. Définition de $\omega_{i} = p_{i0} (q_{i0} + q_{i1}) / \sum_{j = 1}^{n} p_{j0} (q_{j0} + q_{j1})$ résulte dans l'indice Marshall-Edgeworth
 
 \begin{align*}
 I^{A}_{M} = \frac{\sum_{i = 1}^{n} p_{i1} (q_{i0} + q_{i1}) / 2}{\sum_{i = 1}^{n} p_{i0} (q_{i0} + q_{i1}) / 2}.
@@ -221,7 +221,7 @@ I^{A}_{M} = \frac{\sum_{i = 1}^{n} p_{i1} (q_{i0} + q_{i1}) / 2}{\sum_{i = 1}^{n
 
 Comme l'indice de Walsh, cet indice utilise un panier qui prend une moyenne des quantités de la période 0 et de la période 1.
 
-**Indice Geary-Khamis**. Paramètre $\omega_{i} = p_{i0} / (1 / q_{i0} + 1 / q_{i1}) / \sum_{j = 1}^{n} p_{j0} / (1 / q_{j0} + 1 / q_{j1}) $ se traduit par l'indice Geary-Khamis
+**Indice Geary-Khamis**. Paramètre $\omega_{i} = p_{i0} / (1 / q_{i0} + 1 / q_{i1}) / \sum_{j = 1}^{n} p_{j0} / (1 / q_{j0} + 1 / q_{j1})$ se traduit par l'indice Geary-Khamis
 
 \begin{align*}
 I^{A}_{G} = \frac{\sum_{i = 1}^{n} 2 p_{i1} / (1 / q_{i0} + 1 / q_{i1})}{\sum_{i = 1}^{n} 2 p_{i0} / (1 / q_{i0} + 1 / q_{i1})}.
@@ -352,14 +352,13 @@ La plupart des indices des prix ont une structure hiérarchique (ou agrégée), 
 library(DiagrammeR)
 mermaid("
   graph TD
-    A(All items) --- B(Group 1)
-    A --- C(Group 2)
-    B --- B1(Elementary aggregate 1)
-    B --- B2(Elementary aggregate 2)
-    C --- C1(Elementary aggregate 3)
-    C --- C2(Elementary aggregate 4)
-",
-height = 256)
+    A(Tous les articles) --- B(Groupe 1)
+    A --- C(Groupe 2)
+    B --- B1(Agrégat élémentaire 1)
+    B --- B2(Agrégat élémentaire 2)
+    C --- C1(Agrégat élémentaire 3)
+    C --- C2(Agrégat élémentaire 4)
+")
 ```
 
 Une structure hiérarchique ne pose pas de problème particulier pour créer un indice de prix --- l'une des formules de numéro d'index de la section précédente peut toujours être utilisée pour agréger les prix relatifs des biens et services dans chaque groupe de la hiérarchie à produire une collection d'indices de prix pour chaque niveau de la hiérarchie. Le calcul de l'indice doit simplement être répété pour chaque groupe de biens et services dans la structure d'agrégation. Il s'agit de l'approche directe pour calculer un indice de prix avec une structure hiérarchique.
@@ -371,18 +370,17 @@ Cependant, avoir une structure hiérarchique suggère que le calcul peut être s
 ```{r, eval=FALSE, echo=FALSE}
 mermaid("
   graph TD
-    A(All-items index) --- B(Group 1 index)
-    A --- C(Group 2 index)
-    B --- B1(Elementary index 1)
-    B --- B2(Elementary index 2)
-    C --- C1(Elementary index 3)
-    C --- C2(Elementary index 4)
+    A(Index de tous les articles) --- B(Index du groupe 1)
+    A --- C(Index du groupe 2)
+    B --- B1(Indice élémentaire 1)
+    B --- B2(Indice élémentaire 2)
+    C --- C1(Indice élémentaire 3)
+    C --- C2(Indice élémentaire 4)
     B2 --- D
-    D[Index-number formula] --- E1(Relative 1)
-    D --- E2(Relative 2)
-    D --- E3(Relative 3)
-",
-height = 368)
+    D[Formule de numéro d'index] --- E1(Relatif 1)
+    D --- E2(Relatif 2)
+    D --- E3(Relatif 3)
+")
 ```
 
 Étant donné qu'il existe deux façons de calculer un indice de prix avec une structure hiérarchique, le calcul direct donne-t-il le même résultat que le calcul en deux étapes? La réponse est oui pour un indice arithmétique ou géométrique, à condition que les poids utilisés pour agréger les agrégats élémentaires soient formés en utilisant les poids sous-jacents pour l'indice cible. Par exemple, si l'objectif est de calculer un indice de Laspeyres, le poids d'un agrégat élémentaire devrait être la part des dépenses / revenus pour les biens de cet agrégat élémentaire au cours de la période 0. Comme les indices géométriques et arithmétiques sont calculés en tant que moyennes pondérées, il ne devrait pas être surprenant qu'un indice puisse être calculé en regroupant d'abord les parents de prix, en calculant les moyennes au niveau du groupe, puis en faisant la moyenne des moyennes au niveau du groupe pour former une moyenne globale. Par conséquent, ces indices seraient cohérents dans l'agrégation, bien que toutes les formules de nombre d'indices ne soient pas cohérentes dans l'agrégation. Par exemple, l'indice de Fisher n'est pas cohérent dans l'agrégation, et l'utilisation de la procédure en deux étapes pour le calculer donnera une réponse différente de celle du calcul direct.
@@ -468,7 +466,7 @@ dat <- data.frame(x = x, y = c(y, y / 105 * 100), g = g, stringsAsFactors = FALS
 library(ggplot2)
 ggplot(dat) +
   geom_line(aes(x, y, color = g)) +
-  labs(x = "Month", y = "Index value", title = "Example of rebasing a price index", color = "Base period") +
+  labs(x = "Mois", y = "Valeur", title = "Exemple de rebasage d'un indice de prix", color = "Période de base") +
   theme_classic() +
   lims(y = c(92, 106)) +
   scale_x_date(date_labels = "%b")
@@ -510,7 +508,7 @@ dat <- data.frame(x = c(x[c(1:13, 13:24)], x[13:24]), y = c(y[1:13], y[13:24] / 
 
 ggplot(dat) +
   geom_line(aes(x, y, color = g)) +
-  labs(x = "Month", y = "Index value", title = "Example of chaining a price index", color = "Weights") +
+  labs(x = "Mois", y = "Valeur", title = "Exemple de chaînage d'un indice de prix", color = "Poids") +
   theme_classic() +
   #lims(y = c(92, 106)) +
   scale_x_date(date_labels = "%b")

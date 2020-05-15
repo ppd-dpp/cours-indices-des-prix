@@ -175,9 +175,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="inférence-statistique.html"><a href="inférence-statistique.html"><i class="fa fa-check"></i>Inférence statistique</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation</a></li>
-<li class="part"><span><b>III Construire un indice des prix avec R</b></span></li>
+<li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
 <li class="chapter" data-level="" data-path="programme-2.html"><a href="programme-2.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a><ul>
+<li class="chapter" data-level="" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
+<li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>Identification</a></li>
+<li class="chapter" data-level="" data-path="exemple.html"><a href="exemple.html"><i class="fa fa-check"></i>Exemple</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-stratifiés.html"><a href="indices-de-prix-stratifiés.html"><i class="fa fa-check"></i>Indices de prix stratifiés</a><ul>
+<li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
+<li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
+<li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-2.html"><a href="exemple-avec-r-2.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
+<li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
+<li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-3.html"><a href="exemple-avec-r-3.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
+<li class="chapter" data-level="" data-path="programme-3.html"><a href="programme-3.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation</a><ul>
 <li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
 </ul></li>
@@ -236,32 +257,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb13-3" title="3">index</a></code></pre></div>
 <pre><code>##    period value
 ## 1       0   100
-## 2       1   125
-## 3       2    96
-## 4       3   119
-## 5       4   102
-## 6       5   127
-## 7       6    93
-## 8       7   128
-## 9       8   114
-## 10      9   112
-## 11     10   113
-## 12     11   103</code></pre>
+## 2       1    99
+## 3       2   107
+## 4       3   126
+## 5       4   120
+## 6       5   113
+## 7       6   106
+## 8       7    97
+## 9       8   112
+## 10      9    93
+## 11     10    90
+## 12     11   115</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Rebase l&#39;indice pour que la période 6 = 100</span></a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="kw">transform</span>(index, <span class="dt">value =</span> value <span class="op">/</span><span class="st"> </span>value[period <span class="op">==</span><span class="st"> </span><span class="dv">6</span>] <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)</a></code></pre></div>
-<pre><code>##    period    value
-## 1       0 107.5269
-## 2       1 134.4086
-## 3       2 103.2258
-## 4       3 127.9570
-## 5       4 109.6774
-## 6       5 136.5591
-## 7       6 100.0000
-## 8       7 137.6344
-## 9       8 122.5806
-## 10      9 120.4301
-## 11     10 121.5054
-## 12     11 110.7527</code></pre>
+<pre><code>##    period     value
+## 1       0  94.33962
+## 2       1  93.39623
+## 3       2 100.94340
+## 4       3 118.86792
+## 5       4 113.20755
+## 6       5 106.60377
+## 7       6 100.00000
+## 8       7  91.50943
+## 9       8 105.66038
+## 10      9  87.73585
+## 11     10  84.90566
+## 12     11 108.49057</code></pre>
 </div>
 <!-- </div> -->
             </section>

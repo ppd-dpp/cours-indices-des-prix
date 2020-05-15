@@ -58,7 +58,7 @@ Les widgets vont être stratifiés par province et par type de widget pour produ
 library(DiagrammeR)
 mermaid('
     graph TD
-        C[Canada] --- AA[Arithmetic <br> Index]
+        C[Canada] --- AA[Indice <br> arithmétique]
         AA --- BC["BC (59)"]
         AA --- AB["AB (48)"]
         AA --- SK["SK (47)"]
@@ -69,7 +69,7 @@ mermaid('
         AA --- NS["NS (12)"]
         AA --- PE["PE (11)"]
         AA --- NL["NL (10)"]
-        ON --- A[Arithmetic <br> Index]
+        ON --- A[Indice <br> arithmétique]
         A --- a[Type </br> A]
         A --- b[Type </br> B]
         A --- c[Type </br> C]
@@ -81,7 +81,7 @@ mermaid('
         A --- i[Type </br> I]
         A --- j[Type </br> J]
         A --- k[Type </br> K]
-        f --- J[Jevons </br> Index]
+        f --- J[Indice <br> de Jevons]
         J --- q1[Quote 1]
         J --- q2[Quote 2]
         J --- q3[Quote 3]

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Indépendance conditionnelle | Un cours sur les indices des prix</title>
+  <meta name="description" content="Une introduction moderne et simple aux indices des prix" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Indépendance conditionnelle | Un cours sur les indices des prix" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Une introduction moderne et simple aux indices des prix" />
+  <meta name="github-repo" content="ppd-dpp/cours-indices-des-prix" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Indépendance conditionnelle | Un cours sur les indices des prix" />
+  
+  <meta name="twitter:description" content="Une introduction moderne et simple aux indices des prix" />
+  
+
+<meta name="author" content="Steve Martin" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="indices-de-prix-stratifiés.html"/>
+<link rel="next" href="chevauchement.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="align.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Aperçu</a></li>
+<li class="part"><span><b>I Introduction aux indices de prix</b></span></li>
+<li class="chapter" data-level="" data-path="programme.html"><a href="programme.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a><ul>
+<li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix.html"><a href="quest-ce-quun-indice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix?</a></li>
+<li class="chapter" data-level="" data-path="utilisations-dun-indice-des-prix.html"><a href="utilisations-dun-indice-des-prix.html"><i class="fa fa-check"></i>Utilisations d’un indice des prix</a></li>
+<li class="chapter" data-level="" data-path="pourquoi-un-indice-des-prix.html"><a href="pourquoi-un-indice-des-prix.html"><i class="fa fa-check"></i>Pourquoi un indice des prix?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="formule-de-numéro-dindex.html"><a href="formule-de-numéro-dindex.html"><i class="fa fa-check"></i>Formule de numéro d’index</a><ul>
+<li class="chapter" data-level="" data-path="indices-arithmétiques-des-prix.html"><a href="indices-arithmétiques-des-prix.html"><i class="fa fa-check"></i>Indices arithmétiques des prix</a></li>
+<li class="chapter" data-level="" data-path="indices-arithmétiques-communs.html"><a href="indices-arithmétiques-communs.html"><i class="fa fa-check"></i>Indices arithmétiques communs</a></li>
+<li class="chapter" data-level="" data-path="indices-arithmétiques-moins-courants.html"><a href="indices-arithmétiques-moins-courants.html"><i class="fa fa-check"></i>Indices arithmétiques moins courants</a></li>
+<li class="chapter" data-level="" data-path="indices-géométriques-des-prix.html"><a href="indices-géométriques-des-prix.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
+<li class="chapter" data-level="" data-path="lindice-fisher.html"><a href="lindice-fisher.html"><i class="fa fa-check"></i>L’indice Fisher</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r.html"><a href="exemple-avec-r.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a><ul>
+<li class="chapter" data-level="" data-path="sous-indices-et-agrégation.html"><a href="sous-indices-et-agrégation.html"><i class="fa fa-check"></i>Sous-indices et agrégation</a></li>
+<li class="chapter" data-level="" data-path="factorisation-dun-index.html"><a href="factorisation-dun-index.html"><i class="fa fa-check"></i>Factorisation d’un index</a></li>
+<li class="chapter" data-level="" data-path="rebasing.html"><a href="rebasing.html"><i class="fa fa-check"></i>Rebasing</a></li>
+<li class="chapter" data-level="" data-path="chaînage.html"><a href="chaînage.html"><i class="fa fa-check"></i>Chaînage</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-1.html"><a href="exemple-avec-r-1.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="affectation.html"><a href="affectation.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="part"><span><b>II Théorie de l’indice des prix</b></span></li>
+<li class="chapter" data-level="" data-path="programme-1.html"><a href="programme-1.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="lapproche-axiomatique.html"><a href="lapproche-axiomatique.html"><i class="fa fa-check"></i>L’approche axiomatique</a><ul>
+<li class="chapter" data-level="" data-path="un-indice-de-prix-abstrait.html"><a href="un-indice-de-prix-abstrait.html"><i class="fa fa-check"></i>Un indice de prix abstrait</a></li>
+<li class="chapter" data-level="" data-path="les-axiomes.html"><a href="les-axiomes.html"><i class="fa fa-check"></i>Les axiomes</a></li>
+<li class="chapter" data-level="" data-path="exemples-de-compteur.html"><a href="exemples-de-compteur.html"><i class="fa fa-check"></i>Exemples de compteur</a></li>
+<li class="chapter" data-level="" data-path="les-tests.html"><a href="les-tests.html"><i class="fa fa-check"></i>Les tests</a></li>
+<li class="chapter" data-level="" data-path="un-résultat-impossible.html"><a href="un-résultat-impossible.html"><i class="fa fa-check"></i>Un résultat impossible</a></li>
+<li class="chapter" data-level="" data-path="motiver-les-indices-jevons-et-laspeyres.html"><a href="motiver-les-indices-jevons-et-laspeyres.html"><i class="fa fa-check"></i>Motiver les indices Jevons et Laspeyres</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lapproche-économique.html"><a href="lapproche-économique.html"><i class="fa fa-check"></i>L’approche économique</a><ul>
+<li class="chapter" data-level="" data-path="indice-des-prix-des-intrants.html"><a href="indice-des-prix-des-intrants.html"><i class="fa fa-check"></i>Indice des prix des intrants</a></li>
+<li class="chapter" data-level="" data-path="indice-des-prix-à-la-production.html"><a href="indice-des-prix-à-la-production.html"><i class="fa fa-check"></i>Indice des prix à la production</a></li>
+<li class="chapter" data-level="" data-path="indice-du-coût-de-la-vie.html"><a href="indice-du-coût-de-la-vie.html"><i class="fa fa-check"></i>Indice du coût de la vie</a></li>
+<li class="chapter" data-level="" data-path="approximation-dun-indice-économique.html"><a href="approximation-dun-indice-économique.html"><i class="fa fa-check"></i>Approximation d’un indice économique</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lapproche-stochastique.html"><a href="lapproche-stochastique.html"><i class="fa fa-check"></i>L’approche stochastique</a><ul>
+<li class="chapter" data-level="" data-path="le-problème-de-prédiction-optimal.html"><a href="le-problème-de-prédiction-optimal.html"><i class="fa fa-check"></i>Le problème de prédiction optimal</a></li>
+<li class="chapter" data-level="" data-path="indices-géométriques-des-prix-1.html"><a href="indices-géométriques-des-prix-1.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
+<li class="chapter" data-level="" data-path="des-indices-de-prix-plus-généraux.html"><a href="des-indices-de-prix-plus-généraux.html"><i class="fa fa-check"></i>Des indices de prix plus généraux</a></li>
+<li class="chapter" data-level="" data-path="inférence-statistique.html"><a href="inférence-statistique.html"><i class="fa fa-check"></i>Inférence statistique</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
+<li class="chapter" data-level="" data-path="programme-2.html"><a href="programme-2.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
+<li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>Identification</a></li>
+<li class="chapter" data-level="" data-path="exemple.html"><a href="exemple.html"><i class="fa fa-check"></i>Exemple</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-stratifiés.html"><a href="indices-de-prix-stratifiés.html"><i class="fa fa-check"></i>Indices de prix stratifiés</a><ul>
+<li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
+<li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
+<li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-2.html"><a href="exemple-avec-r-2.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
+<li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
+<li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-3.html"><a href="exemple-avec-r-3.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
+<li class="chapter" data-level="" data-path="programme-3.html"><a href="programme-3.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation</a><ul>
+<li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
+<li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i>Références</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Un cours sur les indices des prix</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="indépendance-conditionnelle" class="section level2">
+<h2>Indépendance conditionnelle</h2>
+<p>La configuration de l’indice stratifié suit de près la configuration de l’indice général de qualité constante dans la section précédente, sauf que les caractéristiques d’un bien doivent être explicitement modélisées. Pour ce faire, supposons que <span class="math inline">\(X\)</span> soit un vecteur (aléatoire) de caractéristiques observables sur lesquelles les biens peuvent être stratifiés. Dans le contexte du logement, par exemple, <span class="math inline">\(X\)</span> peut inclure la superficie en pieds carrés, le nombre de chambres et l’âge de la maison. Chaque strate correspond à une réalisation différente de <span class="math inline">\(x\)</span> pour <span class="math inline">\(X\)</span> (par exemple, maisons de 1500 à 2500 pieds carrés, 3 chambres à coucher et âgées de 10 à 25 ans).</p>
+<p>L’indice géométrique des prix de transaction entre la période 0 et la période 1 pour la strate <span class="math inline">\(x\)</span> compare les prix de transaction moyens dans le temps pour les biens de la strate <span class="math inline">\(x\)</span>, et est donné par</p>
+<p><span class="math display">\[\begin{align*}
+\log (I^{T}_{x}) = E(\rho | X = x, t = 1) - E(\rho | X = x, t = 0).
+\end{align*}\]</span></p>
+<p>Si le prix potentiel est indépendant du temps, en fonction des caractéristiques utilisées pour stratifier les biens, les sous-indices de chaque strate, calculés avec les prix de transaction, ont une interprétation de qualité constante. Formellement, ceci est l’hypothèse d’indépendance conditionnelle <span class="math inline">\(\{p(1), p(0)\} \perp t | X\)</span>, l’analogue intra-strate de l’hypothèse d’indépendance de la section précédente. Pour chaque strate, si un bien se vend pendant la période 0 ou la période 1 est essentiellement dû au hasard, il n’y a donc pas de différences systématiques entre les biens qui se vendent pendant la période 0 et la période 1 qui influencent les prix au sein d’une strate. Autrement dit, la seule raison pour laquelle les prix potentiels pourraient changer avec le temps est due à un changement dans la composition de la caractéristiques <span class="math inline">\(X\)</span> — une fois que ces caractéristiques sont maintenues fixes, tout changement des prix observés dans le temps doit être un pur changement de prix.</p>
+<p>Formellement, avec une indépendance conditionnelle, il faut que <span class="math inline">\(E(\rho(t) | X, t) = E(\rho(t) | X)\)</span> pour <span class="math inline">\(t = 0,1\)</span>, et donc</p>
+<p><span class="math display">\[\begin{align*}
+\log (I^{T}_{x}) &amp;= E(\rho(1) | X = x, t = 1) - E(\rho(0) | X = x, t = 0) \\
+ &amp;= E(\rho(1) | X = x) - E(\rho(0) | X = x).
+\end{align*}\]</span></p>
+<p>L’indépendance conditionnelle donne un indice de qualité constante pour chaque strate qui coïncide avec l’indice des prix de transaction pour cette strate.</p>
+<p>Dans le cas extrême où les biens sont regroupés en paires dans le temps, de sorte que chaque strate contient deux biens, l’indice stratifié n’est qu’un indice de modèle apparié pur. Pour voir cela, énumérez la population de paires par <span class="math inline">\(i = 1, \ldots, n_{p}\)</span> de sorte que</p>
+<p><span class="math display">\[\begin{align*}
+I^{Q} = \prod_{i = 1}^{n_{p}} \left(\frac{p_{i1}}{p_{i0}} \right)^{\omega_{i}},
+\end{align*}\]</span></p>
+<p>où <span class="math inline">\(P(X = x) = \omega_{i}\)</span> et <span class="math inline">\(p_{it}\)</span> est le prix du bien en paire <span class="math inline">\(i\)</span> qui se vend pendant la période <span class="math inline">\(t = 0,1\)</span>. L’indépendance conditionnelle est valable pour un indice de modèle apparié si les biens de chaque paire sont suffisamment similaires dans le temps pour que le prix de transaction du bien qui se vend au cours de la période 0 donne une bonne référence pour ce que le bien qui vend au cours de la période 1 aurait vendu au cours de la période 0. Cela montre également que les formules d’index standard sont des cas particuliers de l’indice stratifié et supposent implicitement une indépendance conditionnelle.</p>
+<p>Il convient de souligner que l’indépendance conditionnelle n’est pas une hypothèse vérifiable. C’est intrinsèquement une hypothèse économique sur la façon dont les marchandises se vendent au fil du temps. Mais c’est ce qui permet d’identifier un indice de qualité constante à partir d’un indice de prix de transaction.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="indices-de-prix-stratifiés.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chevauchement.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["cours-indices-des-prix.pdf"],
+"toc": {
+"collapse": "section"
+},
+"info": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
