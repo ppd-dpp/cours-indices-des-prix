@@ -432,8 +432,8 @@ Toutes les formules de l'indice-nombre présentées dans cette section sont simp
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez dans la bibliothèque ppd}
-\KeywordTok{library}\NormalTok{(ppd)}
+\CommentTok{# Apportez dans la bibliothèque gpindex}
+\KeywordTok{library}\NormalTok{(gpindex) }\CommentTok{# install.packages("gpindex")}
 
 \CommentTok{# Faites des prix apparentés}
 \NormalTok{relatives <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{9}\NormalTok{, }\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
@@ -443,10 +443,10 @@ Toutes les formules de l'indice-nombre présentées dans cette section sont simp
 
 \CommentTok{# Calculer les indices}
 \KeywordTok{c}\NormalTok{(}
-  \DataTypeTok{Carli =} \KeywordTok{mean}\NormalTok{(relatives),}
-  \DataTypeTok{Jevons =} \KeywordTok{geomean}\NormalTok{(relatives),}
-\NormalTok{  Arithmé}\DataTypeTok{tique =} \KeywordTok{weighted.mean}\NormalTok{(relatives, weights),}
-\NormalTok{  Géomé}\DataTypeTok{trique =} \KeywordTok{geomean}\NormalTok{(relatives, weights)}
+  \DataTypeTok{Carli =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives),}
+  \DataTypeTok{Jevons =} \KeywordTok{mean_geometric}\NormalTok{(relatives),}
+\NormalTok{  Arithmé}\DataTypeTok{tique =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives, weights),}
+\NormalTok{  Géomé}\DataTypeTok{trique =} \KeywordTok{mean_geometric}\NormalTok{(relatives, weights)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -468,12 +468,12 @@ Le type d'indices arithmétiques et géométriques que cela calcule dépend enti
 
 \CommentTok{# Calculer les indices}
 \KeywordTok{c}\NormalTok{(}
-  \DataTypeTok{Laspeyres =} \KeywordTok{weighted.mean}\NormalTok{(relatives, share0),}
-  \DataTypeTok{Paasche =} \KeywordTok{harmean}\NormalTok{(relatives, share1),}
-  \DataTypeTok{Fisher =} \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{weighted.mean}\NormalTok{(relatives, share0) }\OperatorTok{*}\StringTok{ }\KeywordTok{harmean}\NormalTok{(relatives, share1)),}
-  \StringTok{`}\DataTypeTok{Géométrique Laspeyres}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{geomean}\NormalTok{(relatives, share0),}
-  \StringTok{`}\DataTypeTok{Géométrique Paasche}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{geomean}\NormalTok{(relatives, share1),}
-  \DataTypeTok{Tornqvist =} \KeywordTok{geomean}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+  \DataTypeTok{Laspeyres =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives, share0),}
+  \DataTypeTok{Paasche =} \KeywordTok{mean_harmonic}\NormalTok{(relatives, share1),}
+  \DataTypeTok{Fisher =} \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean_arithmetic}\NormalTok{(relatives, share0) }\OperatorTok{*}\StringTok{ }\KeywordTok{mean_harmonic}\NormalTok{(relatives, share1)),}
+  \StringTok{`}\DataTypeTok{Géométrique Laspeyres}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(relatives, share0),}
+  \StringTok{`}\DataTypeTok{Géométrique Paasche}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(relatives, share1),}
+  \DataTypeTok{Tornqvist =} \KeywordTok{mean_geometric}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -483,6 +483,42 @@ Le type d'indices arithmétiques et géométriques que cela calcule dépend enti
 ##              1.586957              1.836735              1.707284 
 ## Géométrique Laspeyres   Géométrique Paasche             Tornqvist 
 ##              1.207440              2.766324              1.400097
+\end{verbatim}
+
+Il est intéressant de noter que tout indice géométrique peut être transformé en indice arithmétique par un changement approprié de poids. Cela permet de déterminer facilement la contribution de chaque prix relatif à la valeur de l'indice.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Tornqvist index}
+\KeywordTok{mean_geometric}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.400097
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Changer les poids}
+\NormalTok{new_weights <-}\StringTok{ }\KeywordTok{weights_g2a}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\KeywordTok{mean_arithmetic}\NormalTok{(relatives, new_weights) }\CommentTok{# same as geometric mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Contribution de chaque relative}
+\NormalTok{(relatives }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{new_weights}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA NA NA NA NA NA NA NA
 \end{verbatim}
 
 \hypertarget{calcul-dun-indice-des-prix}{%
@@ -584,7 +620,7 @@ Par conséquent, la division de la série d'indices par la valeur d'index de la 
 
 Le graphique ci-dessous donne un exemple de la façon dont le rebasage modifie la série chronologique. L'indice avec une période de base de décembre est simplement l'indice avec une période de base de janvier divisé par la valeur de l'indice en décembre (105). Cela déplace simplement l'indice avec janvier comme période de base vers le bas, et l'écrase un peu, mais ne change pas la forme relative de la série chronologique.
 
-\includegraphics{cours-indices-des-prix_files/figure-latex/unnamed-chunk-6-1.pdf}
+\includegraphics{cours-indices-des-prix_files/figure-latex/unnamed-chunk-7-1.pdf}
 
 La recadrage est plus complexe pour un index arithmétique. Bien qu'il fonctionne pour un indice de Lowe et Dutot de la même manière qu'un indice géométrique, en général, le rebasage d'un indice arithmétique modifie les pondérations utilisées pour la moyenne des prix relatifs en raison de la façon dont un indice arithmétique est factorisé. L'indice rebasé est toujours un indice arithmétique, mais les poids ne sont plus corrects. Par exemple, le rebasage d'un indice de Laspeyres modifie les pondérations afin qu'elles ne soient plus les parts de dépenses de la période de base --- l'indice est toujours un indice arithmétique (un indice de Lowe), mais des produits qui ont connu une augmentation de prix plus importante depuis le la période de base recevra plus de poids dans le calcul de l'indice. En pratique, cependant, cette ride théorique est généralement ignorée, et un indice de prix arithmétique est rebasé en divisant simplement la série d'indices entière par la valeur de l'indice dans la nouvelle période de base.
 
@@ -615,7 +651,7 @@ I^{A}(0, t) = \sum_{i = 1}^{n} \omega_{i0} \frac{p_{ik}}{p_{i0}} \times \sum_{i 
 
 Le graphique ci-dessous donne un exemple de ce à quoi ressemble un indice chaîné.
 
-\includegraphics{cours-indices-des-prix_files/figure-latex/unnamed-chunk-7-1.pdf}
+\includegraphics{cours-indices-des-prix_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 La partie importante d'un indice chaîné est la période de chevauchement \(k\) lorsque les pondérations changent et les prix de la période \(k\) sont utilisés avec deux ensembles de pondérations. S'il n'y a pas de période de chevauchement, alors l'index ne peut pas être enchaîné. Chaque indice peut être considéré comme un maillon de la chaîne, donnant le mouvement des prix pour cette partie du temps, et la période de chevauchement est l'endroit où les maillons se rencontrent.
 
@@ -626,11 +662,11 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez dans la bibliothèque ppd}
-\KeywordTok{library}\NormalTok{(ppd)}
+\CommentTok{# Apportez dans la bibliothèque gpindex}
+\KeywordTok{library}\NormalTok{(gpindex)}
 
 \CommentTok{# Faites des prix apparentés}
-\NormalTok{dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{relatives =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.1}\NormalTok{),}
+\NormalTok{dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{relative =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.1}\NormalTok{),}
                   \DataTypeTok{weight =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{),}
                   \DataTypeTok{group =}\NormalTok{ letters[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)]}
 \NormalTok{)}
@@ -639,18 +675,18 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 \end{Shaded}
 
 \begin{verbatim}
-##   relatives weight group
-## 1       1.1   0.25     a
-## 2       1.2   0.30     a
-## 3       0.9   0.30     b
-## 4       1.1   0.15     b
+##   relative weight group
+## 1      1.1   0.25     a
+## 2      1.2   0.30     a
+## 3      0.9   0.30     b
+## 4      1.1   0.15     b
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Calculer l'indice géométrique pour les parents des groupes a et b}
 \NormalTok{index_ab <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(}\KeywordTok{split}\NormalTok{(dat, dat}\OperatorTok{$}\NormalTok{group), }
-                   \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{geomean}\NormalTok{(x}\OperatorTok{$}\NormalTok{relatives, x}\OperatorTok{$}\NormalTok{weight) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+                   \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{mean_geometric}\NormalTok{(x}\OperatorTok{$}\NormalTok{relative, x}\OperatorTok{$}\NormalTok{weight) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
 \NormalTok{                   )}
 \NormalTok{index_ab}
 \end{Highlighting}
@@ -664,7 +700,7 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Indices agrégés de niveau inférieur}
-\NormalTok{index_top <-}\StringTok{ }\KeywordTok{geomean}\NormalTok{(index_ab, }\KeywordTok{tapply}\NormalTok{(dat}\OperatorTok{$}\NormalTok{weight, dat}\OperatorTok{$}\NormalTok{group, sum))}
+\NormalTok{index_top <-}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(index_ab, }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{tapply}\NormalTok{(dat}\OperatorTok{$}\NormalTok{weight, dat}\OperatorTok{$}\NormalTok{group, sum)))}
 \NormalTok{index_top}
 \end{Highlighting}
 \end{Shaded}
@@ -676,7 +712,7 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Identique au calcul direct}
-\KeywordTok{geomean}\NormalTok{(dat}\OperatorTok{$}\NormalTok{relatives, dat}\OperatorTok{$}\NormalTok{weight) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\KeywordTok{mean_geometric}\NormalTok{(dat}\OperatorTok{$}\NormalTok{relative, dat}\OperatorTok{$}\NormalTok{weight) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -697,17 +733,17 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 \begin{verbatim}
 ##    period value
 ## 1       0   100
-## 2       1    91
-## 3       2   116
-## 4       3   120
-## 5       4   105
-## 6       5   123
-## 7       6   110
-## 8       7   114
-## 9       8   117
-## 10      9   127
-## 11     10   121
-## 12     11   124
+## 2       1    97
+## 3       2   120
+## 4       3   101
+## 5       4   126
+## 6       5   113
+## 7       6   121
+## 8       7   118
+## 9       8    90
+## 10      9   103
+## 11     10   124
+## 12     11   125
 \end{verbatim}
 
 \begin{Shaded}
@@ -719,18 +755,18 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 
 \begin{verbatim}
 ##    period     value
-## 1       0  90.90909
-## 2       1  82.72727
-## 3       2 105.45455
-## 4       3 109.09091
-## 5       4  95.45455
-## 6       5 111.81818
+## 1       0  82.64463
+## 2       1  80.16529
+## 3       2  99.17355
+## 4       3  83.47107
+## 5       4 104.13223
+## 6       5  93.38843
 ## 7       6 100.00000
-## 8       7 103.63636
-## 9       8 106.36364
-## 10      9 115.45455
-## 11     10 110.00000
-## 12     11 112.72727
+## 8       7  97.52066
+## 9       8  74.38017
+## 10      9  85.12397
+## 11     10 102.47934
+## 12     11 103.30579
 \end{verbatim}
 
 \hypertarget{affectation}{%
@@ -1388,7 +1424,7 @@ où \(E\) est l'opérateur de valeur attendue, repris par la distribution du pri
 
 La figure donne un exemple de ce à quoi ressemble le problème de prédiction. Étant donné une distribution des prix relatifs (ligne continue), il y a une erreur de prédiction attendue associée à chaque valeur qu'un indice de prix peut prendre (ligne pointillée). Le meilleur choix pour un indice des prix comme outil de prévision est la valeur qui minimise l'erreur de prédiction attendue (ligne pointillée).
 
-\includegraphics{cours-indices-des-prix_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{cours-indices-des-prix_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 Comme la valeur attendue n'est qu'une moyenne pondérée, l'indice \(I^{A} = E(p_{t} / p_{0})\) est simplement un indice arithmétique qui fait la moyenne des prix relatifs. Ce qui est intéressant, c'est que les poids ont maintenant une nouvelle interprétation --- ils sont la probabilité d'observer un bien ou un service transigé dans la population. C'est,
 
@@ -1951,8 +1987,8 @@ Les indices pour chaque groupe peuvent être calculés avec une seule régressio
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez dans la bibliothèque pdd}
-\KeywordTok{library}\NormalTok{(ppd)}
+\CommentTok{# Apportez dans la bibliothèque gpindex}
+\KeywordTok{library}\NormalTok{(gpindex)}
 
 \CommentTok{# Calculer les indices au niveau des strates avec une régression linéaire}
 \NormalTok{mdl <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{group }\OperatorTok{+}\StringTok{ }\NormalTok{group}\OperatorTok{:}\NormalTok{period }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, df)}
@@ -1961,7 +1997,7 @@ Les indices pour chaque groupe peuvent être calculés avec une seule régressio
 \NormalTok{index <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\KeywordTok{coef}\NormalTok{(mdl)[}\OperatorTok{-}\KeywordTok{seq_len}\NormalTok{(}\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{((mdl}\OperatorTok{$}\NormalTok{model}\OperatorTok{$}\NormalTok{group))))])}
 
 \CommentTok{# Agrégat, en supposant que les deux strates ont un poids égal}
-\KeywordTok{geomean}\NormalTok{(index) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\KeywordTok{mean_geometric}\NormalTok{(index) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2154,8 +2190,8 @@ C'est également la même chose que le calcul manuel de l'indice stratifié.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez dans la bibliothèque ppd}
-\KeywordTok{library}\NormalTok{(ppd)}
+\CommentTok{# Apportez dans la bibliothèque gpindex}
+\KeywordTok{library}\NormalTok{(gpindex)}
 
 \CommentTok{# Poids de la nourriture pour chats par sa fréquence}
 \NormalTok{weights <-}\StringTok{ }\KeywordTok{colSums}\NormalTok{(df[}\OperatorTok{-}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{)])}
@@ -2165,11 +2201,11 @@ C'est également la même chose que le calcul manuel de l'indice stratifié.
 \StringTok{  }\KeywordTok{sapply}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\KeywordTok{subset}\NormalTok{(df, chicken }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{), }
               \KeywordTok{subset}\NormalTok{(df, liver }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{), }
               \KeywordTok{subset}\NormalTok{(df, salmon }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)),}
-         \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{with}\NormalTok{(x, }\KeywordTok{geomean}\NormalTok{(price[period }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{]) }\OperatorTok{/}\StringTok{ }\KeywordTok{geomean}\NormalTok{(price[period }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{]))}
+         \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{with}\NormalTok{(x, }\KeywordTok{mean_geometric}\NormalTok{(price[period }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{]) }\OperatorTok{/}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(price[period }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{]))}
 \NormalTok{         )}
 
 \CommentTok{# Agrégat}
-\KeywordTok{geomean}\NormalTok{(strata_indices, weights) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\KeywordTok{mean_geometric}\NormalTok{(strata_indices, weights) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 

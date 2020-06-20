@@ -233,8 +233,8 @@ df
 Les indices pour chaque groupe peuvent être calculés avec une seule régression linéaire, puis agrégés avec une moyenne.
 
 ```{r}
-# Apportez dans la bibliothèque pdd
-library(ppd)
+# Apportez dans la bibliothèque gpindex
+library(gpindex)
 
 # Calculer les indices au niveau des strates avec une régression linéaire
 mdl <- lm(log(price) ~ group + group:period - 1, df)
@@ -243,7 +243,7 @@ mdl <- lm(log(price) ~ group + group:period - 1, df)
 index <- exp(coef(mdl)[-seq_len(length(unique((mdl$model$group))))])
 
 # Agrégat, en supposant que les deux strates ont un poids égal
-geomean(index) * 100
+mean_geometric(index) * 100
 ```
 
 # Indices de prix hédoniques
@@ -374,8 +374,8 @@ exp(mean(predict(hi1, df) - predict(hi0, df))) * 100
 
 C'est également la même chose que le calcul manuel de l'indice stratifié.
 ```{r}
-# Apportez dans la bibliothèque ppd
-library(ppd)
+# Apportez dans la bibliothèque gpindex
+library(gpindex)
 
 # Poids de la nourriture pour chats par sa fréquence
 weights <- colSums(df[-(1:2)])
@@ -385,11 +385,11 @@ strata_indices <-
   sapply(list(subset(df, chicken == 1), 
               subset(df, liver == 1), 
               subset(df, salmon == 1)),
-         function(x) with(x, geomean(price[period == 1]) / geomean(price[period == 0]))
+         function(x) with(x, mean_geometric(price[period == 1]) / mean_geometric(price[period == 0]))
          )
 
 # Agrégat
-geomean(strata_indices, weights) * 100
+mean_geometric(strata_indices, weights) * 100
 ```
 
 Les résultats sont très similaires si un modèle temporel est utilisé à la place.

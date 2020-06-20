@@ -295,8 +295,8 @@ L'indice Fisher est souvent considéré comme un indice idéal car il traite sym
 Toutes les formules de l'indice-nombre présentées dans cette section sont simplement des moyennes pondérées et sont assez faciles à calculer dans R étant donné les informations sur les prix et certains poids.
 
 ```{r}
-# Apportez dans la bibliothèque ppd
-library(ppd)
+# Apportez dans la bibliothèque gpindex
+library(gpindex) # install.packages("gpindex")
 
 # Faites des prix apparentés
 relatives <- c(1,1, 1,2, 0,9, 1,1)
@@ -306,10 +306,10 @@ weights <- c (0,25, 0,3, 0,3, 0,15)
 
 # Calculer les indices
 c(
-  Carli = mean(relatives),
-  Jevons = geomean(relatives),
-  Arithmétique = weighted.mean(relatives, weights),
-  Géométrique = geomean(relatives, weights)
+  Carli = mean_arithmetic(relatives),
+  Jevons = mean_geometric(relatives),
+  Arithmétique = mean_arithmetic(relatives, weights),
+  Géométrique = mean_geometric(relatives, weights)
 )
 ```
 
@@ -324,14 +324,27 @@ share1 <- c (0,2, 0,2, 0,4, 0,2)
 
 # Calculer les indices
 c(
-  Laspeyres = weighted.mean(relatives, share0),
-  Paasche = harmean(relatives, share1),
-  Fisher = sqrt(weighted.mean(relatives, share0) * harmean(relatives, share1)),
-  `Géométrique Laspeyres` = geomean(relatives, share0),
-  `Géométrique Paasche` = geomean(relatives, share1),
-  Tornqvist = geomean(relatives, (share0 + share1) / 2)
+  Laspeyres = mean_arithmetic(relatives, share0),
+  Paasche = mean_harmonic(relatives, share1),
+  Fisher = sqrt(mean_arithmetic(relatives, share0) * mean_harmonic(relatives, share1)),
+  `Géométrique Laspeyres` = mean_geometric(relatives, share0),
+  `Géométrique Paasche` = mean_geometric(relatives, share1),
+  Tornqvist = mean_geometric(relatives, (share0 + share1) / 2)
 )
+```
 
+Il est intéressant de noter que tout indice géométrique peut être transformé en indice arithmétique par un changement approprié de poids. Cela permet de déterminer facilement la contribution de chaque prix relatif à la valeur de l'indice.
+
+```{r}
+# Tornqvist index
+mean_geometric(relatives, (share0 + share1) / 2) 
+
+# Changer les poids
+new_weights <- weights_g2a(relatives, (share0 + share1) / 2)
+mean_arithmetic(relatives, new_weights) # same as geometric mean
+
+# Contribution de chaque relative
+(relatives - 1) * new_weights
 ```
 
 # Calcul d'un indice des prix
@@ -521,11 +534,11 @@ La partie importante d'un indice chaîné est la période de chevauchement $k$ l
 Il est utile de terminer cette section du cours avec quelques exemples dans R. Le premier exemple montre qu'un indice géométrique est cohérent dans l'agrégation. Le calcul de l'indice en deux étapes donne la même réponse que le calcul direct.
 
 ```{r}
-# Apportez dans la bibliothèque ppd
-library(ppd)
+# Apportez dans la bibliothèque gpindex
+library(gpindex)
 
 # Faites des prix apparentés
-dat <- data.frame(relatives = c(1.1, 1.2, 0.9, 1.1),
+dat <- data.frame(relative = c(1.1, 1.2, 0.9, 1.1),
                   weight = c(0.25, 0.3, 0.3, 0.15),
                   group = letters[c(1, 1, 2, 2)]
 )
@@ -533,17 +546,17 @@ dat
 
 # Calculer l'indice géométrique pour les parents des groupes a et b
 index_ab <- sapply(split(dat, dat$group), 
-                   function(x) geomean(x$relatives, x$weight) * 100
+                   function(x) mean_geometric(x$relative, x$weight) * 100
                    )
 index_ab
 
 
 # Indices agrégés de niveau inférieur
-index_top <- geomean(index_ab, tapply(dat$weight, dat$group, sum))
+index_top <- mean_geometric(index_ab, as.numeric(tapply(dat$weight, dat$group, sum)))
 index_top
 
 # Identique au calcul direct
-geomean(dat$relatives, dat$weight) * 100
+mean_geometric(dat$relative, dat$weight) * 100
 ```
 
 Le deuxième exemple montre comment rebaser un indice de prix --- divisez simplement la série d'indices par la valeur de l'indice dans la nouvelle période de base.

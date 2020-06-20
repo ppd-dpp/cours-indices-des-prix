@@ -223,8 +223,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exemple-avec-r" class="section level2">
 <h2>Exemple avec R</h2>
 <p>Toutes les formules de l’indice-nombre présentées dans cette section sont simplement des moyennes pondérées et sont assez faciles à calculer dans R étant donné les informations sur les prix et certains poids.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Apportez dans la bibliothèque ppd</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(ppd)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Apportez dans la bibliothèque gpindex</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(gpindex) <span class="co"># install.packages(&quot;gpindex&quot;)</span></a>
 <a class="sourceLine" id="cb1-3" title="3"></a>
 <a class="sourceLine" id="cb1-4" title="4"><span class="co"># Faites des prix apparentés</span></a>
 <a class="sourceLine" id="cb1-5" title="5">relatives &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">0</span>,<span class="dv">9</span>, <span class="dv">1</span>,<span class="dv">1</span>)</a>
@@ -234,10 +234,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-9" title="9"></a>
 <a class="sourceLine" id="cb1-10" title="10"><span class="co"># Calculer les indices</span></a>
 <a class="sourceLine" id="cb1-11" title="11"><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb1-12" title="12">  <span class="dt">Carli =</span> <span class="kw">mean</span>(relatives),</a>
-<a class="sourceLine" id="cb1-13" title="13">  <span class="dt">Jevons =</span> <span class="kw">geomean</span>(relatives),</a>
-<a class="sourceLine" id="cb1-14" title="14">  Arithmé<span class="dt">tique =</span> <span class="kw">weighted.mean</span>(relatives, weights),</a>
-<a class="sourceLine" id="cb1-15" title="15">  Géomé<span class="dt">trique =</span> <span class="kw">geomean</span>(relatives, weights)</a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="dt">Carli =</span> <span class="kw">mean_arithmetic</span>(relatives),</a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="dt">Jevons =</span> <span class="kw">mean_geometric</span>(relatives),</a>
+<a class="sourceLine" id="cb1-14" title="14">  Arithmé<span class="dt">tique =</span> <span class="kw">mean_arithmetic</span>(relatives, weights),</a>
+<a class="sourceLine" id="cb1-15" title="15">  Géomé<span class="dt">trique =</span> <span class="kw">mean_geometric</span>(relatives, weights)</a>
 <a class="sourceLine" id="cb1-16" title="16">)</a></code></pre></div>
 <pre><code>##        Carli       Jevons Arithmétique  Géométrique 
 ##     2.000000     0.000000     1.586957     1.207440</code></pre>
@@ -250,17 +250,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-6" title="6"></a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="co"># Calculer les indices</span></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb3-9" title="9">  <span class="dt">Laspeyres =</span> <span class="kw">weighted.mean</span>(relatives, share0),</a>
-<a class="sourceLine" id="cb3-10" title="10">  <span class="dt">Paasche =</span> <span class="kw">harmean</span>(relatives, share1),</a>
-<a class="sourceLine" id="cb3-11" title="11">  <span class="dt">Fisher =</span> <span class="kw">sqrt</span>(<span class="kw">weighted.mean</span>(relatives, share0) <span class="op">*</span><span class="st"> </span><span class="kw">harmean</span>(relatives, share1)),</a>
-<a class="sourceLine" id="cb3-12" title="12">  <span class="st">`</span><span class="dt">Géométrique Laspeyres</span><span class="st">`</span> =<span class="st"> </span><span class="kw">geomean</span>(relatives, share0),</a>
-<a class="sourceLine" id="cb3-13" title="13">  <span class="st">`</span><span class="dt">Géométrique Paasche</span><span class="st">`</span> =<span class="st"> </span><span class="kw">geomean</span>(relatives, share1),</a>
-<a class="sourceLine" id="cb3-14" title="14">  <span class="dt">Tornqvist =</span> <span class="kw">geomean</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="dt">Laspeyres =</span> <span class="kw">mean_arithmetic</span>(relatives, share0),</a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="dt">Paasche =</span> <span class="kw">mean_harmonic</span>(relatives, share1),</a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="dt">Fisher =</span> <span class="kw">sqrt</span>(<span class="kw">mean_arithmetic</span>(relatives, share0) <span class="op">*</span><span class="st"> </span><span class="kw">mean_harmonic</span>(relatives, share1)),</a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="st">`</span><span class="dt">Géométrique Laspeyres</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean_geometric</span>(relatives, share0),</a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="st">`</span><span class="dt">Géométrique Paasche</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean_geometric</span>(relatives, share1),</a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="dt">Tornqvist =</span> <span class="kw">mean_geometric</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb3-15" title="15">)</a></code></pre></div>
 <pre><code>##             Laspeyres               Paasche                Fisher 
 ##              1.586957              1.836735              1.707284 
 ## Géométrique Laspeyres   Géométrique Paasche             Tornqvist 
 ##              1.207440              2.766324              1.400097</code></pre>
+<p>Il est intéressant de noter que tout indice géométrique peut être transformé en indice arithmétique par un changement approprié de poids. Cela permet de déterminer facilement la contribution de chaque prix relatif à la valeur de l’indice.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Tornqvist index</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">mean_geometric</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) </a></code></pre></div>
+<pre><code>## [1] 1.400097</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Changer les poids</span></a>
+<a class="sourceLine" id="cb7-2" title="2">new_weights &lt;-<span class="st"> </span><span class="kw">weights_g2a</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">mean_arithmetic</span>(relatives, new_weights) <span class="co"># same as geometric mean</span></a></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Contribution de chaque relative</span></a>
+<a class="sourceLine" id="cb9-2" title="2">(relatives <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>new_weights</a></code></pre></div>
+<pre><code>## [1] NA NA NA NA NA NA NA NA</code></pre>
 </div>
 <!-- </div> -->
             </section>
