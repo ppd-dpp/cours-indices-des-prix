@@ -30,7 +30,7 @@
 \usepackage{hyperref}
 \hypersetup{
             pdftitle={Un cours sur les indices des prix},
-            pdfauthor={Steve Martin},
+            pdfauthor={Steve Martin et Rebecca Meier},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -108,8 +108,8 @@
 
 
 \title{Un cours sur les indices des prix}
-\author{Steve Martin}
-\date{Mai 2020}
+\author{Steve Martin et Rebecca Meier}
+\date{Jul 2020}
 
 \begin{document}
 \maketitle
@@ -156,7 +156,7 @@ L'évaluation de ce module est basée sur une tâche composée de 20 questions �
 
 Les lectures de ce module proviennent des chapitres 1, 2, 4 et 9 du Manuel de l'indice des prix à la production (ILO et al. 2004b) et / ou du Manuel de l'indice des prix à la consommation (ILO et al. 2004a), publiés par le FMI (disponibles gratuitement sur leur site Web). Comme il existe un chevauchement considérable entre ces sources, le manuel PPI est utilisé comme référence principale.
 
-Veuillez envoyer un e-mail à l'instructeur du cours si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+Veuillez envoyer un e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
 \hypertarget{quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin}{%
 \section{Qu'est-ce qu'un indice des prix et pourquoi en avons-nous besoin?}\label{quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin}}
@@ -436,10 +436,10 @@ Toutes les formules de l'indice-nombre présentées dans cette section sont simp
 \KeywordTok{library}\NormalTok{(gpindex) }\CommentTok{# install.packages("gpindex")}
 
 \CommentTok{# Faites des prix apparentés}
-\NormalTok{relatives <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{9}\NormalTok{, }\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\NormalTok{relatives <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.1}\NormalTok{)}
 
 \CommentTok{# Faites des poids}
-\NormalTok{weights <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{25}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{15}\NormalTok{)}
+\NormalTok{weights <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{)}
 
 \CommentTok{# Calculer les indices}
 \KeywordTok{c}\NormalTok{(}
@@ -453,7 +453,7 @@ Toutes les formules de l'indice-nombre présentées dans cette section sont simp
 
 \begin{verbatim}
 ##        Carli       Jevons Arithmétique  Géométrique 
-##     2.000000     0.000000     1.586957     1.207440
+##     1.075000     1.069184     1.070000     1.063125
 \end{verbatim}
 
 Le type d'indices arithmétiques et géométriques que cela calcule dépend entièrement de la façon dont les poids sont calculés. Habituellement, les pondérations proviennent des données sur les parts des dépenses / recettes, et la manière dont ces informations sont utilisées pour pondérer les prix relatifs affectera le type d'indice de prix calculé.
@@ -461,10 +461,10 @@ Le type d'indices arithmétiques et géométriques que cela calcule dépend enti
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Part des dépenses / recettes de la période de base}
-\NormalTok{share0 <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{25}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{15}\NormalTok{)}
+\NormalTok{share0 <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{)}
 
 \CommentTok{# Part des dépenses / recettes de la période en cours}
-\NormalTok{share1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{share1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.2}\NormalTok{)}
 
 \CommentTok{# Calculer les indices}
 \KeywordTok{c}\NormalTok{(}
@@ -480,9 +480,9 @@ Le type d'indices arithmétiques et géométriques que cela calcule dépend enti
 
 \begin{verbatim}
 ##             Laspeyres               Paasche                Fisher 
-##              1.586957              1.836735              1.707284 
+##              1.070000              1.025907              1.047721 
 ## Géométrique Laspeyres   Géométrique Paasche             Tornqvist 
-##              1.207440              2.766324              1.400097
+##              1.063125              1.032976              1.047942
 \end{verbatim}
 
 Il est intéressant de noter que tout indice géométrique peut être transformé en indice arithmétique par un changement approprié de poids. Cela permet de déterminer facilement la contribution de chaque prix relatif à la valeur de l'indice.
@@ -495,7 +495,7 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1.400097
+## [1] 1.047942
 \end{verbatim}
 
 \begin{Shaded}
@@ -507,7 +507,7 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 \end{Shaded}
 
 \begin{verbatim}
-## [1] NA
+## [1] 1.047942
 \end{verbatim}
 
 \begin{Shaded}
@@ -518,7 +518,7 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 \end{Shaded}
 
 \begin{verbatim}
-## [1] NA NA NA NA NA NA NA NA
+## [1]  0.02193407  0.04663616 -0.03768802  0.01705983
 \end{verbatim}
 
 \hypertarget{calcul-dun-indice-des-prix}{%
@@ -733,17 +733,17 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 \begin{verbatim}
 ##    period value
 ## 1       0   100
-## 2       1    97
-## 3       2   120
-## 4       3   101
-## 5       4   126
-## 6       5   113
-## 7       6   121
-## 8       7   118
-## 9       8    90
+## 2       1    93
+## 3       2    99
+## 4       3   129
+## 5       4   106
+## 6       5   119
+## 7       6   109
+## 8       7   123
+## 9       8   127
 ## 10      9   103
-## 11     10   124
-## 12     11   125
+## 11     10   107
+## 12     11    96
 \end{verbatim}
 
 \begin{Shaded}
@@ -755,24 +755,24 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 
 \begin{verbatim}
 ##    period     value
-## 1       0  82.64463
-## 2       1  80.16529
-## 3       2  99.17355
-## 4       3  83.47107
-## 5       4 104.13223
-## 6       5  93.38843
+## 1       0  91.74312
+## 2       1  85.32110
+## 3       2  90.82569
+## 4       3 118.34862
+## 5       4  97.24771
+## 6       5 109.17431
 ## 7       6 100.00000
-## 8       7  97.52066
-## 9       8  74.38017
-## 10      9  85.12397
-## 11     10 102.47934
-## 12     11 103.30579
+## 8       7 112.84404
+## 9       8 116.51376
+## 10      9  94.49541
+## 11     10  98.16514
+## 12     11  88.07339
 \end{verbatim}
 
 \hypertarget{affectation}{%
 \section{Affectation}\label{affectation}}
 
-Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeur du cours lorsque vous avez terminé.
+Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) lorsque vous avez terminé.
 
 \textbf{Question 1} Vrai ou faux: l'indice Jevons est toujours inférieur ou égal à l'indice Laspeyres.
 
@@ -1023,7 +1023,7 @@ L'évaluation de ce module est basée sur une tâche composée de 20 questions �
 
 Les lectures de ce module proviennent des chapitres 15 à 18 du manuel PPI (ILO et al. 2004b) et / ou du manuel CPI (ILO et al. 2004a), publié par le FMI (disponible gratuitement sur leur site Internet), ainsi que de la revue des prix. théorie de l'indice par Balk (1995).
 
-Veuillez envoyer un e-mail à l'instructeur du cours si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+Veuillez envoyer un e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -1499,7 +1499,7 @@ Un estimateur naturel pour l'indice géométrique est \(\hat{I}^{G} = \prod_{i =
 \hypertarget{affectation-1}{%
 \section{Affectation}\label{affectation-1}}
 
-Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeur du cours lorsque vous avez terminé.
+Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) lorsque vous avez terminé.
 
 \textbf{Question 1} Vrai ou faux: l'indice de Laspeyres est un indice du coût de la vie si les consommateurs ne se substituent pas à des produits plus chers lorsque les prix changent.
 
@@ -1750,7 +1750,7 @@ L'évaluation de ce module est basée sur une tâche composée de 20 questions �
 
 Les lectures de ce module proviennent des chapitres 17 et 21 du manuel PPI (ILO et al. 2004b) et / ou du manuel CPI (ILO et al. 2004a), publiés par le FMI (disponibles gratuitement sur leur site Web), ainsi que des chapitres 4 à 6 de le Manuel sur les indices des prix des propriétés résidentielles (ILO et al. 2013), publié par Eurostat (disponible gratuitement sur leur site Web).\footnote{Bien que le manuel se concentre sur les prix des propriétés résidentielles, les idées s'appliquent à tous les biens ou services, et au matériel est relativement bien présenté.}
 
-Veuillez envoyer un e-mail à l'instructeur du cours si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+Veuillez envoyer un e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
 \hypertarget{introduction-1}{%
 \section{Introduction}\label{introduction-1}}
@@ -2271,7 +2271,7 @@ Cela donne la même réponse que le calcul en deux étapes.
 \hypertarget{affectation-2}{%
 \section{Affectation}\label{affectation-2}}
 
-Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeur du cours lorsque vous avez terminé.
+Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) lorsque vous avez terminé.
 
 \textbf{Question 1} Vrai ou faux: l'indice hédonique factice temporel est un estimateur biaisé de l'indice géométrique de qualité constante.
 
@@ -2503,9 +2503,9 @@ Ce module consiste en une tâche de grande envergure qui permet aux apprenants d
 
 Prérequis: une introduction aux indices de prix et une compréhension de base de la théorie de l'indice des prix R. et des indices de prix de qualité constante, ainsi qu'une compréhension intermédiaire de R, sont utiles.
 
-L'évaluation de ce module est basée sur une tâche unique qui s'appuie sur les connaissances antérieures des apprenants sur la théorie de l'indice des prix. Le devoir se compose de 4 questions (plus une question bonus). La collaboration sur la mission est encouragée, mais chaque personne doit soumettre son propre travail unique. Les réponses à la mission, ainsi que le code de travail pour chaque question (à l'exclusion de la question bonus) valent 15\%. L'instructeur doit être capable de comprendre et d'exécuter votre code; voir {[}example.R{]} (scripts / example.R) pour un exemple. Chaque question correctement répondue vaut 10\% supplémentaires. Répondre correctement à la question bonus vaut 20\%. La réussite de ce module nécessite une note de 60\% ou plus.
+L'évaluation de ce module est basée sur une tâche unique qui s'appuie sur les connaissances antérieures des apprenants sur la théorie de l'indice des prix. Le devoir se compose de 4 questions (plus une question bonus). La collaboration sur la mission est encouragée, mais chaque personne doit soumettre son propre travail unique. Les réponses à la mission, ainsi que le code de travail pour chaque question (à l'exclusion de la question bonus) valent 15\%. L'instructeur doit être capable de comprendre et d'exécuter votre code; voir \href{scripts/example.R}{example.R} pour un exemple. Chaque question correctement répondue vaut 10\% supplémentaires. Répondre correctement à la question bonus vaut 20\%. La réussite de ce module nécessite une note de 60\% ou plus.
 
-Veuillez envoyer un e-mail à l'instructeur du cours si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+Veuillez envoyer un e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
 \hypertarget{affectation-3}{%
 \section{Affectation}\label{affectation-3}}
@@ -2587,7 +2587,7 @@ Exécutez le code suivant pour récupérer tous les fichiers de données et les 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{source}\NormalTok{ (}\StringTok{'https://raw.githubusercontent.com/ppd-dpp/price-index-course/master/scripts/get_data.R'}\NormalTok{)}
+\KeywordTok{source}\NormalTok{ (}\StringTok{'https://raw.githubusercontent.com/ppd-dpp/cours-indices-des-prix/master/scripts/get_data.R'}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

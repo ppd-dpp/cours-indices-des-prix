@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Une introduction moderne et simple aux indices des prix" />
   
 
-<meta name="author" content="Steve Martin" />
+<meta name="author" content="Steve Martin et Rebecca Meier" />
 
 
 
@@ -227,10 +227,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(gpindex) <span class="co"># install.packages(&quot;gpindex&quot;)</span></a>
 <a class="sourceLine" id="cb1-3" title="3"></a>
 <a class="sourceLine" id="cb1-4" title="4"><span class="co"># Faites des prix apparentés</span></a>
-<a class="sourceLine" id="cb1-5" title="5">relatives &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">0</span>,<span class="dv">9</span>, <span class="dv">1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-5" title="5">relatives &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">0.9</span>, <span class="fl">1.1</span>)</a>
 <a class="sourceLine" id="cb1-6" title="6"></a>
 <a class="sourceLine" id="cb1-7" title="7"><span class="co"># Faites des poids</span></a>
-<a class="sourceLine" id="cb1-8" title="8">weights &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="dv">0</span>,<span class="dv">25</span>, <span class="dv">0</span>,<span class="dv">3</span>, <span class="dv">0</span>,<span class="dv">3</span>, <span class="dv">0</span>,<span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb1-8" title="8">weights &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="fl">0.25</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.15</span>)</a>
 <a class="sourceLine" id="cb1-9" title="9"></a>
 <a class="sourceLine" id="cb1-10" title="10"><span class="co"># Calculer les indices</span></a>
 <a class="sourceLine" id="cb1-11" title="11"><span class="kw">c</span>(</a>
@@ -240,13 +240,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-15" title="15">  Géomé<span class="dt">trique =</span> <span class="kw">mean_geometric</span>(relatives, weights)</a>
 <a class="sourceLine" id="cb1-16" title="16">)</a></code></pre></div>
 <pre><code>##        Carli       Jevons Arithmétique  Géométrique 
-##     2.000000     0.000000     1.586957     1.207440</code></pre>
+##     1.075000     1.069184     1.070000     1.063125</code></pre>
 <p>Le type d’indices arithmétiques et géométriques que cela calcule dépend entièrement de la façon dont les poids sont calculés. Habituellement, les pondérations proviennent des données sur les parts des dépenses / recettes, et la manière dont ces informations sont utilisées pour pondérer les prix relatifs affectera le type d’indice de prix calculé.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Part des dépenses / recettes de la période de base</span></a>
-<a class="sourceLine" id="cb3-2" title="2">share0 &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="dv">0</span>,<span class="dv">25</span>, <span class="dv">0</span>,<span class="dv">3</span>, <span class="dv">0</span>,<span class="dv">3</span>, <span class="dv">0</span>,<span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2">share0 &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="fl">0.25</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.15</span>)</a>
 <a class="sourceLine" id="cb3-3" title="3"></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="co"># Part des dépenses / recettes de la période en cours</span></a>
-<a class="sourceLine" id="cb3-5" title="5">share1 &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="dv">0</span>,<span class="dv">2</span>, <span class="dv">0</span>,<span class="dv">2</span>, <span class="dv">0</span>,<span class="dv">4</span>, <span class="dv">0</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-5" title="5">share1 &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>)</a>
 <a class="sourceLine" id="cb3-6" title="6"></a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="co"># Calculer les indices</span></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="kw">c</span>(</a>
@@ -258,20 +258,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-14" title="14">  <span class="dt">Tornqvist =</span> <span class="kw">mean_geometric</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb3-15" title="15">)</a></code></pre></div>
 <pre><code>##             Laspeyres               Paasche                Fisher 
-##              1.586957              1.836735              1.707284 
+##              1.070000              1.025907              1.047721 
 ## Géométrique Laspeyres   Géométrique Paasche             Tornqvist 
-##              1.207440              2.766324              1.400097</code></pre>
+##              1.063125              1.032976              1.047942</code></pre>
 <p>Il est intéressant de noter que tout indice géométrique peut être transformé en indice arithmétique par un changement approprié de poids. Cela permet de déterminer facilement la contribution de chaque prix relatif à la valeur de l’indice.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Tornqvist index</span></a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="kw">mean_geometric</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) </a></code></pre></div>
-<pre><code>## [1] 1.400097</code></pre>
+<pre><code>## [1] 1.047942</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Changer les poids</span></a>
 <a class="sourceLine" id="cb7-2" title="2">new_weights &lt;-<span class="st"> </span><span class="kw">weights_g2a</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="kw">mean_arithmetic</span>(relatives, new_weights) <span class="co"># same as geometric mean</span></a></code></pre></div>
-<pre><code>## [1] NA</code></pre>
+<pre><code>## [1] 1.047942</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Contribution de chaque relative</span></a>
 <a class="sourceLine" id="cb9-2" title="2">(relatives <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>new_weights</a></code></pre></div>
-<pre><code>## [1] NA NA NA NA NA NA NA NA</code></pre>
+<pre><code>## [1]  0.02193407  0.04663616 -0.03768802  0.01705983</code></pre>
 </div>
 <!-- </div> -->
             </section>

@@ -22,7 +22,7 @@ L'évaluation de ce module est basée sur une tâche composée de 20 questions �
 
 Les lectures de ce module proviennent des chapitres 17 et 21 du manuel PPI [@ppimanual] et / ou du manuel CPI [@cpimanual], publiés par le FMI (disponibles gratuitement sur leur site Web), ainsi que des chapitres 4 à 6 de le Manuel sur les indices des prix des propriétés résidentielles [@rppihandbook], publié par Eurostat (disponible gratuitement sur leur site Web).^[Bien que le manuel se concentre sur les prix des propriétés résidentielles, les idées s'appliquent à tous les biens ou services, et au matériel est relativement bien présenté.]
 
-Veuillez envoyer un e-mail à l'instructeur du cours si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+Veuillez envoyer un e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
 # Introduction
 
@@ -427,7 +427,7 @@ exp(weighted.mean(predict(hi1, df) - predict(hi0, df), df$weights)) * 100
 
 # Affectation
 
-Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeur du cours lorsque vous avez terminé.
+Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) lorsque vous avez terminé.
 
 **Question 1** Vrai ou faux: l'indice hédonique factice temporel est un estimateur biaisé de l'indice géométrique de qualité constante.
 

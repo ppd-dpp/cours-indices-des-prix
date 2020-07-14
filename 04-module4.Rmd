@@ -16,9 +16,9 @@ Ce module consiste en une tâche de grande envergure qui permet aux apprenants d
 
 Prérequis: une introduction aux indices de prix et une compréhension de base de la théorie de l'indice des prix R. et des indices de prix de qualité constante, ainsi qu'une compréhension intermédiaire de R, sont utiles.
 
-L'évaluation de ce module est basée sur une tâche unique qui s'appuie sur les connaissances antérieures des apprenants sur la théorie de l'indice des prix. Le devoir se compose de 4 questions (plus une question bonus). La collaboration sur la mission est encouragée, mais chaque personne doit soumettre son propre travail unique. Les réponses à la mission, ainsi que le code de travail pour chaque question (à l'exclusion de la question bonus) valent 15%. L'instructeur doit être capable de comprendre et d'exécuter votre code; voir [example.R] (scripts / example.R) pour un exemple. Chaque question correctement répondue vaut 10% supplémentaires. Répondre correctement à la question bonus vaut 20%. La réussite de ce module nécessite une note de 60% ou plus.
+L'évaluation de ce module est basée sur une tâche unique qui s'appuie sur les connaissances antérieures des apprenants sur la théorie de l'indice des prix. Le devoir se compose de 4 questions (plus une question bonus). La collaboration sur la mission est encouragée, mais chaque personne doit soumettre son propre travail unique. Les réponses à la mission, ainsi que le code de travail pour chaque question (à l'exclusion de la question bonus) valent 15%. L'instructeur doit être capable de comprendre et d'exécuter votre code; voir [example.R](scripts/example.R) pour un exemple. Chaque question correctement répondue vaut 10% supplémentaires. Répondre correctement à la question bonus vaut 20%. La réussite de ce module nécessite une note de 60% ou plus.
 
-Veuillez envoyer un e-mail à l'instructeur du cours si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+Veuillez envoyer un e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
 # Affectation
 
@@ -98,7 +98,7 @@ Ces instructions décrivent un moyen simple de construire l'indice des prix des 
 Exécutez le code suivant pour récupérer tous les fichiers de données et les placer dans votre environnement de travail.
 
 ```r
-source ('https://raw.githubusercontent.com/ppd-dpp/price-index-course/master/scripts/get_data.R')
+source ('https://raw.githubusercontent.com/ppd-dpp/cours-indices-des-prix/master/scripts/get_data.R')
 ```
 
 1. **Faites les poids**

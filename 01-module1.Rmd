@@ -22,7 +22,7 @@ L'évaluation de ce module est basée sur une tâche composée de 20 questions �
 
 Les lectures de ce module proviennent des chapitres 1, 2, 4 et 9 du Manuel de l'indice des prix à la production [@ppimanual] et / ou du Manuel de l'indice des prix à la consommation [@cpimanual], publiés par le FMI (disponibles gratuitement sur leur site Web). Comme il existe un chevauchement considérable entre ces sources, le manuel PPI est utilisé comme référence principale.
 
-Veuillez envoyer un e-mail à l'instructeur du cours si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+Veuillez envoyer un e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
 # Qu'est-ce qu'un indice des prix et pourquoi en avons-nous besoin?
 
@@ -299,10 +299,10 @@ Toutes les formules de l'indice-nombre présentées dans cette section sont simp
 library(gpindex) # install.packages("gpindex")
 
 # Faites des prix apparentés
-relatives <- c(1,1, 1,2, 0,9, 1,1)
+relatives <- c(1.1, 1.2, 0.9, 1.1)
 
 # Faites des poids
-weights <- c (0,25, 0,3, 0,3, 0,15)
+weights <- c (0.25, 0.3, 0.3, 0.15)
 
 # Calculer les indices
 c(
@@ -317,10 +317,10 @@ Le type d'indices arithmétiques et géométriques que cela calcule dépend enti
 
 ```{r}
 # Part des dépenses / recettes de la période de base
-share0 <- c (0,25, 0,3, 0,3, 0,15)
+share0 <- c (0.25, 0.3, 0.3, 0.15)
 
 # Part des dépenses / recettes de la période en cours
-share1 <- c (0,2, 0,2, 0,4, 0,2)
+share1 <- c (0.2, 0.2, 0.4, 0.2)
 
 # Calculer les indices
 c(
@@ -572,7 +572,7 @@ transform(index, value = value / value[period == 6] * 100)
 
 # Affectation
 
-Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeur du cours lorsque vous avez terminé.
+Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) lorsque vous avez terminé.
 
 **Question 1** Vrai ou faux: l'indice Jevons est toujours inférieur ou égal à l'indice Laspeyres.
 
