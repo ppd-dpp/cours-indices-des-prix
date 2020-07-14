@@ -733,17 +733,17 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 \begin{verbatim}
 ##    period value
 ## 1       0   100
-## 2       1    93
-## 3       2    99
-## 4       3   129
-## 5       4   106
-## 6       5   119
-## 7       6   109
-## 8       7   123
-## 9       8   127
-## 10      9   103
-## 11     10   107
-## 12     11    96
+## 2       1   113
+## 3       2    98
+## 4       3   120
+## 5       4   123
+## 6       5   101
+## 7       6   122
+## 8       7   114
+## 9       8   129
+## 10      9   100
+## 11     10    93
+## 12     11   128
 \end{verbatim}
 
 \begin{Shaded}
@@ -755,18 +755,18 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 
 \begin{verbatim}
 ##    period     value
-## 1       0  91.74312
-## 2       1  85.32110
-## 3       2  90.82569
-## 4       3 118.34862
-## 5       4  97.24771
-## 6       5 109.17431
+## 1       0  81.96721
+## 2       1  92.62295
+## 3       2  80.32787
+## 4       3  98.36066
+## 5       4 100.81967
+## 6       5  82.78689
 ## 7       6 100.00000
-## 8       7 112.84404
-## 9       8 116.51376
-## 10      9  94.49541
-## 11     10  98.16514
-## 12     11  88.07339
+## 8       7  93.44262
+## 9       8 105.73770
+## 10      9  81.96721
+## 11     10  76.22951
+## 12     11 104.91803
 \end{verbatim}
 
 \hypertarget{affectation}{%
@@ -2581,7 +2581,7 @@ Les widgets vont être stratifiés par province et par type de widget pour produ
 \hypertarget{instructions}{%
 \subsection{Instructions}\label{instructions}}
 
-Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. (Astuce: consultez le package dplyr et le package \href{https://github.com/marberts/ppd}{ppd} pour quelques outils utiles.)
+Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. (Astuce: consultez le package \href{https://cran.r-project.org/package=dplyr}{dplyr} package, le package \href{https://cran.r-project.org/package=gpindex}{gpindex}, et le package \href{https://github.com/ppd-dpp/calpr}{calpr} pour quelques outils utiles.)
 
 Exécutez le code suivant pour récupérer tous les fichiers de données et les placer dans votre environnement de travail.
 

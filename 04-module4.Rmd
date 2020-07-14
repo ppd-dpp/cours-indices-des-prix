@@ -93,7 +93,7 @@ mermaid('
 
 ## Instructions
 
-Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. (Astuce: consultez le package dplyr et le package [ppd](https://github.com/marberts/ppd) pour quelques outils utiles.)
+Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. (Astuce: consultez le package [dplyr](https://cran.r-project.org/package=dplyr) package, le package [gpindex](https://cran.r-project.org/package=gpindex), et le package [calpr](https://github.com/ppd-dpp/calpr) pour quelques outils utiles.)
 
 Exécutez le code suivant pour récupérer tous les fichiers de données et les placer dans votre environnement de travail.
 
