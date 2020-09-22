@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chaînage | Un cours sur les indices des prix</title>
   <meta name="description" content="Une introduction moderne et simple aux indices des prix" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chaînage | Un cours sur les indices des prix" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="rebasing.html"/>
-<link rel="next" href="exemple-avec-r-1.html"/>
+<link rel="next" href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,12 +49,13 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -63,14 +64,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -129,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Aperçu</a></li>
 <li class="part"><span><b>I Introduction aux indices de prix</b></span></li>
-<li class="chapter" data-level="" data-path="programme.html"><a href="programme.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-introduction-aux-indices-de-prix.html"><a href="programme-pour-introduction-aux-indices-de-prix.html"><i class="fa fa-check"></i>Programme pour Introduction aux indices de prix</a></li>
 <li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a><ul>
 <li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix.html"><a href="quest-ce-quun-indice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix?</a></li>
 <li class="chapter" data-level="" data-path="utilisations-dun-indice-des-prix.html"><a href="utilisations-dun-indice-des-prix.html"><i class="fa fa-check"></i>Utilisations d’un indice des prix</a></li>
@@ -141,19 +144,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="indices-arithmétiques-moins-courants.html"><a href="indices-arithmétiques-moins-courants.html"><i class="fa fa-check"></i>Indices arithmétiques moins courants</a></li>
 <li class="chapter" data-level="" data-path="indices-géométriques-des-prix.html"><a href="indices-géométriques-des-prix.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
 <li class="chapter" data-level="" data-path="lindice-fisher.html"><a href="lindice-fisher.html"><i class="fa fa-check"></i>L’indice Fisher</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r.html"><a href="exemple-avec-r.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-formules-dindex.html"><a href="exemple-avec-r-formules-dindex.html"><i class="fa fa-check"></i>Exemple avec R: formules d’index</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a><ul>
 <li class="chapter" data-level="" data-path="sous-indices-et-agrégation.html"><a href="sous-indices-et-agrégation.html"><i class="fa fa-check"></i>Sous-indices et agrégation</a></li>
 <li class="chapter" data-level="" data-path="factorisation-dun-index.html"><a href="factorisation-dun-index.html"><i class="fa fa-check"></i>Factorisation d’un index</a></li>
 <li class="chapter" data-level="" data-path="rebasing.html"><a href="rebasing.html"><i class="fa fa-check"></i>Rebasing</a></li>
 <li class="chapter" data-level="" data-path="chaînage.html"><a href="chaînage.html"><i class="fa fa-check"></i>Chaînage</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-1.html"><a href="exemple-avec-r-1.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html"><i class="fa fa-check"></i>Exemple avec R: Cohérence dans l’agrégation et le rebasage</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation.html"><a href="affectation.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation 1</a></li>
 <li class="part"><span><b>II Théorie de l’indice des prix</b></span></li>
-<li class="chapter" data-level="" data-path="programme-1.html"><a href="programme-1.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-théorie-de-lindice-des-prix.html"><a href="programme-pour-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Programme pour Théorie de l’indice des prix</a></li>
+<li class="chapter" data-level="" data-path="quest-ce-que-la-théorie-de-lindice-des-prix.html"><a href="quest-ce-que-la-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce que la théorie de l’indice des prix?</a></li>
 <li class="chapter" data-level="" data-path="lapproche-axiomatique.html"><a href="lapproche-axiomatique.html"><i class="fa fa-check"></i>L’approche axiomatique</a><ul>
 <li class="chapter" data-level="" data-path="un-indice-de-prix-abstrait.html"><a href="un-indice-de-prix-abstrait.html"><i class="fa fa-check"></i>Un indice de prix abstrait</a></li>
 <li class="chapter" data-level="" data-path="les-axiomes.html"><a href="les-axiomes.html"><i class="fa fa-check"></i>Les axiomes</a></li>
@@ -170,14 +173,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="lapproche-stochastique.html"><a href="lapproche-stochastique.html"><i class="fa fa-check"></i>L’approche stochastique</a><ul>
 <li class="chapter" data-level="" data-path="le-problème-de-prédiction-optimal.html"><a href="le-problème-de-prédiction-optimal.html"><i class="fa fa-check"></i>Le problème de prédiction optimal</a></li>
-<li class="chapter" data-level="" data-path="indices-géométriques-des-prix-1.html"><a href="indices-géométriques-des-prix-1.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
+<li class="chapter" data-level="" data-path="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><a href="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><i class="fa fa-check"></i>Les indices de prix géométriques comme meilleur prédicteur</a></li>
 <li class="chapter" data-level="" data-path="des-indices-de-prix-plus-généraux.html"><a href="des-indices-de-prix-plus-généraux.html"><i class="fa fa-check"></i>Des indices de prix plus généraux</a></li>
 <li class="chapter" data-level="" data-path="inférence-statistique.html"><a href="inférence-statistique.html"><i class="fa fa-check"></i>Inférence statistique</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation 2</a></li>
 <li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
-<li class="chapter" data-level="" data-path="programme-2.html"><a href="programme-2.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-indices-de-prix-de-qualité-constante.html"><a href="programme-pour-indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Programme pour Indices de prix de qualité constante</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
@@ -188,17 +191,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
 <li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
 <li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-2.html"><a href="exemple-avec-r-2.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-indice-stratifié.html"><a href="exemple-avec-r-indice-stratifié.html"><i class="fa fa-check"></i>Exemple avec R: Indice stratifié</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
 <li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
 <li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-3.html"><a href="exemple-avec-r-3.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-hédonique.html"><a href="exemple-avec-r-hédonique.html"><i class="fa fa-check"></i>Exemple avec R: Hédonique</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation 3</a></li>
 <li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
-<li class="chapter" data-level="" data-path="programme-3.html"><a href="programme-3.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation</a><ul>
+<li class="chapter" data-level="" data-path="programme-pour-construire-un-indice-des-prix-avec-r.html"><a href="programme-pour-construire-un-indice-des-prix-avec-r.html"><i class="fa fa-check"></i>Programme pour Construire un indice des prix avec R</a></li>
+<li class="chapter" data-level="" data-path="affectation-4.html"><a href="affectation-4.html"><i class="fa fa-check"></i>Affectation 4</a><ul>
 <li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
 </ul></li>
@@ -246,7 +249,7 @@ I^{A}(0, t) = \sum_{i = 1}^{n} \omega_{i0} \frac{p_{ik}}{p_{i0}} \times \sum_{i 
         </div>
       </div>
 <a href="rebasing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="exemple-avec-r-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

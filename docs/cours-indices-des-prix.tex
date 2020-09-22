@@ -1,39 +1,46 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[]{article}
+\documentclass[
+]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Un cours sur les indices des prix},
-            pdfauthor={Steve Martin et Rebecca Meier},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Un cours sur les indices des prix},
+  pdfauthor={Steve Martin et Rebecca Meier},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -76,8 +83,14 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -87,25 +100,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
 
 \title{Un cours sur les indices des prix}
 \author{Steve Martin et Rebecca Meier}
@@ -126,11 +128,19 @@ Ce cours donne une introduction moderne et simple aux indices des prix. L'accent
 
 Le cours est divisé en quatre modules qui s'appuient les uns sur les autres. Le premier module donne une introduction aux indices de prix, en se concentrant principalement sur les aspects informatiques d'un indice de prix. Le deuxième module donne une large introduction à la théorie des indices des prix, en mettant l'accent sur la motivation des indices des prix qui sont produits par les organismes statistiques nationaux. Le troisième module couvre les ajustements de qualité, l'un des principaux obstacles pratiques lors de la construction d'un indice des prix. Le quatrième module rassemble le tout avec un exercice étendu pour construire et analyser un indice des prix avec R.
 
+Tous les modules ne sont pas nécessaires pour comprendre les indices de prix, et le matériel de ce cours peut être utilisé par des apprenants ayant une variété de parcours et d'objectifs. Dans tous les cas, le premier module devrait être le point de départ, car il fournit une introduction de base sans approfondir la théorie mathématique.
+
+Ceux qui s'intéressent principalement aux aspects de calcul d'un indice de prix peuvent suivre le module 4 après le module 1, en sautant le matériel plus théorique des modules 2 et 3. Cette séquence est appropriée pour les personnes ayant peu ou pas de connaissances préalables en économie ou en statistique, et qui le font pas besoin d'utiliser un indice des prix pour le travail d'analyse.
+
+Ceux qui ont déjà été familiarisés avec la théorie économique peuvent suivre le module 2 après le module 1 pour acquérir une compréhension plus approfondie du matériel du module 1, suivi du module 4 pour mettre ces idées en pratique. Cette séquence est appropriée pour ceux qui utilisent des indices de prix pour le travail analytique.
+
+Les personnes ayant déjà été exposées à l'économétrie et aux statistiques peuvent suivre le module 3 après le module 2 pour en savoir plus sur certains défis pratiques lors de la construction d'un indice de prix, suivi à nouveau par le module 4. Cette séquence est appropriée pour ceux qui utilisent et construisent des indices de prix, car elle donne les outils fondamentaux nécessaires pour concevoir un indice des prix.
+
 \hypertarget{part-introduction-aux-indices-de-prix}{%
 \part{Introduction aux indices de prix}\label{part-introduction-aux-indices-de-prix}}
 
-\hypertarget{programme}{%
-\section{Programme}\label{programme}}
+\hypertarget{programme-pour-introduction-aux-indices-de-prix}{%
+\section{Programme pour Introduction aux indices de prix}\label{programme-pour-introduction-aux-indices-de-prix}}
 
 Un indice des prix permet de condenser systématiquement les informations sur de nombreux prix pour une gamme de produits et services en une seule valeur. Les indices des prix sont largement utilisés pour analyser et comparer les conditions macroéconomiques dans le temps et ont des implications importantes pour les politiques gouvernementales.
 
@@ -425,8 +435,8 @@ I_{F} &= \sqrt{\frac{\sum_{i = 1}^{n} p_{i1} q_{i0}}{\sum_{i = 1}^{n} p_{i0} q_{
 
 L'indice Fisher est souvent considéré comme un indice idéal car il traite symétriquement les informations de la période 0 et de la période 1.\footnote{L'indice Törnqvist est également considéré comme idéal pour une raison similaire, et ces types d'indices sont souvent appelés superlatifs.} En pratique cependant, l'indice de Fisher n'est pas fréquemment utilisé par les organismes statistiques nationaux car il n'est pas opportun de le calculer. En effet, cela dépend de l'indice de Paasche, qui nécessite des informations sur les quantités de la période 1 en plus des prix de la période 1, ce qui a été historiquement impossible à collecter pour les organismes statistiques nationaux.
 
-\hypertarget{exemple-avec-r}{%
-\subsection{Exemple avec R}\label{exemple-avec-r}}
+\hypertarget{exemple-avec-r-formules-dindex}{%
+\subsection{Exemple avec R: formules d'index}\label{exemple-avec-r-formules-dindex}}
 
 Toutes les formules de l'indice-nombre présentées dans cette section sont simplement des moyennes pondérées et sont assez faciles à calculer dans R étant donné les informations sur les prix et certains poids.
 
@@ -442,12 +452,10 @@ Toutes les formules de l'indice-nombre présentées dans cette section sont simp
 \NormalTok{weights <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{)}
 
 \CommentTok{# Calculer les indices}
-\KeywordTok{c}\NormalTok{(}
-  \DataTypeTok{Carli =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives),}
+\KeywordTok{c}\NormalTok{(}\DataTypeTok{Carli =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives),}
   \DataTypeTok{Jevons =} \KeywordTok{mean_geometric}\NormalTok{(relatives),}
 \NormalTok{  Arithmé}\DataTypeTok{tique =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives, weights),}
-\NormalTok{  Géomé}\DataTypeTok{trique =} \KeywordTok{mean_geometric}\NormalTok{(relatives, weights)}
-\NormalTok{)}
+\NormalTok{  Géomé}\DataTypeTok{trique =} \KeywordTok{mean_geometric}\NormalTok{(relatives, weights))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -467,14 +475,13 @@ Le type d'indices arithmétiques et géométriques que cela calcule dépend enti
 \NormalTok{share1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.2}\NormalTok{)}
 
 \CommentTok{# Calculer les indices}
-\KeywordTok{c}\NormalTok{(}
-  \DataTypeTok{Laspeyres =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives, share0),}
+\KeywordTok{c}\NormalTok{(}\DataTypeTok{Laspeyres =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives, share0),}
   \DataTypeTok{Paasche =} \KeywordTok{mean_harmonic}\NormalTok{(relatives, share1),}
-  \DataTypeTok{Fisher =} \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean_arithmetic}\NormalTok{(relatives, share0) }\OperatorTok{*}\StringTok{ }\KeywordTok{mean_harmonic}\NormalTok{(relatives, share1)),}
+  \DataTypeTok{Fisher =} \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean_arithmetic}\NormalTok{(relatives, share0) }\OperatorTok{*}\StringTok{ }
+\StringTok{                  }\KeywordTok{mean_harmonic}\NormalTok{(relatives, share1)),}
   \StringTok{`}\DataTypeTok{Géométrique Laspeyres}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(relatives, share0),}
   \StringTok{`}\DataTypeTok{Géométrique Paasche}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(relatives, share1),}
-  \DataTypeTok{Tornqvist =} \KeywordTok{mean_geometric}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
-\NormalTok{)}
+  \DataTypeTok{Tornqvist =} \KeywordTok{mean_geometric}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -501,7 +508,7 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Changer les poids}
-\NormalTok{new_weights <-}\StringTok{ }\KeywordTok{weights_g2a}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{new_weights <-}\StringTok{ }\KeywordTok{weights_transmute}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
 \KeywordTok{mean_arithmetic}\NormalTok{(relatives, new_weights) }\CommentTok{# same as geometric mean}
 \end{Highlighting}
 \end{Shaded}
@@ -518,7 +525,7 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  0.02193407  0.04663616 -0.03768802  0.01705983
+## [1]  0.02095439  0.04455317 -0.03600469  0.01629786
 \end{verbatim}
 
 \hypertarget{calcul-dun-indice-des-prix}{%
@@ -655,8 +662,8 @@ Le graphique ci-dessous donne un exemple de ce à quoi ressemble un indice chaî
 
 La partie importante d'un indice chaîné est la période de chevauchement \(k\) lorsque les pondérations changent et les prix de la période \(k\) sont utilisés avec deux ensembles de pondérations. S'il n'y a pas de période de chevauchement, alors l'index ne peut pas être enchaîné. Chaque indice peut être considéré comme un maillon de la chaîne, donnant le mouvement des prix pour cette partie du temps, et la période de chevauchement est l'endroit où les maillons se rencontrent.
 
-\hypertarget{exemple-avec-r-1}{%
-\subsection{Exemple avec R}\label{exemple-avec-r-1}}
+\hypertarget{exemple-avec-r-cohuxe9rence-dans-lagruxe9gation-et-le-rebasage}{%
+\subsection{Exemple avec R: Cohérence dans l'agrégation et le rebasage}\label{exemple-avec-r-cohuxe9rence-dans-lagruxe9gation-et-le-rebasage}}
 
 Il est utile de terminer cette section du cours avec quelques exemples dans R. Le premier exemple montre qu'un indice géométrique est cohérent dans l'agrégation. Le calcul de l'indice en deux étapes donne la même réponse que le calcul direct.
 
@@ -668,8 +675,7 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 \CommentTok{# Faites des prix apparentés}
 \NormalTok{dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{relative =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.1}\NormalTok{),}
                   \DataTypeTok{weight =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{),}
-                  \DataTypeTok{group =}\NormalTok{ letters[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)]}
-\NormalTok{)}
+                  \DataTypeTok{group =}\NormalTok{ letters[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)])}
 \NormalTok{dat}
 \end{Highlighting}
 \end{Shaded}
@@ -686,8 +692,7 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 \begin{Highlighting}[]
 \CommentTok{# Calculer l'indice géométrique pour les parents des groupes a et b}
 \NormalTok{index_ab <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(}\KeywordTok{split}\NormalTok{(dat, dat}\OperatorTok{$}\NormalTok{group), }
-                   \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{mean_geometric}\NormalTok{(x}\OperatorTok{$}\NormalTok{relative, x}\OperatorTok{$}\NormalTok{weight) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
-\NormalTok{                   )}
+                   \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{mean_geometric}\NormalTok{(x}\OperatorTok{$}\NormalTok{relative, x}\OperatorTok{$}\NormalTok{weight) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{)}
 \NormalTok{index_ab}
 \end{Highlighting}
 \end{Shaded}
@@ -733,17 +738,17 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 \begin{verbatim}
 ##    period value
 ## 1       0   100
-## 2       1   113
-## 3       2    98
-## 4       3   120
-## 5       4   123
-## 6       5   101
-## 7       6   122
-## 8       7   114
-## 9       8   129
-## 10      9   100
-## 11     10    93
-## 12     11   128
+## 2       1    93
+## 3       2   123
+## 4       3   108
+## 5       4   126
+## 6       5    98
+## 7       6   120
+## 8       7   113
+## 9       8   130
+## 10      9   103
+## 11     10    99
+## 12     11   114
 \end{verbatim}
 
 \begin{Shaded}
@@ -755,22 +760,22 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 
 \begin{verbatim}
 ##    period     value
-## 1       0  81.96721
-## 2       1  92.62295
-## 3       2  80.32787
-## 4       3  98.36066
-## 5       4 100.81967
-## 6       5  82.78689
+## 1       0  83.33333
+## 2       1  77.50000
+## 3       2 102.50000
+## 4       3  90.00000
+## 5       4 105.00000
+## 6       5  81.66667
 ## 7       6 100.00000
-## 8       7  93.44262
-## 9       8 105.73770
-## 10      9  81.96721
-## 11     10  76.22951
-## 12     11 104.91803
+## 8       7  94.16667
+## 9       8 108.33333
+## 10      9  85.83333
+## 11     10  82.50000
+## 12     11  95.00000
 \end{verbatim}
 
-\hypertarget{affectation}{%
-\section{Affectation}\label{affectation}}
+\hypertarget{affectation-1}{%
+\section{Affectation 1}\label{affectation-1}}
 
 Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) lorsque vous avez terminé.
 
@@ -998,8 +1003,8 @@ Les réponses à ces questions proviennent à la fois du contenu du cours et des
 \hypertarget{part-thuxe9orie-de-lindice-des-prix}{%
 \part{Théorie de l'indice des prix}\label{part-thuxe9orie-de-lindice-des-prix}}
 
-\hypertarget{programme-1}{%
-\section{Programme}\label{programme-1}}
+\hypertarget{programme-pour-thuxe9orie-de-lindice-des-prix}{%
+\section{Programme pour Théorie de l'indice des prix}\label{programme-pour-thuxe9orie-de-lindice-des-prix}}
 
 Pourquoi certaines formules de numéro d'indice sont-elles utilisées pour calculer un indice de prix? Répondre à cette question nécessite une théorie des indices de prix qui peut être utilisée pour évaluer les propriétés d'un indice de prix et déterminer si un numéro d'indice est meilleur qu'un autre.
 
@@ -1025,8 +1030,8 @@ Les lectures de ce module proviennent des chapitres 15 à 18 du manuel PPI (ILO 
 
 Veuillez envoyer un e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\hypertarget{quest-ce-que-la-thuxe9orie-de-lindice-des-prix}{%
+\section{Qu'est-ce que la théorie de l'indice des prix?}\label{quest-ce-que-la-thuxe9orie-de-lindice-des-prix}}
 
 Il existe trois grandes approches pour motiver les formules d'indice des prix qui sont utilisées dans la pratique par les organismes statistiques: l'approche axiomatique, l'approche économique et l'approche stochastique. Chaque approche est utile en soi, et les trois donnent des perspectives et des compréhensions différentes pour les diverses formules de nombre d'indices qui sont utilisées pour construire des indices de prix. Ensemble, ces différentes approches constituent une théorie des indices de prix.
 
@@ -1434,8 +1439,8 @@ I^{A} = \sum_{i = 1}^{n} \frac{p_{it}}{p_{i0}} P_{i}.
 
 Différentes formules arithmétiques d'indice de prix --- par exemple, Laspeyres, Paasche, Lowe --- correspondent donc à différentes déclarations sur ce qui détermine la probabilité d'observer une transaction. Par exemple, avec un indice de Laspeyres, les probabilités sont données par la part des dépenses ou des revenus de la période 0. Cela revient à dire que la probabilité d'observer une transaction pour un bien est la probabilité de dépenser ou de recevoir un dollar pour ce bien au cours de la période 0.
 
-\hypertarget{indices-guxe9omuxe9triques-des-prix-1}{%
-\subsection{Indices géométriques des prix}\label{indices-guxe9omuxe9triques-des-prix-1}}
+\hypertarget{les-indices-de-prix-guxe9omuxe9triques-comme-meilleur-pruxe9dicteur}{%
+\subsection{Les indices de prix géométriques comme meilleur prédicteur}\label{les-indices-de-prix-guxe9omuxe9triques-comme-meilleur-pruxe9dicteur}}
 
 Un indice géométrique peut être motivé de la même manière qu'un indice arithmétique. Formellement, un index géométrique est la valeur \(I^{G}\) qui résout
 
@@ -1496,8 +1501,8 @@ Avec l'échantillonnage aléatoire, une approche naturelle pour estimer l'indice
 
 Un estimateur naturel pour l'indice géométrique est \(\hat{I}^{G} = \prod_{i = 1}^{n_{s}} (p_{it} / p_{i0})^{1 / n_{s}}\), l'index Jevons. Contrairement à l'indice de Carli, cependant, l'indice de Jevons est un estimateur biaisé de l'indice géométrique. Il est à nouveau simple de montrer que \(E(\hat{I}^{G}) \geq I^{G}\), avec \(E(\hat{I}^{G}) = I^{G}\) ne tenant que dans des circonstances très particulières --- l'indice de Jevons surestime systématiquement l'indice géométrique (c'est-à-dire qu'il est biaisé à la hausse).\footnote{L'indice de Jevons n'est pas biaisé dans les cas où la distribution d'échantillonnage est dégénérée, ou la variance des prix relatifs est zéro. Voir Lehmann and Casella (1998 Chapitre 1 Théorème 7.5).} Bien que le biais soit un inconvénient de l'indice de Jevons, le biais n'est pas la seule propriété statistique importante d'un estimateur, et l'indice de Jevons a d'autres propriétés statistiques souhaitables (par exemple, c'est une constante estimateur de l'indice géométrique et, dans certaines circonstances, atteint le maximum d'efficacité de vraisemblance lié).\footnote{L'indice de Carli est également un estimateur cohérent de l'indice arithmétique sous échantillonnage aléatoire, mais il ne peut pas être un estimateur du maximum de vraisemblance car cela nécessiterait des prix apparentés d'avoir une distribution gaussienne, ce qui signifie que les prix relatifs peuvent être négatifs. En revanche, l'indice de Jevons est un estimateur du maximum de vraisemblance pour l'indice géométrique si les parents de prix ont une distribution log-normale, ce qui implique que les prix sont toujours positifs.} Il est possible d'ajuster le biais à la hausse des Jevons en divisant les Jevons index par \(1 + \sigma^{2} / (2n)\), où \(\sigma^{2}\) est la variance des logarithmes du prix (Kennedy 2003, 41), mais cela n'est généralement pas fait dans la pratique.
 
-\hypertarget{affectation-1}{%
-\section{Affectation}\label{affectation-1}}
+\hypertarget{affectation-2}{%
+\section{Affectation 2}\label{affectation-2}}
 
 Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) lorsque vous avez terminé.
 
@@ -1723,8 +1728,8 @@ Période & Prix 1 & Prix 2 & Quantité 1 & Quantité 2 & Indice des prix des int
 \hypertarget{part-indices-de-prix-de-qualituxe9-constante}{%
 \part{Indices de prix de qualité constante}\label{part-indices-de-prix-de-qualituxe9-constante}}
 
-\hypertarget{programme-2}{%
-\section{Programme}\label{programme-2}}
+\hypertarget{programme-pour-indices-de-prix-de-qualituxe9-constante}{%
+\section{Programme pour Indices de prix de qualité constante}\label{programme-pour-indices-de-prix-de-qualituxe9-constante}}
 
 Un indice des prix devrait mesurer un pur mouvement des prix dans le temps. Dans la pratique, cependant, les biens et services changent avec le temps, ce qui peut contaminer un indice des prix --- sans informations supplémentaires, il n'y a aucun moyen de dissocier un mouvement des prix d'un changement dans la qualité d'un bien ou d'un service.
 
@@ -1752,8 +1757,8 @@ Les lectures de ce module proviennent des chapitres 17 et 21 du manuel PPI (ILO 
 
 Veuillez envoyer un e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
-\hypertarget{introduction-1}{%
-\section{Introduction}\label{introduction-1}}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
 
 La prise en compte des différences de qualité entre les biens est une préoccupation permanente lors de la construction d'un indice des prix. L'objectif d'un indice de prix est de capturer un mouvement de prix pur sur deux périodes, mais s'il y a des différences systématiques dans les marchandises comparées au fil du temps qui affectent également le prix --- soi-disant différences de qualité --- alors un prix pur le mouvement ne peut pas être capturé en utilisant uniquement les prix de transaction. Sans information préalable, il n'y a aucun moyen de démêler un mouvement de prix pur d'un mouvement de prix en raison de l'évolution de la qualité au fil du temps. La mesure idéale d'un mouvement de prix pur est un indice des prix de qualité constante qui maintient les déterminants des prix fixés d'une période à l'autre. Cela permet une comparaison de pommes à pommes en utilisant les prix de transaction, et toute différence de prix entre les périodes doit refléter un mouvement de prix pur.
 
@@ -1954,8 +1959,8 @@ Le défi avec une approche stratifiée est de trouver le bon équilibre entre ce
 
 Un problème connexe avec la stratification est que, si la stratification se produit pour de nombreuses caractéristiques d'un bien, \(X\) peut être de grande dimension. Dans ce cas, la taille des cellules pour chaque strate peut être très petite, et les indices spécifiques à la strate peuvent être très sensibles à l'ajout ou à la suppression de transactions pour un bien. Le chevauchement et la dimensionnalité limitent tous deux la capacité de créer des groupes de biens homogènes pour lesquels il est plus facile de motiver l'indépendance conditionnelle.
 
-\hypertarget{exemple-avec-r-2}{%
-\subsection{Exemple avec R}\label{exemple-avec-r-2}}
+\hypertarget{exemple-avec-r-indice-stratifiuxe9}{%
+\subsection{Exemple avec R: Indice stratifié}\label{exemple-avec-r-indice-stratifiuxe9}}
 
 Le calcul d'un indice stratifié est simple en pratique. Une bonne façon de le faire est d'utiliser une simple régression linéaire.
 
@@ -2093,8 +2098,8 @@ Le point à retenir ici est que lorsque les biens sont stratifiés en fonction d
 
 Dans la pratique, le modèle hédonique factice est plus populaire que l'approche d'imputation hédonique, en partie parce qu'il est plus simple, plus facile à calculer et moins gourmand en données. L'inconvénient de l'approche temporelle est qu'elle est plus restrictive et nécessite une hypothèse supplémentaire. Dans la plupart des cas, cependant, les deux approches donnent des résultats similaires.
 
-\hypertarget{exemple-avec-r-3}{%
-\subsection{Exemple avec R}\label{exemple-avec-r-3}}
+\hypertarget{exemple-avec-r-huxe9donique}{%
+\subsection{Exemple avec R: Hédonique}\label{exemple-avec-r-huxe9donique}}
 
 Le calcul d'un indice de prix hédonique linéaire est très facile dans R.
 
@@ -2268,8 +2273,8 @@ Cela donne la même réponse que le calcul en deux étapes.
 ## [1] 111.1855
 \end{verbatim}
 
-\hypertarget{affectation-2}{%
-\section{Affectation}\label{affectation-2}}
+\hypertarget{affectation-3}{%
+\section{Affectation 3}\label{affectation-3}}
 
 Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65\% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) lorsque vous avez terminé.
 
@@ -2479,8 +2484,8 @@ Vrai ou faux: les prix potentiels de la période 0 étant-ils corrélés avec le
 \hypertarget{part-construire-un-indice-des-prix-avec-r}{%
 \part{Construire un indice des prix avec R}\label{part-construire-un-indice-des-prix-avec-r}}
 
-\hypertarget{programme-3}{%
-\section{Programme}\label{programme-3}}
+\hypertarget{programme-pour-construire-un-indice-des-prix-avec-r}{%
+\section{Programme pour Construire un indice des prix avec R}\label{programme-pour-construire-un-indice-des-prix-avec-r}}
 
 La mise en pratique de la théorie de l'indice des prix nécessite des outils de calcul. Un outil particulièrement utile pour construire et analyser des indices de prix est le langage de programmation R.
 
@@ -2507,8 +2512,8 @@ L'évaluation de ce module est basée sur une tâche unique qui s'appuie sur les
 
 Veuillez envoyer un e-mail à l'instructeurs du cours (\href{mailto:steve.martin5@canada.ca}{Steve Martin} ou \href{mailto:rebecca.meier@canada.ca}{Rebecca Meier}) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
-\hypertarget{affectation-3}{%
-\section{Affectation}\label{affectation-3}}
+\hypertarget{affectation-4}{%
+\section{Affectation 4}\label{affectation-4}}
 
 Les widgets sont un produit fortement réglementé dans chacune des 10 provinces, et le gouvernement fédéral limite les mouvements de widgets entre les provinces. Récemment, en réponse au tollé général suscité par le caractère inaccessible des widgets, le groupe canadien d'analyse économique réglementaire a proposé que le gouvernement fédéral autorise le commerce interprovincial de widgets pour améliorer l'accès aux marchés et réduire les prix. Avant d'envisager de concevoir une nouvelle politique, le gouvernement fédéral aimerait toutefois évaluer comment les prix des widgets ont augmenté ces dernières années. Un indice des prix est nécessaire pour les marchés de widgets provinciaux et pour le pays dans son ensemble.
 
@@ -2581,13 +2586,22 @@ Les widgets vont être stratifiés par province et par type de widget pour produ
 \hypertarget{instructions}{%
 \subsection{Instructions}\label{instructions}}
 
-Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. (Astuce: consultez le package \href{https://cran.r-project.org/package=dplyr}{dplyr} package, le package \href{https://cran.r-project.org/package=gpindex}{gpindex}, et le package \href{https://github.com/ppd-dpp/calpr}{calpr} pour quelques outils utiles.)
+Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul.
 
-Exécutez le code suivant pour récupérer tous les fichiers de données et les placer dans votre environnement de travail.
+Exécutez le code suivant pour récupérer tous les fichiers de données et les mettre dans votre environnement de travail. Notez que ces données ne sont pas parfaites. N'oubliez pas de vérifier vos calculs intermédiaires pour vous assurer que tout est comme prévu (par exemple, avec la fonction \texttt{summary}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{source}\NormalTok{ (}\StringTok{'https://raw.githubusercontent.com/ppd-dpp/cours-indices-des-prix/master/scripts/get_data.R'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-project.org/package=tidyr}{tidyr}, \href{https:\%20/\%20/cran.r-project.org/package=gpindex}{gpindex} et les packages \href{https://github.com/ppd-dpp/calpr}{calpr} seront utilisés dans ce module. Installez-les comme suit s'ils ne sont pas déjà installés. (Astuce: il vaut la peine de parcourir la documentation dans les packages \texttt{gpindex} et\texttt{calpr}.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\StringTok{"tidyr"}\NormalTok{, }\StringTok{"gpindex"}\NormalTok{, }\StringTok{"devtools"}\NormalTok{))}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"ppd-dpp/calpr"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2597,34 +2611,121 @@ Exécutez le code suivant pour récupérer tous les fichiers de données et les 
   \textbf{Faites les poids}
 
   À l'aide du fichier «poids», créez un ensemble de poids qui donne la part de valeur de chaque produit vendu dans chaque province chaque année, et un autre qui donne la part de valeur de tous les produits vendus dans chaque province chaque année. Ce premier ensemble de poids sera utilisé pour agréger les indices élémentaires pour obtenir 10 indices au niveau de la province, et le deuxième ensemble de poids sera utilisé pour agréger les indices au niveau de la province en un indice national. Il devrait y avoir 200 poids dans le premier fichier et 20 poids dans le second fichier.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(tidyr)}
+\KeywordTok{library}\NormalTok{(gpindex)}
+\KeywordTok{library}\NormalTok{(calpr)}
+
+\CommentTok{# Make provincial weights}
+\NormalTok{weights_prov <-}\StringTok{ }\NormalTok{weights }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, province) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# group all sales values by reference year and province}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{weight =} \KeywordTok{sum}\NormalTok{(weight)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# value of all sales in each province in each year}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share_prov =} \KeywordTok{weights_scale}\NormalTok{(weight)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# scale to sum to 1}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{weight) }\CommentTok{# drop the weight column as it won't be needed again}
+
+\CommentTok{# Make product weights}
+\NormalTok{weights_prod <-}\StringTok{ }\NormalTok{weights }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share_prod =} \KeywordTok{weights_scale}\NormalTok{(weight)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{weight)}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Calculez la géomée du produit K}
 
   En utilisant les microdonnées pour le produit K dans le fichier \texttt{dat\_micro}, calculez la moyenne géométrique des prix dans chaque province pour chaque mois de chaque année de référence. Ce fichier devrait contenir 250 géomées.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat_micro <-}\StringTok{ }\NormalTok{dat_micro }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{period =} \KeywordTok{year_month}\NormalTok{(period)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# turn transaction dates into month-by-year dates}
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{geomean =} \KeywordTok{mean_geometric}\NormalTok{(price)) }\CommentTok{# calculate the geometric avergage}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Calculez la géomée des produits A à J}
 
   En utilisant les données du système de prix globaux dans \texttt{dat\_gps}, calculez la moyenne géométrique des prix pour chaque produit dans chaque province dans chaque mois de chaque année de référence, pour les produits A à J. Combinez ces données avec les données préparées à l'étape 2. Le fichier résultant devrait avoir 2 500 géomées.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat_index <-}\StringTok{ }\NormalTok{dat_gps }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =} \StringTok{"quote"}\NormalTok{, }\DataTypeTok{value =} \StringTok{"price"}\NormalTok{, price1}\OperatorTok{:}\NormalTok{price3) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# melt into a long dataset}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(province, product, year, period) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\KeywordTok{bind_rows}\NormalTok{(dat_micro) }\CommentTok{# append to dat_micro}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Calculer les indices élémentaires période sur période}
 
   Pour chaque produit dans chaque province dans chaque année de référence, calculez le rapport des moyennes géométriques calculées à l'étape 3, en vous assurant d'avoir un prix relatif de 1 en janvier 2018 et janvier 2019 (janvier 2019 sera le mois de liaison lorsqu'il est le temps de chaîner l'index.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat_index <-}\StringTok{ }\NormalTok{dat_index }\OperatorTok{%>%}\StringTok{  }
+\StringTok{  }\CommentTok{# your code here}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Prix mettre à jour les poids des produits}
 
   Fusionnez les pondérations au niveau du produit par province de l'étape 1 dans l'ensemble de données créé à l'étape 4 et utilisez les indices élémentaires période sur période pour mettre à jour les pondérations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat_index <-}\StringTok{ }\NormalTok{dat_index }\OperatorTok{%>%}\StringTok{  }
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share_prod_u =} \KeywordTok{weights_update}\NormalTok{(}\KeywordTok{cumprod}\NormalTok{(}\KeywordTok{lag}\NormalTok{(rel, }\DataTypeTok{default =} \DecValTok{1}\NormalTok{)), share_prod, }\DataTypeTok{scale =} \OtherTok{FALSE}\NormalTok{)) }\CommentTok{# price update the weights}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Calculez l'indice provincial}
 
   Calculez un indice arithmétique pour chaque province au cours de chaque année de référence, à l'aide des indices élémentaires d'une période à l'autre et des pondérations mises à jour des prix des étapes 4 et 5.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{index_prov <-}\StringTok{ }\NormalTok{dat_index }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(period, year, province) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Calculez l'indice au niveau du Canada}
 
   Fusionnez les pondérations provinciales à l'étape 1 avec les indices provinciaux de l'étape 6 pour calculer un indice canadien pour chaque année de référence.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{index <-}\StringTok{ }\NormalTok{index_prov }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(period, year) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{province =} \DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# province 0 is the Canada-level}
+\StringTok{  }\KeywordTok{bind_rows}\NormalTok{(index_prov)}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Chaîne des indices 2018 et 2019}
 
   Enchaînez les indices au niveau de la province de 2018 et 2019 et du niveau du Canada ensemble, en utilisant janvier 2019 comme mois de liaison, pour obtenir un indice de janvier 2018 à décembre 2019 avec janvier 2018 comme période de base (généralement, la période de base serait une année civile , mais il n'y a que 24 mois de données).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{index_chain <-}\StringTok{ }\NormalTok{index }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(province) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(period, province) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{index =} \KeywordTok{unique}\NormalTok{(index)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# remove the duplicate rows for the link month}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 \end{enumerate}
 
 Le résultat final devrait être un fichier avec 11 indices de prix, un pour chaque province et un indice national, de janvier 2018 à décembre 2019, avec janvier 2018 comme période de base (= 100).
@@ -2638,6 +2739,27 @@ La validation de l'indice au niveau du Canada nécessite de mettre l'indice du g
   \textbf{Trimestre par rapport aux indices mensuels}
 
   Transformez l'indice que vous venez de créer et l'indice du groupe Analyse réglementaire de la réglementation canadienne dans \texttt{index\_crea} en un indice trimestriel, avec le 1er trimestre 2019 comme période de base, en prenant la moyenne des trois valeurs d'indice de chaque trimestre.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_index <-}\StringTok{ }\NormalTok{index_chain }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(province }\OperatorTok{==}\StringTok{ '0'}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# keep only the Canada-level index}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{period =} \KeywordTok{year_quarter}\NormalTok{(period)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(period) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{index =} \KeywordTok{mean}\NormalTok{(index)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{index =}\NormalTok{ index}\OperatorTok{/}\NormalTok{index[period }\OperatorTok{==}\StringTok{ '2019-01-01'}\NormalTok{] }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{) }\CommentTok{# rebase to Jan 2019}
+
+\NormalTok{index_crea <-}\StringTok{ }\NormalTok{index_crea }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\CommentTok{# your code here %>%}
+\StringTok{  }\CommentTok{# your code here %>%}
+
+\NormalTok{index_mw <-}\StringTok{ }\NormalTok{index_mw }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# your code here}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Ajoutez les trois indices ensemble}
 

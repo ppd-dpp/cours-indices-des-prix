@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exemple avec R | Un cours sur les indices des prix</title>
+  <title>Les indices de prix géométriques comme meilleur prédicteur | Un cours sur les indices des prix</title>
   <meta name="description" content="Une introduction moderne et simple aux indices des prix" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exemple avec R | Un cours sur les indices des prix" />
+  <meta property="og:title" content="Les indices de prix géométriques comme meilleur prédicteur | Un cours sur les indices des prix" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ppd-dpp/cours-indices-des-prix" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exemple avec R | Un cours sur les indices des prix" />
+  <meta name="twitter:title" content="Les indices de prix géométriques comme meilleur prédicteur | Un cours sur les indices des prix" />
   
   <meta name="twitter:description" content="Une introduction moderne et simple aux indices des prix" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lindice-fisher.html"/>
-<link rel="next" href="calcul-dun-indice-des-prix.html"/>
+<link rel="prev" href="le-problème-de-prédiction-optimal.html"/>
+<link rel="next" href="des-indices-de-prix-plus-généraux.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,12 +49,13 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -63,14 +64,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -129,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Aperçu</a></li>
 <li class="part"><span><b>I Introduction aux indices de prix</b></span></li>
-<li class="chapter" data-level="" data-path="programme.html"><a href="programme.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-introduction-aux-indices-de-prix.html"><a href="programme-pour-introduction-aux-indices-de-prix.html"><i class="fa fa-check"></i>Programme pour Introduction aux indices de prix</a></li>
 <li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a><ul>
 <li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix.html"><a href="quest-ce-quun-indice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix?</a></li>
 <li class="chapter" data-level="" data-path="utilisations-dun-indice-des-prix.html"><a href="utilisations-dun-indice-des-prix.html"><i class="fa fa-check"></i>Utilisations d’un indice des prix</a></li>
@@ -141,19 +144,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="indices-arithmétiques-moins-courants.html"><a href="indices-arithmétiques-moins-courants.html"><i class="fa fa-check"></i>Indices arithmétiques moins courants</a></li>
 <li class="chapter" data-level="" data-path="indices-géométriques-des-prix.html"><a href="indices-géométriques-des-prix.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
 <li class="chapter" data-level="" data-path="lindice-fisher.html"><a href="lindice-fisher.html"><i class="fa fa-check"></i>L’indice Fisher</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r.html"><a href="exemple-avec-r.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-formules-dindex.html"><a href="exemple-avec-r-formules-dindex.html"><i class="fa fa-check"></i>Exemple avec R: formules d’index</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a><ul>
 <li class="chapter" data-level="" data-path="sous-indices-et-agrégation.html"><a href="sous-indices-et-agrégation.html"><i class="fa fa-check"></i>Sous-indices et agrégation</a></li>
 <li class="chapter" data-level="" data-path="factorisation-dun-index.html"><a href="factorisation-dun-index.html"><i class="fa fa-check"></i>Factorisation d’un index</a></li>
 <li class="chapter" data-level="" data-path="rebasing.html"><a href="rebasing.html"><i class="fa fa-check"></i>Rebasing</a></li>
 <li class="chapter" data-level="" data-path="chaînage.html"><a href="chaînage.html"><i class="fa fa-check"></i>Chaînage</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-1.html"><a href="exemple-avec-r-1.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html"><i class="fa fa-check"></i>Exemple avec R: Cohérence dans l’agrégation et le rebasage</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation.html"><a href="affectation.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation 1</a></li>
 <li class="part"><span><b>II Théorie de l’indice des prix</b></span></li>
-<li class="chapter" data-level="" data-path="programme-1.html"><a href="programme-1.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-théorie-de-lindice-des-prix.html"><a href="programme-pour-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Programme pour Théorie de l’indice des prix</a></li>
+<li class="chapter" data-level="" data-path="quest-ce-que-la-théorie-de-lindice-des-prix.html"><a href="quest-ce-que-la-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce que la théorie de l’indice des prix?</a></li>
 <li class="chapter" data-level="" data-path="lapproche-axiomatique.html"><a href="lapproche-axiomatique.html"><i class="fa fa-check"></i>L’approche axiomatique</a><ul>
 <li class="chapter" data-level="" data-path="un-indice-de-prix-abstrait.html"><a href="un-indice-de-prix-abstrait.html"><i class="fa fa-check"></i>Un indice de prix abstrait</a></li>
 <li class="chapter" data-level="" data-path="les-axiomes.html"><a href="les-axiomes.html"><i class="fa fa-check"></i>Les axiomes</a></li>
@@ -170,14 +173,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="lapproche-stochastique.html"><a href="lapproche-stochastique.html"><i class="fa fa-check"></i>L’approche stochastique</a><ul>
 <li class="chapter" data-level="" data-path="le-problème-de-prédiction-optimal.html"><a href="le-problème-de-prédiction-optimal.html"><i class="fa fa-check"></i>Le problème de prédiction optimal</a></li>
-<li class="chapter" data-level="" data-path="indices-géométriques-des-prix-1.html"><a href="indices-géométriques-des-prix-1.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
+<li class="chapter" data-level="" data-path="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><a href="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><i class="fa fa-check"></i>Les indices de prix géométriques comme meilleur prédicteur</a></li>
 <li class="chapter" data-level="" data-path="des-indices-de-prix-plus-généraux.html"><a href="des-indices-de-prix-plus-généraux.html"><i class="fa fa-check"></i>Des indices de prix plus généraux</a></li>
 <li class="chapter" data-level="" data-path="inférence-statistique.html"><a href="inférence-statistique.html"><i class="fa fa-check"></i>Inférence statistique</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation 2</a></li>
 <li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
-<li class="chapter" data-level="" data-path="programme-2.html"><a href="programme-2.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-indices-de-prix-de-qualité-constante.html"><a href="programme-pour-indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Programme pour Indices de prix de qualité constante</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
@@ -188,17 +191,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
 <li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
 <li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-2.html"><a href="exemple-avec-r-2.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-indice-stratifié.html"><a href="exemple-avec-r-indice-stratifié.html"><i class="fa fa-check"></i>Exemple avec R: Indice stratifié</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
 <li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
 <li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-3.html"><a href="exemple-avec-r-3.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-hédonique.html"><a href="exemple-avec-r-hédonique.html"><i class="fa fa-check"></i>Exemple avec R: Hédonique</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation 3</a></li>
 <li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
-<li class="chapter" data-level="" data-path="programme-3.html"><a href="programme-3.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation</a><ul>
+<li class="chapter" data-level="" data-path="programme-pour-construire-un-indice-des-prix-avec-r.html"><a href="programme-pour-construire-un-indice-des-prix-avec-r.html"><i class="fa fa-check"></i>Programme pour Construire un indice des prix avec R</a></li>
+<li class="chapter" data-level="" data-path="affectation-4.html"><a href="affectation-4.html"><i class="fa fa-check"></i>Affectation 4</a><ul>
 <li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
 </ul></li>
@@ -220,67 +223,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exemple-avec-r" class="section level2">
-<h2>Exemple avec R</h2>
-<p>Toutes les formules de l’indice-nombre présentées dans cette section sont simplement des moyennes pondérées et sont assez faciles à calculer dans R étant donné les informations sur les prix et certains poids.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Apportez dans la bibliothèque gpindex</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(gpindex) <span class="co"># install.packages(&quot;gpindex&quot;)</span></a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Faites des prix apparentés</span></a>
-<a class="sourceLine" id="cb1-5" title="5">relatives &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">0.9</span>, <span class="fl">1.1</span>)</a>
-<a class="sourceLine" id="cb1-6" title="6"></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co"># Faites des poids</span></a>
-<a class="sourceLine" id="cb1-8" title="8">weights &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="fl">0.25</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.15</span>)</a>
-<a class="sourceLine" id="cb1-9" title="9"></a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="co"># Calculer les indices</span></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb1-12" title="12">  <span class="dt">Carli =</span> <span class="kw">mean_arithmetic</span>(relatives),</a>
-<a class="sourceLine" id="cb1-13" title="13">  <span class="dt">Jevons =</span> <span class="kw">mean_geometric</span>(relatives),</a>
-<a class="sourceLine" id="cb1-14" title="14">  Arithmé<span class="dt">tique =</span> <span class="kw">mean_arithmetic</span>(relatives, weights),</a>
-<a class="sourceLine" id="cb1-15" title="15">  Géomé<span class="dt">trique =</span> <span class="kw">mean_geometric</span>(relatives, weights)</a>
-<a class="sourceLine" id="cb1-16" title="16">)</a></code></pre></div>
-<pre><code>##        Carli       Jevons Arithmétique  Géométrique 
-##     1.075000     1.069184     1.070000     1.063125</code></pre>
-<p>Le type d’indices arithmétiques et géométriques que cela calcule dépend entièrement de la façon dont les poids sont calculés. Habituellement, les pondérations proviennent des données sur les parts des dépenses / recettes, et la manière dont ces informations sont utilisées pour pondérer les prix relatifs affectera le type d’indice de prix calculé.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Part des dépenses / recettes de la période de base</span></a>
-<a class="sourceLine" id="cb3-2" title="2">share0 &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="fl">0.25</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.15</span>)</a>
-<a class="sourceLine" id="cb3-3" title="3"></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># Part des dépenses / recettes de la période en cours</span></a>
-<a class="sourceLine" id="cb3-5" title="5">share1 &lt;-<span class="st"> </span><span class="kw">c</span> (<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb3-6" title="6"></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co"># Calculer les indices</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb3-9" title="9">  <span class="dt">Laspeyres =</span> <span class="kw">mean_arithmetic</span>(relatives, share0),</a>
-<a class="sourceLine" id="cb3-10" title="10">  <span class="dt">Paasche =</span> <span class="kw">mean_harmonic</span>(relatives, share1),</a>
-<a class="sourceLine" id="cb3-11" title="11">  <span class="dt">Fisher =</span> <span class="kw">sqrt</span>(<span class="kw">mean_arithmetic</span>(relatives, share0) <span class="op">*</span><span class="st"> </span><span class="kw">mean_harmonic</span>(relatives, share1)),</a>
-<a class="sourceLine" id="cb3-12" title="12">  <span class="st">`</span><span class="dt">Géométrique Laspeyres</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean_geometric</span>(relatives, share0),</a>
-<a class="sourceLine" id="cb3-13" title="13">  <span class="st">`</span><span class="dt">Géométrique Paasche</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean_geometric</span>(relatives, share1),</a>
-<a class="sourceLine" id="cb3-14" title="14">  <span class="dt">Tornqvist =</span> <span class="kw">mean_geometric</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-15" title="15">)</a></code></pre></div>
-<pre><code>##             Laspeyres               Paasche                Fisher 
-##              1.070000              1.025907              1.047721 
-## Géométrique Laspeyres   Géométrique Paasche             Tornqvist 
-##              1.063125              1.032976              1.047942</code></pre>
-<p>Il est intéressant de noter que tout indice géométrique peut être transformé en indice arithmétique par un changement approprié de poids. Cela permet de déterminer facilement la contribution de chaque prix relatif à la valeur de l’indice.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Tornqvist index</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw">mean_geometric</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) </a></code></pre></div>
-<pre><code>## [1] 1.047942</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Changer les poids</span></a>
-<a class="sourceLine" id="cb7-2" title="2">new_weights &lt;-<span class="st"> </span><span class="kw">weights_g2a</span>(relatives, (share0 <span class="op">+</span><span class="st"> </span>share1) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw">mean_arithmetic</span>(relatives, new_weights) <span class="co"># same as geometric mean</span></a></code></pre></div>
-<pre><code>## [1] 1.047942</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Contribution de chaque relative</span></a>
-<a class="sourceLine" id="cb9-2" title="2">(relatives <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>new_weights</a></code></pre></div>
-<pre><code>## [1]  0.02193407  0.04663616 -0.03768802  0.01705983</code></pre>
+<div id="les-indices-de-prix-géométriques-comme-meilleur-prédicteur" class="section level2">
+<h2>Les indices de prix géométriques comme meilleur prédicteur</h2>
+<p>Un indice géométrique peut être motivé de la même manière qu’un indice arithmétique. Formellement, un index géométrique est la valeur <span class="math inline">\(I^{G}\)</span> qui résout</p>
+<p><span class="math display">\[\begin{align*}
+\min_{I} E\left[\left(\log\left(\frac{p_{t}} {p_{0}} \right) - \log(I) \right)^{2} \right] ,
+\end{align*}\]</span></p>
+<p>la solution à laquelle est <span class="math inline">\(I^{G} = \exp(E[\log (p_{t} / p_{0})])\)</span>. Mais ce n’est qu’un index géométrique, comme</p>
+<p><span class="math display">\[\begin{align*}
+\exp\left(E\left[\log \left(\frac{p_{t}} {p_{0}} \right) \right] \right) &amp; = \exp \left(P_{i} \sum_{i = 1}^{n} \log \left(\frac{p_{it}} {p_{i0}} \right) \right) \\
+&amp;= \prod_{i = 1}^{n} \left(\frac{p_{it}}{p_{i0}} \right)^{P_{i}},
+\end{align*}\]</span></p>
+<p>avec des poids égaux à la probabilité d’observer un prix relatif. Il convient de noter qu’en raison des logarithmes du problème de prédiction, un indice géométrique peut également être motivé par la recherche d’une valeur <span class="math inline">\(I^{G}\)</span> telle que <span class="math inline">\(I^{G} \times p_{i0}\)</span> prédit le mieux <span class="math inline">\(p_{it}\)</span> (ou <span class="math inline">\(p_{it} / I^{G}\)</span> prédit le mieux <span class="math inline">\(p_{i0}\)</span>). Il s’agit d’une propriété non partagée avec les indices arithmétiques. Alors qu’un indice arithmétique prédit les variations de prix au fil du temps, un indice géométrique prend le prix d’un bien pendant la période 0, le gonfle / le dégonfle avec l’indice des prix et utilise le résultat pour prédire le prix de ce bien pendant la période <span class="math inline">\(t\)</span>. Par conséquent, un indice géométrique s’intègre mieux dans l’approche stochastique car il correspond directement à la façon dont un indice des prix est utilisé pour gonfler et dégonfler les prix dans le temps dans la pratique.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></p>
+<p>L’indice de Törnqvist apparaît généralement comme le meilleur indice de l’approche stochastique car il sélectionne une valeur sensible pour représenter la probabilité d’observer un prix relatif. L’idée derrière les probabilités de Törnqvist est que la probabilité d’observer un prix particulier relatif à un bien dépend de la part des dépenses / revenus de ce bien sur les deux périodes. Ainsi, l’indice de Törnqvist définit les probabilités sous forme de parts de dépenses moyennes:</p>
+<p><span class="math display">\[\begin{align*}
+P_{i} = \frac{1}{2} \frac{p_{i0} q_{i0}}{\sum_{j = 1}^{n} p_{j0} q_{j0}} + \frac{1}{2} \frac{p_{it} q_{it}}{\sum_{j = 1}^{n} p_{jt} q_{jt}}.
+\end{align*}\]</span></p>
+<p>L’inconvénient de ces probabilités est qu’elles nécessitent des informations pour les parts des dépenses / recettes de la période 0 et de la période <span class="math inline">\(t\)</span>, ce qui peut ne pas être connu au moment du calcul de l’indice.</p>
 </div>
-<!-- </div> -->
+<div class="footnotes">
+<hr />
+<ol start="23">
+<li id="fn23"><p>Motiver un indice des prix pour résoudre le problème <span class="math inline">\(\min_{I} E[(p_{t} - p_{0} I)^{2}]\)</span> donne <span class="math inline">\(I = E(p_{t} p_{0}) / E(p_{0}^{2})\)</span>, qui est un indice des prix assez inhabituel.<a href="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html#fnref23" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="lindice-fisher.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="calcul-dun-indice-des-prix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="le-problème-de-prédiction-optimal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="des-indices-de-prix-plus-généraux.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

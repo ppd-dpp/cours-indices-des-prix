@@ -1,6 +1,6 @@
 # (PART) Construire un indice des prix avec R {-}
 
-# Programme
+# Programme pour Construire un indice des prix avec R
 
 La mise en pratique de la théorie de l'indice des prix nécessite des outils de calcul. Un outil particulièrement utile pour construire et analyser des indices de prix est le langage de programmation R.
 
@@ -20,7 +20,7 @@ L'évaluation de ce module est basée sur une tâche unique qui s'appuie sur les
 
 Veuillez envoyer un e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
-# Affectation
+# Affectation 4
 
 Les widgets sont un produit fortement réglementé dans chacune des 10 provinces, et le gouvernement fédéral limite les mouvements de widgets entre les provinces. Récemment, en réponse au tollé général suscité par le caractère inaccessible des widgets, le groupe canadien d'analyse économique réglementaire a proposé que le gouvernement fédéral autorise le commerce interprovincial de widgets pour améliorer l'accès aux marchés et réduire les prix. Avant d'envisager de concevoir une nouvelle politique, le gouvernement fédéral aimerait toutefois évaluer comment les prix des widgets ont augmenté ces dernières années. Un indice des prix est nécessaire pour les marchés de widgets provinciaux et pour le pays dans son ensemble.
 
@@ -93,45 +93,123 @@ mermaid('
 
 ## Instructions
 
-Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. (Astuce: consultez le package [dplyr](https://cran.r-project.org/package=dplyr) package, le package [gpindex](https://cran.r-project.org/package=gpindex), et le package [calpr](https://github.com/ppd-dpp/calpr) pour quelques outils utiles.)
+Ces instructions décrivent un moyen simple de construire l'indice des prix des widgets, mais n'hésitez pas à utiliser une approche différente si c'est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul. 
 
-Exécutez le code suivant pour récupérer tous les fichiers de données et les placer dans votre environnement de travail.
+Exécutez le code suivant pour récupérer tous les fichiers de données et les mettre dans votre environnement de travail. Notez que ces données ne sont pas parfaites. N'oubliez pas de vérifier vos calculs intermédiaires pour vous assurer que tout est comme prévu (par exemple, avec la fonction `summary`).
 
 ```r
 source ('https://raw.githubusercontent.com/ppd-dpp/cours-indices-des-prix/master/scripts/get_data.R')
 ```
 
+Le [dplyr](https://cran.r-project.org/package=dplyr), [tidyr](https://cran.r-project.org/package=tidyr), [gpindex](https: / /cran.r-project.org/package=gpindex) et les packages [calpr](https://github.com/ppd-dpp/calpr) seront utilisés dans ce module. Installez-les comme suit s'ils ne sont pas déjà installés. (Astuce: il vaut la peine de parcourir la documentation dans les packages `gpindex` et` calpr`.)
+
+```{r, eval=FALSE}
+install.packages(c("dplyr", "tidyr", "gpindex", "devtools"))
+devtools::install_github("ppd-dpp/calpr")
+```
+
 1. **Faites les poids**
 
     À l'aide du fichier «poids», créez un ensemble de poids qui donne la part de valeur de chaque produit vendu dans chaque province chaque année, et un autre qui donne la part de valeur de tous les produits vendus dans chaque province chaque année. Ce premier ensemble de poids sera utilisé pour agréger les indices élémentaires pour obtenir 10 indices au niveau de la province, et le deuxième ensemble de poids sera utilisé pour agréger les indices au niveau de la province en un indice national. Il devrait y avoir 200 poids dans le premier fichier et 20 poids dans le second fichier.
+    
+    ```{r, eval=FALSE}
+library(dplyr)
+library(tidyr)
+library(gpindex)
+library(calpr)
+
+# Make provincial weights
+weights_prov <- weights %>%
+  group_by(year, province) %>% # group all sales values by reference year and province
+  summarize(weight = sum(weight)) %>% # value of all sales in each province in each year
+  mutate(share_prov = weights_scale(weight)) %>% # scale to sum to 1
+  select(-weight) # drop the weight column as it won't be needed again
+
+# Make product weights
+weights_prod <- weights %>%
+  # your code here %>%
+  mutate(share_prod = weights_scale(weight)) %>%
+  select(-weight)
+    ```
 
 2. **Calculez la géomée du produit K**
 
     En utilisant les microdonnées pour le produit K dans le fichier `dat_micro`, calculez la moyenne géométrique des prix dans chaque province pour chaque mois de chaque année de référence. Ce fichier devrait contenir 250 géomées.
+    
+    ```{r, eval = FALSE}
+dat_micro <- dat_micro %>%
+  mutate(period = year_month(period)) %>% # turn transaction dates into month-by-year dates
+  # your code here %>%
+  summarize(geomean = mean_geometric(price)) # calculate the geometric avergage
+    ```
 
 3. **Calculez la géomée des produits A à J**
 
     En utilisant les données du système de prix globaux dans `dat_gps`, calculez la moyenne géométrique des prix pour chaque produit dans chaque province dans chaque mois de chaque année de référence, pour les produits A à J. Combinez ces données avec les données préparées à l'étape 2. Le fichier résultant devrait avoir 2 500 géomées.
+    
+    ```{r, eval = FALSE}
+dat_index <- dat_gps %>%
+  # your code here %>%
+  gather(key = "quote", value = "price", price1:price3) %>% # melt into a long dataset
+  group_by(province, product, year, period) %>%
+  # your code here %>%
+  bind_rows(dat_micro) # append to dat_micro
+    ```
 
 4. **Calculer les indices élémentaires période sur période**
 
     Pour chaque produit dans chaque province dans chaque année de référence, calculez le rapport des moyennes géométriques calculées à l'étape 3, en vous assurant d'avoir un prix relatif de 1 en janvier 2018 et janvier 2019 (janvier 2019 sera le mois de liaison lorsqu'il est le temps de chaîner l'index.)
+    
+    ```{r, eval = FALSE}
+dat_index <- dat_index %>%  
+  # your code here
+    ```
 
 5. **Prix mettre à jour les poids des produits**
 
     Fusionnez les pondérations au niveau du produit par province de l'étape 1 dans l'ensemble de données créé à l'étape 4 et utilisez les indices élémentaires période sur période pour mettre à jour les pondérations.
+    
+    ```{r, eval = FALSE}
+dat_index <- dat_index %>%  
+  # your code here %>%
+  mutate(share_prod_u = weights_update(cumprod(lag(rel, default = 1)), share_prod, scale = FALSE)) # price update the weights
+    ```
 
 6. **Calculez l'indice provincial**
 
     Calculez un indice arithmétique pour chaque province au cours de chaque année de référence, à l'aide des indices élémentaires d'une période à l'autre et des pondérations mises à jour des prix des étapes 4 et 5.
+    
+    ```{r, eval = FALSE}
+index_prov <- dat_index %>%
+  group_by(period, year, province) %>%
+  # your code here
+    ```
 
 7. **Calculez l'indice au niveau du Canada**
 
     Fusionnez les pondérations provinciales à l'étape 1 avec les indices provinciaux de l'étape 6 pour calculer un indice canadien pour chaque année de référence.
+    
+    ```{r, eval = FALSE}
+index <- index_prov %>%
+  # your code here
+  group_by(period, year) %>%
+  # your code here
+  mutate(province = 0) %>% # province 0 is the Canada-level
+  bind_rows(index_prov)
+    ```
 
 8. **Chaîne des indices 2018 et 2019**
 
     Enchaînez les indices au niveau de la province de 2018 et 2019 et du niveau du Canada ensemble, en utilisant janvier 2019 comme mois de liaison, pour obtenir un indice de janvier 2018 à décembre 2019 avec janvier 2018 comme période de base (généralement, la période de base serait une année civile , mais il n'y a que 24 mois de données).
+    
+    ```{r, eval = FALSE}
+index_chain <- index %>%
+  group_by(province) %>%
+  # your code here
+  group_by(period, province) %>%
+  summarize(index = unique(index)) %>% # remove the duplicate rows for the link month
+  ungroup()
+    ```
 
 Le résultat final devrait être un fichier avec 11 indices de prix, un pour chaque province et un indice national, de janvier 2018 à décembre 2019, avec janvier 2018 comme période de base (= 100).
 
@@ -140,6 +218,25 @@ La validation de l'indice au niveau du Canada nécessite de mettre l'indice du g
 9. **Trimestre par rapport aux indices mensuels**
 
     Transformez l'indice que vous venez de créer et l'indice du groupe Analyse réglementaire de la réglementation canadienne dans `index_crea` en un indice trimestriel, avec le 1er trimestre 2019 comme période de base, en prenant la moyenne des trois valeurs d'indice de chaque trimestre.
+    
+    ```{r, eval = FALSE}
+my_index <- index_chain %>%
+  filter(province == '0') %>% # keep only the Canada-level index
+  mutate(period = year_quarter(period)) %>%
+  group_by(period) %>%
+  summarize(index = mean(index)) %>%
+  mutate(index = index/index[period == '2019-01-01'] * 100) # rebase to Jan 2019
+    
+index_crea <- index_crea %>%
+  # your code here %>%
+  # your code here %>%
+  # your code here %>%
+  # your code here %>%
+  # your code here %>%
+    
+index_mw <- index_mw %>%
+  # your code here
+    ```
 
 10. **Ajoutez les trois indices ensemble**
 

@@ -1,6 +1,6 @@
 # (PART) Indices de prix de qualité constante {-}
 
-# Programme
+# Programme pour Indices de prix de qualité constante
 
 Un indice des prix devrait mesurer un pur mouvement des prix dans le temps. Dans la pratique, cependant, les biens et services changent avec le temps, ce qui peut contaminer un indice des prix --- sans informations supplémentaires, il n'y a aucun moyen de dissocier un mouvement des prix d'un changement dans la qualité d'un bien ou d'un service.
 
@@ -216,7 +216,7 @@ Le défi avec une approche stratifiée est de trouver le bon équilibre entre ce
 
 Un problème connexe avec la stratification est que, si la stratification se produit pour de nombreuses caractéristiques d'un bien, $X$ peut être de grande dimension. Dans ce cas, la taille des cellules pour chaque strate peut être très petite, et les indices spécifiques à la strate peuvent être très sensibles à l'ajout ou à la suppression de transactions pour un bien. Le chevauchement et la dimensionnalité limitent tous deux la capacité de créer des groupes de biens homogènes pour lesquels il est plus facile de motiver l'indépendance conditionnelle.
 
-## Exemple avec R
+## Exemple avec R: Indice stratifié
 
 Le calcul d'un indice stratifié est simple en pratique. Une bonne façon de le faire est d'utiliser une simple régression linéaire.
 
@@ -331,7 +331,7 @@ Le point à retenir ici est que lorsque les biens sont stratifiés en fonction d
 
 Dans la pratique, le modèle hédonique factice est plus populaire que l'approche d'imputation hédonique, en partie parce qu'il est plus simple, plus facile à calculer et moins gourmand en données. L'inconvénient de l'approche temporelle est qu'elle est plus restrictive et nécessite une hypothèse supplémentaire. Dans la plupart des cas, cependant, les deux approches donnent des résultats similaires.
 
-## Exemple avec R
+## Exemple avec R: Hédonique
 
 Le calcul d'un indice de prix hédonique linéaire est très facile dans R.
 
@@ -425,7 +425,7 @@ exp(weighted.mean(predict(hi1, df) - predict(hi0, df), df$weights)) * 100
 
 ```
 
-# Affectation
+# Affectation 3
 
 Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) lorsque vous avez terminé.
 

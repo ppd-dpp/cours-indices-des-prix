@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Affectation | Un cours sur les indices des prix</title>
+  <title>Affectation 2 | Un cours sur les indices des prix</title>
   <meta name="description" content="Une introduction moderne et simple aux indices des prix" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Affectation | Un cours sur les indices des prix" />
+  <meta property="og:title" content="Affectation 2 | Un cours sur les indices des prix" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="ppd-dpp/cours-indices-des-prix" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Affectation | Un cours sur les indices des prix" />
+  <meta name="twitter:title" content="Affectation 2 | Un cours sur les indices des prix" />
   
   <meta name="twitter:description" content="Une introduction moderne et simple aux indices des prix" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exemple-avec-r-3.html"/>
-<link rel="next" href="programme-3.html"/>
+<link rel="prev" href="inférence-statistique.html"/>
+<link rel="next" href="programme-pour-indices-de-prix-de-qualité-constante.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,12 +49,13 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -63,14 +64,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -129,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Aperçu</a></li>
 <li class="part"><span><b>I Introduction aux indices de prix</b></span></li>
-<li class="chapter" data-level="" data-path="programme.html"><a href="programme.html"><i class="fa fa-check"></i>Programme</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-introduction-aux-indices-de-prix.html"><a href="programme-pour-introduction-aux-indices-de-prix.html"><i class="fa fa-check"></i>Programme pour Introduction aux indices de prix</a></li>
 <li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a><ul>
 <li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix.html"><a href="quest-ce-quun-indice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix?</a></li>
 <li class="chapter" data-level="" data-path="utilisations-dun-indice-des-prix.html"><a href="utilisations-dun-indice-des-prix.html"><i class="fa fa-check"></i>Utilisations d’un indice des prix</a></li>
@@ -141,19 +144,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="indices-arithmétiques-moins-courants.html"><a href="indices-arithmétiques-moins-courants.html"><i class="fa fa-check"></i>Indices arithmétiques moins courants</a></li>
 <li class="chapter" data-level="" data-path="indices-géométriques-des-prix.html"><a href="indices-géométriques-des-prix.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
 <li class="chapter" data-level="" data-path="lindice-fisher.html"><a href="lindice-fisher.html"><i class="fa fa-check"></i>L’indice Fisher</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r.html"><a href="exemple-avec-r.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-formules-dindex.html"><a href="exemple-avec-r-formules-dindex.html"><i class="fa fa-check"></i>Exemple avec R: formules d’index</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a><ul>
 <li class="chapter" data-level="" data-path="sous-indices-et-agrégation.html"><a href="sous-indices-et-agrégation.html"><i class="fa fa-check"></i>Sous-indices et agrégation</a></li>
 <li class="chapter" data-level="" data-path="factorisation-dun-index.html"><a href="factorisation-dun-index.html"><i class="fa fa-check"></i>Factorisation d’un index</a></li>
 <li class="chapter" data-level="" data-path="rebasing.html"><a href="rebasing.html"><i class="fa fa-check"></i>Rebasing</a></li>
 <li class="chapter" data-level="" data-path="chaînage.html"><a href="chaînage.html"><i class="fa fa-check"></i>Chaînage</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-1.html"><a href="exemple-avec-r-1.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html"><i class="fa fa-check"></i>Exemple avec R: Cohérence dans l’agrégation et le rebasage</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation.html"><a href="affectation.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation 1</a></li>
 <li class="part"><span><b>II Théorie de l’indice des prix</b></span></li>
-<li class="chapter" data-level="" data-path="programme-1.html"><a href="programme-1.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-théorie-de-lindice-des-prix.html"><a href="programme-pour-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Programme pour Théorie de l’indice des prix</a></li>
+<li class="chapter" data-level="" data-path="quest-ce-que-la-théorie-de-lindice-des-prix.html"><a href="quest-ce-que-la-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce que la théorie de l’indice des prix?</a></li>
 <li class="chapter" data-level="" data-path="lapproche-axiomatique.html"><a href="lapproche-axiomatique.html"><i class="fa fa-check"></i>L’approche axiomatique</a><ul>
 <li class="chapter" data-level="" data-path="un-indice-de-prix-abstrait.html"><a href="un-indice-de-prix-abstrait.html"><i class="fa fa-check"></i>Un indice de prix abstrait</a></li>
 <li class="chapter" data-level="" data-path="les-axiomes.html"><a href="les-axiomes.html"><i class="fa fa-check"></i>Les axiomes</a></li>
@@ -170,14 +173,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="lapproche-stochastique.html"><a href="lapproche-stochastique.html"><i class="fa fa-check"></i>L’approche stochastique</a><ul>
 <li class="chapter" data-level="" data-path="le-problème-de-prédiction-optimal.html"><a href="le-problème-de-prédiction-optimal.html"><i class="fa fa-check"></i>Le problème de prédiction optimal</a></li>
-<li class="chapter" data-level="" data-path="indices-géométriques-des-prix-1.html"><a href="indices-géométriques-des-prix-1.html"><i class="fa fa-check"></i>Indices géométriques des prix</a></li>
+<li class="chapter" data-level="" data-path="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><a href="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><i class="fa fa-check"></i>Les indices de prix géométriques comme meilleur prédicteur</a></li>
 <li class="chapter" data-level="" data-path="des-indices-de-prix-plus-généraux.html"><a href="des-indices-de-prix-plus-généraux.html"><i class="fa fa-check"></i>Des indices de prix plus généraux</a></li>
 <li class="chapter" data-level="" data-path="inférence-statistique.html"><a href="inférence-statistique.html"><i class="fa fa-check"></i>Inférence statistique</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation-1.html"><a href="affectation-1.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation 2</a></li>
 <li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
-<li class="chapter" data-level="" data-path="programme-2.html"><a href="programme-2.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="programme-pour-indices-de-prix-de-qualité-constante.html"><a href="programme-pour-indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Programme pour Indices de prix de qualité constante</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
@@ -188,17 +191,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
 <li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
 <li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-2.html"><a href="exemple-avec-r-2.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-indice-stratifié.html"><a href="exemple-avec-r-indice-stratifié.html"><i class="fa fa-check"></i>Exemple avec R: Indice stratifié</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
 <li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
 <li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
-<li class="chapter" data-level="" data-path="exemple-avec-r-3.html"><a href="exemple-avec-r-3.html"><i class="fa fa-check"></i>Exemple avec R</a></li>
+<li class="chapter" data-level="" data-path="exemple-avec-r-hédonique.html"><a href="exemple-avec-r-hédonique.html"><i class="fa fa-check"></i>Exemple avec R: Hédonique</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="affectation-2.html"><a href="affectation-2.html"><i class="fa fa-check"></i>Affectation</a></li>
+<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation 3</a></li>
 <li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
-<li class="chapter" data-level="" data-path="programme-3.html"><a href="programme-3.html"><i class="fa fa-check"></i>Programme</a></li>
-<li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation</a><ul>
+<li class="chapter" data-level="" data-path="programme-pour-construire-un-indice-des-prix-avec-r.html"><a href="programme-pour-construire-un-indice-des-prix-avec-r.html"><i class="fa fa-check"></i>Programme pour Construire un indice des prix avec R</a></li>
+<li class="chapter" data-level="" data-path="affectation-4.html"><a href="affectation-4.html"><i class="fa fa-check"></i>Affectation 4</a><ul>
 <li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
 </ul></li>
@@ -221,148 +224,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="affectation-2" class="section level1">
-<h1>Affectation</h1>
+<h1>Affectation 2</h1>
 <p>Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65% (13 sur 20 correct). Envoyez vos réponses par e-mail à l’instructeurs du cours (<a href="mailto:steve.martin5@canada.ca">Steve Martin</a> ou <a href="mailto:rebecca.meier@canada.ca">Rebecca Meier</a>) lorsque vous avez terminé.</p>
-<p><strong>Question 1</strong> Vrai ou faux: l’indice hédonique factice temporel est un estimateur biaisé de l’indice géométrique de qualité constante.</p>
-<p><strong>Question 2</strong> Vrai ou faux: un indice de prix hédonique ne nécessite aucune hypothèse pour être un indice de qualité constante une fois que les caractéristiques des marchandises vendues sont connues.</p>
-<p><strong>Question 3</strong> Un indice hédonique linéaire est égal à l’indice de prix Jevons dans quelles circonstances.</p>
+<p><strong>Question 1</strong> Vrai ou faux: l’indice de Laspeyres est un indice du coût de la vie si les consommateurs ne se substituent pas à des produits plus chers lorsque les prix changent.</p>
+<p><strong>Question 2</strong> Vrai ou faux: le test d’inversion du temps indique qu’un indice des prix entre la période 0 et la période 1 est identique à l’inverse de l’indice des prix entre la période 1 et la période 0.</p>
+<p><strong>Question 3</strong> Quelle est la différence entre les approches économique et axiomatique des indices?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Lorsque les caractéristiques moyennes des biens vendus au cours de la période 1 sont égales aux caractéristiques moyennes des biens vendus au cours de la période 0.</p></li>
-<li><p>Lorsque les conditions de chevauchement sont remplies.</p></li>
-<li><p>Lorsque les paramètres du modèle hédonique ne changent pas avec le temps.</p></li>
-<li><p>a et c.</p></li>
+<li><p>Les prix et les quantités sont indépendants dans l’approche axiomatique et dépendants dans l’approche économique.</p></li>
+<li><p>L’approche économique traite les prix comme fixes, tandis que l’approche axiomatique traite les prix comme aléatoires.</p></li>
+<li><p>L’approche économique consiste en une série de tests basés sur la théorie économique pour évaluer la pertinence d’un numéro d’index, tandis que l’approche axiomatique utilise les axiomes fondamentaux de la théorie des ensembles pour évaluer dans quelle mesure un numéro d’index compare les listes de prix.</p></li>
+<li><p>L’approche axiomatique et l’approche économique sont équivalentes.</p></li>
 <li><p>Aucune de ces réponses.</p></li>
 </ol>
-<p><strong>Question 4</strong> Quel ajustement de qualité nécessite le plus grand nombre d’hypothèses?</p>
+<p><strong>Question 4</strong> Quels poids l’indice Palgrave utilise-t-il pour agréger les prix relatifs entre la période 0 et la période 1?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Stratification.</p></li>
-<li><p>Hédonique utilisant l’approche des caractéristiques.</p></li>
-<li><p>Hédonique utilisant l’approche temps-factice.</p></li>
-<li><p>Hédonique utilisant l’approche de la double imputation.</p></li>
-</ol>
-<p><strong>Question 5</strong> Vrai ou faux: un indice de vente répétée peut être motivé / dérivé comme un type d’indice hédonique.</p>
-<p><strong>Question 6</strong> La taille du contenant pour la nourriture pour chat de saumon a diminué entre la période 0 et la période 1 dans les exemples avec R pour les indices de prix hédoniques. Si les autres types d’aliments pour chats sont restés les mêmes, que dire des indices hédoniques?</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Ils surestiment la baisse des prix entre la période 0 et la période 1.</p></li>
-<li><p>Ils sous-estiment l’augmentation des prix entre la période 0 et la période 1.</p></li>
-<li><p>Ils surestiment la hausse des prix entre la période 0 et la période 1.</p></li>
-<li><p>Le modèle hédonique sous-estime l’augmentation et le modèle stratifié surévalue l’augmentation.</p></li>
+<li><p>Part des dépenses / recettes de la période 0.</p></li>
+<li><p>Part des dépenses / recettes de la période 1.</p></li>
+<li><p>La moyenne géométrique des parts des dépenses / recettes de la période 0 et de la période 1.</p></li>
+<li><p>La moyenne harmonique des parts des dépenses / recettes de la période 0 et de la période 1.</p></li>
 <li><p>Aucune de ces réponses.</p></li>
 </ol>
-<p>Les quatre questions suivantes concernent le type d’ajustement de qualité suivant. Une stratégie courante pour construire un indice de qualité constante lorsque l’emballage d’un produit change consiste à diviser le prix par la taille de l’emballagE(par exemple, le prix par litre de savon à vaisselle), de sorte que le prix relatif du produit <span class="math inline">\(i\)</span> devienne <span class="math inline">\(p_{i1} / p_{i0} \times s_{i0} / s_{i1}\)</span>, où <span class="math inline">\(s_{it}\)</span> est la taille du paquet dans la période <span class="math inline">\(t\)</span>. Un indice basé sur cette approche peut être calculé avec une régression linéaire, comme</p>
-<p><span class="math display">\[\begin{align*}
-E(\rho | i, s, t) = \alpha_i + t \log(I) + \log(s).
-\end{align*}\]</span></p>
-<p><strong>Question 7</strong> Vrai ou faux: l’ajustement du prix en fonction de la taille de l’emballage est un type d’index hédonique factice.</p>
-<p><strong>Question 8</strong> Quelle est l’hypothèse d’indépendance conditionnelle qui fait fonctionner cet ajustement de la qualité?</p>
+<p><strong>Question 5</strong> Vrai ou faux: l’indice de Fisher est hautement considéré comme un numéro d’index car il satisfait aux axiomes les plus importants et correspond toujours à un indice du coût de la vie.</p>
+<p><strong>Question 6</strong> Vrai ou faux: le test d’inversion du temps indique qu’un indice de prix et un indice de quantité ont la même forme fonctionnelle.</p>
+<p><strong>Question 7</strong> Quel axiome l’indice Dutot ne satisfait-il pas?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>La seule différence entre le même produit pendant la période 0 et la période 1 est la taille de l’emballage.</p></li>
-<li><p>Les produits de la période 1 sont un bon contrefactuel pour les produits de la période 0.</p></li>
-<li><p>Chaque produit se vend au cours des deux périodes.</p></li>
-<li><p>La seule différence entre les produits au fil du temps est due à la taille de l’emballage.</p></li>
-<li><p>L’indépendance conditionnelle n’est pas nécessaire.</p></li>
+<li><p>Monotonie.</p></li>
+<li><p>Continuité.</p></li>
+<li><p>Invariance dimensionnelle.</p></li>
+<li><p>Circularité.</p></li>
+<li><p>Aucune de ces réponses.</p></li>
 </ol>
-<p><strong>Question 9</strong> Quelle hypothèse supplémentaire est faite pour que le simple fait de diviser le prix par la taille de l’emballage s’adapte aux changements de qualité, plutôt que d’avoir à estimer le modèle hédonique?</p>
+<p><strong>Question 8</strong> Vrai ou faux: il est impossible qu’un indice géométrique de Laspeyres soit un indice du coût de la vie.</p>
+<p><strong>Question 9</strong> Quel type d’indice faut-il utiliser pour calculer un indice de quantité de Laspeyres en dégonflant la variation de la valeur globale entre deux périodes?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Les paramètres du modèle hédonique ne changent pas avec le temps.</p></li>
-<li><p>L’erreur est que le modèle hédonique est homoscédastique.</p></li>
-<li><p>L’élasticité entre le prix et la taille de l’emballage est de un.</p></li>
-<li><p>Aucune hypothèse supplémentaire n’est faite.</p></li>
+<li><p>Indice de Palgrave.</p></li>
+<li><p>Indice de Laspeyres.</p></li>
+<li><p>Indice de Paasche.</p></li>
+<li><p>Indice de Fisher.</p></li>
+<li><p>Indice géométrique de Laspeyres.</p></li>
 </ol>
-<p><strong>Question 10</strong> Quelle est l’hypothèse de chevauchement requise pour calculer cet indice?</p>
+<p><strong>Question 10</strong> Vrai ou faux: l’indice de Jevons est un estimateur biaisé de l’indice géométrique dans la population sous échantillonnage aléatoire.</p>
+<p>Les 4 questions suivantes utilisent les données du tableau suivant qui contiennent une population de trois parents de prix, chacun avec une probabilité égale, et tous les échantillons possibles de cette population.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Population des parents de prix</th>
+<th>Échantillon 1</th>
+<th>Échantillon 2</th>
+<th>Échantillon 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.2</td>
+<td>1.2</td>
+<td>1.2</td>
+<td>1.1</td>
+</tr>
+<tr class="even">
+<td>1.1</td>
+<td>1.1</td>
+<td>1,35</td>
+<td>1,35</td>
+</tr>
+<tr class="odd">
+<td>1,35</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Question 11</strong> Quelle est la valeur de l’indice géométrique dans la population?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Une transaction doit avoir lieu pour chaque combinaison de taille de produit-emballage dans la période 0 et la période 1.</p></li>
-<li><p>Chaque produit doit être vendu dans les deux périodes.</p></li>
-<li><p>Chaque produit doit être vendu dans les deux périodes et la taille de l’emballage doit changer pour au moins un produit.</p></li>
-<li><p>Aucune hypothèse de chevauchement n’est nécessaire.</p></li>
+<li><p>121,2</p></li>
+<li><p>100</p></li>
+<li><p>120,5</p></li>
+<li><p>129,8</p></li>
+<li><p>98,7</p></li>
 </ol>
-<p><strong>Question 11</strong> Vrai ou faux: les indices de prix d’imputation temporelle et factice hédonique donnent toujours des valeurs différentes.</p>
-<p>Les deux questions suivantes portent sur une variation de l’indice hédonique factice en fonction des médianes conditionnelles, de sorte que <span class="math inline">\(\text{med}(\rho | X, t) = \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X \beta\)</span>. Avec l’indépendance conditionnelle, <span class="math inline">\(\alpha_{1} - \alpha_{0} = \log(\text{med}(p(1)) / \text{med}(p(0)))\)</span>.</p>
-<p><strong>Question 12</strong> Pourquoi l’indice de l’indice temporel médian est-il une mauvaise mesure pour un indice de qualité constante?</p>
+<p><strong>Question 12</strong> Quelle est la valeur moyenne (arithmétique) des indices de Jevons dans chaque échantillon?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Il compare ce que le produit médian de la période 1 se vendrait au cours de la période 1 à ce que le produit médian de la période 0 se vendrait au cours de la période 0, et ne compare donc pas les mêmes biens au fil du temps.</p></li>
-<li><p>Il s’agit d’un estimateur biaisé d’un indice de qualité constante.</p></li>
-<li><p>Il n’est pas possible de construire un estimateur du maximum de vraisemblance pour un indice basé sur les médianes.</p></li>
-<li><p>Il ne satisfait pas l’axiome de monotonie de l’approche axiomatique des indices de prix.</p></li>
-<li><p>Il n’y a rien de mal à l’index temporel médian.</p></li>
+<li><p>121,2</p></li>
+<li><p>119,4</p></li>
+<li><p>121,3</p></li>
+<li><p>100</p></li>
+<li><p>123,1</p></li>
 </ol>
-<p><strong>Question 13</strong> Vrai ou faux: étant donné que la médiane est moins sensible aux valeurs aberrantes que la moyenne, l’indice médian temps factice trouve application dans les paramètres où il peut y avoir des observations de prix aberrantes.</p>
-<p>Les quatre questions suivantes utilisent les données suivantes sur les transactions pour deux produits sur deux périodes.</p>
+<p><strong>Question 13</strong> Quelle est la valeur du biais dans l’indice de Jevons?</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>0</p></li>
+<li><p>-0,2</p></li>
+<li><p>0,1</p></li>
+<li><p>0,8</p></li>
+<li><p>-1,3</p></li>
+</ol>
+<p><strong>Question 14</strong> Quelle est la valeur du biais dans l’indice Carli?</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>1,1</p></li>
+<li><p>-0,4</p></li>
+<li><p>-0,2</p></li>
+<li><p>0,7</p></li>
+<li><p>0</p></li>
+</ol>
+<p><strong>Question 15</strong> Vrai ou faux: si un consommateur représentatif a une fonction d’utilité d’élasticité de substitution constante, l’ampleur du biais de substitution augmente à mesure que l’élasticité de substitution augmente.</p>
+<p>Les quatre questions suivantes utilisent les données du tableau suivant qui contiennent des informations sur les prix et les quantités pour deux entrées sur deux périodes, ainsi qu’un véritable indice des prix des entrées.</p>
 <table>
 <thead>
 <tr class="header">
 <th>Période</th>
-<th>Produit</th>
 <th>Prix 1</th>
 <th>Prix 2</th>
-<th>Prix 3</th>
+<th>Quantité 1</th>
+<th>Quantité 2</th>
+<th>Indice des prix des intrants</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>0</td>
-<td>A</td>
-<td>2</td>
-<td>2</td>
-<td>…</td>
+<td>100</td>
+<td>60</td>
+<td>141</td>
+<td>391</td>
+<td>100,0</td>
 </tr>
 <tr class="even">
 <td>1</td>
-<td>A</td>
-<td>1</td>
-<td>2</td>
-<td>…</td>
-</tr>
-<tr class="odd">
-<td>0</td>
-<td>B</td>
-<td>4</td>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>B</td>
-<td>2</td>
-<td>4</td>
-<td>8</td>
+<td>120</td>
+<td>80</td>
+<td>160</td>
+<td>360</td>
+<td>128,0</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Question 14</strong> Quelle est la valeur de l’indice Jevons lorsque toutes les informations sur les prix sont regroupées pour les deux périodes?</p>
+<p><strong>Question 16</strong> Quelle est la valeur de l’indice de Laspeyres?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>100</p></li>
-<li><p>98,3</p></li>
-<li><p>104,7</p></li>
-<li><p>106,4</p></li>
-<li><p>89,8</p></li>
+<li><p>101,0</p></li>
+<li><p>133,3</p></li>
+<li><p>128,0</p></li>
+<li><p>128,3</p></li>
+<li><p>99,3</p></li>
 </ol>
-<p><strong>Question 15</strong> Quelle est la valeur de l’indice stratifié, où chaque produit appartient à une strate distincte et toutes les strates ont un poids égal, calculé à l’aide d’un indice de Jevons?</p>
+<p><strong>Question 17</strong> Quelle est la valeur de l’indice de Paasche?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>104,7</p></li>
-<li><p>98,3</p></li>
-<li><p>84,1</p></li>
-<li><p>110,6</p></li>
-<li><p>101,3</p></li>
+<li><p>127,7</p></li>
+<li><p>131,2</p></li>
+<li><p>101,0</p></li>
+<li><p>99,1</p></li>
+<li><p>130,0</p></li>
 </ol>
-<p><strong>Question 16</strong> Pourquoi l’indice stratifié montre-t-il une baisse des prix alors que l’indice groupé montre une augmentation des prix?</p>
+<p><strong>Question 18</strong> Quelle est la valeur de l’indice Jevons?</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>L’indice groupé est un indice de qualité constante, tandis que l’indice stratifié est biaisé
-vers le bas.</p></li>
-<li><p>L’indice groupé utilise toutes les données sur les prix, contrairement à l’indice stratifié.</p></li>
-<li><p>Le produit B se vend à un prix plus élevé que le produit A, et relativement plus de produit B
-vendu au cours de la période 2, mais uniquement le produit Un prix modifié au cours de la période 2</p></li>
-<li><p>Aucune de ces réponses.</p></li>
+<li><p>120,1</p></li>
+<li><p>128,2</p></li>
+<li><p>99,0</p></li>
+<li><p>126,5</p></li>
+<li><p>98,4</p></li>
 </ol>
-<p><strong>Question 17</strong> Vrai ou faux: si chaque produit ne change pas dans le temps, l’indice stratifié est un indice de qualité constante.</p>
-<p><strong>Question 18</strong> Vrai ou faux: l’indice de répétition des ventes est un type d’indice de modèle apparié.</p>
-<p><strong>Question 19</strong> Vrai ou faux: il est possible de mélanger la stratification avec l’hédonique pour détendre le chevauchement.</p>
-<p><strong>Question 20</strong> On peut montrer que</p>
-<p><span class="math display">\[\begin{align*}
-\underbrace{E(\rho | t = 1) - E(\rho | t = 0)}_{\text{indice des prix de transaction}} =&amp; \underbrace{E(\rho(1) | t = 0 ) - E(\rho(0) | t = 0)}_{\text{Indice de qualité constante semblable à Laspeyres}} \\
-&amp; + \underbrace{E(\rho(1) | t = 1) - E(\rho(1) | t = 0)}_{\text{biais de sélection}}.
-\end{align*}\]</span></p>
-<p>Vrai ou faux: les prix potentiels de la période 0 étant-ils corrélés avec le temps, de sorte que les produits vendus au cours de la période 1 se seraient vendus moins cher au cours de la période 0 que les produits vendus à la période 0, affecter l’utilisation des prix de transaction pour identifier une constante de type Laspeyres -indice de qualité?</p>
+<p><strong>Question 19</strong> Vrai ou faux: l’indice Jevons calculé à la question 18 est plus proche de l’indice des prix des intrants que l’indice Fisher.</p>
+<p><strong>Question 20</strong> Vrai ou faux: il est possible de construire un indice des prix des intrants pour une entreprise qui détient un pouvoir de marché pour les produits qu’elle vend.</p>
 
 </div>
 
@@ -373,8 +395,8 @@ vendu au cours de la période 2, mais uniquement le produit Un prix modifié au 
           </div>
         </div>
       </div>
-<a href="exemple-avec-r-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="programme-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="inférence-statistique.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programme-pour-indices-de-prix-de-qualité-constante.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

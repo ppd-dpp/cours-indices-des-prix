@@ -1,6 +1,6 @@
 # (PART) Introduction aux indices de prix{-}
 
-# Programme
+# Programme pour Introduction aux indices de prix
 
 Un indice des prix permet de condenser systématiquement les informations sur de nombreux prix pour une gamme de produits et services en une seule valeur. Les indices des prix sont largement utilisés pour analyser et comparer les conditions macroéconomiques dans le temps et ont des implications importantes pour les politiques gouvernementales.
 
@@ -290,7 +290,7 @@ I_{F} &= \sqrt{\frac{\sum_{i = 1}^{n} p_{i1} q_{i0}}{\sum_{i = 1}^{n} p_{i0} q_{
 
 L'indice Fisher est souvent considéré comme un indice idéal car il traite symétriquement les informations de la période 0 et de la période 1.^[L'indice Törnqvist est également considéré comme idéal pour une raison similaire, et ces types d'indices sont souvent appelés superlatifs.] En pratique cependant, l'indice de Fisher n'est pas fréquemment utilisé par les organismes statistiques nationaux car il n'est pas opportun de le calculer. En effet, cela dépend de l'indice de Paasche, qui nécessite des informations sur les quantités de la période 1 en plus des prix de la période 1, ce qui a été historiquement impossible à collecter pour les organismes statistiques nationaux.
 
-## Exemple avec R
+## Exemple avec R: formules d'index
 
 Toutes les formules de l'indice-nombre présentées dans cette section sont simplement des moyennes pondérées et sont assez faciles à calculer dans R étant donné les informations sur les prix et certains poids.
 
@@ -305,12 +305,10 @@ relatives <- c(1.1, 1.2, 0.9, 1.1)
 weights <- c (0.25, 0.3, 0.3, 0.15)
 
 # Calculer les indices
-c(
-  Carli = mean_arithmetic(relatives),
+c(Carli = mean_arithmetic(relatives),
   Jevons = mean_geometric(relatives),
   Arithmétique = mean_arithmetic(relatives, weights),
-  Géométrique = mean_geometric(relatives, weights)
-)
+  Géométrique = mean_geometric(relatives, weights))
 ```
 
 Le type d'indices arithmétiques et géométriques que cela calcule dépend entièrement de la façon dont les poids sont calculés. Habituellement, les pondérations proviennent des données sur les parts des dépenses / recettes, et la manière dont ces informations sont utilisées pour pondérer les prix relatifs affectera le type d'indice de prix calculé.
@@ -323,14 +321,13 @@ share0 <- c (0.25, 0.3, 0.3, 0.15)
 share1 <- c (0.2, 0.2, 0.4, 0.2)
 
 # Calculer les indices
-c(
-  Laspeyres = mean_arithmetic(relatives, share0),
+c(Laspeyres = mean_arithmetic(relatives, share0),
   Paasche = mean_harmonic(relatives, share1),
-  Fisher = sqrt(mean_arithmetic(relatives, share0) * mean_harmonic(relatives, share1)),
+  Fisher = sqrt(mean_arithmetic(relatives, share0) * 
+                  mean_harmonic(relatives, share1)),
   `Géométrique Laspeyres` = mean_geometric(relatives, share0),
   `Géométrique Paasche` = mean_geometric(relatives, share1),
-  Tornqvist = mean_geometric(relatives, (share0 + share1) / 2)
-)
+  Tornqvist = mean_geometric(relatives, (share0 + share1) / 2))
 ```
 
 Il est intéressant de noter que tout indice géométrique peut être transformé en indice arithmétique par un changement approprié de poids. Cela permet de déterminer facilement la contribution de chaque prix relatif à la valeur de l'indice.
@@ -340,7 +337,7 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 mean_geometric(relatives, (share0 + share1) / 2) 
 
 # Changer les poids
-new_weights <- weights_g2a(relatives, (share0 + share1) / 2)
+new_weights <- weights_transmute(0, 1)(relatives, (share0 + share1) / 2)
 mean_arithmetic(relatives, new_weights) # same as geometric mean
 
 # Contribution de chaque relative
@@ -529,7 +526,7 @@ ggplot(dat) +
 
 La partie importante d'un indice chaîné est la période de chevauchement $k$ lorsque les pondérations changent et les prix de la période $k$ sont utilisés avec deux ensembles de pondérations. S'il n'y a pas de période de chevauchement, alors l'index ne peut pas être enchaîné. Chaque indice peut être considéré comme un maillon de la chaîne, donnant le mouvement des prix pour cette partie du temps, et la période de chevauchement est l'endroit où les maillons se rencontrent.
 
-## Exemple avec R
+## Exemple avec R: Cohérence dans l'agrégation et le rebasage
 
 Il est utile de terminer cette section du cours avec quelques exemples dans R. Le premier exemple montre qu'un indice géométrique est cohérent dans l'agrégation. Le calcul de l'indice en deux étapes donne la même réponse que le calcul direct.
 
@@ -540,14 +537,12 @@ library(gpindex)
 # Faites des prix apparentés
 dat <- data.frame(relative = c(1.1, 1.2, 0.9, 1.1),
                   weight = c(0.25, 0.3, 0.3, 0.15),
-                  group = letters[c(1, 1, 2, 2)]
-)
+                  group = letters[c(1, 1, 2, 2)])
 dat
 
 # Calculer l'indice géométrique pour les parents des groupes a et b
 index_ab <- sapply(split(dat, dat$group), 
-                   function(x) mean_geometric(x$relative, x$weight) * 100
-                   )
+                   function(x) mean_geometric(x$relative, x$weight) * 100)
 index_ab
 
 
@@ -570,7 +565,7 @@ index
 transform(index, value = value / value[period == 6] * 100)
 ```
 
-# Affectation
+# Affectation 1
 
 Les réponses à ces questions proviennent à la fois du contenu du cours et des lectures. Chaque question vaut un point, pour un total de 20 points. La réussite de ce module nécessite au moins 65% (13 sur 20 correct). Envoyez vos réponses par e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) lorsque vous avez terminé.
 
