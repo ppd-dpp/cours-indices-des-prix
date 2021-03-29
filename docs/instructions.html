@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Instructions | Un cours sur les indices des prix</title>
   <meta name="description" content="Une introduction moderne et simple aux indices des prix" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Instructions | Un cours sur les indices des prix" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="méthodologie.html"/>
 <link rel="next" href="références.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,22 +50,21 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -84,7 +84,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -133,12 +133,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Aperçu</a></li>
 <li class="part"><span><b>I Introduction aux indices de prix</b></span></li>
 <li class="chapter" data-level="" data-path="programme-pour-introduction-aux-indices-de-prix.html"><a href="programme-pour-introduction-aux-indices-de-prix.html"><i class="fa fa-check"></i>Programme pour Introduction aux indices de prix</a></li>
-<li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a><ul>
+<li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a>
+<ul>
 <li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix.html"><a href="quest-ce-quun-indice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix?</a></li>
 <li class="chapter" data-level="" data-path="utilisations-dun-indice-des-prix.html"><a href="utilisations-dun-indice-des-prix.html"><i class="fa fa-check"></i>Utilisations d’un indice des prix</a></li>
 <li class="chapter" data-level="" data-path="pourquoi-un-indice-des-prix.html"><a href="pourquoi-un-indice-des-prix.html"><i class="fa fa-check"></i>Pourquoi un indice des prix?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="formule-de-numéro-dindex.html"><a href="formule-de-numéro-dindex.html"><i class="fa fa-check"></i>Formule de numéro d’index</a><ul>
+<li class="chapter" data-level="" data-path="formule-de-numéro-dindex.html"><a href="formule-de-numéro-dindex.html"><i class="fa fa-check"></i>Formule de numéro d’index</a>
+<ul>
 <li class="chapter" data-level="" data-path="indices-arithmétiques-des-prix.html"><a href="indices-arithmétiques-des-prix.html"><i class="fa fa-check"></i>Indices arithmétiques des prix</a></li>
 <li class="chapter" data-level="" data-path="indices-arithmétiques-communs.html"><a href="indices-arithmétiques-communs.html"><i class="fa fa-check"></i>Indices arithmétiques communs</a></li>
 <li class="chapter" data-level="" data-path="indices-arithmétiques-moins-courants.html"><a href="indices-arithmétiques-moins-courants.html"><i class="fa fa-check"></i>Indices arithmétiques moins courants</a></li>
@@ -146,7 +148,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="lindice-fisher.html"><a href="lindice-fisher.html"><i class="fa fa-check"></i>L’indice Fisher</a></li>
 <li class="chapter" data-level="" data-path="exemple-avec-r-formules-dindex.html"><a href="exemple-avec-r-formules-dindex.html"><i class="fa fa-check"></i>Exemple avec R: formules d’index</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a><ul>
+<li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a>
+<ul>
 <li class="chapter" data-level="" data-path="sous-indices-et-agrégation.html"><a href="sous-indices-et-agrégation.html"><i class="fa fa-check"></i>Sous-indices et agrégation</a></li>
 <li class="chapter" data-level="" data-path="factorisation-dun-index.html"><a href="factorisation-dun-index.html"><i class="fa fa-check"></i>Factorisation d’un index</a></li>
 <li class="chapter" data-level="" data-path="rebasing.html"><a href="rebasing.html"><i class="fa fa-check"></i>Rebasing</a></li>
@@ -157,7 +160,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>II Théorie de l’indice des prix</b></span></li>
 <li class="chapter" data-level="" data-path="programme-pour-théorie-de-lindice-des-prix.html"><a href="programme-pour-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Programme pour Théorie de l’indice des prix</a></li>
 <li class="chapter" data-level="" data-path="quest-ce-que-la-théorie-de-lindice-des-prix.html"><a href="quest-ce-que-la-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce que la théorie de l’indice des prix?</a></li>
-<li class="chapter" data-level="" data-path="lapproche-axiomatique.html"><a href="lapproche-axiomatique.html"><i class="fa fa-check"></i>L’approche axiomatique</a><ul>
+<li class="chapter" data-level="" data-path="lapproche-axiomatique.html"><a href="lapproche-axiomatique.html"><i class="fa fa-check"></i>L’approche axiomatique</a>
+<ul>
 <li class="chapter" data-level="" data-path="un-indice-de-prix-abstrait.html"><a href="un-indice-de-prix-abstrait.html"><i class="fa fa-check"></i>Un indice de prix abstrait</a></li>
 <li class="chapter" data-level="" data-path="les-axiomes.html"><a href="les-axiomes.html"><i class="fa fa-check"></i>Les axiomes</a></li>
 <li class="chapter" data-level="" data-path="exemples-de-compteur.html"><a href="exemples-de-compteur.html"><i class="fa fa-check"></i>Exemples de compteur</a></li>
@@ -165,13 +169,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="un-résultat-impossible.html"><a href="un-résultat-impossible.html"><i class="fa fa-check"></i>Un résultat impossible</a></li>
 <li class="chapter" data-level="" data-path="motiver-les-indices-jevons-et-laspeyres.html"><a href="motiver-les-indices-jevons-et-laspeyres.html"><i class="fa fa-check"></i>Motiver les indices Jevons et Laspeyres</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="lapproche-économique.html"><a href="lapproche-économique.html"><i class="fa fa-check"></i>L’approche économique</a><ul>
+<li class="chapter" data-level="" data-path="lapproche-économique.html"><a href="lapproche-économique.html"><i class="fa fa-check"></i>L’approche économique</a>
+<ul>
 <li class="chapter" data-level="" data-path="indice-des-prix-des-intrants.html"><a href="indice-des-prix-des-intrants.html"><i class="fa fa-check"></i>Indice des prix des intrants</a></li>
 <li class="chapter" data-level="" data-path="indice-des-prix-à-la-production.html"><a href="indice-des-prix-à-la-production.html"><i class="fa fa-check"></i>Indice des prix à la production</a></li>
 <li class="chapter" data-level="" data-path="indice-du-coût-de-la-vie.html"><a href="indice-du-coût-de-la-vie.html"><i class="fa fa-check"></i>Indice du coût de la vie</a></li>
 <li class="chapter" data-level="" data-path="approximation-dun-indice-économique.html"><a href="approximation-dun-indice-économique.html"><i class="fa fa-check"></i>Approximation d’un indice économique</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="lapproche-stochastique.html"><a href="lapproche-stochastique.html"><i class="fa fa-check"></i>L’approche stochastique</a><ul>
+<li class="chapter" data-level="" data-path="lapproche-stochastique.html"><a href="lapproche-stochastique.html"><i class="fa fa-check"></i>L’approche stochastique</a>
+<ul>
 <li class="chapter" data-level="" data-path="le-problème-de-prédiction-optimal.html"><a href="le-problème-de-prédiction-optimal.html"><i class="fa fa-check"></i>Le problème de prédiction optimal</a></li>
 <li class="chapter" data-level="" data-path="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><a href="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><i class="fa fa-check"></i>Les indices de prix géométriques comme meilleur prédicteur</a></li>
 <li class="chapter" data-level="" data-path="des-indices-de-prix-plus-généraux.html"><a href="des-indices-de-prix-plus-généraux.html"><i class="fa fa-check"></i>Des indices de prix plus généraux</a></li>
@@ -181,19 +187,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
 <li class="chapter" data-level="" data-path="programme-pour-indices-de-prix-de-qualité-constante.html"><a href="programme-pour-indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Programme pour Indices de prix de qualité constante</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
+<li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a>
+<ul>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
 <li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>Identification</a></li>
 <li class="chapter" data-level="" data-path="exemple.html"><a href="exemple.html"><i class="fa fa-check"></i>Exemple</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="indices-de-prix-stratifiés.html"><a href="indices-de-prix-stratifiés.html"><i class="fa fa-check"></i>Indices de prix stratifiés</a><ul>
+<li class="chapter" data-level="" data-path="indices-de-prix-stratifiés.html"><a href="indices-de-prix-stratifiés.html"><i class="fa fa-check"></i>Indices de prix stratifiés</a>
+<ul>
 <li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
 <li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
 <li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
 <li class="chapter" data-level="" data-path="exemple-avec-r-indice-stratifié.html"><a href="exemple-avec-r-indice-stratifié.html"><i class="fa fa-check"></i>Exemple avec R: Indice stratifié</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
+<li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a>
+<ul>
 <li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
 <li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
 <li class="chapter" data-level="" data-path="exemple-avec-r-hédonique.html"><a href="exemple-avec-r-hédonique.html"><i class="fa fa-check"></i>Exemple avec R: Hédonique</a></li>
@@ -201,7 +210,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation 3</a></li>
 <li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
 <li class="chapter" data-level="" data-path="programme-pour-construire-un-indice-des-prix-avec-r.html"><a href="programme-pour-construire-un-indice-des-prix-avec-r.html"><i class="fa fa-check"></i>Programme pour Construire un indice des prix avec R</a></li>
-<li class="chapter" data-level="" data-path="affectation-4.html"><a href="affectation-4.html"><i class="fa fa-check"></i>Affectation 4</a><ul>
+<li class="chapter" data-level="" data-path="affectation-4.html"><a href="affectation-4.html"><i class="fa fa-check"></i>Affectation 4</a>
+<ul>
 <li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
 </ul></li>
@@ -227,96 +237,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Instructions</h2>
 <p>Ces instructions décrivent un moyen simple de construire l’indice des prix des widgets, mais n’hésitez pas à utiliser une approche différente si c’est plus facile. Le but est de comprendre le processus, plutôt que de concevoir le système le plus efficace en termes de calcul.</p>
 <p>Exécutez le code suivant pour récupérer tous les fichiers de données et les mettre dans votre environnement de travail. Notez que ces données ne sont pas parfaites. N’oubliez pas de vérifier vos calculs intermédiaires pour vous assurer que tout est comme prévu (par exemple, avec la fonction <code>summary</code>).</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="instructions.html#cb43-1"></a><span class="kw">source</span> (<span class="st">&#39;https://raw.githubusercontent.com/ppd-dpp/cours-indices-des-prix/master/scripts/get_data.R&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="instructions.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span> (<span class="st">&#39;https://raw.githubusercontent.com/ppd-dpp/cours-indices-des-prix/master/scripts/get_data.R&#39;</span>)</span></code></pre></div>
 <p>Le <a href="https://cran.r-project.org/package=dplyr">dplyr</a>, <a href="https://cran.r-project.org/package=tidyr">tidyr</a>, <a href="https:%20/%20/cran.r-project.org/package=gpindex">gpindex</a> et les packages <a href="https://github.com/ppd-dpp/calpr">calpr</a> seront utilisés dans ce module. Installez-les comme suit s’ils ne sont pas déjà installés. (Astuce: il vaut la peine de parcourir la documentation dans les packages <code>gpindex</code> et<code>calpr</code>.)</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="instructions.html#cb44-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;gpindex&quot;</span>, <span class="st">&quot;devtools&quot;</span>))</span>
-<span id="cb44-2"><a href="instructions.html#cb44-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ppd-dpp/calpr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="instructions.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;gpindex&quot;</span>, <span class="st">&quot;devtools&quot;</span>))</span>
+<span id="cb44-2"><a href="instructions.html#cb44-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ppd-dpp/calpr&quot;</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><p><strong>Faites les poids</strong></p>
 <p>À l’aide du fichier «poids», créez un ensemble de poids qui donne la part de valeur de chaque produit vendu dans chaque province chaque année, et un autre qui donne la part de valeur de tous les produits vendus dans chaque province chaque année. Ce premier ensemble de poids sera utilisé pour agréger les indices élémentaires pour obtenir 10 indices au niveau de la province, et le deuxième ensemble de poids sera utilisé pour agréger les indices au niveau de la province en un indice national. Il devrait y avoir 200 poids dans le premier fichier et 20 poids dans le second fichier.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="instructions.html#cb45-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb45-2"><a href="instructions.html#cb45-2"></a><span class="kw">library</span>(tidyr)</span>
-<span id="cb45-3"><a href="instructions.html#cb45-3"></a><span class="kw">library</span>(gpindex)</span>
-<span id="cb45-4"><a href="instructions.html#cb45-4"></a><span class="kw">library</span>(calpr)</span>
-<span id="cb45-5"><a href="instructions.html#cb45-5"></a></span>
-<span id="cb45-6"><a href="instructions.html#cb45-6"></a><span class="co"># Make provincial weights</span></span>
-<span id="cb45-7"><a href="instructions.html#cb45-7"></a>weights_prov &lt;-<span class="st"> </span>weights <span class="op">%&gt;%</span></span>
-<span id="cb45-8"><a href="instructions.html#cb45-8"></a><span class="st">  </span><span class="kw">group_by</span>(year, province) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># group all sales values by reference year and province</span></span>
-<span id="cb45-9"><a href="instructions.html#cb45-9"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">weight =</span> <span class="kw">sum</span>(weight)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># value of all sales in each province in each year</span></span>
-<span id="cb45-10"><a href="instructions.html#cb45-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">share_prov =</span> <span class="kw">weights_scale</span>(weight)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># scale to sum to 1</span></span>
-<span id="cb45-11"><a href="instructions.html#cb45-11"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>weight) <span class="co"># drop the weight column as it won&#39;t be needed again</span></span>
-<span id="cb45-12"><a href="instructions.html#cb45-12"></a></span>
-<span id="cb45-13"><a href="instructions.html#cb45-13"></a><span class="co"># Make product weights</span></span>
-<span id="cb45-14"><a href="instructions.html#cb45-14"></a>weights_prod &lt;-<span class="st"> </span>weights <span class="op">%&gt;%</span></span>
-<span id="cb45-15"><a href="instructions.html#cb45-15"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb45-16"><a href="instructions.html#cb45-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">share_prod =</span> <span class="kw">weights_scale</span>(weight)) <span class="op">%&gt;%</span></span>
-<span id="cb45-17"><a href="instructions.html#cb45-17"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>weight)</span></code></pre></div></li>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="instructions.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb45-2"><a href="instructions.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb45-3"><a href="instructions.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gpindex)</span>
+<span id="cb45-4"><a href="instructions.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calpr)</span>
+<span id="cb45-5"><a href="instructions.html#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="instructions.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Make provincial weights</span></span>
+<span id="cb45-7"><a href="instructions.html#cb45-7" aria-hidden="true" tabindex="-1"></a>weights_prov <span class="ot">&lt;-</span> weights <span class="sc">%&gt;%</span></span>
+<span id="cb45-8"><a href="instructions.html#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, province) <span class="sc">%&gt;%</span> <span class="co"># group all sales values by reference year and province</span></span>
+<span id="cb45-9"><a href="instructions.html#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">weight =</span> <span class="fu">sum</span>(weight)) <span class="sc">%&gt;%</span> <span class="co"># value of all sales in each province in each year</span></span>
+<span id="cb45-10"><a href="instructions.html#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">share_prov =</span> <span class="fu">weights_scale</span>(weight)) <span class="sc">%&gt;%</span> <span class="co"># scale to sum to 1</span></span>
+<span id="cb45-11"><a href="instructions.html#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>weight) <span class="co"># drop the weight column as it won&#39;t be needed again</span></span>
+<span id="cb45-12"><a href="instructions.html#cb45-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-13"><a href="instructions.html#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Make product weights</span></span>
+<span id="cb45-14"><a href="instructions.html#cb45-14" aria-hidden="true" tabindex="-1"></a>weights_prod <span class="ot">&lt;-</span> weights <span class="sc">%&gt;%</span></span>
+<span id="cb45-15"><a href="instructions.html#cb45-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb45-16"><a href="instructions.html#cb45-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">share_prod =</span> <span class="fu">weights_scale</span>(weight)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-17"><a href="instructions.html#cb45-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>weight)</span></code></pre></div></li>
 <li><p><strong>Calculez la géomée du produit K</strong></p>
 <p>En utilisant les microdonnées pour le produit K dans le fichier <code>dat_micro</code>, calculez la moyenne géométrique des prix dans chaque province pour chaque mois de chaque année de référence. Ce fichier devrait contenir 250 géomées.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="instructions.html#cb46-1"></a>dat_micro &lt;-<span class="st"> </span>dat_micro <span class="op">%&gt;%</span></span>
-<span id="cb46-2"><a href="instructions.html#cb46-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">period =</span> <span class="kw">year_month</span>(period)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># turn transaction dates into month-by-year dates</span></span>
-<span id="cb46-3"><a href="instructions.html#cb46-3"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb46-4"><a href="instructions.html#cb46-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">geomean =</span> <span class="kw">mean_geometric</span>(price)) <span class="co"># calculate the geometric avergage</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="instructions.html#cb46-1" aria-hidden="true" tabindex="-1"></a>dat_micro <span class="ot">&lt;-</span> dat_micro <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="instructions.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">year_month</span>(period)) <span class="sc">%&gt;%</span> <span class="co"># turn transaction dates into month-by-year dates</span></span>
+<span id="cb46-3"><a href="instructions.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb46-4"><a href="instructions.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">geomean =</span> <span class="fu">mean_geometric</span>(price)) <span class="co"># calculate the geometric avergage</span></span></code></pre></div></li>
 <li><p><strong>Calculez la géomée des produits A à J</strong></p>
 <p>En utilisant les données du système de prix globaux dans <code>dat_gps</code>, calculez la moyenne géométrique des prix pour chaque produit dans chaque province dans chaque mois de chaque année de référence, pour les produits A à J. Combinez ces données avec les données préparées à l’étape 2. Le fichier résultant devrait avoir 2 500 géomées.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="instructions.html#cb47-1"></a>dat_index &lt;-<span class="st"> </span>dat_gps <span class="op">%&gt;%</span></span>
-<span id="cb47-2"><a href="instructions.html#cb47-2"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb47-3"><a href="instructions.html#cb47-3"></a><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="st">&quot;quote&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;price&quot;</span>, price1<span class="op">:</span>price3) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># melt into a long dataset</span></span>
-<span id="cb47-4"><a href="instructions.html#cb47-4"></a><span class="st">  </span><span class="kw">group_by</span>(province, product, year, period) <span class="op">%&gt;%</span></span>
-<span id="cb47-5"><a href="instructions.html#cb47-5"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb47-6"><a href="instructions.html#cb47-6"></a><span class="st">  </span><span class="kw">bind_rows</span>(dat_micro) <span class="co"># append to dat_micro</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="instructions.html#cb47-1" aria-hidden="true" tabindex="-1"></a>dat_index <span class="ot">&lt;-</span> dat_gps <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="instructions.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb47-3"><a href="instructions.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;quote&quot;</span>, <span class="at">value =</span> <span class="st">&quot;price&quot;</span>, price1<span class="sc">:</span>price3) <span class="sc">%&gt;%</span> <span class="co"># melt into a long dataset</span></span>
+<span id="cb47-4"><a href="instructions.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(province, product, year, period) <span class="sc">%&gt;%</span></span>
+<span id="cb47-5"><a href="instructions.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb47-6"><a href="instructions.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(dat_micro) <span class="co"># append to dat_micro</span></span></code></pre></div></li>
 <li><p><strong>Calculer les indices élémentaires période sur période</strong></p>
 <p>Pour chaque produit dans chaque province dans chaque année de référence, calculez le rapport des moyennes géométriques calculées à l’étape 3, en vous assurant d’avoir un prix relatif de 1 en janvier 2018 et janvier 2019 (janvier 2019 sera le mois de liaison lorsqu’il est le temps de chaîner l’index.)</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="instructions.html#cb48-1"></a>dat_index &lt;-<span class="st"> </span>dat_index <span class="op">%&gt;%</span><span class="st">  </span></span>
-<span id="cb48-2"><a href="instructions.html#cb48-2"></a><span class="st">  </span><span class="co"># your code here</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="instructions.html#cb48-1" aria-hidden="true" tabindex="-1"></a>dat_index <span class="ot">&lt;-</span> dat_index <span class="sc">%&gt;%</span>  </span>
+<span id="cb48-2"><a href="instructions.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here</span></span></code></pre></div></li>
 <li><p><strong>Prix mettre à jour les poids des produits</strong></p>
 <p>Fusionnez les pondérations au niveau du produit par province de l’étape 1 dans l’ensemble de données créé à l’étape 4 et utilisez les indices élémentaires période sur période pour mettre à jour les pondérations.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="instructions.html#cb49-1"></a>dat_index &lt;-<span class="st"> </span>dat_index <span class="op">%&gt;%</span><span class="st">  </span></span>
-<span id="cb49-2"><a href="instructions.html#cb49-2"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb49-3"><a href="instructions.html#cb49-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">share_prod_u =</span> <span class="kw">weights_update</span>(<span class="kw">cumprod</span>(<span class="kw">lag</span>(rel, <span class="dt">default =</span> <span class="dv">1</span>)), share_prod, <span class="dt">scale =</span> <span class="ot">FALSE</span>)) <span class="co"># price update the weights</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="instructions.html#cb49-1" aria-hidden="true" tabindex="-1"></a>dat_index <span class="ot">&lt;-</span> dat_index <span class="sc">%&gt;%</span>  </span>
+<span id="cb49-2"><a href="instructions.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb49-3"><a href="instructions.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">share_prod_u =</span> <span class="fu">weights_update</span>(<span class="fu">cumprod</span>(<span class="fu">lag</span>(rel, <span class="at">default =</span> <span class="dv">1</span>)), share_prod, <span class="at">scale =</span> <span class="cn">FALSE</span>)) <span class="co"># price update the weights</span></span></code></pre></div></li>
 <li><p><strong>Calculez l’indice provincial</strong></p>
 <p>Calculez un indice arithmétique pour chaque province au cours de chaque année de référence, à l’aide des indices élémentaires d’une période à l’autre et des pondérations mises à jour des prix des étapes 4 et 5.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="instructions.html#cb50-1"></a>index_prov &lt;-<span class="st"> </span>dat_index <span class="op">%&gt;%</span></span>
-<span id="cb50-2"><a href="instructions.html#cb50-2"></a><span class="st">  </span><span class="kw">group_by</span>(period, year, province) <span class="op">%&gt;%</span></span>
-<span id="cb50-3"><a href="instructions.html#cb50-3"></a><span class="st">  </span><span class="co"># your code here</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="instructions.html#cb50-1" aria-hidden="true" tabindex="-1"></a>index_prov <span class="ot">&lt;-</span> dat_index <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="instructions.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(period, year, province) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="instructions.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here</span></span></code></pre></div></li>
 <li><p><strong>Calculez l’indice au niveau du Canada</strong></p>
 <p>Fusionnez les pondérations provinciales à l’étape 1 avec les indices provinciaux de l’étape 6 pour calculer un indice canadien pour chaque année de référence.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="instructions.html#cb51-1"></a>index &lt;-<span class="st"> </span>index_prov <span class="op">%&gt;%</span></span>
-<span id="cb51-2"><a href="instructions.html#cb51-2"></a><span class="st">  </span><span class="co"># your code here</span></span>
-<span id="cb51-3"><a href="instructions.html#cb51-3"></a><span class="st">  </span><span class="kw">group_by</span>(period, year) <span class="op">%&gt;%</span></span>
-<span id="cb51-4"><a href="instructions.html#cb51-4"></a><span class="st">  </span><span class="co"># your code here</span></span>
-<span id="cb51-5"><a href="instructions.html#cb51-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">province =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># province 0 is the Canada-level</span></span>
-<span id="cb51-6"><a href="instructions.html#cb51-6"></a><span class="st">  </span><span class="kw">bind_rows</span>(index_prov)</span></code></pre></div></li>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="instructions.html#cb51-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> index_prov <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="instructions.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here</span></span>
+<span id="cb51-3"><a href="instructions.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(period, year) <span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="instructions.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here</span></span>
+<span id="cb51-5"><a href="instructions.html#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">province =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="co"># province 0 is the Canada-level</span></span>
+<span id="cb51-6"><a href="instructions.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(index_prov)</span></code></pre></div></li>
 <li><p><strong>Chaîne des indices 2018 et 2019</strong></p>
 <p>Enchaînez les indices au niveau de la province de 2018 et 2019 et du niveau du Canada ensemble, en utilisant janvier 2019 comme mois de liaison, pour obtenir un indice de janvier 2018 à décembre 2019 avec janvier 2018 comme période de base (généralement, la période de base serait une année civile , mais il n’y a que 24 mois de données).</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="instructions.html#cb52-1"></a>index_chain &lt;-<span class="st"> </span>index <span class="op">%&gt;%</span></span>
-<span id="cb52-2"><a href="instructions.html#cb52-2"></a><span class="st">  </span><span class="kw">group_by</span>(province) <span class="op">%&gt;%</span></span>
-<span id="cb52-3"><a href="instructions.html#cb52-3"></a><span class="st">  </span><span class="co"># your code here</span></span>
-<span id="cb52-4"><a href="instructions.html#cb52-4"></a><span class="st">  </span><span class="kw">group_by</span>(period, province) <span class="op">%&gt;%</span></span>
-<span id="cb52-5"><a href="instructions.html#cb52-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">index =</span> <span class="kw">unique</span>(index)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># remove the duplicate rows for the link month</span></span>
-<span id="cb52-6"><a href="instructions.html#cb52-6"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div></li>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="instructions.html#cb52-1" aria-hidden="true" tabindex="-1"></a>index_chain <span class="ot">&lt;-</span> index <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="instructions.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(province) <span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="instructions.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here</span></span>
+<span id="cb52-4"><a href="instructions.html#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(period, province) <span class="sc">%&gt;%</span></span>
+<span id="cb52-5"><a href="instructions.html#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">index =</span> <span class="fu">unique</span>(index)) <span class="sc">%&gt;%</span> <span class="co"># remove the duplicate rows for the link month</span></span>
+<span id="cb52-6"><a href="instructions.html#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div></li>
 </ol>
 <p>Le résultat final devrait être un fichier avec 11 indices de prix, un pour chaque province et un indice national, de janvier 2018 à décembre 2019, avec janvier 2018 comme période de base (= 100).</p>
 <p>La validation de l’indice au niveau du Canada nécessite de mettre l’indice du groupe canadien d’analyse économique réglementaire et l’indice Monsterweb sous une forme commune.</p>
 <ol start="9" style="list-style-type: decimal">
 <li><p><strong>Trimestre par rapport aux indices mensuels</strong></p>
 <p>Transformez l’indice que vous venez de créer et l’indice du groupe Analyse réglementaire de la réglementation canadienne dans <code>index_crea</code> en un indice trimestriel, avec le 1er trimestre 2019 comme période de base, en prenant la moyenne des trois valeurs d’indice de chaque trimestre.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="instructions.html#cb53-1"></a>my_index &lt;-<span class="st"> </span>index_chain <span class="op">%&gt;%</span></span>
-<span id="cb53-2"><a href="instructions.html#cb53-2"></a><span class="st">  </span><span class="kw">filter</span>(province <span class="op">==</span><span class="st"> &#39;0&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># keep only the Canada-level index</span></span>
-<span id="cb53-3"><a href="instructions.html#cb53-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">period =</span> <span class="kw">year_quarter</span>(period)) <span class="op">%&gt;%</span></span>
-<span id="cb53-4"><a href="instructions.html#cb53-4"></a><span class="st">  </span><span class="kw">group_by</span>(period) <span class="op">%&gt;%</span></span>
-<span id="cb53-5"><a href="instructions.html#cb53-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">index =</span> <span class="kw">mean</span>(index)) <span class="op">%&gt;%</span></span>
-<span id="cb53-6"><a href="instructions.html#cb53-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">index =</span> index<span class="op">/</span>index[period <span class="op">==</span><span class="st"> &#39;2019-01-01&#39;</span>] <span class="op">*</span><span class="st"> </span><span class="dv">100</span>) <span class="co"># rebase to Jan 2019</span></span>
-<span id="cb53-7"><a href="instructions.html#cb53-7"></a></span>
-<span id="cb53-8"><a href="instructions.html#cb53-8"></a>index_crea &lt;-<span class="st"> </span>index_crea <span class="op">%&gt;%</span></span>
-<span id="cb53-9"><a href="instructions.html#cb53-9"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb53-10"><a href="instructions.html#cb53-10"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb53-11"><a href="instructions.html#cb53-11"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb53-12"><a href="instructions.html#cb53-12"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb53-13"><a href="instructions.html#cb53-13"></a><span class="st">  </span><span class="co"># your code here %&gt;%</span></span>
-<span id="cb53-14"><a href="instructions.html#cb53-14"></a></span>
-<span id="cb53-15"><a href="instructions.html#cb53-15"></a>index_mw &lt;-<span class="st"> </span>index_mw <span class="op">%&gt;%</span></span>
-<span id="cb53-16"><a href="instructions.html#cb53-16"></a><span class="st">  </span><span class="co"># your code here</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="instructions.html#cb53-1" aria-hidden="true" tabindex="-1"></a>my_index <span class="ot">&lt;-</span> index_chain <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="instructions.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(province <span class="sc">==</span> <span class="st">&#39;0&#39;</span>) <span class="sc">%&gt;%</span> <span class="co"># keep only the Canada-level index</span></span>
+<span id="cb53-3"><a href="instructions.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">year_quarter</span>(period)) <span class="sc">%&gt;%</span></span>
+<span id="cb53-4"><a href="instructions.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(period) <span class="sc">%&gt;%</span></span>
+<span id="cb53-5"><a href="instructions.html#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">index =</span> <span class="fu">mean</span>(index)) <span class="sc">%&gt;%</span></span>
+<span id="cb53-6"><a href="instructions.html#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> index<span class="sc">/</span>index[period <span class="sc">==</span> <span class="st">&#39;2019-01-01&#39;</span>] <span class="sc">*</span> <span class="dv">100</span>) <span class="co"># rebase to Jan 2019</span></span>
+<span id="cb53-7"><a href="instructions.html#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="instructions.html#cb53-8" aria-hidden="true" tabindex="-1"></a>index_crea <span class="ot">&lt;-</span> index_crea <span class="sc">%&gt;%</span></span>
+<span id="cb53-9"><a href="instructions.html#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb53-10"><a href="instructions.html#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb53-11"><a href="instructions.html#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb53-12"><a href="instructions.html#cb53-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb53-13"><a href="instructions.html#cb53-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here %&gt;%</span></span>
+<span id="cb53-14"><a href="instructions.html#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-15"><a href="instructions.html#cb53-15" aria-hidden="true" tabindex="-1"></a>index_mw <span class="ot">&lt;-</span> index_mw <span class="sc">%&gt;%</span></span>
+<span id="cb53-16"><a href="instructions.html#cb53-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your code here</span></span></code></pre></div></li>
 <li><p><strong>Ajoutez les trois indices ensemble</strong></p>
 <p>Rassemblez les indices de l’étape 9 dans un ensemble de données avec l’index de Monsterweb dans <code>index_mw</code>. Ils devraient tous être trimestriels avec le premier trimestre 2019 comme période de base (= 100).</p></li>
 </ol>

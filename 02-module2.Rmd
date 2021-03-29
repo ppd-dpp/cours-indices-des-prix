@@ -429,7 +429,7 @@ Un indice géométrique peut être motivé de la même manière qu'un indice ari
 la solution à laquelle est $I^{G} = \exp(E[\log (p_{t} / p_{0})])$. Mais ce n'est qu'un index géométrique, comme
 
 \begin{align*}
-\exp\left(E\left[\log \left(\frac{p_{t}} {p_{0}} \right) \right] \right) & = \exp \left(P_{i} \sum_{i = 1}^{n} \log \left(\frac{p_{it}} {p_{i0}} \right) \right) \\
+\exp\left(E\left[\log \left(\frac{p_{t}} {p_{0}} \right) \right] \right) & = \exp \left(\sum_{i = 1}^{n} P_{i} \log \left(\frac{p_{it}} {p_{i0}} \right) \right) \\
 &= \prod_{i = 1}^{n} \left(\frac{p_{it}}{p_{i0}} \right)^{P_{i}},
 \end{align*}
   

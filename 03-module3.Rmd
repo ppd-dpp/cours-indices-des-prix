@@ -87,7 +87,7 @@ L'indice des prix de transaction diffère généralement de l'indice de qualité
 Notez que cet indice n'est pas nécessairement basé sur des prix relatifs, car le même nombre de biens peut ne pas se vendre à chaque période. Si $n(t)$ désigne l'ensemble des biens qui se vendent au cours de la période $t$, l'indice géométrique des prix de transaction est un rapport de moyennes géométriques,
 
 \begin{align*}
-\log (I^{T}) = \frac{\prod_{i \in n(1)} p_{i}(1)^{P_{i} | t = 1}}{\prod_{i \in n(0)} p_{i}(1)^{P_{i} | t = 0}},
+\log (I^{T}) = \frac{\prod_{i \in n(1)} p_{i}(1)^{P_{i} | t = 1}}{\prod_{i \in n(0)} p_{i}(0)^{P_{i} | t = 0}},
 \end{align*}
 
 où $P_{i} | t$ est la probabilité conditionnelle d'observer un bon $i$ pendant la période $t$. Il s'agit simplement d'une généralisation de l'indice géométrique des prix habituel lorsque différents biens se vendent au fil du temps.

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Les axiomes | Un cours sur les indices des prix</title>
   <meta name="description" content="Une introduction moderne et simple aux indices des prix" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Les axiomes | Un cours sur les indices des prix" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="un-indice-de-prix-abstrait.html"/>
 <link rel="next" href="exemples-de-compteur.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,22 +50,21 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -84,7 +84,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -133,12 +133,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Aperçu</a></li>
 <li class="part"><span><b>I Introduction aux indices de prix</b></span></li>
 <li class="chapter" data-level="" data-path="programme-pour-introduction-aux-indices-de-prix.html"><a href="programme-pour-introduction-aux-indices-de-prix.html"><i class="fa fa-check"></i>Programme pour Introduction aux indices de prix</a></li>
-<li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a><ul>
+<li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><a href="quest-ce-quun-indice-des-prix-et-pourquoi-en-avons-nous-besoin.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix et pourquoi en avons-nous besoin?</a>
+<ul>
 <li class="chapter" data-level="" data-path="quest-ce-quun-indice-des-prix.html"><a href="quest-ce-quun-indice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce qu’un indice des prix?</a></li>
 <li class="chapter" data-level="" data-path="utilisations-dun-indice-des-prix.html"><a href="utilisations-dun-indice-des-prix.html"><i class="fa fa-check"></i>Utilisations d’un indice des prix</a></li>
 <li class="chapter" data-level="" data-path="pourquoi-un-indice-des-prix.html"><a href="pourquoi-un-indice-des-prix.html"><i class="fa fa-check"></i>Pourquoi un indice des prix?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="formule-de-numéro-dindex.html"><a href="formule-de-numéro-dindex.html"><i class="fa fa-check"></i>Formule de numéro d’index</a><ul>
+<li class="chapter" data-level="" data-path="formule-de-numéro-dindex.html"><a href="formule-de-numéro-dindex.html"><i class="fa fa-check"></i>Formule de numéro d’index</a>
+<ul>
 <li class="chapter" data-level="" data-path="indices-arithmétiques-des-prix.html"><a href="indices-arithmétiques-des-prix.html"><i class="fa fa-check"></i>Indices arithmétiques des prix</a></li>
 <li class="chapter" data-level="" data-path="indices-arithmétiques-communs.html"><a href="indices-arithmétiques-communs.html"><i class="fa fa-check"></i>Indices arithmétiques communs</a></li>
 <li class="chapter" data-level="" data-path="indices-arithmétiques-moins-courants.html"><a href="indices-arithmétiques-moins-courants.html"><i class="fa fa-check"></i>Indices arithmétiques moins courants</a></li>
@@ -146,7 +148,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="lindice-fisher.html"><a href="lindice-fisher.html"><i class="fa fa-check"></i>L’indice Fisher</a></li>
 <li class="chapter" data-level="" data-path="exemple-avec-r-formules-dindex.html"><a href="exemple-avec-r-formules-dindex.html"><i class="fa fa-check"></i>Exemple avec R: formules d’index</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a><ul>
+<li class="chapter" data-level="" data-path="calcul-dun-indice-des-prix.html"><a href="calcul-dun-indice-des-prix.html"><i class="fa fa-check"></i>Calcul d’un indice des prix</a>
+<ul>
 <li class="chapter" data-level="" data-path="sous-indices-et-agrégation.html"><a href="sous-indices-et-agrégation.html"><i class="fa fa-check"></i>Sous-indices et agrégation</a></li>
 <li class="chapter" data-level="" data-path="factorisation-dun-index.html"><a href="factorisation-dun-index.html"><i class="fa fa-check"></i>Factorisation d’un index</a></li>
 <li class="chapter" data-level="" data-path="rebasing.html"><a href="rebasing.html"><i class="fa fa-check"></i>Rebasing</a></li>
@@ -157,7 +160,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>II Théorie de l’indice des prix</b></span></li>
 <li class="chapter" data-level="" data-path="programme-pour-théorie-de-lindice-des-prix.html"><a href="programme-pour-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Programme pour Théorie de l’indice des prix</a></li>
 <li class="chapter" data-level="" data-path="quest-ce-que-la-théorie-de-lindice-des-prix.html"><a href="quest-ce-que-la-théorie-de-lindice-des-prix.html"><i class="fa fa-check"></i>Qu’est-ce que la théorie de l’indice des prix?</a></li>
-<li class="chapter" data-level="" data-path="lapproche-axiomatique.html"><a href="lapproche-axiomatique.html"><i class="fa fa-check"></i>L’approche axiomatique</a><ul>
+<li class="chapter" data-level="" data-path="lapproche-axiomatique.html"><a href="lapproche-axiomatique.html"><i class="fa fa-check"></i>L’approche axiomatique</a>
+<ul>
 <li class="chapter" data-level="" data-path="un-indice-de-prix-abstrait.html"><a href="un-indice-de-prix-abstrait.html"><i class="fa fa-check"></i>Un indice de prix abstrait</a></li>
 <li class="chapter" data-level="" data-path="les-axiomes.html"><a href="les-axiomes.html"><i class="fa fa-check"></i>Les axiomes</a></li>
 <li class="chapter" data-level="" data-path="exemples-de-compteur.html"><a href="exemples-de-compteur.html"><i class="fa fa-check"></i>Exemples de compteur</a></li>
@@ -165,13 +169,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="un-résultat-impossible.html"><a href="un-résultat-impossible.html"><i class="fa fa-check"></i>Un résultat impossible</a></li>
 <li class="chapter" data-level="" data-path="motiver-les-indices-jevons-et-laspeyres.html"><a href="motiver-les-indices-jevons-et-laspeyres.html"><i class="fa fa-check"></i>Motiver les indices Jevons et Laspeyres</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="lapproche-économique.html"><a href="lapproche-économique.html"><i class="fa fa-check"></i>L’approche économique</a><ul>
+<li class="chapter" data-level="" data-path="lapproche-économique.html"><a href="lapproche-économique.html"><i class="fa fa-check"></i>L’approche économique</a>
+<ul>
 <li class="chapter" data-level="" data-path="indice-des-prix-des-intrants.html"><a href="indice-des-prix-des-intrants.html"><i class="fa fa-check"></i>Indice des prix des intrants</a></li>
 <li class="chapter" data-level="" data-path="indice-des-prix-à-la-production.html"><a href="indice-des-prix-à-la-production.html"><i class="fa fa-check"></i>Indice des prix à la production</a></li>
 <li class="chapter" data-level="" data-path="indice-du-coût-de-la-vie.html"><a href="indice-du-coût-de-la-vie.html"><i class="fa fa-check"></i>Indice du coût de la vie</a></li>
 <li class="chapter" data-level="" data-path="approximation-dun-indice-économique.html"><a href="approximation-dun-indice-économique.html"><i class="fa fa-check"></i>Approximation d’un indice économique</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="lapproche-stochastique.html"><a href="lapproche-stochastique.html"><i class="fa fa-check"></i>L’approche stochastique</a><ul>
+<li class="chapter" data-level="" data-path="lapproche-stochastique.html"><a href="lapproche-stochastique.html"><i class="fa fa-check"></i>L’approche stochastique</a>
+<ul>
 <li class="chapter" data-level="" data-path="le-problème-de-prédiction-optimal.html"><a href="le-problème-de-prédiction-optimal.html"><i class="fa fa-check"></i>Le problème de prédiction optimal</a></li>
 <li class="chapter" data-level="" data-path="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><a href="les-indices-de-prix-géométriques-comme-meilleur-prédicteur.html"><i class="fa fa-check"></i>Les indices de prix géométriques comme meilleur prédicteur</a></li>
 <li class="chapter" data-level="" data-path="des-indices-de-prix-plus-généraux.html"><a href="des-indices-de-prix-plus-généraux.html"><i class="fa fa-check"></i>Des indices de prix plus généraux</a></li>
@@ -181,19 +187,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>III Indices de prix de qualité constante</b></span></li>
 <li class="chapter" data-level="" data-path="programme-pour-indices-de-prix-de-qualité-constante.html"><a href="programme-pour-indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Programme pour Indices de prix de qualité constante</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a><ul>
+<li class="chapter" data-level="" data-path="prix-potentiels.html"><a href="prix-potentiels.html"><i class="fa fa-check"></i>Prix potentiels</a>
+<ul>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-qualité-constante.html"><a href="indices-de-prix-de-qualité-constante.html"><i class="fa fa-check"></i>Indices de prix de qualité constante</a></li>
 <li class="chapter" data-level="" data-path="indices-de-prix-de-transaction.html"><a href="indices-de-prix-de-transaction.html"><i class="fa fa-check"></i>Indices de prix de transaction</a></li>
 <li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>Identification</a></li>
 <li class="chapter" data-level="" data-path="exemple.html"><a href="exemple.html"><i class="fa fa-check"></i>Exemple</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="indices-de-prix-stratifiés.html"><a href="indices-de-prix-stratifiés.html"><i class="fa fa-check"></i>Indices de prix stratifiés</a><ul>
+<li class="chapter" data-level="" data-path="indices-de-prix-stratifiés.html"><a href="indices-de-prix-stratifiés.html"><i class="fa fa-check"></i>Indices de prix stratifiés</a>
+<ul>
 <li class="chapter" data-level="" data-path="indépendance-conditionnelle.html"><a href="indépendance-conditionnelle.html"><i class="fa fa-check"></i>Indépendance conditionnelle</a></li>
 <li class="chapter" data-level="" data-path="chevauchement.html"><a href="chevauchement.html"><i class="fa fa-check"></i>Chevauchement</a></li>
 <li class="chapter" data-level="" data-path="problèmes-de-stratification.html"><a href="problèmes-de-stratification.html"><i class="fa fa-check"></i>Problèmes de stratification</a></li>
 <li class="chapter" data-level="" data-path="exemple-avec-r-indice-stratifié.html"><a href="exemple-avec-r-indice-stratifié.html"><i class="fa fa-check"></i>Exemple avec R: Indice stratifié</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a><ul>
+<li class="chapter" data-level="" data-path="indices-de-prix-hédoniques.html"><a href="indices-de-prix-hédoniques.html"><i class="fa fa-check"></i>Indices de prix hédoniques</a>
+<ul>
 <li class="chapter" data-level="" data-path="indices-hédoniques-linéaires.html"><a href="indices-hédoniques-linéaires.html"><i class="fa fa-check"></i>Indices hédoniques linéaires</a></li>
 <li class="chapter" data-level="" data-path="lapproche-temporelle.html"><a href="lapproche-temporelle.html"><i class="fa fa-check"></i>L’approche temporelle</a></li>
 <li class="chapter" data-level="" data-path="exemple-avec-r-hédonique.html"><a href="exemple-avec-r-hédonique.html"><i class="fa fa-check"></i>Exemple avec R: Hédonique</a></li>
@@ -201,7 +210,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="affectation-3.html"><a href="affectation-3.html"><i class="fa fa-check"></i>Affectation 3</a></li>
 <li class="part"><span><b>IV Construire un indice des prix avec R</b></span></li>
 <li class="chapter" data-level="" data-path="programme-pour-construire-un-indice-des-prix-avec-r.html"><a href="programme-pour-construire-un-indice-des-prix-avec-r.html"><i class="fa fa-check"></i>Programme pour Construire un indice des prix avec R</a></li>
-<li class="chapter" data-level="" data-path="affectation-4.html"><a href="affectation-4.html"><i class="fa fa-check"></i>Affectation 4</a><ul>
+<li class="chapter" data-level="" data-path="affectation-4.html"><a href="affectation-4.html"><i class="fa fa-check"></i>Affectation 4</a>
+<ul>
 <li class="chapter" data-level="" data-path="méthodologie.html"><a href="méthodologie.html"><i class="fa fa-check"></i>Méthodologie</a></li>
 <li class="chapter" data-level="" data-path="instructions.html"><a href="instructions.html"><i class="fa fa-check"></i>Instructions</a></li>
 </ul></li>

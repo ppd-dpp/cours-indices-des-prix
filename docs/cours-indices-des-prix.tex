@@ -4,8 +4,8 @@
 %
 \documentclass[
 ]{article}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
@@ -82,7 +82,8 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -91,7 +92,7 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -108,6 +109,29 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \title{Un cours sur les indices des prix}
 \author{Steve Martin et Rebecca Meier}
@@ -381,7 +405,7 @@ Un indice de prix géométrique est entièrement analogue à un indice arithmét
 I^{G} = \prod_{i = 1}^{n} \left(\frac{p_{i1}}{p_{i0}} \right)^{\omega_{i}}.
 \end{align*}
 
-Comme pour les indices arithmétiques, différents indices géométriques correspondent à différents choix pour les poids.\footnote{Il est intéressant de noter que les poids peuvent également être choisis de sorte que tout indice géométrique soit également un indice arithmétique (et vice versa). Autrement dit, pour tout \(\omega_{i}\), il existe un \(\tilde{\omega}_{i}\) tel que \(\prod_{i = 1}^{n} (p_{i1} / p_{i0})^{\omega_{i}} = \sum_{i = 1}^{n} \tilde{\omega}_{i} p_{i1} / p_{i0}\). Voir Balk (2008 Section 4.2) pour voir à quoi ressemblent ces poids. Cadrer un index comme arithmétique ou géométrique est vraiment juste un cas de cadrage des poids.}
+Comme pour les indices arithmétiques, différents indices géométriques correspondent à différents choix pour les poids.\footnote{Il est intéressant de noter que les poids peuvent également être choisis de sorte que tout indice géométrique soit également un indice arithmétique (et vice versa). Autrement dit, pour tout \(\omega_{i}\), il existe un \(\tilde{\omega}_{i}\) tel que \(\prod_{i = 1}^{n} (p_{i1} / p_{i0})^{\omega_{i}} = \sum_{i = 1}^{n} \tilde{\omega}_{i} p_{i1} / p_{i0}\). Voir Balk (2008Section 4.2) pour voir à quoi ressemblent ces poids. Cadrer un index comme arithmétique ou géométrique est vraiment juste un cas de cadrage des poids.}
 
 \textbf{Indice de Jevons}. La définition de \(\omega_{i} = 1 / n\) entraîne l'index Jevons
 
@@ -421,7 +445,7 @@ L'indice de Törnqvist développe l'indice géométrique de Laspeyres en utilisa
 
 L'indice de Jevons est généralement synonyme d'index géométrique, et il trouve application dans des situations où il n'y a pas d'informations de quantité pour former des poids (par opposition à l'utilisation d'un index Carli ou Dutot). Parfois, un indice de Jevons pondéré est utilisé comme raccourci pour l'indice géométrique général.
 
-Un point à noter à propos des indices géométriques est qu'ils sont toujours plus petits que leurs homologues arithmétiques. Pour tout poids donné, on peut montrer que \(I^{G} \leq I^{A}\), avec égalité uniquement lorsque tous les prix relatifs sont égaux ou tous les prix relatifs sauf un ont un poids nul. Par conséquent, un indice géométrique montre toujours une augmentation des prix plus faible dans le temps (ou une diminution plus importante) que l'indice arithmétique correspondant.\footnote{La différence entre un indice arithmétique et un indice géométrique a tendance à être plus grande lorsque les prix relatifs sont plus dispersés, bien que cela n'est pas toujours le cas. Il est possible que la différence devienne plus grande lorsque la variance entre les prix relatifs devient plus petite --- voir Lord (2002).} C'est un inconvénient important d'avoir un menu de nombres d'index parmi lesquels choisir, car le choix de la formule de nombre d'index a un impact sur la mesure de l'inflation qui en résulte.\footnote{Le même raisonnement peut être utilisé pour montrer qu'un indice de prix harmonique est toujours plus petit que l'indice géométrique correspondant --- voir Bullen (2003 II 2.1 Corollaire 2).}
+Un point à noter à propos des indices géométriques est qu'ils sont toujours plus petits que leurs homologues arithmétiques. Pour tout poids donné, on peut montrer que \(I^{G} \leq I^{A}\), avec égalité uniquement lorsque tous les prix relatifs sont égaux ou tous les prix relatifs sauf un ont un poids nul. Par conséquent, un indice géométrique montre toujours une augmentation des prix plus faible dans le temps (ou une diminution plus importante) que l'indice arithmétique correspondant.\footnote{La différence entre un indice arithmétique et un indice géométrique a tendance à être plus grande lorsque les prix relatifs sont plus dispersés, bien que cela n'est pas toujours le cas. Il est possible que la différence devienne plus grande lorsque la variance entre les prix relatifs devient plus petite --- voir Lord (2002).} C'est un inconvénient important d'avoir un menu de nombres d'index parmi lesquels choisir, car le choix de la formule de nombre d'index a un impact sur la mesure de l'inflation qui en résulte.\footnote{Le même raisonnement peut être utilisé pour montrer qu'un indice de prix harmonique est toujours plus petit que l'indice géométrique correspondant --- voir Bullen (2003II 2.1 Corollaire 2).}
 
 \hypertarget{lindice-fisher}{%
 \subsection{L'indice Fisher}\label{lindice-fisher}}
@@ -442,20 +466,20 @@ Toutes les formules de l'indice-nombre présentées dans cette section sont simp
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez dans la bibliothèque gpindex}
-\KeywordTok{library}\NormalTok{(gpindex) }\CommentTok{# install.packages("gpindex")}
+\CommentTok{\# Apportez dans la bibliothèque gpindex}
+\FunctionTok{library}\NormalTok{(gpindex) }\CommentTok{\# install.packages("gpindex")}
 
-\CommentTok{# Faites des prix apparentés}
-\NormalTok{relatives <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.1}\NormalTok{)}
+\CommentTok{\# Faites des prix apparentés}
+\NormalTok{relatives }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.1}\NormalTok{)}
 
-\CommentTok{# Faites des poids}
-\NormalTok{weights <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{)}
+\CommentTok{\# Faites des poids}
+\NormalTok{weights }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{ (}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{)}
 
-\CommentTok{# Calculer les indices}
-\KeywordTok{c}\NormalTok{(}\DataTypeTok{Carli =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives),}
-  \DataTypeTok{Jevons =} \KeywordTok{mean_geometric}\NormalTok{(relatives),}
-\NormalTok{  Arithmé}\DataTypeTok{tique =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives, weights),}
-\NormalTok{  Géomé}\DataTypeTok{trique =} \KeywordTok{mean_geometric}\NormalTok{(relatives, weights))}
+\CommentTok{\# Calculer les indices}
+\FunctionTok{c}\NormalTok{(}\AttributeTok{Carli =} \FunctionTok{mean\_arithmetic}\NormalTok{(relatives),}
+  \AttributeTok{Jevons =} \FunctionTok{mean\_geometric}\NormalTok{(relatives),}
+\NormalTok{  Arithmétique }\OtherTok{=} \FunctionTok{mean\_arithmetic}\NormalTok{(relatives, weights),}
+\NormalTok{  Géométrique }\OtherTok{=} \FunctionTok{mean\_geometric}\NormalTok{(relatives, weights))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -468,20 +492,20 @@ Le type d'indices arithmétiques et géométriques que cela calcule dépend enti
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Part des dépenses / recettes de la période de base}
-\NormalTok{share0 <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{)}
+\CommentTok{\# Part des dépenses / recettes de la période de base}
+\NormalTok{share0 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{ (}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{)}
 
-\CommentTok{# Part des dépenses / recettes de la période en cours}
-\NormalTok{share1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.2}\NormalTok{)}
+\CommentTok{\# Part des dépenses / recettes de la période en cours}
+\NormalTok{share1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{ (}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.2}\NormalTok{)}
 
-\CommentTok{# Calculer les indices}
-\KeywordTok{c}\NormalTok{(}\DataTypeTok{Laspeyres =} \KeywordTok{mean_arithmetic}\NormalTok{(relatives, share0),}
-  \DataTypeTok{Paasche =} \KeywordTok{mean_harmonic}\NormalTok{(relatives, share1),}
-  \DataTypeTok{Fisher =} \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean_arithmetic}\NormalTok{(relatives, share0) }\OperatorTok{*}\StringTok{ }
-\StringTok{                  }\KeywordTok{mean_harmonic}\NormalTok{(relatives, share1)),}
-  \StringTok{`}\DataTypeTok{Géométrique Laspeyres}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(relatives, share0),}
-  \StringTok{`}\DataTypeTok{Géométrique Paasche}\StringTok{`}\NormalTok{ =}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(relatives, share1),}
-  \DataTypeTok{Tornqvist =} \KeywordTok{mean_geometric}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{))}
+\CommentTok{\# Calculer les indices}
+\FunctionTok{c}\NormalTok{(}\AttributeTok{Laspeyres =} \FunctionTok{mean\_arithmetic}\NormalTok{(relatives, share0),}
+  \AttributeTok{Paasche =} \FunctionTok{mean\_harmonic}\NormalTok{(relatives, share1),}
+  \AttributeTok{Fisher =} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean\_arithmetic}\NormalTok{(relatives, share0) }\SpecialCharTok{*} 
+                  \FunctionTok{mean\_harmonic}\NormalTok{(relatives, share1)),}
+  \StringTok{\textasciigrave{}}\AttributeTok{Géométrique Laspeyres}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{mean\_geometric}\NormalTok{(relatives, share0),}
+  \StringTok{\textasciigrave{}}\AttributeTok{Géométrique Paasche}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{mean\_geometric}\NormalTok{(relatives, share1),}
+  \AttributeTok{Tornqvist =} \FunctionTok{mean\_geometric}\NormalTok{(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -496,8 +520,8 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Tornqvist index}
-\KeywordTok{mean_geometric}\NormalTok{(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{) }
+\CommentTok{\# Tornqvist index}
+\FunctionTok{mean\_geometric}\NormalTok{(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -507,9 +531,9 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Changer les poids}
-\NormalTok{new_weights <-}\StringTok{ }\KeywordTok{weights_transmute}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)(relatives, (share0 }\OperatorTok{+}\StringTok{ }\NormalTok{share1) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
-\KeywordTok{mean_arithmetic}\NormalTok{(relatives, new_weights) }\CommentTok{# same as geometric mean}
+\CommentTok{\# Changer les poids}
+\NormalTok{new\_weights }\OtherTok{\textless{}{-}} \FunctionTok{weights\_transmute}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{)}
+\FunctionTok{mean\_arithmetic}\NormalTok{(relatives, new\_weights) }\CommentTok{\# same as geometric mean}
 \end{Highlighting}
 \end{Shaded}
 
@@ -519,8 +543,8 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Contribution de chaque relative}
-\NormalTok{(relatives }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{new_weights}
+\CommentTok{\# Contribution de chaque relative}
+\NormalTok{(relatives }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ new\_weights}
 \end{Highlighting}
 \end{Shaded}
 
@@ -669,13 +693,13 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez dans la bibliothèque gpindex}
-\KeywordTok{library}\NormalTok{(gpindex)}
+\CommentTok{\# Apportez dans la bibliothèque gpindex}
+\FunctionTok{library}\NormalTok{(gpindex)}
 
-\CommentTok{# Faites des prix apparentés}
-\NormalTok{dat <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{relative =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.1}\NormalTok{),}
-                  \DataTypeTok{weight =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{),}
-                  \DataTypeTok{group =}\NormalTok{ letters[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)])}
+\CommentTok{\# Faites des prix apparentés}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{relative =} \FunctionTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.1}\NormalTok{),}
+                  \AttributeTok{weight =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{),}
+                  \AttributeTok{group =}\NormalTok{ letters[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)])}
 \NormalTok{dat}
 \end{Highlighting}
 \end{Shaded}
@@ -690,10 +714,10 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Calculer l'indice géométrique pour les parents des groupes a et b}
-\NormalTok{index_ab <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(}\KeywordTok{split}\NormalTok{(dat, dat}\OperatorTok{$}\NormalTok{group), }
-                   \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{mean_geometric}\NormalTok{(x}\OperatorTok{$}\NormalTok{relative, x}\OperatorTok{$}\NormalTok{weight) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{)}
-\NormalTok{index_ab}
+\CommentTok{\# Calculer l\textquotesingle{}indice géométrique pour les parents des groupes a et b}
+\NormalTok{index\_ab }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\FunctionTok{split}\NormalTok{(dat, dat}\SpecialCharTok{$}\NormalTok{group), }
+                   \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{mean\_geometric}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{relative, x}\SpecialCharTok{$}\NormalTok{weight) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
+\NormalTok{index\_ab}
 \end{Highlighting}
 \end{Shaded}
 
@@ -704,9 +728,9 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Indices agrégés de niveau inférieur}
-\NormalTok{index_top <-}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(index_ab, }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{tapply}\NormalTok{(dat}\OperatorTok{$}\NormalTok{weight, dat}\OperatorTok{$}\NormalTok{group, sum)))}
-\NormalTok{index_top}
+\CommentTok{\# Indices agrégés de niveau inférieur}
+\NormalTok{index\_top }\OtherTok{\textless{}{-}} \FunctionTok{mean\_geometric}\NormalTok{(index\_ab, }\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{tapply}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{weight, dat}\SpecialCharTok{$}\NormalTok{group, sum)))}
+\NormalTok{index\_top}
 \end{Highlighting}
 \end{Shaded}
 
@@ -716,8 +740,8 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Identique au calcul direct}
-\KeywordTok{mean_geometric}\NormalTok{(dat}\OperatorTok{$}\NormalTok{relative, dat}\OperatorTok{$}\NormalTok{weight) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\CommentTok{\# Identique au calcul direct}
+\FunctionTok{mean\_geometric}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{relative, dat}\SpecialCharTok{$}\NormalTok{weight) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -729,8 +753,8 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Faire un index sur 12 périodes avec période 0 = 100}
-\NormalTok{index <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{period =} \DecValTok{0}\OperatorTok{:}\DecValTok{11}\NormalTok{, }\DataTypeTok{value =} \KeywordTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\KeywordTok{sample}\NormalTok{(}\DecValTok{90}\OperatorTok{:}\DecValTok{130}\NormalTok{, }\DecValTok{11}\NormalTok{)))}
+\CommentTok{\# Faire un index sur 12 périodes avec période 0 = 100}
+\NormalTok{index }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{period =} \DecValTok{0}\SpecialCharTok{:}\DecValTok{11}\NormalTok{, }\AttributeTok{value =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\FunctionTok{sample}\NormalTok{(}\DecValTok{90}\SpecialCharTok{:}\DecValTok{130}\NormalTok{, }\DecValTok{11}\NormalTok{)))}
 \NormalTok{index}
 \end{Highlighting}
 \end{Shaded}
@@ -738,40 +762,40 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 \begin{verbatim}
 ##    period value
 ## 1       0   100
-## 2       1    93
-## 3       2   123
-## 4       3   108
-## 5       4   126
-## 6       5    98
-## 7       6   120
-## 8       7   113
-## 9       8   130
-## 10      9   103
-## 11     10    99
-## 12     11   114
+## 2       1    98
+## 3       2   103
+## 4       3   104
+## 5       4   125
+## 6       5   110
+## 7       6    94
+## 8       7   124
+## 9       8   122
+## 10      9    90
+## 11     10   126
+## 12     11    99
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Rebase l'indice pour que la période 6 = 100}
-\KeywordTok{transform}\NormalTok{(index, }\DataTypeTok{value =}\NormalTok{ value }\OperatorTok{/}\StringTok{ }\NormalTok{value[period }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{] }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{)}
+\CommentTok{\# Rebase l\textquotesingle{}indice pour que la période 6 = 100}
+\FunctionTok{transform}\NormalTok{(index, }\AttributeTok{value =}\NormalTok{ value }\SpecialCharTok{/}\NormalTok{ value[period }\SpecialCharTok{==} \DecValTok{6}\NormalTok{] }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##    period     value
-## 1       0  83.33333
-## 2       1  77.50000
-## 3       2 102.50000
-## 4       3  90.00000
-## 5       4 105.00000
-## 6       5  81.66667
+## 1       0 106.38298
+## 2       1 104.25532
+## 3       2 109.57447
+## 4       3 110.63830
+## 5       4 132.97872
+## 6       5 117.02128
 ## 7       6 100.00000
-## 8       7  94.16667
-## 9       8 108.33333
-## 10      9  85.83333
-## 11     10  82.50000
-## 12     11  95.00000
+## 8       7 131.91489
+## 9       8 129.78723
+## 10      9  95.74468
+## 11     10 134.04255
+## 12     11 105.31915
 \end{verbatim}
 
 \hypertarget{affectation-1}{%
@@ -1046,7 +1070,7 @@ Un indice des prix combine des informations sur les prix et les quantités à de
 
 Le résultat idéal de l'approche axiomatique est une formule d'indice unique et unique qui satisfait un ensemble minimal de conditions non controversées qu'un indice de prix devrait satisfaire. Cela signifierait qu'il n'y a qu'une seule formule d'indice qui devrait être utilisée pour créer un indice de prix. La réalité, cependant, est que des compromis doivent être faits, et le maintien de certaines conditions nécessite d'ignorer les autres. Par conséquent, une distinction est faite entre les axiomes --- déclarations fondamentales que tout indice de prix raisonnable devrait satisfaire --- et les tests, qui sont des propriétés souhaitables mais pas aussi fondamentales que les axiomes. Un petit ensemble d'axiomes clés est toujours conservé, tandis que les tests peuvent être mutuellement incohérents, et des choix doivent être faits quant aux tests qu'un index doit satisfaire en fonction de son objectif. Les axiomes peuvent être considérés comme le premier tamis à éliminer toutes les formules de nombre d'index déraisonnables, avec des tests agissant comme un second tamis pour affiner davantage ce qui reste.
 
-Cette section du cours commence le voyage dans la théorie de l'indice des prix en donnant un bref aperçu de l'approche axiomatique de la théorie de l'indice des prix. Cela a été un domaine d'étude considérable, et par conséquent il y a beaucoup de matériel intéressant qui n'est pas couvert dans ce cours. Le lecteur intéressé peut consulter ILO et al. (2004a Chapitre 16) ou ILO et al. (2004b Chapter 16) pour plus de détails, ou Balk (2008).
+Cette section du cours commence le voyage dans la théorie de l'indice des prix en donnant un bref aperçu de l'approche axiomatique de la théorie de l'indice des prix. Cela a été un domaine d'étude considérable, et par conséquent il y a beaucoup de matériel intéressant qui n'est pas couvert dans ce cours. Le lecteur intéressé peut consulter ILO et al. (2004aChapitre 16) ou ILO et al. (2004bChapter 16) pour plus de détails, ou Balk (2008).
 
 📖 Balk (1995), ignorez la section 4 et l'annexe.
 
@@ -1158,7 +1182,7 @@ Il devrait être assez sûr de dire que tout indice de prix raisonnable devrait 
 \hypertarget{exemples-de-compteur}{%
 \subsection{Exemples de compteur}\label{exemples-de-compteur}}
 
-Pour la plupart, il est difficile de noter un prix décent à mi-chemin qui ne satisfait pas aux cinq axiomes de la section précédente. Les exemples pathologiques abondent, mais il est plus intéressant de regarder des cas raisonnables où une formule d'indice ne satisfait pas tous les axiomes.\footnote{Deux cas pathologiques intéressants ont à voir avec l'échec de la monotonie pour les indices géométriques Laspeyres et Paasche. Bien que le Laspeyres géométrique augmente toujours dans les prix de la période-\(t\), il peut également augmenter dans les prix de la période-0. Pour cela, il faut que \(p_{i1} / p_{i0} \geq \exp(1) I(p_{1}, p_{0}, q_{t}, q_{0}) \approx 2,72 I(p_{1}, p_{0}, q_{t}, q_{0})\) pour au moins un bon \(i\), de sorte qu'au moins certaines marchandises subissent un changement de prix qui est considérablement plus grand que le changement de prix pour les autres marchandises. De même, si le Paasche géométrique diminue toujours dans les prix de la période 0, il peut également diminuer dans les prix de la période \(t\). Pour que cela soit nécessaire, il faut que \(p_{i1} / p_{i0} \leq I(p_{1}, p_{0}, q_{t}, q_{0}) / \exp(1) \approx I(p_{1}, p_{0}, q_{t}, q_{0}) / 2,72\) pour au moins un bon \(i\). Voir Balk (2008 Section 3.12).} Deux exemples intéressants d'indices de prix raisonnables qui ne satisfont pas aux cinq axiomes sont l'indice de Dutot et l'indice de valeur médiane (c'est-à-dire l'indice qui prend le prix médian relatif).
+Pour la plupart, il est difficile de noter un prix décent à mi-chemin qui ne satisfait pas aux cinq axiomes de la section précédente. Les exemples pathologiques abondent, mais il est plus intéressant de regarder des cas raisonnables où une formule d'indice ne satisfait pas tous les axiomes.\footnote{Deux cas pathologiques intéressants ont à voir avec l'échec de la monotonie pour les indices géométriques Laspeyres et Paasche. Bien que le Laspeyres géométrique augmente toujours dans les prix de la période-\(t\), il peut également augmenter dans les prix de la période-0. Pour cela, il faut que \(p_{i1} / p_{i0} \geq \exp(1) I(p_{1}, p_{0}, q_{t}, q_{0}) \approx 2,72 I(p_{1}, p_{0}, q_{t}, q_{0})\) pour au moins un bon \(i\), de sorte qu'au moins certaines marchandises subissent un changement de prix qui est considérablement plus grand que le changement de prix pour les autres marchandises. De même, si le Paasche géométrique diminue toujours dans les prix de la période 0, il peut également diminuer dans les prix de la période \(t\). Pour que cela soit nécessaire, il faut que \(p_{i1} / p_{i0} \leq I(p_{1}, p_{0}, q_{t}, q_{0}) / \exp(1) \approx I(p_{1}, p_{0}, q_{t}, q_{0}) / 2,72\) pour au moins un bon \(i\). Voir Balk (2008Section 3.12).} Deux exemples intéressants d'indices de prix raisonnables qui ne satisfont pas aux cinq axiomes sont l'indice de Dutot et l'indice de valeur médiane (c'est-à-dire l'indice qui prend le prix médian relatif).
 
 L'indice de Dutot satisfait tous les axiomes sauf l'invariance dimensionnelle, tandis que l'indice de valeur moyenne satisfait tous les axiomes sauf la monotonie. Pour voir pourquoi l'indice Dutot ne satisfait pas à l'invariance dimensionnelle, supposons qu'il n'y a que deux biens (c'est-à-dire \(n = 2\)) avec \(p_{1t} = 1\), \(p_{2t} = 2\) et \(p_{10} = p_{20} = 1\), et avec
 
@@ -1262,7 +1286,7 @@ I(p_{t}, p_{0}, q_{t}, q_{0}) = \frac{\sum_{i = 1}^{n} p_{it} q_{it}}{\sum_{i = 
 
 Ces résultats frappants aident à motiver l'utilisation de ces indices simples et donnent des indications pratiques sur le moment de les utiliser. Un indice géométrique est utile lorsque le chaînage d'un indice est relativement plus important que la déflation des valeurs agrégées, tandis qu'un indice arithmétique de Laspeyres (ou Paasche) est utile lorsque la déflation des valeurs agrégées dans un cadre de comptabilité nationale est relativement plus importante que l'utilisation d'un calcul chaîné. Cela permet d'expliquer pourquoi les indices de prix produits par les organismes statistiques ont tendance à utiliser un indice géométrique pour calculer les indices élémentaires et un indice arithmétique pour calculer les indices de niveau supérieur. Au niveau le plus bas de la hiérarchie d'un indice, il est important de pouvoir calculer les indices élémentaires en utilisant les variations de prix d'une période à l'autre, mais ces indices n'ont pas tendance à être utilisés pour déflater les valeurs agrégées. À des niveaux d'agrégation plus élevés, il est nécessaire de pouvoir déflater les valeurs agrégées, mais pas besoin de chaîner les variations de prix d'une période à l'autre pour calculer l'indice, car il est agrégé à partir des indices élémentaires.
 
-Il convient de noter que l'indice Fisher se présente généralement comme l'idéal théorique dans un cadre axiomatique.\footnote{Ou parfois les indices Törnqvist ou Walsh, selon les axiomes particuliers --- voir Balk and Diewert (2001) et Balk (2008 Sections 3.6.4 et 3.6.5.).} Cela se produit parce que le test du produit est maintenu sans exiger la cohérence de l'agrégation, ainsi que d'imposer d'autres tests. Par conséquent, l'indice Fisher peut être plus approprié si un indice de prix n'est pas calculé à l'aide d'une structure hiérarchique. Mais il est important de noter que ce n'est pas acquis d'avance --- l'un des principaux résultats de l'approche axiomatique est que l'indice de prix idéal dépend de son objectif, et qu'il n'existe aucun indice de prix universellement applicable.
+Il convient de noter que l'indice Fisher se présente généralement comme l'idéal théorique dans un cadre axiomatique.\footnote{Ou parfois les indices Törnqvist ou Walsh, selon les axiomes particuliers --- voir Balk and Diewert (2001) et Balk (2008Sections 3.6.4 et 3.6.5.).} Cela se produit parce que le test du produit est maintenu sans exiger la cohérence de l'agrégation, ainsi que d'imposer d'autres tests. Par conséquent, l'indice Fisher peut être plus approprié si un indice de prix n'est pas calculé à l'aide d'une structure hiérarchique. Mais il est important de noter que ce n'est pas acquis d'avance --- l'un des principaux résultats de l'approche axiomatique est que l'indice de prix idéal dépend de son objectif, et qu'il n'existe aucun indice de prix universellement applicable.
 
 \hypertarget{lapproche-uxe9conomique}{%
 \section{L'approche économique}\label{lapproche-uxe9conomique}}
@@ -1401,7 +1425,7 @@ I^{C} &= \exp(\log(e (p_{t}, y_{0})) - \log(e (p_{0}, y_{0}))) \\
 
 où \(\omega_{i0} = p_{i0} q_{i0} / \sum_{j = 1}^{n} p_{j0} q_{j0}\) est le poids des dépenses de la période 0 pour un bon \(i\). Comme un indice géométrique est toujours plus petit que son indice arithmétique correspondant et que l'indice de Laspeyres est trop grand par rapport à l'indice des prix des intrants (c.-à-d.~Que l'erreur d'approximation est toujours positive en raison du biais de substitution), l'indice géométrique de Laspeyres donnera une meilleure approximation de l'indice des prix des intrants que de l'indice de Laspeyres chaque fois que l'erreur d'approximation de l'indice géométrique est positive.
 
-Dans de nombreux cas, l'indice de Fisher ou de Törnqvist offre une meilleure approximation à un indice des prix des intrants que l'indice de Laspeyres ou l'indice géométrique de Laspeyres. L'argument pour lequel ces indices peuvent être une meilleure approximation est plus complexe --- voir ILO et al. (2004a Chapitre 17) et ILO et al. (2004b Chapitre 17) pour plus de détails. Le coût de cette meilleure approximation, cependant, est le besoin de plus d'informations sur les quantités de la période \(t\), qui peuvent ou non être disponibles au moment où l'indice est réellement calculé.\footnote{Dans certains cas, ces approximations sont exactes. Un indice de Laspeyres sera un véritable indice des prix des intrants si l'entreprise a une fonction de production Leontief; un indice de Fisher sera également exact dans ce cas. De même, un Laspeyres géométrique sera un véritable indice des prix des intrants si l'entreprise a des fonctions de production Cobb-Douglas; un indice de Törnqvist sera également exact dans ce cas. L'indice de prix de Lloyd-Moulton est un cas intéressant car il est exact chaque fois que l'entreprise a une élasticité constante de la fonction de production de substitution, mais il ne nécessite que des informations sur la quantité pour la période 0.}
+Dans de nombreux cas, l'indice de Fisher ou de Törnqvist offre une meilleure approximation à un indice des prix des intrants que l'indice de Laspeyres ou l'indice géométrique de Laspeyres. L'argument pour lequel ces indices peuvent être une meilleure approximation est plus complexe --- voir ILO et al. (2004aChapitre 17) et ILO et al. (2004bChapitre 17) pour plus de détails. Le coût de cette meilleure approximation, cependant, est le besoin de plus d'informations sur les quantités de la période \(t\), qui peuvent ou non être disponibles au moment où l'indice est réellement calculé.\footnote{Dans certains cas, ces approximations sont exactes. Un indice de Laspeyres sera un véritable indice des prix des intrants si l'entreprise a une fonction de production Leontief; un indice de Fisher sera également exact dans ce cas. De même, un Laspeyres géométrique sera un véritable indice des prix des intrants si l'entreprise a des fonctions de production Cobb-Douglas; un indice de Törnqvist sera également exact dans ce cas. L'indice de prix de Lloyd-Moulton est un cas intéressant car il est exact chaque fois que l'entreprise a une élasticité constante de la fonction de production de substitution, mais il ne nécessite que des informations sur la quantité pour la période 0.}
 
 \hypertarget{lapproche-stochastique}{%
 \section{L'approche stochastique}\label{lapproche-stochastique}}
@@ -1451,7 +1475,7 @@ Un indice géométrique peut être motivé de la même manière qu'un indice ari
 la solution à laquelle est \(I^{G} = \exp(E[\log (p_{t} / p_{0})])\). Mais ce n'est qu'un index géométrique, comme
 
 \begin{align*}
-\exp\left(E\left[\log \left(\frac{p_{t}} {p_{0}} \right) \right] \right) & = \exp \left(P_{i} \sum_{i = 1}^{n} \log \left(\frac{p_{it}} {p_{i0}} \right) \right) \\
+\exp\left(E\left[\log \left(\frac{p_{t}} {p_{0}} \right) \right] \right) & = \exp \left(\sum_{i = 1}^{n} P_{i} \log \left(\frac{p_{it}} {p_{i0}} \right) \right) \\
 &= \prod_{i = 1}^{n} \left(\frac{p_{it}}{p_{i0}} \right)^{P_{i}},
 \end{align*}
 
@@ -1495,11 +1519,11 @@ Un point intéressant à propos de ces types d'indices de prix plus généraux e
 \hypertarget{infuxe9rence-statistique}{%
 \subsection{Inférence statistique}\label{infuxe9rence-statistique}}
 
-Dans la pratique, la distribution complète des prix relatifs n'est généralement pas connue et un indice est calculé à partir d'un échantillon de prix collectés auprès des producteurs ou des détaillants. Cela signifie que les valeurs de l'indice sont calculées avec un estimateur pour \(I^{A}\) ou \(I^{G}\), selon qu'un indice arithmétique ou géométrique est l'indice cible. Bien que les sujets de l'échantillonnage et de l'inférence statistique se compliquent rapidement et dépassent le cadre de ce cours, il convient d'examiner comment les indices arithmétiques et géométriques se comportent lorsqu'ils sont calculés avec un échantillon aléatoire de données de prix.\footnote{Voir Balk (2008 Chapitre 5) pour une introduction à l'échantillonnage et à l'inférence statistique pour les indices de prix.} L'un des avantages de l'approche stochastique est qu'elle donne un aperçu du problème d'estimation d'un indice de prix avec un échantillon.
+Dans la pratique, la distribution complète des prix relatifs n'est généralement pas connue et un indice est calculé à partir d'un échantillon de prix collectés auprès des producteurs ou des détaillants. Cela signifie que les valeurs de l'indice sont calculées avec un estimateur pour \(I^{A}\) ou \(I^{G}\), selon qu'un indice arithmétique ou géométrique est l'indice cible. Bien que les sujets de l'échantillonnage et de l'inférence statistique se compliquent rapidement et dépassent le cadre de ce cours, il convient d'examiner comment les indices arithmétiques et géométriques se comportent lorsqu'ils sont calculés avec un échantillon aléatoire de données de prix.\footnote{Voir Balk (2008Chapitre 5) pour une introduction à l'échantillonnage et à l'inférence statistique pour les indices de prix.} L'un des avantages de l'approche stochastique est qu'elle donne un aperçu du problème d'estimation d'un indice de prix avec un échantillon.
 
 Avec l'échantillonnage aléatoire, une approche naturelle pour estimer l'indice arithmétique consiste à remplacer la valeur attendue --- une moyenne de population --- par la moyenne de l'échantillon. Cela donne un estimateur de la méthode des moments \(\hat {I}^A = 1 / n_{s} \sum_{i = 1}^{n_{s}} p_{it} / p_{i0}\), où \(n_{s}\) est la taille de l'échantillon, qui n'est qu'un index Carli. Si les parents de prix sont échantillonnés au hasard, alors il est facile de voir que \(E(\hat {I}^{A}) = I^{A}\), donc l'indice de Carli est un estimateur sans biais pour l'indice arithmétique.
 
-Un estimateur naturel pour l'indice géométrique est \(\hat{I}^{G} = \prod_{i = 1}^{n_{s}} (p_{it} / p_{i0})^{1 / n_{s}}\), l'index Jevons. Contrairement à l'indice de Carli, cependant, l'indice de Jevons est un estimateur biaisé de l'indice géométrique. Il est à nouveau simple de montrer que \(E(\hat{I}^{G}) \geq I^{G}\), avec \(E(\hat{I}^{G}) = I^{G}\) ne tenant que dans des circonstances très particulières --- l'indice de Jevons surestime systématiquement l'indice géométrique (c'est-à-dire qu'il est biaisé à la hausse).\footnote{L'indice de Jevons n'est pas biaisé dans les cas où la distribution d'échantillonnage est dégénérée, ou la variance des prix relatifs est zéro. Voir Lehmann and Casella (1998 Chapitre 1 Théorème 7.5).} Bien que le biais soit un inconvénient de l'indice de Jevons, le biais n'est pas la seule propriété statistique importante d'un estimateur, et l'indice de Jevons a d'autres propriétés statistiques souhaitables (par exemple, c'est une constante estimateur de l'indice géométrique et, dans certaines circonstances, atteint le maximum d'efficacité de vraisemblance lié).\footnote{L'indice de Carli est également un estimateur cohérent de l'indice arithmétique sous échantillonnage aléatoire, mais il ne peut pas être un estimateur du maximum de vraisemblance car cela nécessiterait des prix apparentés d'avoir une distribution gaussienne, ce qui signifie que les prix relatifs peuvent être négatifs. En revanche, l'indice de Jevons est un estimateur du maximum de vraisemblance pour l'indice géométrique si les parents de prix ont une distribution log-normale, ce qui implique que les prix sont toujours positifs.} Il est possible d'ajuster le biais à la hausse des Jevons en divisant les Jevons index par \(1 + \sigma^{2} / (2n)\), où \(\sigma^{2}\) est la variance des logarithmes du prix (Kennedy 2003, 41), mais cela n'est généralement pas fait dans la pratique.
+Un estimateur naturel pour l'indice géométrique est \(\hat{I}^{G} = \prod_{i = 1}^{n_{s}} (p_{it} / p_{i0})^{1 / n_{s}}\), l'index Jevons. Contrairement à l'indice de Carli, cependant, l'indice de Jevons est un estimateur biaisé de l'indice géométrique. Il est à nouveau simple de montrer que \(E(\hat{I}^{G}) \geq I^{G}\), avec \(E(\hat{I}^{G}) = I^{G}\) ne tenant que dans des circonstances très particulières --- l'indice de Jevons surestime systématiquement l'indice géométrique (c'est-à-dire qu'il est biaisé à la hausse).\footnote{L'indice de Jevons n'est pas biaisé dans les cas où la distribution d'échantillonnage est dégénérée, ou la variance des prix relatifs est zéro. Voir Lehmann and Casella (1998Chapitre 1 Théorème 7.5).} Bien que le biais soit un inconvénient de l'indice de Jevons, le biais n'est pas la seule propriété statistique importante d'un estimateur, et l'indice de Jevons a d'autres propriétés statistiques souhaitables (par exemple, c'est une constante estimateur de l'indice géométrique et, dans certaines circonstances, atteint le maximum d'efficacité de vraisemblance lié).\footnote{L'indice de Carli est également un estimateur cohérent de l'indice arithmétique sous échantillonnage aléatoire, mais il ne peut pas être un estimateur du maximum de vraisemblance car cela nécessiterait des prix apparentés d'avoir une distribution gaussienne, ce qui signifie que les prix relatifs peuvent être négatifs. En revanche, l'indice de Jevons est un estimateur du maximum de vraisemblance pour l'indice géométrique si les parents de prix ont une distribution log-normale, ce qui implique que les prix sont toujours positifs.} Il est possible d'ajuster le biais à la hausse des Jevons en divisant les Jevons index par \(1 + \sigma^{2} / (2n)\), où \(\sigma^{2}\) est la variance des logarithmes du prix (Kennedy 2003, 41), mais cela n'est généralement pas fait dans la pratique.
 
 \hypertarget{affectation-2}{%
 \section{Affectation 2}\label{affectation-2}}
@@ -1586,12 +1610,12 @@ Les 4 questions suivantes utilisent les données du tableau suivant qui contienn
 
 \begin{longtable}[]{@{}llll@{}}
 \toprule
-Population des parents de prix & Échantillon 1 & Échantillon 2 & Échantillon 3\tabularnewline
+Population des parents de prix & Échantillon 1 & Échantillon 2 & Échantillon 3 \\
 \midrule
 \endhead
-1.2 & 1.2 & 1.2 & 1.1\tabularnewline
-1.1 & 1.1 & 1,35 & 1,35\tabularnewline
-1,35 & \ldots{} & \ldots{} & \ldots{}\tabularnewline
+1.2 & 1.2 & 1.2 & 1.1 \\
+1.1 & 1.1 & 1,35 & 1,35 \\
+1,35 & \ldots{} & \ldots{} & \ldots{} \\
 \bottomrule
 \end{longtable}
 
@@ -1665,11 +1689,11 @@ Les quatre questions suivantes utilisent les données du tableau suivant qui con
 
 \begin{longtable}[]{@{}llllll@{}}
 \toprule
-Période & Prix 1 & Prix 2 & Quantité 1 & Quantité 2 & Indice des prix des intrants\tabularnewline
+Période & Prix 1 & Prix 2 & Quantité 1 & Quantité 2 & Indice des prix des intrants \\
 \midrule
 \endhead
-0 & 100 & 60 & 141 & 391 & 100,0\tabularnewline
-1 & 120 & 80 & 160 & 360 & 128,0\tabularnewline
+0 & 100 & 60 & 141 & 391 & 100,0 \\
+1 & 120 & 80 & 160 & 360 & 128,0 \\
 \bottomrule
 \end{longtable}
 
@@ -1766,7 +1790,7 @@ Il existe un certain nombre de techniques disponibles pour lutter contre les dif
 
 Une caractéristique intéressante de ces différentes méthodes - modèle, stratification et hédonie appariés - est qu'elles ne sont vraiment pas si différentes. Chacun s'appuie sur la même hypothèse clé pour produire un indice de qualité constante; ce qui diffère entre les méthodes, c'est simplement la manière dont elles mettent en œuvre cette hypothèse. Ce point est fondamental pour comprendre comment ces différentes approches peuvent fournir un indice de qualité constante et comment elles sont liées les unes aux autres.
 
-Dans un souci de simplicité, ce cours se concentre sur les indices géométriques des prix. Les concepts d'un indice géométrique sont directement applicables aux indices arithmétiques, bien qu'il y ait quelques détails supplémentaires à s'inquiéter dans le cas arithmétique.\footnote{Voir Lee (2016 Chapitre 1) et Manski (2007 Chapitre 7) pour certains des détails.} Dans la plupart des applications, les ajustements de qualité sont effectués à l'aide d'une formule d'indice géométrique. Tout au long de ce cours, l'attention est concentrée sur la construction d'un indice de qualité constante lorsque l'ensemble de la population des transactions de biens et services est connue. Ce n'est presque jamais le cas dans la pratique, mais cela facilite l'exposition en ignorant les problèmes associés à l'échantillonnage et à l'inférence statistique. Il souligne également que la construction d'un indice de qualité constante est fondamentalement un problème au niveau de la population, et non un problème d'échantillonnage. Une fois qu'un indice de qualité constante est défini dans la population, il est simple de l'estimer avec un échantillon de transactions en remplaçant les quantités au niveau de la population par leurs homologues de l'échantillon --- voir Manski (1988).
+Dans un souci de simplicité, ce cours se concentre sur les indices géométriques des prix. Les concepts d'un indice géométrique sont directement applicables aux indices arithmétiques, bien qu'il y ait quelques détails supplémentaires à s'inquiéter dans le cas arithmétique.\footnote{Voir Lee (2016Chapitre 1) et Manski (2007Chapitre 7) pour certains des détails.} Dans la plupart des applications, les ajustements de qualité sont effectués à l'aide d'une formule d'indice géométrique. Tout au long de ce cours, l'attention est concentrée sur la construction d'un indice de qualité constante lorsque l'ensemble de la population des transactions de biens et services est connue. Ce n'est presque jamais le cas dans la pratique, mais cela facilite l'exposition en ignorant les problèmes associés à l'échantillonnage et à l'inférence statistique. Il souligne également que la construction d'un indice de qualité constante est fondamentalement un problème au niveau de la population, et non un problème d'échantillonnage. Une fois qu'un indice de qualité constante est défini dans la population, il est simple de l'estimer avec un échantillon de transactions en remplaçant les quantités au niveau de la population par leurs homologues de l'échantillon --- voir Manski (1988).
 
 \hypertarget{prix-potentiels}{%
 \section{Prix potentiels}\label{prix-potentiels}}
@@ -1775,7 +1799,7 @@ La formalisation d'un indice de qualité constante nécessite d'étendre l'appro
 
 Le concept de prix potentiel est extrêmement utile. Dans le modèle d'indice de prix standard, seuls les prix et les quantités peuvent changer au fil du temps. Cependant, avec les prix potentiels, la composition de ce qui se vend au fil du temps peut également changer. Cette généralisation permet de définir un indice de prix lorsque non seulement les prix et les quantités évoluent dans le temps, mais aussi ce qui vend évolue dans le temps.
 
-Un prix potentiel est un type particulier de résultat potentiel qui constitue la base du Rubin Causal Model, un modèle performant pour faire l'inférence causale dans la littérature sur l'évaluation de programme. Le modèle causal de Rubin s'articule autour du récit d'une expérience, où un groupe d'individus reçoit un traitement, l'autre groupe servant de référence contrôlée. Le but de l'expérience est d'obtenir une mesure de l'impact causal du traitement. Dans le contexte d'un indice des prix, un indice de qualité constante est l'effet causal du temps sur les prix, et il est utile de garder à l'esprit le récit d'une expérience. Manski (2007 Chapitre 7), Angrist and Pischke (2009 Chapitres 2 à 4) et Wooldridge (2010 Chapitre 21) fournissent chacun une excellente présentation du cadre de résultats potentiels. Lee (2016) donne un traitement d'une longueur de livre.
+Un prix potentiel est un type particulier de résultat potentiel qui constitue la base du Rubin Causal Model, un modèle performant pour faire l'inférence causale dans la littérature sur l'évaluation de programme. Le modèle causal de Rubin s'articule autour du récit d'une expérience, où un groupe d'individus reçoit un traitement, l'autre groupe servant de référence contrôlée. Le but de l'expérience est d'obtenir une mesure de l'impact causal du traitement. Dans le contexte d'un indice des prix, un indice de qualité constante est l'effet causal du temps sur les prix, et il est utile de garder à l'esprit le récit d'une expérience. Manski (2007Chapitre 7), Angrist and Pischke (2009Chapitres 2 à 4) et Wooldridge (2010Chapitre 21) fournissent chacun une excellente présentation du cadre de résultats potentiels. Lee (2016) donne un traitement d'une longueur de livre.
 
 Pour opérationnaliser le concept d'un prix potentiel dans le cadre stochastique, supposons qu'il existe \(n\) biens uniques qui peuvent se vendre dans la période \(t = 0\) ou la période \(t = 1\). Soit \(p_{i}(1)\) le prix du bien \(i\) s'il devait être vendu au cours de la période 1, et que \(p_{i}(0)\) soit le prix du bien \(i\) s'il devait vendre pendant la période 0, quel que soit le moment où le bien se vend réellement. Si le bien \(i\) se vend effectivement au cours de la période 1, le prix \(p_{i}(1)\) est le prix de transaction observé --- il peut être observé lorsque le bien se vend au cours de la période 1 --- alors que \(p_{i}(0)\) est contre-factuel, et donc non observable. De même, si un bon \(i\) se vend pendant la période 0, alors \(p_{i}(0)\) est le prix de transaction, avec \(p_{i}(1)\) contre-factuel. Ainsi, pour chaque prix de transaction, il existe également un prix contrefactuel, ce qui permet de construire un prix relatif \(p_{i}(1)/ p_{i}(0)\) malgré un bien qui ne se vend pas dans les deux périodes.
 
@@ -1824,7 +1848,7 @@ L'indice des prix de transaction diffère généralement de l'indice de qualité
 Notez que cet indice n'est pas nécessairement basé sur des prix relatifs, car le même nombre de biens peut ne pas se vendre à chaque période. Si \(n(t)\) désigne l'ensemble des biens qui se vendent au cours de la période \(t\), l'indice géométrique des prix de transaction est un rapport de moyennes géométriques,
 
 \begin{align*}
-\log (I^{T}) = \frac{\prod_{i \in n(1)} p_{i}(1)^{P_{i} | t = 1}}{\prod_{i \in n(0)} p_{i}(1)^{P_{i} | t = 0}},
+\log (I^{T}) = \frac{\prod_{i \in n(1)} p_{i}(1)^{P_{i} | t = 1}}{\prod_{i \in n(0)} p_{i}(0)^{P_{i} | t = 0}},
 \end{align*}
 
 où \(P_{i} | t\) est la probabilité conditionnelle d'observer un bon \(i\) pendant la période \(t\). Il s'agit simplement d'une généralisation de l'indice géométrique des prix habituel lorsque différents biens se vendent au fil du temps.
@@ -1968,10 +1992,10 @@ Considérez les données suivantes avec des transactions sur deux périodes pour
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Faire quelques données}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{period =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }
-                 \DataTypeTok{group =}\NormalTok{ letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{],}
-                 \DataTypeTok{price =} \DecValTok{1}\OperatorTok{:}\DecValTok{8}\NormalTok{)}
+\CommentTok{\# Faire quelques données}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{period =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+                 \AttributeTok{group =}\NormalTok{ letters[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{],}
+                 \AttributeTok{price =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{8}\NormalTok{)}
 \NormalTok{df}
 \end{Highlighting}
 \end{Shaded}
@@ -1992,17 +2016,17 @@ Les indices pour chaque groupe peuvent être calculés avec une seule régressio
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez dans la bibliothèque gpindex}
-\KeywordTok{library}\NormalTok{(gpindex)}
+\CommentTok{\# Apportez dans la bibliothèque gpindex}
+\FunctionTok{library}\NormalTok{(gpindex)}
 
-\CommentTok{# Calculer les indices au niveau des strates avec une régression linéaire}
-\NormalTok{mdl <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{group }\OperatorTok{+}\StringTok{ }\NormalTok{group}\OperatorTok{:}\NormalTok{period }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, df)}
+\CommentTok{\# Calculer les indices au niveau des strates avec une régression linéaire}
+\NormalTok{mdl }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group }\SpecialCharTok{+}\NormalTok{ group}\SpecialCharTok{:}\NormalTok{period }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, df)}
 
-\CommentTok{# Transformer les coefficients de régression en indices}
-\NormalTok{index <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\KeywordTok{coef}\NormalTok{(mdl)[}\OperatorTok{-}\KeywordTok{seq_len}\NormalTok{(}\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{((mdl}\OperatorTok{$}\NormalTok{model}\OperatorTok{$}\NormalTok{group))))])}
+\CommentTok{\# Transformer les coefficients de régression en indices}
+\NormalTok{index }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(mdl)[}\SpecialCharTok{{-}}\FunctionTok{seq\_len}\NormalTok{(}\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{((mdl}\SpecialCharTok{$}\NormalTok{model}\SpecialCharTok{$}\NormalTok{group))))])}
 
-\CommentTok{# Agrégat, en supposant que les deux strates ont un poids égal}
-\KeywordTok{mean_geometric}\NormalTok{(index) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\CommentTok{\# Agrégat, en supposant que les deux strates ont un poids égal}
+\FunctionTok{mean\_geometric}\NormalTok{(index) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2080,7 +2104,7 @@ L'indice hédonique de la section précédente peut être simplifié pour rendre
 E(\rho | X, t) = \alpha_{0} + t \log(I^{Q}) + X \beta.
 \end{align*}
 
-Une caractéristique intéressante de l'indice temporel est que, comme l'indice hédonique linéaire général, il s'agit d'un type d'index stratifié lorsque les biens sont répartis selon leurs caractéristiques observables. Pour voir cela, notez que, avec l'hypothèse que \(\beta_{0} = \beta_{1} = \beta\), le modèle hédonique devient \(h(X, t) = \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X \beta\). Lorsque les biens sont stratifiés en fonction de \(X\), alors \(h\) est saturé en \(X\) de telle sorte qu'il existe un \(\beta_x\) unique pour chaque combinaison de \(x\) pour \(X\) --- chaque strate obtient son propre paramètre dans la régression. Dans ce cas, le résultat dans Angrist and Pischke (2009 Section 3.3.1) s'applique, de sorte que
+Une caractéristique intéressante de l'indice temporel est que, comme l'indice hédonique linéaire général, il s'agit d'un type d'index stratifié lorsque les biens sont répartis selon leurs caractéristiques observables. Pour voir cela, notez que, avec l'hypothèse que \(\beta_{0} = \beta_{1} = \beta\), le modèle hédonique devient \(h(X, t) = \alpha_{0} + t (\alpha_{1} - \alpha_{0}) + X \beta\). Lorsque les biens sont stratifiés en fonction de \(X\), alors \(h\) est saturé en \(X\) de telle sorte qu'il existe un \(\beta_x\) unique pour chaque combinaison de \(x\) pour \(X\) --- chaque strate obtient son propre paramètre dans la régression. Dans ce cas, le résultat dans Angrist and Pischke (2009Section 3.3.1) s'applique, de sorte que
 
 \begin{align*}
 \log (I^{Q}) = \sum_{x} [E(\rho | X = x, t = 1) - E(\rho | X = x, t = 0)] \omega_{x},
@@ -2105,8 +2129,8 @@ Le calcul d'un indice de prix hédonique linéaire est très facile dans R.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez quelques données}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"csv/data.csv"}\NormalTok{)}
+\CommentTok{\# Apportez quelques données}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"csv/data.csv"}\NormalTok{)}
 \NormalTok{df}
 \end{Highlighting}
 \end{Shaded}
@@ -2144,9 +2168,9 @@ Il s'agit d'un ensemble de données simple pour la nourriture pour chat, avec tr
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Calculer l'indice de prix commun}
-\NormalTok{pooled <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{period, df)}
-\KeywordTok{exp}\NormalTok{(}\KeywordTok{coef}\NormalTok{(pooled)[}\DecValTok{2}\NormalTok{]) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\CommentTok{\# Calculer l\textquotesingle{}indice de prix commun}
+\NormalTok{pooled }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ period, df)}
+\FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(pooled)[}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2159,11 +2183,11 @@ L'indice hédonique linéaire général est facile à calculer avec une simple r
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Calculer l'indice d'imputation hédonique}
-\NormalTok{hedonic_imputation <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{period }\OperatorTok{+}\StringTok{ }\NormalTok{liver }\OperatorTok{+}\StringTok{ }\NormalTok{salmon }\OperatorTok{+}\StringTok{ }
-\StringTok{                           }\NormalTok{period}\OperatorTok{:}\NormalTok{(}\KeywordTok{I}\NormalTok{(liver }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(liver)) }\OperatorTok{+}\StringTok{ }\KeywordTok{I}\NormalTok{(salmon }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(salmon))), }
+\CommentTok{\# Calculer l\textquotesingle{}indice d\textquotesingle{}imputation hédonique}
+\NormalTok{hedonic\_imputation }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ period }\SpecialCharTok{+}\NormalTok{ liver }\SpecialCharTok{+}\NormalTok{ salmon }\SpecialCharTok{+} 
+\NormalTok{                           period}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{I}\NormalTok{(liver }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(liver)) }\SpecialCharTok{+} \FunctionTok{I}\NormalTok{(salmon }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(salmon))), }
 \NormalTok{                         df)}
-\KeywordTok{exp}\NormalTok{(}\KeywordTok{coef}\NormalTok{(hedonic_imputation)[}\DecValTok{2}\NormalTok{]) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(hedonic\_imputation)[}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2176,14 +2200,14 @@ C'est le même que le calcul en deux étapes qui est normalement effectué pour 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Régression période 0}
-\NormalTok{hi0 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{liver }\OperatorTok{+}\StringTok{ }\NormalTok{salmon, df, }\DataTypeTok{subset =}\NormalTok{ period }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\CommentTok{\# Régression période 0}
+\NormalTok{hi0 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ liver }\SpecialCharTok{+}\NormalTok{ salmon, df, }\AttributeTok{subset =}\NormalTok{ period }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
 
-\CommentTok{# Régression de la période 1}
-\NormalTok{hi1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{liver }\OperatorTok{+}\StringTok{ }\NormalTok{salmon, df, }\DataTypeTok{subset =}\NormalTok{ period }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\CommentTok{\# Régression de la période 1}
+\NormalTok{hi1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ liver }\SpecialCharTok{+}\NormalTok{ salmon, df, }\AttributeTok{subset =}\NormalTok{ period }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)}
 
-\CommentTok{# Calculer l'indice à l'aide des prix prévus}
-\KeywordTok{exp}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{predict}\NormalTok{(hi1, df) }\OperatorTok{-}\StringTok{ }\KeywordTok{predict}\NormalTok{(hi0, df))) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\CommentTok{\# Calculer l\textquotesingle{}indice à l\textquotesingle{}aide des prix prévus}
+\FunctionTok{exp}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{predict}\NormalTok{(hi1, df) }\SpecialCharTok{{-}} \FunctionTok{predict}\NormalTok{(hi0, df))) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2195,22 +2219,22 @@ C'est également la même chose que le calcul manuel de l'indice stratifié.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Apportez dans la bibliothèque gpindex}
-\KeywordTok{library}\NormalTok{(gpindex)}
+\CommentTok{\# Apportez dans la bibliothèque gpindex}
+\FunctionTok{library}\NormalTok{(gpindex)}
 
-\CommentTok{# Poids de la nourriture pour chats par sa fréquence}
-\NormalTok{weights <-}\StringTok{ }\KeywordTok{colSums}\NormalTok{(df[}\OperatorTok{-}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{)])}
+\CommentTok{\# Poids de la nourriture pour chats par sa fréquence}
+\NormalTok{weights }\OtherTok{\textless{}{-}} \FunctionTok{colSums}\NormalTok{(df[}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)])}
 
-\CommentTok{# Calculer un indice pour chaque type de nourriture pour chat}
-\NormalTok{strata_indices <-}\StringTok{ }
-\StringTok{  }\KeywordTok{sapply}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\KeywordTok{subset}\NormalTok{(df, chicken }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{), }
-              \KeywordTok{subset}\NormalTok{(df, liver }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{), }
-              \KeywordTok{subset}\NormalTok{(df, salmon }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)),}
-         \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{with}\NormalTok{(x, }\KeywordTok{mean_geometric}\NormalTok{(price[period }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{]) }\OperatorTok{/}\StringTok{ }\KeywordTok{mean_geometric}\NormalTok{(price[period }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{]))}
+\CommentTok{\# Calculer un indice pour chaque type de nourriture pour chat}
+\NormalTok{strata\_indices }\OtherTok{\textless{}{-}} 
+  \FunctionTok{sapply}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\FunctionTok{subset}\NormalTok{(df, chicken }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), }
+              \FunctionTok{subset}\NormalTok{(df, liver }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), }
+              \FunctionTok{subset}\NormalTok{(df, salmon }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)),}
+         \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{with}\NormalTok{(x, }\FunctionTok{mean\_geometric}\NormalTok{(price[period }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{/} \FunctionTok{mean\_geometric}\NormalTok{(price[period }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]))}
 \NormalTok{         )}
 
-\CommentTok{# Agrégat}
-\KeywordTok{mean_geometric}\NormalTok{(strata_indices, weights) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\CommentTok{\# Agrégat}
+\FunctionTok{mean\_geometric}\NormalTok{(strata\_indices, weights) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2222,9 +2246,9 @@ Les résultats sont très similaires si un modèle temporel est utilisé à la p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Indice temporel factice}
-\NormalTok{time_dummy <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{period }\OperatorTok{+}\StringTok{ }\NormalTok{liver }\OperatorTok{+}\StringTok{ }\NormalTok{salmon, df)}
-\KeywordTok{exp}\NormalTok{(}\KeywordTok{coef}\NormalTok{(time_dummy)[}\DecValTok{2}\NormalTok{]) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\CommentTok{\# Indice temporel factice}
+\NormalTok{time\_dummy }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ period }\SpecialCharTok{+}\NormalTok{ liver }\SpecialCharTok{+}\NormalTok{ salmon, df)}
+\FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(time\_dummy)[}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2237,15 +2261,15 @@ L'ajout de pondérations pour les transactions dans chaque strate peut facilemen
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Faites des poids}
-\NormalTok{df}\OperatorTok{$}\NormalTok{weights <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{25} \OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{25}\NormalTok{)}
+\CommentTok{\# Faites des poids}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{weights }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{25} \SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{25}\NormalTok{)}
 
-\CommentTok{# Calculer l'indice d'imputation hédonique pondéré}
-\NormalTok{hedonic_imputation <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{period }\OperatorTok{+}\StringTok{ }\NormalTok{liver }\OperatorTok{+}\StringTok{ }\NormalTok{salmon }\OperatorTok{+}\StringTok{ }
-\StringTok{                           }\NormalTok{period}\OperatorTok{:}\NormalTok{(}\KeywordTok{I}\NormalTok{(liver }\OperatorTok{-}\StringTok{ }\KeywordTok{weighted.mean}\NormalTok{(liver, weights)) }\OperatorTok{+}\StringTok{ }
-\StringTok{                                   }\KeywordTok{I}\NormalTok{(salmon }\OperatorTok{-}\StringTok{ }\KeywordTok{weighted.mean}\NormalTok{(salmon, weights))), }
-\NormalTok{                         df, }\DataTypeTok{weights =}\NormalTok{ weights)}
-\KeywordTok{exp}\NormalTok{(}\KeywordTok{coef}\NormalTok{(hedonic_imputation)[}\DecValTok{2}\NormalTok{]) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\CommentTok{\# Calculer l\textquotesingle{}indice d\textquotesingle{}imputation hédonique pondéré}
+\NormalTok{hedonic\_imputation }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ period }\SpecialCharTok{+}\NormalTok{ liver }\SpecialCharTok{+}\NormalTok{ salmon }\SpecialCharTok{+} 
+\NormalTok{                           period}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{I}\NormalTok{(liver }\SpecialCharTok{{-}} \FunctionTok{weighted.mean}\NormalTok{(liver, weights)) }\SpecialCharTok{+} 
+                                   \FunctionTok{I}\NormalTok{(salmon }\SpecialCharTok{{-}} \FunctionTok{weighted.mean}\NormalTok{(salmon, weights))), }
+\NormalTok{                         df, }\AttributeTok{weights =}\NormalTok{ weights)}
+\FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(hedonic\_imputation)[}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2258,14 +2282,14 @@ Cela donne la même réponse que le calcul en deux étapes.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Régression période 0}
-\NormalTok{hi0 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{liver }\OperatorTok{+}\StringTok{ }\NormalTok{salmon, df, }\DataTypeTok{subset =}\NormalTok{ period }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\DataTypeTok{weights =}\NormalTok{ weights)}
+\CommentTok{\# Régression période 0}
+\NormalTok{hi0 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ liver }\SpecialCharTok{+}\NormalTok{ salmon, df, }\AttributeTok{subset =}\NormalTok{ period }\SpecialCharTok{==} \DecValTok{0}\NormalTok{, }\AttributeTok{weights =}\NormalTok{ weights)}
 
-\CommentTok{# Régression de la période 1}
-\NormalTok{hi1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(price) }\OperatorTok{~}\StringTok{ }\NormalTok{liver }\OperatorTok{+}\StringTok{ }\NormalTok{salmon, df, }\DataTypeTok{subset =}\NormalTok{ period }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{weights =}\NormalTok{ weights)}
+\CommentTok{\# Régression de la période 1}
+\NormalTok{hi1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ liver }\SpecialCharTok{+}\NormalTok{ salmon, df, }\AttributeTok{subset =}\NormalTok{ period }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{weights =}\NormalTok{ weights)}
 
-\CommentTok{# Calculer l'indice à l'aide de prix prédits pondérés}
-\KeywordTok{exp}\NormalTok{(}\KeywordTok{weighted.mean}\NormalTok{(}\KeywordTok{predict}\NormalTok{(hi1, df) }\OperatorTok{-}\StringTok{ }\KeywordTok{predict}\NormalTok{(hi0, df), df}\OperatorTok{$}\NormalTok{weights)) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\CommentTok{\# Calculer l\textquotesingle{}indice à l\textquotesingle{}aide de prix prédits pondérés}
+\FunctionTok{exp}\NormalTok{(}\FunctionTok{weighted.mean}\NormalTok{(}\FunctionTok{predict}\NormalTok{(hi1, df) }\SpecialCharTok{{-}} \FunctionTok{predict}\NormalTok{(hi0, df), df}\SpecialCharTok{$}\NormalTok{weights)) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2408,13 +2432,13 @@ Les quatre questions suivantes utilisent les données suivantes sur les transact
 
 \begin{longtable}[]{@{}lllll@{}}
 \toprule
-Période & Produit & Prix 1 & Prix 2 & Prix 3\tabularnewline
+Période & Produit & Prix 1 & Prix 2 & Prix 3 \\
 \midrule
 \endhead
-0 & A & 2 & 2 & \ldots{}\tabularnewline
-1 & A & 1 & 2 & \ldots{}\tabularnewline
-0 & B & 4 & \ldots{} & \ldots{}\tabularnewline
-1 & B & 2 & 4 & 8\tabularnewline
+0 & A & 2 & 2 & \ldots{} \\
+1 & A & 1 & 2 & \ldots{} \\
+0 & B & 4 & \ldots{} & \ldots{} \\
+1 & B & 2 & 4 & 8 \\
 \bottomrule
 \end{longtable}
 
@@ -2523,40 +2547,18 @@ Les widgets sont de différents types, et une enquête a été utilisée pour co
 
 Toutes ces données sont résumées comme suit.
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}@{}}
 \toprule
-\begin{minipage}[b]{0.47\columnwidth}\raggedright
-Nom de fichier\strut
-\end{minipage} & \begin{minipage}[b]{0.47\columnwidth}\raggedright
-Données\strut
-\end{minipage}\tabularnewline
+Nom de fichier & Données \\
 \midrule
 \endhead
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-dat\_gps\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-Offres de prix mensuelles pour les types de widget ``A'' à ``J'' de janvier 2018 à décembre 2019 à partir du système de prix globaux.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-dat\_micro\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-Microdonnées accessibles au public pour les transactions quotidiennes des widgets de type ``K'' de janvier 2018 à décembre 2019.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-poids\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-Valeur de la transaction de widget (en milliers de dollars) dans chaque province pour 2018 et 2019.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-index\_crea\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-L'indice des prix du groupe canadien d'analyse économique réglementaire.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.47\columnwidth}\raggedright
-index\_mw\strut
-\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-Indice des prix de Monsterweb.\strut
-\end{minipage}\tabularnewline
+dat\_gps & Offres de prix mensuelles pour les types de widget ``A'' à ``J'' de janvier 2018 à décembre 2019 à partir du système de prix globaux. \\
+dat\_micro & Microdonnées accessibles au public pour les transactions quotidiennes des widgets de type ``K'' de janvier 2018 à décembre 2019. \\
+poids & Valeur de la transaction de widget (en milliers de dollars) dans chaque province pour 2018 et 2019. \\
+index\_crea & L'indice des prix du groupe canadien d'analyse économique réglementaire. \\
+index\_mw & Indice des prix de Monsterweb. \\
 \bottomrule
 \end{longtable}
 
@@ -2592,7 +2594,7 @@ Exécutez le code suivant pour récupérer tous les fichiers de données et les 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{source}\NormalTok{ (}\StringTok{'https://raw.githubusercontent.com/ppd-dpp/cours-indices-des-prix/master/scripts/get_data.R'}\NormalTok{)}
+\FunctionTok{source}\NormalTok{ (}\StringTok{\textquotesingle{}https://raw.githubusercontent.com/ppd{-}dpp/cours{-}indices{-}des{-}prix/master/scripts/get\_data.R\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2600,8 +2602,8 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\StringTok{"tidyr"}\NormalTok{, }\StringTok{"gpindex"}\NormalTok{, }\StringTok{"devtools"}\NormalTok{))}
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"ppd-dpp/calpr"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\StringTok{"tidyr"}\NormalTok{, }\StringTok{"gpindex"}\NormalTok{, }\StringTok{"devtools"}\NormalTok{))}
+\NormalTok{devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"ppd{-}dpp/calpr"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2614,23 +2616,23 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(tidyr)}
-\KeywordTok{library}\NormalTok{(gpindex)}
-\KeywordTok{library}\NormalTok{(calpr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(gpindex)}
+\FunctionTok{library}\NormalTok{(calpr)}
 
-\CommentTok{# Make provincial weights}
-\NormalTok{weights_prov <-}\StringTok{ }\NormalTok{weights }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(year, province) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# group all sales values by reference year and province}
-\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{weight =} \KeywordTok{sum}\NormalTok{(weight)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# value of all sales in each province in each year}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share_prov =} \KeywordTok{weights_scale}\NormalTok{(weight)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# scale to sum to 1}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{weight) }\CommentTok{# drop the weight column as it won't be needed again}
+\CommentTok{\# Make provincial weights}
+\NormalTok{weights\_prov }\OtherTok{\textless{}{-}}\NormalTok{ weights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(year, province) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# group all sales values by reference year and province}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{weight =} \FunctionTok{sum}\NormalTok{(weight)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# value of all sales in each province in each year}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{share\_prov =} \FunctionTok{weights\_scale}\NormalTok{(weight)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# scale to sum to 1}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{weight) }\CommentTok{\# drop the weight column as it won\textquotesingle{}t be needed again}
 
-\CommentTok{# Make product weights}
-\NormalTok{weights_prod <-}\StringTok{ }\NormalTok{weights }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share_prod =} \KeywordTok{weights_scale}\NormalTok{(weight)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{weight)}
+\CommentTok{\# Make product weights}
+\NormalTok{weights\_prod }\OtherTok{\textless{}{-}}\NormalTok{ weights }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{share\_prod =} \FunctionTok{weights\_scale}\NormalTok{(weight)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{weight)}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -2640,10 +2642,10 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat_micro <-}\StringTok{ }\NormalTok{dat_micro }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{period =} \KeywordTok{year_month}\NormalTok{(period)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# turn transaction dates into month-by-year dates}
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{geomean =} \KeywordTok{mean_geometric}\NormalTok{(price)) }\CommentTok{# calculate the geometric avergage}
+\NormalTok{dat\_micro }\OtherTok{\textless{}{-}}\NormalTok{ dat\_micro }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{period =} \FunctionTok{year\_month}\NormalTok{(period)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# turn transaction dates into month{-}by{-}year dates}
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{geomean =} \FunctionTok{mean\_geometric}\NormalTok{(price)) }\CommentTok{\# calculate the geometric avergage}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -2653,12 +2655,12 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat_index <-}\StringTok{ }\NormalTok{dat_gps }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =} \StringTok{"quote"}\NormalTok{, }\DataTypeTok{value =} \StringTok{"price"}\NormalTok{, price1}\OperatorTok{:}\NormalTok{price3) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# melt into a long dataset}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(province, product, year, period) }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\KeywordTok{bind_rows}\NormalTok{(dat_micro) }\CommentTok{# append to dat_micro}
+\NormalTok{dat\_index }\OtherTok{\textless{}{-}}\NormalTok{ dat\_gps }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =} \StringTok{"quote"}\NormalTok{, }\AttributeTok{value =} \StringTok{"price"}\NormalTok{, price1}\SpecialCharTok{:}\NormalTok{price3) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# melt into a long dataset}
+  \FunctionTok{group\_by}\NormalTok{(province, product, year, period) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \FunctionTok{bind\_rows}\NormalTok{(dat\_micro) }\CommentTok{\# append to dat\_micro}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -2668,8 +2670,8 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat_index <-}\StringTok{ }\NormalTok{dat_index }\OperatorTok{%>%}\StringTok{  }
-\StringTok{  }\CommentTok{# your code here}
+\NormalTok{dat\_index }\OtherTok{\textless{}{-}}\NormalTok{ dat\_index }\SpecialCharTok{\%\textgreater{}\%}  
+  \CommentTok{\# your code here}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -2679,9 +2681,9 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat_index <-}\StringTok{ }\NormalTok{dat_index }\OperatorTok{%>%}\StringTok{  }
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share_prod_u =} \KeywordTok{weights_update}\NormalTok{(}\KeywordTok{cumprod}\NormalTok{(}\KeywordTok{lag}\NormalTok{(rel, }\DataTypeTok{default =} \DecValTok{1}\NormalTok{)), share_prod, }\DataTypeTok{scale =} \OtherTok{FALSE}\NormalTok{)) }\CommentTok{# price update the weights}
+\NormalTok{dat\_index }\OtherTok{\textless{}{-}}\NormalTok{ dat\_index }\SpecialCharTok{\%\textgreater{}\%}  
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{share\_prod\_u =} \FunctionTok{weights\_update}\NormalTok{(}\FunctionTok{cumprod}\NormalTok{(}\FunctionTok{lag}\NormalTok{(rel, }\AttributeTok{default =} \DecValTok{1}\NormalTok{)), share\_prod, }\AttributeTok{scale =} \ConstantTok{FALSE}\NormalTok{)) }\CommentTok{\# price update the weights}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -2691,9 +2693,9 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{index_prov <-}\StringTok{ }\NormalTok{dat_index }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(period, year, province) }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here}
+\NormalTok{index\_prov }\OtherTok{\textless{}{-}}\NormalTok{ dat\_index }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(period, year, province) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -2703,12 +2705,12 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{index <-}\StringTok{ }\NormalTok{index_prov }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(period, year) }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{province =} \DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# province 0 is the Canada-level}
-\StringTok{  }\KeywordTok{bind_rows}\NormalTok{(index_prov)}
+\NormalTok{index }\OtherTok{\textless{}{-}}\NormalTok{ index\_prov }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here}
+  \FunctionTok{group\_by}\NormalTok{(period, year) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{province =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# province 0 is the Canada{-}level}
+  \FunctionTok{bind\_rows}\NormalTok{(index\_prov)}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -2718,12 +2720,12 @@ Le \href{https://cran.r-project.org/package=dplyr}{dplyr}, \href{https://cran.r-
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{index_chain <-}\StringTok{ }\NormalTok{index }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(province) }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(period, province) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{index =} \KeywordTok{unique}\NormalTok{(index)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# remove the duplicate rows for the link month}
-\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\NormalTok{index\_chain }\OtherTok{\textless{}{-}}\NormalTok{ index }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(province) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here}
+  \FunctionTok{group\_by}\NormalTok{(period, province) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{index =} \FunctionTok{unique}\NormalTok{(index)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# remove the duplicate rows for the link month}
+  \FunctionTok{ungroup}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 \end{enumerate}
@@ -2742,22 +2744,22 @@ La validation de l'indice au niveau du Canada nécessite de mettre l'indice du g
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{my_index <-}\StringTok{ }\NormalTok{index_chain }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(province }\OperatorTok{==}\StringTok{ '0'}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# keep only the Canada-level index}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{period =} \KeywordTok{year_quarter}\NormalTok{(period)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(period) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{index =} \KeywordTok{mean}\NormalTok{(index)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{index =}\NormalTok{ index}\OperatorTok{/}\NormalTok{index[period }\OperatorTok{==}\StringTok{ '2019-01-01'}\NormalTok{] }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{) }\CommentTok{# rebase to Jan 2019}
+\NormalTok{my\_index }\OtherTok{\textless{}{-}}\NormalTok{ index\_chain }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(province }\SpecialCharTok{==} \StringTok{\textquotesingle{}0\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# keep only the Canada{-}level index}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{period =} \FunctionTok{year\_quarter}\NormalTok{(period)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(period) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{index =} \FunctionTok{mean}\NormalTok{(index)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{index =}\NormalTok{ index}\SpecialCharTok{/}\NormalTok{index[period }\SpecialCharTok{==} \StringTok{\textquotesingle{}2019{-}01{-}01\textquotesingle{}}\NormalTok{] }\SpecialCharTok{*} \DecValTok{100}\NormalTok{) }\CommentTok{\# rebase to Jan 2019}
 
-\NormalTok{index_crea <-}\StringTok{ }\NormalTok{index_crea }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\CommentTok{# your code here %>%}
-\StringTok{  }\CommentTok{# your code here %>%}
+\NormalTok{index\_crea }\OtherTok{\textless{}{-}}\NormalTok{ index\_crea }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \CommentTok{\# your code here \%\textgreater{}\%}
+  \CommentTok{\# your code here \%\textgreater{}\%}
 
-\NormalTok{index_mw <-}\StringTok{ }\NormalTok{index_mw }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# your code here}
+\NormalTok{index\_mw }\OtherTok{\textless{}{-}}\NormalTok{ index\_mw }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# your code here}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -2771,23 +2773,24 @@ La validation de l'indice au niveau du Canada nécessite de mettre l'indice du g
 \addcontentsline{toc}{section}{Références}
 
 \hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
 \leavevmode\hypertarget{ref-angrist2009}{}%
 Angrist, J., and J-S. Pischke. 2009. \emph{Mostly Harmless Econometrics}. Princeton University Press.
 
 \leavevmode\hypertarget{ref-balk1995}{}%
-Balk, B. M. 1995. ``Axiomatic Price Index Theory: A Survey.'' \emph{International Statistical Review/Revue Internationale de Statistique} 63 (1): 69--93.
+Balk, B. M. 1995. {``Axiomatic Price Index Theory: A Survey.''} \emph{International Statistical Review/Revue Internationale de Statistique} 63 (1): 69--93.
 
 \leavevmode\hypertarget{ref-balk2008}{}%
 ---------. 2008. \emph{Price and Quantity Index Numbers}. Cambridge University Press.
 
 \leavevmode\hypertarget{ref-balk2001}{}%
-Balk, B. M., and W. E. Diewert. 2001. ``A Characterization of the Törnqvist Price Index.'' \emph{Economics Letters} 72 (3): 279--81.
+Balk, B. M., and W. E. Diewert. 2001. {``A Characterization of the t{ö}rnqvist Price Index.''} \emph{Economics Letters} 72 (3): 279--81.
 
 \leavevmode\hypertarget{ref-bullen2003}{}%
 Bullen, P. S. 2003. \emph{Handbook of Means and Their Inequalities}. Springer.
 
 \leavevmode\hypertarget{ref-hausman2003}{}%
-Hausman, J. 2003. ``Sources of Bias and Solutions to Bias in the Consumer Price Index.'' \emph{Journal of Economic Perspectives} 17 (1): 23--44.
+Hausman, J. 2003. {``Sources of Bias and Solutions to Bias in the Consumer Price Index.''} \emph{Journal of Economic Perspectives} 17 (1): 23--44.
 
 \leavevmode\hypertarget{ref-cpimanual}{}%
 ILO, IMF, OECD, Eurostat, UN, and World Bank. 2004a. \emph{Consumer Price Index Manual: Theory and Practice}. International Monetary Fund.
@@ -2796,16 +2799,16 @@ ILO, IMF, OECD, Eurostat, UN, and World Bank. 2004a. \emph{Consumer Price Index 
 ---------. 2004b. \emph{Producer Price Index Manual: Theory and Practice}. International Monetary Fund.
 
 \leavevmode\hypertarget{ref-rppihandbook}{}%
----------. 2013. \emph{Handbook on Residential Property Prices Indices (RPPIs)}. Eurostat.
+---------. 2013. \emph{Handbook on Residential Property Prices Indices ({RPPIs})}. Eurostat.
 
 \leavevmode\hypertarget{ref-kennedy2003}{}%
 Kennedy, P. 2003. \emph{A Guide to Econometrics}. 5th ed. MIT University Press.
 
 \leavevmode\hypertarget{ref-kirbymcgregor2019}{}%
-Kirby-McGregor, M., and S. Martin. 2019. ``An R Package for Calculating Repeat-Sale Price Indices.'' \emph{Romanian Statistical Review}, no. 3: 17--33.
+Kirby-McGregor, M., and S. Martin. 2019. {``An r Package for Calculating Repeat-Sale Price Indices.''} \emph{Romanian Statistical Review}, no. 3: 17--33.
 
 \leavevmode\hypertarget{ref-kirman1992}{}%
-Kirman, A. P. 1992. ``Whom or What Does the Representative Individual Represent?'' \emph{Journal of Economic Perspectives} 6 (2): 117--36.
+Kirman, A. P. 1992. {``Whom or What Does the Representative Individual Represent?''} \emph{Journal of Economic Perspectives} 6 (2): 117--36.
 
 \leavevmode\hypertarget{ref-lee2016}{}%
 Lee, M-J. 2016. \emph{Matching, Regression Discontinuity, Difference in Differences, and Beyond}. Oxford University Press.
@@ -2814,7 +2817,7 @@ Lee, M-J. 2016. \emph{Matching, Regression Discontinuity, Difference in Differen
 Lehmann, E. L., and G. Casella. 1998. \emph{Theory of Point Estimation}. 2nd ed. Springer.
 
 \leavevmode\hypertarget{ref-lord2002}{}%
-Lord, N. 2002. ``Does Smaller Spread Always Mean Larger Product?'' \emph{The Mathematical Gazette} 86 (506): 273--74.
+Lord, N. 2002. {``Does Smaller Spread Always Mean Larger Product?''} \emph{The Mathematical Gazette} 86 (506): 273--74.
 
 \leavevmode\hypertarget{ref-manski1988}{}%
 Manski, C. F. 1988. \emph{Analog Estimation Methods in Econometrics}. Chapman Hall.
@@ -2823,18 +2826,20 @@ Manski, C. F. 1988. \emph{Analog Estimation Methods in Econometrics}. Chapman Ha
 ---------. 2007. \emph{Identification for Prediction and Decision}. Harvard University Press.
 
 \leavevmode\hypertarget{ref-martin2019}{}%
-Martin, S. 2019. ``Moral Management in Competitive Markets.'' \emph{Journal of Economics \& Management Strategy} 28 (3): 541--60.
+Martin, S. 2019. {``Moral Management in Competitive Markets.''} \emph{Journal of Economics \& Management Strategy} 28 (3): 541--60.
 
 \leavevmode\hypertarget{ref-mcfadden1978}{}%
-McFadden, D. 1978. ``Cost, Revenue, and Profit Functions.'' In \emph{Production Economics: A Dual Approach to Theory and Applications}, edited by M. Fuss and D. McFadden. North-Holland.
+McFadden, D. 1978. {``Cost, Revenue, and Profit Functions.''} In \emph{Production Economics: A Dual Approach to Theory and Applications}, edited by M. Fuss and D. McFadden. North-Holland.
 
 \leavevmode\hypertarget{ref-pollak1980}{}%
-Pollak, R. A. 1980. ``Group Cost-of-Living Indexes.'' \emph{The American Economic Review} 70 (2): 273--78.
+Pollak, R. A. 1980. {``Group Cost-of-Living Indexes.''} \emph{The American Economic Review} 70 (2): 273--78.
 
 \leavevmode\hypertarget{ref-rosen1974}{}%
-Rosen, S. 1974. ``Hedonic Prices and Implicit Markets: Product Differentiation in Pure Competition.'' \emph{Journal of Political Economy} 82 (1): 34--55.
+Rosen, S. 1974. {``Hedonic Prices and Implicit Markets: Product Differentiation in Pure Competition.''} \emph{Journal of Political Economy} 82 (1): 34--55.
 
 \leavevmode\hypertarget{ref-wooldridge2010}{}%
 Wooldridge, J. M. 2010. \emph{Econometric Analysis of Cross Section and Panel Data}. MIT University Press.
+
+\end{CSLReferences}
 
 \end{document}
