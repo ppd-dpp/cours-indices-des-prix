@@ -18,7 +18,7 @@ Prérequis: une introduction aux indices de prix et une compréhension de base d
 
 L'évaluation de ce module est basée sur une tâche unique qui s'appuie sur les connaissances antérieures des apprenants sur la théorie de l'indice des prix. Le devoir se compose de 4 questions (plus une question bonus). La collaboration sur la mission est encouragée, mais chaque personne doit soumettre son propre travail unique. Les réponses à la mission, ainsi que le code de travail pour chaque question (à l'exclusion de la question bonus) valent 15%. L'instructeur doit être capable de comprendre et d'exécuter votre code; voir [example.R](scripts/example.R) pour un exemple. Chaque question correctement répondue vaut 10% supplémentaires. Répondre correctement à la question bonus vaut 20%. La réussite de ce module nécessite une note de 60% ou plus.
 
-Veuillez envoyer un e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Rebecca Meier](mailto:rebecca.meier@canada.ca)) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
+Veuillez envoyer un e-mail à l'instructeurs du cours ([Steve Martin](mailto:steve.martin5@canada.ca) ou [Shaoxiong Wang](mailto:shaoxiong.wang@canada.ca) ou [Anastasiia Nosach](mailto:anastasiia.nosach@canada.ca)) si vous avez des questions ou si vous avez besoin d'aide concernant le matériel ou le devoir du cours.
 
 # Affectation 4
 

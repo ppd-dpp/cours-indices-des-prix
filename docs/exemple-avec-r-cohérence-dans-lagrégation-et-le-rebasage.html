@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exemple avec R: Cohérence dans l’agrégation et le rebasage | Un cours sur les indices des prix</title>
   <meta name="description" content="Une introduction moderne et simple aux indices des prix" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exemple avec R: Cohérence dans l’agrégation et le rebasage | Un cours sur les indices des prix" />
   <meta property="og:type" content="book" />
@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Une introduction moderne et simple aux indices des prix" />
   
 
-<meta name="author" content="Steve Martin et Rebecca Meier" />
+<meta name="author" content="Steve Martin" />
 
 
 
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="chaînage.html"/>
 <link rel="next" href="affectation-1.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -115,6 +117,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="align.css" type="text/css" />
@@ -268,32 +293,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb19-3"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb19-3" aria-hidden="true" tabindex="-1"></a>index</span></code></pre></div>
 <pre><code>##    period value
 ## 1       0   100
-## 2       1   115
-## 3       2   120
-## 4       3   104
-## 5       4   101
-## 6       5   128
-## 7       6    91
-## 8       7   106
-## 9       8    93
-## 10      9    96
-## 11     10    92
-## 12     11    99</code></pre>
+## 2       1    96
+## 3       2   106
+## 4       3   112
+## 5       4    93
+## 6       5   109
+## 7       6   126
+## 8       7   100
+## 9       8   128
+## 10      9    99
+## 11     10   120
+## 12     11   127</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rebase l&#39;indice pour que la période 6 = 100</span></span>
 <span id="cb21-2"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">transform</span>(index, <span class="at">value =</span> value <span class="sc">/</span> value[period <span class="sc">==</span> <span class="dv">6</span>] <span class="sc">*</span> <span class="dv">100</span>)</span></code></pre></div>
-<pre><code>##    period    value
-## 1       0 109.8901
-## 2       1 126.3736
-## 3       2 131.8681
-## 4       3 114.2857
-## 5       4 110.9890
-## 6       5 140.6593
-## 7       6 100.0000
-## 8       7 116.4835
-## 9       8 102.1978
-## 10      9 105.4945
-## 11     10 101.0989
-## 12     11 108.7912</code></pre>
+<pre><code>##    period     value
+## 1       0  79.36508
+## 2       1  76.19048
+## 3       2  84.12698
+## 4       3  88.88889
+## 5       4  73.80952
+## 6       5  86.50794
+## 7       6 100.00000
+## 8       7  79.36508
+## 9       8 101.58730
+## 10      9  78.57143
+## 11     10  95.23810
+## 12     11 100.79365</code></pre>
 </div>
 <!-- </div> -->
             </section>
@@ -325,6 +350,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {

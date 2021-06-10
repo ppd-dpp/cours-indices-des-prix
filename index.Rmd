@@ -1,7 +1,7 @@
 ---
 title: "Un cours sur les indices des prix"
-author: "Steve Martin et Rebecca Meier"
-date: "Jul 2020"
+author: "Steve Martin"
+date: "été 2020"
 documentclass: article
 geometry: margin=1in
 site: bookdown::bookdown_site
