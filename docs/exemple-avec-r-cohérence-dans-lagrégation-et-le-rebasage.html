@@ -276,16 +276,16 @@ div.csl-indent {
 ## 4      1.1   0.15     b</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculer l&#39;indice géométrique pour les parents des groupes a et b</span></span>
 <span id="cb13-2"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb13-2" aria-hidden="true" tabindex="-1"></a>index_ab <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">split</span>(dat, dat<span class="sc">$</span>group), </span>
-<span id="cb13-3"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb13-3" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">function</span>(x) <span class="fu">mean_geometric</span>(x<span class="sc">$</span>relative, x<span class="sc">$</span>weight) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb13-3"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb13-3" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">function</span>(x) <span class="fu">geometric_mean</span>(x<span class="sc">$</span>relative, x<span class="sc">$</span>weight) <span class="sc">*</span> <span class="dv">100</span>)</span>
 <span id="cb13-4"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb13-4" aria-hidden="true" tabindex="-1"></a>index_ab</span></code></pre></div>
 <pre><code>##         a         b 
 ## 115.34655  96.22603</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Indices agrégés de niveau inférieur</span></span>
-<span id="cb15-2"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb15-2" aria-hidden="true" tabindex="-1"></a>index_top <span class="ot">&lt;-</span> <span class="fu">mean_geometric</span>(index_ab, <span class="fu">as.numeric</span>(<span class="fu">tapply</span>(dat<span class="sc">$</span>weight, dat<span class="sc">$</span>group, sum)))</span>
+<span id="cb15-2"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb15-2" aria-hidden="true" tabindex="-1"></a>index_top <span class="ot">&lt;-</span> <span class="fu">geometric_mean</span>(index_ab, <span class="fu">as.numeric</span>(<span class="fu">tapply</span>(dat<span class="sc">$</span>weight, dat<span class="sc">$</span>group, sum)))</span>
 <span id="cb15-3"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb15-3" aria-hidden="true" tabindex="-1"></a>index_top</span></code></pre></div>
 <pre><code>## [1] 106.3125</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identique au calcul direct</span></span>
-<span id="cb17-2"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_geometric</span>(dat<span class="sc">$</span>relative, dat<span class="sc">$</span>weight) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<span id="cb17-2"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geometric_mean</span>(dat<span class="sc">$</span>relative, dat<span class="sc">$</span>weight) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 106.3125</code></pre>
 <p>Le deuxième exemple montre comment rebaser un indice de prix — divisez simplement la série d’indices par la valeur de l’indice dans la nouvelle période de base.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Faire un index sur 12 périodes avec période 0 = 100</span></span>
@@ -293,32 +293,32 @@ div.csl-indent {
 <span id="cb19-3"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb19-3" aria-hidden="true" tabindex="-1"></a>index</span></code></pre></div>
 <pre><code>##    period value
 ## 1       0   100
-## 2       1    96
-## 3       2   106
-## 4       3   112
-## 5       4    93
-## 6       5   109
-## 7       6   126
-## 8       7   100
-## 9       8   128
-## 10      9    99
-## 11     10   120
-## 12     11   127</code></pre>
+## 2       1    98
+## 3       2   104
+## 4       3    94
+## 5       4   106
+## 6       5    95
+## 7       6    93
+## 8       7   116
+## 9       8   107
+## 10      9   115
+## 11     10   124
+## 12     11   112</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rebase l&#39;indice pour que la période 6 = 100</span></span>
 <span id="cb21-2"><a href="exemple-avec-r-cohérence-dans-lagrégation-et-le-rebasage.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">transform</span>(index, <span class="at">value =</span> value <span class="sc">/</span> value[period <span class="sc">==</span> <span class="dv">6</span>] <span class="sc">*</span> <span class="dv">100</span>)</span></code></pre></div>
-<pre><code>##    period     value
-## 1       0  79.36508
-## 2       1  76.19048
-## 3       2  84.12698
-## 4       3  88.88889
-## 5       4  73.80952
-## 6       5  86.50794
-## 7       6 100.00000
-## 8       7  79.36508
-## 9       8 101.58730
-## 10      9  78.57143
-## 11     10  95.23810
-## 12     11 100.79365</code></pre>
+<pre><code>##    period    value
+## 1       0 107.5269
+## 2       1 105.3763
+## 3       2 111.8280
+## 4       3 101.0753
+## 5       4 113.9785
+## 6       5 102.1505
+## 7       6 100.0000
+## 8       7 124.7312
+## 9       8 115.0538
+## 10      9 123.6559
+## 11     10 133.3333
+## 12     11 120.4301</code></pre>
 </div>
 <!-- </div> -->
             </section>

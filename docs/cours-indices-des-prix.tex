@@ -476,10 +476,10 @@ Toutes les formules de l'indice-nombre présentées dans cette section sont simp
 \NormalTok{weights }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{ (}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.15}\NormalTok{)}
 
 \CommentTok{\# Calculer les indices}
-\FunctionTok{c}\NormalTok{(}\AttributeTok{Carli =} \FunctionTok{mean\_arithmetic}\NormalTok{(relatives),}
-  \AttributeTok{Jevons =} \FunctionTok{mean\_geometric}\NormalTok{(relatives),}
-\NormalTok{  Arithmétique }\OtherTok{=} \FunctionTok{mean\_arithmetic}\NormalTok{(relatives, weights),}
-\NormalTok{  Géométrique }\OtherTok{=} \FunctionTok{mean\_geometric}\NormalTok{(relatives, weights))}
+\FunctionTok{c}\NormalTok{(}\AttributeTok{Carli =} \FunctionTok{arithmetic\_mean}\NormalTok{(relatives),}
+  \AttributeTok{Jevons =} \FunctionTok{geometric\_mean}\NormalTok{(relatives),}
+\NormalTok{  Arithmétique }\OtherTok{=} \FunctionTok{arithmetic\_mean}\NormalTok{(relatives, weights),}
+\NormalTok{  Géométrique }\OtherTok{=} \FunctionTok{geometric\_mean}\NormalTok{(relatives, weights))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -499,13 +499,13 @@ Le type d'indices arithmétiques et géométriques que cela calcule dépend enti
 \NormalTok{share1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{ (}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.2}\NormalTok{)}
 
 \CommentTok{\# Calculer les indices}
-\FunctionTok{c}\NormalTok{(}\AttributeTok{Laspeyres =} \FunctionTok{mean\_arithmetic}\NormalTok{(relatives, share0),}
-  \AttributeTok{Paasche =} \FunctionTok{mean\_harmonic}\NormalTok{(relatives, share1),}
-  \AttributeTok{Fisher =} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean\_arithmetic}\NormalTok{(relatives, share0) }\SpecialCharTok{*} 
-                  \FunctionTok{mean\_harmonic}\NormalTok{(relatives, share1)),}
-  \StringTok{\textasciigrave{}}\AttributeTok{Géométrique Laspeyres}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{mean\_geometric}\NormalTok{(relatives, share0),}
-  \StringTok{\textasciigrave{}}\AttributeTok{Géométrique Paasche}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{mean\_geometric}\NormalTok{(relatives, share1),}
-  \AttributeTok{Tornqvist =} \FunctionTok{mean\_geometric}\NormalTok{(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{))}
+\FunctionTok{c}\NormalTok{(}\AttributeTok{Laspeyres =} \FunctionTok{arithmetic\_mean}\NormalTok{(relatives, share0),}
+  \AttributeTok{Paasche =} \FunctionTok{harmonic\_mean}\NormalTok{(relatives, share1),}
+  \AttributeTok{Fisher =} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{arithmetic\_mean}\NormalTok{(relatives, share0) }\SpecialCharTok{*} 
+                  \FunctionTok{harmonic\_mean}\NormalTok{(relatives, share1)),}
+  \StringTok{\textasciigrave{}}\AttributeTok{Géométrique Laspeyres}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{geometric\_mean}\NormalTok{(relatives, share0),}
+  \StringTok{\textasciigrave{}}\AttributeTok{Géométrique Paasche}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{geometric\_mean}\NormalTok{(relatives, share1),}
+  \AttributeTok{Tornqvist =} \FunctionTok{geometric\_mean}\NormalTok{(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -521,7 +521,7 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Tornqvist index}
-\FunctionTok{mean\_geometric}\NormalTok{(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{) }
+\FunctionTok{geometric\_mean}\NormalTok{(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -532,8 +532,8 @@ Il est intéressant de noter que tout indice géométrique peut être transform�
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Changer les poids}
-\NormalTok{new\_weights }\OtherTok{\textless{}{-}} \FunctionTok{weights\_transmute}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{)}
-\FunctionTok{mean\_arithmetic}\NormalTok{(relatives, new\_weights) }\CommentTok{\# same as geometric mean}
+\NormalTok{new\_weights }\OtherTok{\textless{}{-}} \FunctionTok{transmute\_weights}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)(relatives, (share0 }\SpecialCharTok{+}\NormalTok{ share1) }\SpecialCharTok{/} \DecValTok{2}\NormalTok{)}
+\FunctionTok{arithmetic\_mean}\NormalTok{(relatives, new\_weights) }\CommentTok{\# same as geometric mean}
 \end{Highlighting}
 \end{Shaded}
 
@@ -716,7 +716,7 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 \begin{Highlighting}[]
 \CommentTok{\# Calculer l\textquotesingle{}indice géométrique pour les parents des groupes a et b}
 \NormalTok{index\_ab }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\FunctionTok{split}\NormalTok{(dat, dat}\SpecialCharTok{$}\NormalTok{group), }
-                   \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{mean\_geometric}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{relative, x}\SpecialCharTok{$}\NormalTok{weight) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
+                   \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{geometric\_mean}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{relative, x}\SpecialCharTok{$}\NormalTok{weight) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
 \NormalTok{index\_ab}
 \end{Highlighting}
 \end{Shaded}
@@ -729,7 +729,7 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Indices agrégés de niveau inférieur}
-\NormalTok{index\_top }\OtherTok{\textless{}{-}} \FunctionTok{mean\_geometric}\NormalTok{(index\_ab, }\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{tapply}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{weight, dat}\SpecialCharTok{$}\NormalTok{group, sum)))}
+\NormalTok{index\_top }\OtherTok{\textless{}{-}} \FunctionTok{geometric\_mean}\NormalTok{(index\_ab, }\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{tapply}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{weight, dat}\SpecialCharTok{$}\NormalTok{group, sum)))}
 \NormalTok{index\_top}
 \end{Highlighting}
 \end{Shaded}
@@ -741,7 +741,7 @@ Il est utile de terminer cette section du cours avec quelques exemples dans R. L
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Identique au calcul direct}
-\FunctionTok{mean\_geometric}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{relative, dat}\SpecialCharTok{$}\NormalTok{weight) }\SpecialCharTok{*} \DecValTok{100}
+\FunctionTok{geometric\_mean}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{relative, dat}\SpecialCharTok{$}\NormalTok{weight) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -762,17 +762,17 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 \begin{verbatim}
 ##    period value
 ## 1       0   100
-## 2       1   111
-## 3       2    99
-## 4       3   110
-## 5       4   101
-## 6       5   122
-## 7       6   124
-## 8       7   123
-## 9       8    93
-## 10      9   115
-## 11     10   116
-## 12     11   112
+## 2       1    94
+## 3       2   126
+## 4       3   129
+## 5       4    98
+## 6       5    92
+## 7       6   108
+## 8       7   105
+## 9       8    99
+## 10      9   127
+## 11     10    90
+## 12     11   119
 \end{verbatim}
 
 \begin{Shaded}
@@ -784,18 +784,18 @@ Le deuxième exemple montre comment rebaser un indice de prix --- divisez simple
 
 \begin{verbatim}
 ##    period     value
-## 1       0  80.64516
-## 2       1  89.51613
-## 3       2  79.83871
-## 4       3  88.70968
-## 5       4  81.45161
-## 6       5  98.38710
+## 1       0  92.59259
+## 2       1  87.03704
+## 3       2 116.66667
+## 4       3 119.44444
+## 5       4  90.74074
+## 6       5  85.18519
 ## 7       6 100.00000
-## 8       7  99.19355
-## 9       8  75.00000
-## 10      9  92.74194
-## 11     10  93.54839
-## 12     11  90.32258
+## 8       7  97.22222
+## 9       8  91.66667
+## 10      9 117.59259
+## 11     10  83.33333
+## 12     11 110.18519
 \end{verbatim}
 
 \hypertarget{affectation-1}{%
@@ -2023,10 +2023,10 @@ Les indices pour chaque groupe peuvent être calculés avec une seule régressio
 \NormalTok{mdl }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group }\SpecialCharTok{+}\NormalTok{ group}\SpecialCharTok{:}\NormalTok{period }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, df)}
 
 \CommentTok{\# Transformer les coefficients de régression en indices}
-\NormalTok{index }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(mdl)[}\SpecialCharTok{{-}}\FunctionTok{seq\_len}\NormalTok{(}\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{((mdl}\SpecialCharTok{$}\NormalTok{model}\SpecialCharTok{$}\NormalTok{group))))])}
+\NormalTok{index }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(mdl)[}\SpecialCharTok{{-}}\FunctionTok{seq\_len}\NormalTok{(}\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(mdl}\SpecialCharTok{$}\NormalTok{model}\SpecialCharTok{$}\NormalTok{group)))])}
 
 \CommentTok{\# Agrégat, en supposant que les deux strates ont un poids égal}
-\FunctionTok{mean\_geometric}\NormalTok{(index) }\SpecialCharTok{*} \DecValTok{100}
+\FunctionTok{geometric\_mean}\NormalTok{(index) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2230,11 +2230,11 @@ C'est également la même chose que le calcul manuel de l'indice stratifié.
   \FunctionTok{sapply}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\FunctionTok{subset}\NormalTok{(df, chicken }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), }
               \FunctionTok{subset}\NormalTok{(df, liver }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), }
               \FunctionTok{subset}\NormalTok{(df, salmon }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)),}
-         \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{with}\NormalTok{(x, }\FunctionTok{mean\_geometric}\NormalTok{(price[period }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{/} \FunctionTok{mean\_geometric}\NormalTok{(price[period }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]))}
+         \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{with}\NormalTok{(x, }\FunctionTok{geometric\_mean}\NormalTok{(price[period }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{/} \FunctionTok{geometric\_mean}\NormalTok{(price[period }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]))}
 \NormalTok{         )}
 
 \CommentTok{\# Agrégat}
-\FunctionTok{mean\_geometric}\NormalTok{(strata\_indices, weights) }\SpecialCharTok{*} \DecValTok{100}
+\FunctionTok{geometric\_mean}\NormalTok{(strata\_indices, weights) }\SpecialCharTok{*} \DecValTok{100}
 \end{Highlighting}
 \end{Shaded}
 

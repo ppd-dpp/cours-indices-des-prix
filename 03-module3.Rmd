@@ -240,10 +240,10 @@ library(gpindex)
 mdl <- lm(log(price) ~ group + group:period - 1, df)
 
 # Transformer les coefficients de régression en indices
-index <- exp(coef(mdl)[-seq_len(length(unique((mdl$model$group))))])
+index <- exp(coef(mdl)[-seq_len(length(unique(mdl$model$group)))])
 
 # Agrégat, en supposant que les deux strates ont un poids égal
-mean_geometric(index) * 100
+geometric_mean(index) * 100
 ```
 
 # Indices de prix hédoniques
@@ -385,11 +385,11 @@ strata_indices <-
   sapply(list(subset(df, chicken == 1), 
               subset(df, liver == 1), 
               subset(df, salmon == 1)),
-         function(x) with(x, mean_geometric(price[period == 1]) / mean_geometric(price[period == 0]))
+         function(x) with(x, geometric_mean(price[period == 1]) / geometric_mean(price[period == 0]))
          )
 
 # Agrégat
-mean_geometric(strata_indices, weights) * 100
+geometric_mean(strata_indices, weights) * 100
 ```
 
 Les résultats sont très similaires si un modèle temporel est utilisé à la place.

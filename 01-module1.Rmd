@@ -305,10 +305,10 @@ relatives <- c(1.1, 1.2, 0.9, 1.1)
 weights <- c (0.25, 0.3, 0.3, 0.15)
 
 # Calculer les indices
-c(Carli = mean_arithmetic(relatives),
-  Jevons = mean_geometric(relatives),
-  Arithmétique = mean_arithmetic(relatives, weights),
-  Géométrique = mean_geometric(relatives, weights))
+c(Carli = arithmetic_mean(relatives),
+  Jevons = geometric_mean(relatives),
+  Arithmétique = arithmetic_mean(relatives, weights),
+  Géométrique = geometric_mean(relatives, weights))
 ```
 
 Le type d'indices arithmétiques et géométriques que cela calcule dépend entièrement de la façon dont les poids sont calculés. Habituellement, les pondérations proviennent des données sur les parts des dépenses / recettes, et la manière dont ces informations sont utilisées pour pondérer les prix relatifs affectera le type d'indice de prix calculé.
@@ -321,24 +321,24 @@ share0 <- c (0.25, 0.3, 0.3, 0.15)
 share1 <- c (0.2, 0.2, 0.4, 0.2)
 
 # Calculer les indices
-c(Laspeyres = mean_arithmetic(relatives, share0),
-  Paasche = mean_harmonic(relatives, share1),
-  Fisher = sqrt(mean_arithmetic(relatives, share0) * 
-                  mean_harmonic(relatives, share1)),
-  `Géométrique Laspeyres` = mean_geometric(relatives, share0),
-  `Géométrique Paasche` = mean_geometric(relatives, share1),
-  Tornqvist = mean_geometric(relatives, (share0 + share1) / 2))
+c(Laspeyres = arithmetic_mean(relatives, share0),
+  Paasche = harmonic_mean(relatives, share1),
+  Fisher = sqrt(arithmetic_mean(relatives, share0) * 
+                  harmonic_mean(relatives, share1)),
+  `Géométrique Laspeyres` = geometric_mean(relatives, share0),
+  `Géométrique Paasche` = geometric_mean(relatives, share1),
+  Tornqvist = geometric_mean(relatives, (share0 + share1) / 2))
 ```
 
 Il est intéressant de noter que tout indice géométrique peut être transformé en indice arithmétique par un changement approprié de poids. Cela permet de déterminer facilement la contribution de chaque prix relatif à la valeur de l'indice.
 
 ```{r}
 # Tornqvist index
-mean_geometric(relatives, (share0 + share1) / 2) 
+geometric_mean(relatives, (share0 + share1) / 2) 
 
 # Changer les poids
-new_weights <- weights_transmute(0, 1)(relatives, (share0 + share1) / 2)
-mean_arithmetic(relatives, new_weights) # same as geometric mean
+new_weights <- transmute_weights(0, 1)(relatives, (share0 + share1) / 2)
+arithmetic_mean(relatives, new_weights) # same as geometric mean
 
 # Contribution de chaque relative
 (relatives - 1) * new_weights
@@ -542,16 +542,16 @@ dat
 
 # Calculer l'indice géométrique pour les parents des groupes a et b
 index_ab <- sapply(split(dat, dat$group), 
-                   function(x) mean_geometric(x$relative, x$weight) * 100)
+                   function(x) geometric_mean(x$relative, x$weight) * 100)
 index_ab
 
 
 # Indices agrégés de niveau inférieur
-index_top <- mean_geometric(index_ab, as.numeric(tapply(dat$weight, dat$group, sum)))
+index_top <- geometric_mean(index_ab, as.numeric(tapply(dat$weight, dat$group, sum)))
 index_top
 
 # Identique au calcul direct
-mean_geometric(dat$relative, dat$weight) * 100
+geometric_mean(dat$relative, dat$weight) * 100
 ```
 
 Le deuxième exemple montre comment rebaser un indice de prix --- divisez simplement la série d'indices par la valeur de l'indice dans la nouvelle période de base.
